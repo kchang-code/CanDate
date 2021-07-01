@@ -1,7 +1,26 @@
-import React from 'react';
+import React from "react";
+import ProfileCard from "./profile-card";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
-const userPage = () => {
-  return 
+const UserPage = (props) => {
+  return (
+    
+     <Grid container spacing={3}>
+       <Grid item xs={12} md={4}>
+         <ProfileCard>1</ProfileCard>
+       </Grid>
+       <Grid item xs={12} md={4}>
+         <ProfileCard>2</ProfileCard>
+       </Grid>
+
+       <Grid item xs={12} md={4}>
+         <ProfileCard>3</ProfileCard>
+       </Grid>
+
+     </Grid>
+    
+  );
 };
 
-export default userPage;
+export default UserPage;
