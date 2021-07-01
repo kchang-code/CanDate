@@ -19,3 +19,4 @@ INSERT INTO users(username, email, password, gender, height, address, age, profi
 VALUES ('Kelly', 'kelly@email.com', 'kelly',  'female', 165, 'Burnaby', 23, 'https://www.theattitudequotes.com/wp-content/uploads/2021/02/Best-DP-For-Girls-WhatsApp-Profile-Picture-2021-Girls-WhatsApp-Dp-35.jpg', 'I like dancing');
 
 
+
