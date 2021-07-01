@@ -1,4 +1,4 @@
-## local database Setup
+## Local database Setup
 
 1. on your vagrant machine and in candate api folder run:
    `psql -U vagrant -d template1`
@@ -7,7 +7,7 @@
    `CREATE ROLE labber WITH LOGIN password 'labber';`
    `CREATE DATABASE candate OWNER labber;`
 
-note: we have created users and password so probably you don't need to run the first command. However, make sure you create candate database.
+note: If you have created users and password before, so probably you don't need to run the first command. However, make sure you create candate database.
 
 ## Getting Started
 
