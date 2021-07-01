@@ -18,13 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-const usersRoutes = require("./routes/users");
-const tagsRoutes = require("./routes/tags");
-const userTagRoutes = require("./routes/user_tag");
+const apiRoutes = require("./routes/api");
 
-app.use("/api/users", usersRoutes(db));
-app.use("/api/tags", tagsRoutes(db));
-app.use("/api/user_tag", userTagRoutes(db));
+app.use("/api", apiRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
