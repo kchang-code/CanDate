@@ -2,7 +2,32 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Components/Home';
 
+
 function App() {
+  const pics = [
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
+  ]
+
   return (
     <div className="App">
       <Router>
@@ -16,7 +41,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home />
+            <Home image={pics} />
           </Route>
         </Switch>
       </Router>
