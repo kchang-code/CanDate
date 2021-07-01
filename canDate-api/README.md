@@ -4,7 +4,7 @@
    `psql -U vagrant -d template1`
 
 2. Run the following SQL commands to create the necessary objects in the DB:
-   `CREATE ROLE labber WITH LOGIN password 'labber'`
+   `CREATE ROLE labber WITH LOGIN password 'labber';`
    `CREATE DATABASE candate OWNER labber;`
 
 note: we have created users and password so probably you don't need to run the first command. However, make sure you create candate database.
