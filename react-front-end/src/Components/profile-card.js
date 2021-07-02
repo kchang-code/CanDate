@@ -12,7 +12,7 @@ export default function ProfileCard() {
   return (
     <>
     <div>
-      <Card elevation={3}>
+      <Card elevation={3} onClick={() => {console.log('flip')}}>
         <CardHeader title={"Mary Smith, 26, Vancouver"}
         action={
           <IconButton onClick={() => {console.log("favorite")}}>
