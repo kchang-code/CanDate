@@ -10,6 +10,10 @@ const reduceToNames = (message) => {
   return result;
 };
 
+const filteredMessageByLoginUser = (message, loginUserId) => {
+  let result = [];
+};
+
 // const filterAllMessageByUser = (message, id) => {
 //   let result = [];
 //   message.forEach((el) => {

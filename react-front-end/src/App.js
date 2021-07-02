@@ -30,7 +30,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/message">
+          <Route path="/users/:id/message">
             <Message messages={messages} users={users} />
           </Route>
           <Route path="/profile">
