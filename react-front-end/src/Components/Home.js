@@ -12,6 +12,9 @@ export default function Home(props) {
       <div className="register">
         <Form />
       </div>
+      <div className="question">
+        <TagList />
+      </div>
     </div>
   );
 }
