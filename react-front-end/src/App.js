@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react'
 
 
+import UserPage from './Components/user-page';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
           </Route>
 
           <Route path="/user">
-            <p>USER PAGE</p>
+            <UserPage />
           </Route>
 
           <Route path="/">
