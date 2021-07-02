@@ -14,19 +14,19 @@ export default function Home(props) {
         <form action="/register" method="POST">
           <div className="forms">
             <div>
-              <label for="first_name" className="label"  >First Name:</label>
+              <label for="first_name" className="label" style={{ marginTop: "50px" }} >First Name:</label>
               <input className="input" type="text" name="first_name" />
             </div>
             <div>
-              <label for="last_name" className="label">Last Name:</label>
+              <label for="last_name" className="label" style={{ marginTop: "50px" }}>Last Name:</label>
               <input className="input" type="text" name="last_name" />
             </div>
             <div>
-              <label for="email" className="label">email:</label>
+              <label for="email" className="label" style={{ marginTop: "50px" }}>email:</label>
               <input className="input" type="email" name="email" />
             </div>
             <div>
-              <label for="password" className="label">password:</label>
+              <label for="password" className="label" style={{ marginTop: "50px" }}>password:</label>
               <input className="input" type="text" name="password" />
             </div>
             <div>
