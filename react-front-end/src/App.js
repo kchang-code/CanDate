@@ -5,7 +5,7 @@ import Message from './Components/Message';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import UserPage from './Components/user-page';
+import UserPage from './Components/UserPage';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -45,7 +45,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={users} tag={tags} />
+            {/* <Home image={users} tag={tags} /> */}
           </Route>
         </Switch>
       </Router>

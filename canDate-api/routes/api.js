@@ -6,7 +6,7 @@ router.get("/users", (req, res) => {
   apiQueries
     .getAllUsers()
     .then((users) => {
-      res.json({ users });
+      res.json({users});
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
