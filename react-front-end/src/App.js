@@ -18,12 +18,9 @@ function App() {
     ]).then((all) => {
       const [user, message] = all;
       setUsers(user.data.users);
+
       setMessages(message.data.message);
     });
-
-    // axios.get('http://localhost:8080/api/users').then((data) => {
-    //   setUsers(data.data.users);
-    // });
   }, []);
 
   return (
@@ -31,7 +28,11 @@ function App() {
       <Router>
         <Switch>
           <Route path="/users/:id/message">
-            <Message messages={messages} users={users} />
+            <Message
+              messages={messages}
+              users={users}
+              setMessages={setMessages}
+            />
           </Route>
           <Route path="/profile">
             <p>PROFILE PAGE</p>

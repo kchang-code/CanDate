@@ -1,28 +1,57 @@
-const reduceToNames = (message) => {
+const reduceToNames = (message, userId) => {
   let id = [];
   let result = [];
   message.forEach((el) => {
-    if (!id.includes(el['to_user_id'])) {
+    if (!id.includes(el['to_user_id']) && Number(userId) !== el['to_user_id']) {
       result.push(el);
       id.push(el['to_user_id']);
     }
   });
+
   return result;
 };
 
-const filteredMessageByLoginUser = (message, loginUserId) => {
-  let result = [];
+const filteredMessageByLoginUser = (messages, loginUserId) => {
+  return messages.filter((message) => {
+    // console.log('passedIn', message);
+    // console.log('loginUserId', message['to_user_id']);
+    // console.log(
+    //   'return',
+    //   message['to_user_id'] === Number(loginUserId) ||
+    //     message['from_user_id'] === Number(loginUserId)
+    // );
+    return (
+      message['to_user_id'] === Number(loginUserId) ||
+      message['from_user_id'] === Number(loginUserId)
+    );
+  });
 };
 
-// const filterAllMessageByUser = (message, id) => {
-//   let result = [];
-//   message.forEach((el) => {
-//     if (id === el.)
-//   })
-//   return result;
-// };
+const filteredMessageBySelectedUser = (messages, selectedUserId) => {
+  return messages.filter((message) => {
+    return (
+      message['to_user_id'] === Number(selectedUserId) ||
+      message['from_user_id'] === Number(selectedUserId)
+    );
+  });
+};
+
+const filterMessageByToUserId = (messages, selectedUserId) => {
+  return messages.filter((message) => {
+    return message['to_user_id'] === Number(selectedUserId);
+  });
+};
+
+const getRidOfUsersChatBox = (messages, userId) => {
+  return messages.filter((message) => {
+    return message['to_user_id'] !== Number(userId);
+  });
+};
 
 module.exports = {
   reduceToNames,
-  // filterMessageById,
+  filterMessageByToUserId,
+  filteredMessageByLoginUser,
+  getRidOfUsersChatBox,
+  filteredMessageBySelectedUser,
 };
