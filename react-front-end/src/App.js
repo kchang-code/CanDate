@@ -21,7 +21,7 @@ function App() {
       const [user, message, tag] = all;
       setUsers(user.data.users);
       setMessages(message.data.message);
-      setMessages(tag.data.tags);
+      setTags(tag.data.tags);
     });
 
     // axios.get('http://localhost:8080/api/users').then((data) => {
@@ -45,7 +45,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={users} tag={tags} />
+            <Home image={users} tags={tags} />
           </Route>
         </Switch>
       </Router>
