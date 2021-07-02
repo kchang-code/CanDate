@@ -41,8 +41,39 @@ const getAllTags = () => {
     });
 };
 
+const getAllMessages = () => {
+  const queryStatement = `SELECT * FROM message
+
+  `;
+  return db
+    .query(queryStatement)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+const creatNewUser = (newUser) => {
+  const value = [
+    newUser["first_name"],
+    newUser["last_name"],
+    newUser["email"],
+    newUser["password"],
+  ];
+  console.log(value);
+  const queryStatement = `INSERT INTO users(first_name, last_name, email, password)
+  VALUES ($1, $2, $3, $4)`;
+  return db.query(queryStatement, value).catch((err) => {
+    return err;
+  });
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
   getAllUserTags,
+  getAllMessages,
+  creatNewUser,
 };

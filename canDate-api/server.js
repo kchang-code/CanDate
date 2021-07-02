@@ -16,9 +16,10 @@ db.connect();
 app.use(morgan("dev"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(express.static("public"));
-app.use(cors())
+app.use(cors());
 
 const apiRoutes = require("./routes/api");
 
