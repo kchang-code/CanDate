@@ -5,7 +5,12 @@ import './Chat.scss';
 const Chat = (props) => {
   const { name, message, profilePic, timestamp } = props;
   return (
-    <div className="chat">
+    <div
+      className="chat"
+      onClick={() => {
+        console.log('clicked');
+      }}
+    >
       <Avatar className="chat__image" alt="Zio" src={profilePic} />
 
       <div className="chat_details">
