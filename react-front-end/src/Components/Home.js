@@ -3,7 +3,8 @@ import PhotoList from './PhotoList';
 import TagList from './TagList';
 import useVisualMode from '../hooks/useVisualMode';
 import Question from './Question';
-import Status from './Status';
+import SignIn from './SignIn';
+
 import Form from './Form';
 import './Home.scss';
 
@@ -11,6 +12,7 @@ export default function Home(props) {
   const FORM = "FORM"
   const QUESTION = "QUESTION"
   const TAG = "TAG"
+  const SIGN = "SIGN"
 
   const { mode, transition, back } = useVisualMode(FORM)
 
@@ -20,6 +22,9 @@ export default function Home(props) {
   function tagPage() {
     transition(TAG)
   }
+  function Sign() {
+    transition(SIGN)
+  }
 
   return (
     <div className="home-container">
@@ -27,9 +32,10 @@ export default function Home(props) {
         <PhotoList image={props.image} />
       </div>
       <div className="register">
-        {mode === FORM && <Form change={change} />}
+        {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} />}
         {mode === TAG && <TagList tags={props.tags} />}
+        {mode === SIGN && <SignIn back={back} />}
       </div>
     </div>
   );

@@ -4,8 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -67,6 +65,8 @@ export default function Form(props) {
       .then(() => console.log('done'))
       .catch((err) => console.log('1111---v', err));
   };
+
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -143,7 +143,7 @@ export default function Form(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link onClick={props.SignIn}>
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -154,61 +154,5 @@ export default function Form(props) {
         <Copyright />
       </Box>
     </Container>
-    // <form onSubmit={(e) => e.preventDefault()}>
-    //   <div className="forms">
-    //     <div>
-    //       <label for="first_name" className="label">
-    //         First Name:
-    //       </label>
-    //       <input
-    //         className="input"
-    //         type="text"
-    //         name="first_name"
-    //         onChange={(e) => setFirst_name(e.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       <label for="last_name" className="label">
-    //         Last Name:
-    //       </label>
-    //       <input
-    //         className="input"
-    //         type="text"
-    //         name="last_name"
-    //         onChange={(e) => setLast_name(e.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       <label for="email" className="label">
-    //         email:
-    //       </label>
-    //       <input
-    //         className="input"
-    //         type="email"
-    //         name="email"
-    //         onChange={(e) => setEmail(e.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       <label for="password" className="label">
-    //         password:
-    //       </label>
-    //       <input
-    //         className="input"
-    //         type="text"
-    //         name="password"
-    //         onChange={(e) => setPassword(e.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       <button
-    //         type="submit"
-    //         className="btn btn-primary"
-    //         onClick={() => { save(first_name, last_name, email, password) }}>
-    //         sign up
-    //       </button>
-    //     </div>
-    //   </div>
-    // </form>
   );
 }
