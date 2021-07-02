@@ -10,29 +10,29 @@ const UserPage = () => {
   useEffect(() => {
     axios.get('http://localhost:8080/api/users')
       .then(res => {
-        setUsers(res.data.users)
+        setUsers(res.data.users.slice(5))
       })
   }, [])
 
   return (
 
     <div>
-      This is rendering
        {users.map(user=> {
          return (
-          <div class={user.id}>
-            {user.id}
-          </div>);
-      })}
-    </div>
-    // <Grid container spacing={4}>
-    //   <Grid item xs={12} md={3}>
-    //     <ProfileCard></ProfileCard>
-
-    //   </Grid>
-    // </Grid>
-
-  );
-}
+          <Grid container spacing={4}>
+          <Grid item xs={12} md={3}>
+            <ProfileCard 
+              key={user.id}
+              name={user.first_name}
+              age={user.age}
+              profile_photo={user.profile_photo}
+            />
+          </Grid>
+        </Grid>
+         )
+       }
+       )}
+  </div>
+  )}
 
 export default UserPage;

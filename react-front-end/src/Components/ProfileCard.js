@@ -9,14 +9,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Button from '@material-ui/core/Button';
 
-export default function ProfileCard() {
+export default function ProfileCard(props) {
 
   
   return (
     <>
       <div>
         <Card elevation={3} onClick={() => { console.log('flip') }}>
-          <CardHeader title={"Mary Smith, 26, Vancouver"}
+          <CardHeader title={props.name}
             action={
               <>
               <IconButton onClick={() => { console.log("favorite") }}>
@@ -31,7 +31,7 @@ export default function ProfileCard() {
           />
           <CardMedia
             style={{ height: "300px", paddingTop: "2%" }}
-            image="https://www.female-founders.org/wp-content/uploads/marston-website-.png"
+            image={props.profile_photo}
             title="Paella dish"
           />
           <CardContent>
