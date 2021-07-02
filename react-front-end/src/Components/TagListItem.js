@@ -8,6 +8,7 @@ const TagListItem = props => {
   return (
 
     <Button
+      onClick={() => { }}
       type="submit"
       variant="contained"
       color="withe"

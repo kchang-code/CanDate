@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    width: '80%'
   },
 }));
 
@@ -44,7 +45,7 @@ export default function TagList(props) {
   });
   return (
     <div>
-      <p>choose your tag</p>
+      <h1>choose your tag</h1>
 
       <span> {lists} </span>
 
