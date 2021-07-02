@@ -22,7 +22,7 @@ function App() {
       setUsers(user.data.users);
 
       setMessages(message.data.message);
-      setMessages(tag.data.tags);
+      setTags(tag.data.tags);
     });
   }, []);
 
@@ -46,7 +46,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={users} tag={tags} />
+            <Home image={users} tags={tags} />
           </Route>
         </Switch>
       </Router>
