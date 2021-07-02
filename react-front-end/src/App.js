@@ -2,32 +2,22 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Components/Home';
 import Message from './Components/Message';
+import axios from 'axios';
+import { useState, useEffect } from 'react'
+
 
 
 function App() {
-  const pics = [
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-    { pic: 'https://randomuser.me/api/portraits/men/67.jpg' },
-  ]
+
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/users')
+      .then(data => {
+        setUsers(data.data.users)
+      })
+  }, [])
+
 
   return (
     <div className="App">
@@ -45,7 +35,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={pics} />
+            <Home image={users} />
           </Route>
         </Switch>
       </Router>

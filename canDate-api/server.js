@@ -1,5 +1,6 @@
 // load .env data into process.env
 require("dotenv").config();
+const cors = require("cors");
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -17,6 +18,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
+app.use(cors())
 
 const apiRoutes = require("./routes/api");
 

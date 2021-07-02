@@ -1,0 +1,22 @@
+.home-container {
+  display: flex;
+  flex-direction: row;
+  .image-wall {
+    width: 70%;
+  }
+  .register {
+    border: black solid 2px;
+    margin-right:20px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    
+    .forms {
+      margin-top:200px;
+      display:flex;
+      flex-direction: column;
+      align-items: space-between;
+    }
+  }
+
+}
