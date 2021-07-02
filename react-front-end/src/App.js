@@ -10,15 +10,18 @@ import UserPage from './Components/user-page';
 function App() {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/message'),
+      axios.get('http://localhost:8080/api/tags'),
     ]).then((all) => {
-      const [user, message] = all;
+      const [user, message, tag] = all;
       setUsers(user.data.users);
       setMessages(message.data.message);
+      setMessages(tag.data.tags);
     });
 
     // axios.get('http://localhost:8080/api/users').then((data) => {
@@ -42,7 +45,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={users} />
+            <Home image={users} tag={tags} />
           </Route>
         </Switch>
       </Router>
