@@ -1,12 +1,14 @@
 import React from 'react';
 import Chat from './Chat';
 import './Message.scss';
+import ChatScreen from './ChatScreen';
 
 const Message = () => {
   return (
     <div className="container">
       <section className="message">
         <Chat
+          key="1"
           name="Zio"
           message="Hello! I like you!"
           timestamp="just now"
@@ -14,6 +16,7 @@ const Message = () => {
         />
 
         <Chat
+          key="2"
           name="Matt"
           message="Hello! I don't like you!"
           timestamp="5 mins ago"
@@ -21,6 +24,7 @@ const Message = () => {
         />
 
         <Chat
+          key="3"
           name="Khea"
           message="Hello! I don't like you!"
           timestamp="10 mins ago"
@@ -28,7 +32,9 @@ const Message = () => {
         />
       </section>
 
-      <section>Chart Screen</section>
+      <section className="chat_screen">
+        <ChatScreen />
+      </section>
     </div>
   );
 };
