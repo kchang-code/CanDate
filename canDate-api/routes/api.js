@@ -35,4 +35,24 @@ router.get("/user_tag", (req, res) => {
     });
 });
 
+router.get("/message", (req, res) => {
+  apiQueries
+    .getAllMessages()
+    .then((message) => {
+      console.log(message);
+      res.json({ message });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.put("/users", (req, res) => {
+  console.log(req.body.newUser);
+  res.json("success");
+  apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+    console.log(err);
+  });
+});
+
 module.exports = router;

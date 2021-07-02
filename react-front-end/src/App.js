@@ -3,29 +3,35 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Components/Home';
 import Message from './Components/Message';
 import axios from 'axios';
-import { useState, useEffect } from 'react'
-
+import { useState, useEffect } from 'react';
 
 import UserPage from './Components/user-page';
 
 function App() {
-
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/users')
-      .then(data => {
-        setUsers(data.data.users)
-      })
-  }, [])
+    Promise.all([
+      axios.get('http://localhost:8080/api/users'),
+      axios.get('http://localhost:8080/api/message'),
+    ]).then((all) => {
+      const [user, message] = all;
+      setUsers(user.data.users);
+      setMessages(message.data.message);
+    });
 
+    // axios.get('http://localhost:8080/api/users').then((data) => {
+    //   setUsers(data.data.users);
+    // });
+  }, []);
 
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/message">
-            <Message />
+            <Message messages={messages} users={users} />
           </Route>
           <Route path="/profile">
             <p>PROFILE PAGE</p>

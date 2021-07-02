@@ -3,7 +3,8 @@ import { Avatar } from '@material-ui/core';
 import './Chat.scss';
 
 const Chat = (props) => {
-  const { name, message, profilePic, timestamp } = props;
+  const { to_name, message, profilePic, timestamp } = props;
+  console.log(to_name);
   return (
     <div
       className="chat"
@@ -14,7 +15,7 @@ const Chat = (props) => {
       <Avatar className="chat__image" alt="Zio" src={profilePic} />
 
       <div className="chat_details">
-        <h2>{name}</h2>
+        <h2>{to_name}</h2>
         <p>{message}</p>
       </div>
       <p>{timestamp}</p>
