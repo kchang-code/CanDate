@@ -15,18 +15,11 @@ const UserPage = (props) => {
   }, [])
   return (
     
-     <Grid container spacing={3}>
-       <Grid item xs={12} md={4}>
-         <ProfileCard>1</ProfileCard>
-       </Grid>
-       <Grid item xs={12} md={4}>
-         <ProfileCard>2</ProfileCard>
-       </Grid>
+     <Grid container spacing={4}>
+       <Grid item xs={12} md={3}>
+         <ProfileCard></ProfileCard>
 
-       <Grid item xs={12} md={4}>
-         <ProfileCard>3</ProfileCard>
        </Grid>
-
      </Grid>
     
   );
