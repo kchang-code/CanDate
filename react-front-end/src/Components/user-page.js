@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
+import axios from 'axios';
 import ProfileCard from "./profile-card";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 const UserPage = (props) => {
+
+  const [state, setState] = useState('')
+  
+  useEffect(() => {
+    axios.get('/users').then((res) => {
+      setState(res.first_name)
+    })
+  }, [])
   return (
     
      <Grid container spacing={3}>
@@ -21,6 +30,6 @@ const UserPage = (props) => {
      </Grid>
     
   );
-};
+}
 
 export default UserPage;
