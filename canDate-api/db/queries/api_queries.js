@@ -14,7 +14,7 @@ const getAllUsers = () => {
 
 const getAllUserTags = () => {
   const queryStatement = `
-  SELECT username, tags.name AS interest
+  SELECT users.id, tags.id AS interest
   FROM tags
   JOIN user_tag ON tags.id = tag_id
   JOIN users ON users.id = user_id;
