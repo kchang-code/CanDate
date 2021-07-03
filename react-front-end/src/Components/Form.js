@@ -59,13 +59,12 @@ export default function Form(props) {
       email,
       password,
     };
-
+    console.log('new user', newUser);
     axios
       .put('http://localhost:8080/api/users', { newUser })
       .then(() => console.log('done'))
       .catch((err) => console.log('1111---v', err));
   };
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -89,7 +88,9 @@ export default function Form(props) {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                onChange={(e) => { setFirst_name(e.target.value) }}
+                onChange={(e) => {
+                  setFirst_name(e.target.value);
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -101,7 +102,9 @@ export default function Form(props) {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                onChange={(e) => { setLast_name(e.target.value) }}
+                onChange={(e) => {
+                  setLast_name(e.target.value);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -113,7 +116,9 @@ export default function Form(props) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => { setEmail(e.target.value) }}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -126,7 +131,9 @@ export default function Form(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={(e) => { setPassword(e.target.value) }}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
             </Grid>
           </Grid>
@@ -136,8 +143,10 @@ export default function Form(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => { save(first_name, last_name, email, password) }}
-            onClick={props.change}
+            onClick={() => {
+              props.change();
+              save(first_name, last_name, email, password);
+            }}
           >
             Sign Up
           </Button>
