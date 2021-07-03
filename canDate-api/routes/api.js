@@ -55,4 +55,12 @@ router.put("/users", (req, res) => {
   });
 });
 
+router.put("/signup/:id", (req, res) => {
+  console.log(req.body.updateUser);
+  res.json("success");
+  apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+    console.log(err);
+  });
+});
+
 module.exports = router;
