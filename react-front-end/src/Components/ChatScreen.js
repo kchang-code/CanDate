@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import './ChatScreen.scss';
-import { Avatar } from '@material-ui/core';
+
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
-let from_user_id = null;
+
+import { Avatar, IconButton } from '@material-ui/core';
+import './Chat.scss';
+import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
+import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
+
+let to_user_id = null;
 
 const ChatScreen = (props) => {
   const [input, setInput] = useState('');
   let { id } = useParams();
 
   const newMessage = {
-    to_user_id: Number(id),
-    from_user_id: Number(from_user_id),
+    from_user_id: Number(id),
+    to_user_id: Number(to_user_id),
     content: input,
   };
+  console.log('newMessage', newMessage);
 
   const [showMsg, setShowMsg] = useState([]);
 
-  // console.log('selectedMessages in chat', props.selectedMessages);
-  // console.log('showMsg in chat', showMsg);
-  // // const [selectedMessages, setSelectedMessages] = useState(
-  // //   props.selectedMessages
-  // // );
   useEffect(() => {
     setShowMsg(props.selectedMessages);
   }, [props.selectedMessages]);
 
-  const handleSend = () => {
+  const sendMessage = () => {
     axios.put('http://localhost:8080/api/users/:id/messages', { newMessage });
 
     props.setMessages([...props.messages, newMessage]);
@@ -35,9 +40,11 @@ const ChatScreen = (props) => {
     setInput('');
   };
 
+  console.log('shoeM', props);
+
   const messageContent = showMsg.map((message) => {
-    if (message['from_user_id'] === Number(id)) {
-      from_user_id = message['to_user_id'];
+    if (message['from_user_id'] !== Number(id)) {
+      to_user_id = message['from_user_id'];
 
       return (
         <div className="chatScreen_message">
@@ -45,48 +52,67 @@ const ChatScreen = (props) => {
             key={message.id}
             className="chatScreen_image"
             alt={message.name}
-            src={message.profilePic}
+            src={props.selectedPhoto}
           />
-          <p className="chatScreen_text">{message.content}</p>
+          <p className="chatScreen_text">
+            {message.content}
+            <span className="chat_time">3:00pm</span>
+          </p>
         </div>
       );
     } else {
       return (
         <div className="chatScreen_message">
-          <p className="chatScreen_textUser">{message.content}</p>
+          <p className="chatScreen_textUser">
+            {message.content}
+            <span className="chat_time">3:00pm</span>
+          </p>
         </div>
       );
     }
   });
 
   return (
-    <div className="box">
-      <h2>Chat screen</h2>
+    <div className="chat">
+      <div className="chat_header">
+        <Avatar />
+        <div className="chat_headerInfo">
+          <h3>ROOM NAME</h3>
+          <p>LAST SEEN at ...</p>
+        </div>
+        <div className="chat_headerRight">
+          <IconButton>
+            <SearchOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <AttachFileOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
+      </div>
 
-      {messageContent}
+      <div className="chat_body">{messageContent}</div>
 
-      <form
-        className="chatScreen_input"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <input
-          value={input}
-          onChange={(data) => setInput(data.target.value)}
-          className="chatScreen_inputField"
-          placeholder="Type a message..."
-        />
-        <button
-          onClick={() => {
-            handleSend();
+      <div className="chat_footer">
+        <InsertEmoticonOutlinedIcon />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
           }}
-          className="chatScreen_inputButton"
-          type="submit"
         >
-          SEND
-        </button>
-      </form>
+          <input
+            type="text"
+            value={input}
+            onChange={(data) => setInput(data.target.value)}
+          />
+          <button onClick={sendMessage} type="submit">
+            Send a message
+          </button>
+        </form>
+        <MicNoneOutlinedIcon />
+      </div>
     </div>
   );
 };

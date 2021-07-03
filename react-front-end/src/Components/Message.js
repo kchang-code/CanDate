@@ -5,59 +5,68 @@ import ChatScreen from './ChatScreen';
 import {
   filteredMessageByLoginUser,
   filteredMessageBySelectedUser,
-  reduceToNames,
+  // reduceToNames,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Message = (props) => {
   let { id } = useParams();
   const { messages, users, setMessages } = props;
-
   const userAllMessages = filteredMessageByLoginUser(messages, id);
-  const reducedMessage = reduceToNames(userAllMessages, id);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  // const [selectedUserMessages, setSelectedUserMessages] = useState([]);
+  // const reducedMessage = reduceToNames(userAllMessages, id);
+
+  // const firstChatId = reducedMessage
+  //   ? reducedMessage[0]['from_user_id'] !== Number(id)
+  //     ? reducedMessage[0]['from_user_id']
+  //     : reducedMessage[0]['to_user_id']
+  //   : null;
+
+  // let firstChatId = null;
+
+  // if (reducedMessage.length !== 0) {
+  //   if (reducedMessage[0]['from_user_id'] !== Number(id)) {
+  //     firstChatId = reducedMessage[0]['from_user_id'];
+  //   } else {
+  //     firstChatId = reducedMessage[0]['to_user_id'];
+  //   }
+  // }
 
   // useEffect(() => {
-  //   setSelectedUserMessages(
-  //     filteredMessageBySelectedUser(userAllMessages, selectedUserId)
-  //   );
-  // }, [messages]);
+  //   if (reducedMessage.length !== 0) {
+  //     if (reducedMessage[0]['from_user_id'] !== Number(id)) {
+  //       setSelectedUserId(reducedMessage[0]['from_user_id']);
+  //     } else {
+  //       setSelectedUserId(reducedMessage[0]['to_user_id']);
+  //     }
+  //   }
+  // }, []);
+
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const selectedUserMessages = filteredMessageBySelectedUser(
     userAllMessages,
     selectedUserId
   );
 
-  // console.log('selectedUserMessages', selectedUserMessages);
-  console.log('MSGGGGGGGGGG', messages);
-  console.log('USERMSG', userAllMessages);
-
-  const reducedMessagesComp = reducedMessage.map((message) => {
-    return (
-      <Chat
-        key={message.id}
-        to_user_id={message['to_user_id']}
-        from_name={users[message['from_user_id'] - 1]['first_name']}
-        to_name={users[message['to_user_id'] - 1]['first_name']}
-        timestamp="just now"
-        message={message.content}
-        profilePic={users[message['to_user_id'] - 1]['profile_photo']}
-        setSelectedUserId={setSelectedUserId}
-      />
-    );
-  });
+  const selectedPhoto = selectedUserId
+    ? users[selectedUserId - 1]['profile_photo']
+    : null;
 
   return (
-    <div className="container">
-      <section className="message">{reducedMessagesComp}</section>
-
-      <section className="chat_screen">
+    <div className="app">
+      <div className="app_body">
+        <Chat
+          messages={messages}
+          users={users}
+          setMessages={setMessages}
+          setSelectedUserId={setSelectedUserId}
+        />
         <ChatScreen
           selectedMessages={selectedUserMessages}
           messages={messages}
           setMessages={setMessages}
+          selectedPhoto={selectedPhoto}
         />
-      </section>
+      </div>
     </div>
   );
 };
