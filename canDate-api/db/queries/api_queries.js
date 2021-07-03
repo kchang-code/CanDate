@@ -93,6 +93,33 @@ const createNewMessage = (newMessage) => {
   );
 };
 
+const updateUser = (updateUser) => {
+  const value = [
+    updateUser.gender,
+    updateUser.height,
+    updateUser.address,
+    updateUser.age,
+    updateUser.url,
+    updateUser.description,
+    updateUser.id,
+  ];
+
+  const queryStatement =
+    `UPDATE users
+     SET gender = $1, height = $2, address = $3, age = $4, profile_photo = $5, about_me = $6
+     WHERE id = $7`;
+  return (
+    db
+      .query(queryStatement, value)
+      // .then(() => {
+      //   console.log("successes");
+      // })
+      .catch((err) => {
+        return err;
+      })
+  );
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -100,4 +127,5 @@ module.exports = {
   getAllMessages,
   creatNewUser,
   createNewMessage,
+  updateUser,
 };

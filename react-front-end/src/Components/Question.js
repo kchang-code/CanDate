@@ -54,8 +54,9 @@ export default function Question(props) {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
 
-  const update = (gender, height, address, age, description, url) => {
+  const update = (gender, height, address, age, description, url, id) => {
     let updateUser = {
+      id,
       gender,
       height,
       address,
@@ -63,14 +64,13 @@ export default function Question(props) {
       description,
       url,
     };
-    console.log('update', updateUser);
-    console.log('id', props.id);
 
     axios
       .put(`http://localhost:8080/api/signup/${props.id}`, { updateUser })
       .then(() => console.log('done'))
       .catch((err) => console.log('1111---v', err));
   };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -165,7 +165,7 @@ export default function Question(props) {
             className={classes.submit}
             onClick={() => {
               props.tagPage();
-              update(gender, height, address, age, description, url);
+              update(gender, height, address, age, description, url, props.id);
             }}
           >
             Submit

@@ -54,9 +54,8 @@ router.put("/users", (req, res) => {
 });
 
 router.put("/signup/:id", (req, res) => {
-  console.log(req.body.updateUser);
   res.json("success");
-  apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+  apiQueries.updateUser(req.body.updateUser).catch((err) => {
     console.log(err);
   });
 });
