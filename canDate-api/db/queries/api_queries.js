@@ -62,12 +62,35 @@ const creatNewUser = (newUser) => {
     newUser["email"],
     newUser["password"],
   ];
-  console.log(value);
+
   const queryStatement = `INSERT INTO users(first_name, last_name, email, password)
   VALUES ($1, $2, $3, $4)`;
   return db.query(queryStatement, value).catch((err) => {
     return err;
   });
+};
+
+const createNewMessage = (newMessage) => {
+  const value = [
+    newMessage["to_user_id"],
+    newMessage["from_user_id"],
+    newMessage["content"],
+  ];
+
+  const queryStatement = `INSERT INTO message(to_user_id, from_user_id, content)
+  VALUES ($1, $2, $3)`;
+
+  console.log("---------------", value, queryStatement);
+  return (
+    db
+      .query(queryStatement, value)
+      // .then(() => {
+      //   console.log("successes");
+      // })
+      .catch((err) => {
+        return err;
+      })
+  );
 };
 
 module.exports = {
@@ -76,4 +99,5 @@ module.exports = {
   getAllUserTags,
   getAllMessages,
   creatNewUser,
+  createNewMessage,
 };

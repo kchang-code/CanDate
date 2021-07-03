@@ -54,8 +54,6 @@ export default function Question(props) {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
 
-
-
   const update = (gender, height, address, age, description, url) => {
     let updateUser = {
       gender,
@@ -65,7 +63,9 @@ export default function Question(props) {
       description,
       url,
     };
-    console.log("update", updateUser)
+    console.log('update', updateUser);
+    console.log('id', props.id);
+
     axios
       .put(`http://localhost:8080/api/signup/${props.id}`, { updateUser })
       .then(() => console.log('done'))
@@ -81,7 +81,11 @@ export default function Question(props) {
         <Typography component="h1" variant="h5">
           Tell us about yourself
         </Typography>
-        <form className={classes.form} noValidate onSubmit={(e) => e.preventDefault}>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={(e) => e.preventDefault}
+        >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -159,8 +163,10 @@ export default function Question(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => update(gender, height, address, age, description, url)}
-            onClick={props.tagPage}
+            onClick={() => {
+              props.tagPage();
+              update(gender, height, address, age, description, url);
+            }}
           >
             Submit
           </Button>

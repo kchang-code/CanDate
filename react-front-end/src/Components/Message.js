@@ -16,16 +16,21 @@ const Message = (props) => {
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [selectedUserMessages, setSelectedUserMessages] = useState([]);
+  // const [selectedUserMessages, setSelectedUserMessages] = useState([]);
 
-  useEffect(() => {
-    setSelectedUserMessages(
-      filteredMessageBySelectedUser(userAllMessages, selectedUserId)
-    );
-  }, [selectedUserId]);
+  // useEffect(() => {
+  //   setSelectedUserMessages(
+  //     filteredMessageBySelectedUser(userAllMessages, selectedUserId)
+  //   );
+  // }, [messages]);
+  const selectedUserMessages = filteredMessageBySelectedUser(
+    userAllMessages,
+    selectedUserId
+  );
 
   // console.log('selectedUserMessages', selectedUserMessages);
-  // console.log('MSGGGGGGGGGG', messages);
+  console.log('MSGGGGGGGGGG', messages);
+  console.log('USERMSG', userAllMessages);
 
   const reducedMessagesComp = reducedMessage.map((message) => {
     return (

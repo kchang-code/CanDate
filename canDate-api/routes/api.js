@@ -39,7 +39,6 @@ router.get("/message", (req, res) => {
   apiQueries
     .getAllMessages()
     .then((message) => {
-      console.log(message);
       res.json({ message });
     })
     .catch((err) => {
@@ -48,11 +47,25 @@ router.get("/message", (req, res) => {
 });
 
 router.put("/users", (req, res) => {
-  console.log(req.body.newUser);
   res.json("success");
   apiQueries.creatNewUser(req.body.newUser).catch((err) => {
     console.log(err);
   });
+});
+
+router.put("/signup/:id", (req, res) => {
+  console.log(req.body.updateUser);
+  res.json("success");
+  apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+    console.log(err);
+  });
+});
+
+router.put("/users/:id/messages", (req, res) => {
+  apiQueries.createNewMessage(req.body.newMessage).catch((err) => {
+    console.log(err);
+  });
+  // res.json("success");
 });
 
 module.exports = router;
