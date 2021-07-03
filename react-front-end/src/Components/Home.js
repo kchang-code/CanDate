@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PhotoList from './PhotoList';
 import TagList from './TagList';
 import useVisualMode from '../hooks/useVisualMode';
@@ -13,6 +13,9 @@ export default function Home(props) {
   const QUESTION = "QUESTION"
   const TAG = "TAG"
   const SIGN = "SIGN"
+  const [users, setUsers] = useState(props.image)
+
+  const id = props.image.length + 1
 
   const { mode, transition, back } = useVisualMode(FORM)
 
@@ -33,7 +36,7 @@ export default function Home(props) {
       </div>
       <div className="register">
         {mode === FORM && <Form change={change} SignIn={Sign} />}
-        {mode === QUESTION && <Question tagPage={tagPage} />}
+        {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
         {mode === TAG && <TagList tags={props.tags} />}
         {mode === SIGN && <SignIn back={back} />}
       </div>

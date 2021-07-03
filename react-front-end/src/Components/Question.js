@@ -4,8 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -54,18 +52,22 @@ export default function Question(props) {
   const [address, setAddress] = useState('');
   const [age, setAge] = useState('');
   const [description, setDescription] = useState('');
+  const [url, setUrl] = useState('');
 
-  const update = (gender, height, address, age, description) => {
+
+
+  const update = (gender, height, address, age, description, url) => {
     let updateUser = {
       gender,
       height,
       address,
       age,
-      description
+      description,
+      url,
     };
-
+    console.log("update", updateUser)
     axios
-      .put('http://localhost:8080/api/users', { updateUser })
+      .put(`http://localhost:8080/api/signup/${props.id}`, { updateUser })
       .then(() => console.log('done'))
       .catch((err) => console.log('1111---v', err));
   };
@@ -79,7 +81,7 @@ export default function Question(props) {
         <Typography component="h1" variant="h5">
           Tell us about yourself
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={(e) => e.preventDefault}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -115,7 +117,7 @@ export default function Question(props) {
                 onChange={(e) => setHeight(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -124,6 +126,18 @@ export default function Question(props) {
                 label="Address(City)"
                 name="address"
                 onChange={(e) => setAddress(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="profile-photo"
+                label="Profile Photo Url"
+                type="text"
+                id="profile-photo"
+                onChange={(e) => setUrl(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -145,7 +159,7 @@ export default function Question(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => { update(gender, height, address, age, description) }}
+            onClick={() => update(gender, height, address, age, description, url)}
             onClick={props.tagPage}
           >
             Submit

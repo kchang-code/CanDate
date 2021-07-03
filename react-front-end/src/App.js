@@ -20,7 +20,6 @@ function App() {
     ]).then((all) => {
       const [user, message, tag] = all;
       setUsers(user.data.users);
-
       setMessages(message.data.message);
       setTags(tag.data.tags);
     });
