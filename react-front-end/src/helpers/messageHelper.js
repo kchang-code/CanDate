@@ -13,13 +13,7 @@ const reduceToNames = (message, userId) => {
 
 const filteredMessageByLoginUser = (messages, loginUserId) => {
   return messages.filter((message) => {
-    // console.log('passedIn', message);
-    // console.log('loginUserId', message['to_user_id']);
-    // console.log(
-    //   'return',
-    //   message['to_user_id'] === Number(loginUserId) ||
-    //     message['from_user_id'] === Number(loginUserId)
-    // );
+    console.log('TYPE OF TOUSER', typeof message['to_user_id']);
     return (
       message['to_user_id'] === Number(loginUserId) ||
       message['from_user_id'] === Number(loginUserId)
