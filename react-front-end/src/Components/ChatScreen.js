@@ -17,30 +17,49 @@ let to_user_id = null;
 const ChatScreen = (props) => {
   const [input, setInput] = useState('');
   let { id } = useParams();
+  const [showMsg, setShowMsg] = useState([]);
+  const [showTime, setShowTime] = useState('');
 
   const newMessage = {
     from_user_id: Number(id),
     to_user_id: Number(to_user_id),
     content: input,
+    creates_on: showTime,
   };
-  console.log('newMessage', newMessage);
-
-  const [showMsg, setShowMsg] = useState([]);
 
   useEffect(() => {
     setShowMsg(props.selectedMessages);
   }, [props.selectedMessages]);
 
-  const sendMessage = () => {
-    axios.put('http://localhost:8080/api/users/:id/messages', { newMessage });
+  const sendMessage = (e) => {
+    e.preventDefault();
+    const timeElapsed = Date.now();
+    let today = new Date(timeElapsed);
+    let time = today.toUTCString().slice(5, today.toUTCString().length - 4);
+    console.log('object', time);
+    setShowTime(time);
+    console.log('after set time');
+    console.log('showtime', showTime);
 
-    props.setMessages([...props.messages, newMessage]);
-    console.log('NEW MSG', newMessage);
+    axios
+      .put('http://localhost:8080/api/users/:id/messages', { newMessage })
+      .then(() => {
+        console.log('Put is done');
+        props.setMessages([...props.messages, newMessage]);
+      })
+      .catch((err) => {
+        console.log('hererererere', err);
+      });
+
+    // console.log('newMessage-------------', newMessage);
+    // console.log('showTime11111', showTime);
+    // console.log(
+    //   'now',
+    //   today.toUTCString().slice(5, today.toUTCString().length - 4)
+    // );
 
     setInput('');
   };
-
-  console.log('shoeM', props);
 
   const messageContent = showMsg.map((message) => {
     if (message['from_user_id'] !== Number(id)) {
@@ -56,7 +75,8 @@ const ChatScreen = (props) => {
           />
           <p className="chatScreen_text">
             {message.content}
-            <span className="chat_time">3:00pm</span>
+
+            <span className="chat_time">{message['creates_on']}</span>
           </p>
         </div>
       );
@@ -65,7 +85,7 @@ const ChatScreen = (props) => {
         <div className="chatScreen_message">
           <p className="chatScreen_textUser">
             {message.content}
-            <span className="chat_time">3:00pm</span>
+            <span className="chat_time">{message['creates_on']}</span>
           </p>
         </div>
       );
@@ -107,7 +127,7 @@ const ChatScreen = (props) => {
             value={input}
             onChange={(data) => setInput(data.target.value)}
           />
-          <button onClick={sendMessage} type="submit">
+          <button onClick={(e) => sendMessage(e)} type="submit">
             Send a message
           </button>
         </form>

@@ -7,6 +7,19 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
+const server = require("http").Server(app);
+const WebSocket = require("ws");
+const wss = new WebSocket.Server({ server });
+
+wss.on("connection", (socket) => {
+  socket.onmessage = (event) => {
+    console.log(`Message Received: ${event.data}`);
+
+    if (event.data === "ping") {
+      socket.send(JSON.stringify("pong"));
+    }
+  };
+});
 
 const app = express();
 const morgan = require("morgan");

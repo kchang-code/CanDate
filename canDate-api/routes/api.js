@@ -62,10 +62,16 @@ router.put("/signup/:id", (req, res) => {
 });
 
 router.put("/users/:id/messages", (req, res) => {
-  apiQueries.createNewMessage(req.body.newMessage).catch((err) => {
-    console.log(err);
-  });
-  // res.json("success");
+  apiQueries
+    .createNewMessage(req.body.newMessage)
+    .then(() => {
+      console.log("api message put done");
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // res.sendStatus(200);
 });
 
 module.exports = router;

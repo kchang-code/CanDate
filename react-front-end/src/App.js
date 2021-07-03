@@ -23,6 +23,11 @@ function App() {
       setMessages(message.data.message);
       setTags(tag.data.tags);
     });
+
+    const schedularSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    schedularSocket.onopen = function () {
+      schedularSocket.send('ping');
+    };
   }, []);
 
   return (
