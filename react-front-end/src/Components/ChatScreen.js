@@ -16,9 +16,9 @@ const ChatScreen = (props) => {
   };
 
   const [showMsg, setShowMsg] = useState([]);
-  console.log('selectedMessages in chat', props.selectedMessages);
-  console.log('showmsg in chat', showMsg);
 
+  // console.log('selectedMessages in chat', props.selectedMessages);
+  // console.log('showMsg in chat', showMsg);
   // // const [selectedMessages, setSelectedMessages] = useState(
   // //   props.selectedMessages
   // // );
