@@ -70,10 +70,27 @@ const creatNewUser = (newUser) => {
   });
 };
 
+const getTagNames = () => {
+  const queryStatement = `
+  SELECT *
+  FROM user_tag
+  CROSS JOIN tags
+  `;
+  return db
+    .query(queryStatement)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
 module.exports = {
   getAllTags,
   getAllUsers,
   getAllUserTags,
   getAllMessages,
   creatNewUser,
+  getTagNames
 };

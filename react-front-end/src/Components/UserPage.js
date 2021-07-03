@@ -20,7 +20,7 @@ const UserPage = () => {
        {users.map(user=> {
          return (
           <Grid container spacing={4}>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={6} sm={3}>
             <ProfileCard 
               key={user.id}
               name={user.first_name}
