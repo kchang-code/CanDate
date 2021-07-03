@@ -10,35 +10,34 @@ const ChatScreen = (props) => {
   let { id } = useParams();
 
   const newMessage = {
-    to_user_id: id,
-    from_user_id: from_user_id,
+    to_user_id: Number(id),
+    from_user_id: Number(from_user_id),
     content: input,
   };
 
-  const [showMsg, setShowMsg] = useState(props.selectedMessages);
+  const [showMsg, setShowMsg] = useState([]);
   console.log('selectedMessages in chat', props.selectedMessages);
   console.log('showmsg in chat', showMsg);
 
   // // const [selectedMessages, setSelectedMessages] = useState(
   // //   props.selectedMessages
   // // );
-  // useEffect(() => {
-  //   setShowMsg(props.selectedMessages);
-  // }, [props.selectedMessages]);
+  useEffect(() => {
+    setShowMsg(props.selectedMessages);
+  }, [props.selectedMessages]);
 
   const handleSend = () => {
     axios.put('http://localhost:8080/api/users/:id/messages', { newMessage });
 
     props.setMessages([...props.messages, newMessage]);
-
-    setShowMsg([...showMsg, newMessage]);
+    console.log('NEW MSG', newMessage);
 
     setInput('');
   };
 
   const messageContent = showMsg.map((message) => {
     if (message['from_user_id'] === Number(id)) {
-      from_user_id = message['to_user_id'].toString();
+      from_user_id = message['to_user_id'];
 
       return (
         <div className="chatScreen_message">
