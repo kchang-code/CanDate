@@ -3,13 +3,21 @@ import { Avatar } from '@material-ui/core';
 import './Chat.scss';
 
 const Chat = (props) => {
-  const { to_name, message, profilePic, timestamp } = props;
-  console.log(to_name);
+  const {
+    to_name,
+    message,
+    profilePic,
+    timestamp,
+    setSelectedUserId,
+    to_user_id,
+  } = props;
+
   return (
     <div
       className="chat"
       onClick={() => {
-        console.log('clicked');
+        setSelectedUserId(to_user_id);
+        // console.log('user_id', to_user_id);
       }}
     >
       <Avatar className="chat__image" alt="Zio" src={profilePic} />

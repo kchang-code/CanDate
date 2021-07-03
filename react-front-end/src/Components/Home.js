@@ -1,91 +1,47 @@
 import React, { useState } from 'react';
 import PhotoList from './PhotoList';
-import './Home.scss';
-import axios from 'axios';
-export default function Home(props) {
-  const [first_name, setFirst_name] = useState('');
-  const [last_name, setLast_name] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const save = (first_name, last_name, email, password) => {
-    let newUser = {
-      first_name,
-      last_name,
-      email,
-      password,
-    };
+import TagList from './TagList';
+import useVisualMode from '../hooks/useVisualMode';
+import Question from './Question';
+import SignIn from './SignIn';
 
-    axios
-      .put('http://localhost:8080/api/users', { newUser })
-      .then(() => console.log('done'))
-      .catch((err) => console.log('1111---v', err));
-  };
+import Form from './Form';
+import './Home.scss';
+
+export default function Home(props) {
+  const FORM = "FORM"
+  const QUESTION = "QUESTION"
+  const TAG = "TAG"
+  const SIGN = "SIGN"
+  const [users, setUsers] = useState(props.image)
+
+  const id = props.image.length + 1
+
+  const { mode, transition, back } = useVisualMode(FORM)
+
+  function change() {
+    transition(QUESTION)
+  }
+  function tagPage() {
+    transition(TAG)
+  }
+  function Sign() {
+    transition(SIGN)
+  }
+
   return (
     <div className="home-container">
       <div className="image-wall">
         <PhotoList image={props.image} />
       </div>
       <div className="register">
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div className="forms">
-            <div>
-              <label for="first_name" className="label">
-                First Name:
-              </label>
-              <input
-                className="input"
-                type="text"
-                name="first_name"
-                onChange={(e) => setFirst_name(e.target.value)}
-              />
-            </div>
-            <div>
-              <label for="last_name" className="label">
-                Last Name:
-              </label>
-              <input
-                className="input"
-                type="text"
-                name="last_name"
-                onChange={(e) => setLast_name(e.target.value)}
-              />
-            </div>
-            <div>
-              <label for="email" className="label">
-                email:
-              </label>
-              <input
-                className="input"
-                type="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label for="password" className="label">
-                password:
-              </label>
-              <input
-                className="input"
-                type="text"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={() => {
-                  save(first_name, last_name, email, password);
-                }}
-              >
-                sign up
-              </button>
-            </div>
-          </div>
-        </form>
+        {mode === FORM && <Form change={change} SignIn={Sign} />}
+        {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
+        {mode === TAG && <TagList tags={props.tags} />}
+        {mode === SIGN && <SignIn back={back} />}
       </div>
     </div>
   );
 }
+
+

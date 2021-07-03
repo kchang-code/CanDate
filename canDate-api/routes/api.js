@@ -53,6 +53,14 @@ router.put("/users", (req, res) => {
   });
 });
 
+router.put("/signup/:id", (req, res) => {
+  console.log(req.body.updateUser);
+  res.json("success");
+  apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+    console.log(err);
+  });
+});
+
 router.put("/users/:id/messages", (req, res) => {
   apiQueries.createNewMessage(req.body.newMessage).catch((err) => {
     console.log(err);
