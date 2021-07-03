@@ -13,7 +13,6 @@ export default function Home(props) {
   const QUESTION = "QUESTION"
   const TAG = "TAG"
   const SIGN = "SIGN"
-  const [users, setUsers] = useState(props.image)
 
   const id = props.image.length + 1
 
@@ -37,7 +36,7 @@ export default function Home(props) {
       <div className="register">
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
-        {mode === TAG && <TagList tags={props.tags} />}
+        {mode === TAG && <TagList tags={props.tags} id={id} />}
         {mode === SIGN && <SignIn back={back} />}
       </div>
     </div>
