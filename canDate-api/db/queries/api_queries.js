@@ -72,9 +72,14 @@ const creatNewUser = (newUser) => {
 
 const getTagNames = () => {
   const queryStatement = `
-  SELECT *
-  FROM users
-  JOIN user_tag ON users.id = user_tag.user_id
+  SELECT user_id,ARRAY_AGG(name) tags
+  FROM user_tag
+  JOIN tags USING (id)
+  JOIN users USING (id)
+  GROUP BY user_id
+  ORDER BY user_id
+
+
   `;
   return db
     .query(queryStatement)
