@@ -73,8 +73,8 @@ const creatNewUser = (newUser) => {
 const getTagNames = () => {
   const queryStatement = `
   SELECT *
-  FROM user_tag
-  CROSS JOIN tags
+  FROM users
+  JOIN user_tag ON users.id = user_tag.user_id
   `;
   return db
     .query(queryStatement)
@@ -86,11 +86,15 @@ const getTagNames = () => {
     });
 }
 
+
+
+
 module.exports = {
   getAllTags,
   getAllUsers,
   getAllUserTags,
   getAllMessages,
   creatNewUser,
-  getTagNames
+  getTagNames,
+
 };

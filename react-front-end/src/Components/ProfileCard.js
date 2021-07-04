@@ -39,20 +39,9 @@ export default function ProfileCard(props) {
               Tags:
             </Typography>
             <Button size="small" variant='outlined' color='primary'>
-              Hiking
+              
             </Button>
-            <Button size="small" variant='outlined' color='primary'>
-              Swimming
-            </Button>
-            <Button size="small" variant='outlined' color='primary'>
-              Singing
-            </Button>
-            <Button size="small" variant='outlined' color='primary'>
-              Yoga
-            </Button>
-            <Button size="small" variant='outlined' color='primary'>
-              Baking
-            </Button>
+            
           </CardContent>
         </Card>
       </div>
