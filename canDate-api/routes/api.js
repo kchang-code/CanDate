@@ -36,8 +36,12 @@ router.get("/user_tag", (req, res) => {
 });
 
 router.put("/user_tag/new", (req, res) => {
+  console.log("check", req.body.newTagUser)
   apiQueries
     .newUserTag(req.body.newTagUser)
+    .then(() => {
+      res.sendStatus(200);
+    })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });

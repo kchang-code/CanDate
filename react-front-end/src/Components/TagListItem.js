@@ -16,10 +16,8 @@ const TagListItem = props => {
     setNum(num)
     if (num % 2 === 0) {
       setNewColor("secondary")
+      console.log("check1", newTagUser)
       axios.put("http://localhost:8080/api/user_tag/new", { newTagUser })
-        .then(() => {
-          console.log("newUserTag")
-        })
         .catch((err) => console.log('1111---v', err));
       return
     }
