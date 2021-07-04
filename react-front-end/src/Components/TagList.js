@@ -40,7 +40,7 @@ export default function TagList(props) {
   const classes = useStyles();
   const lists = props.tags.map((item) => {
     return (
-      <TagListItem name={item.name} />
+      <TagListItem name={item.name} tag_id={item.id} id={props.id} />
     );
   });
   return (

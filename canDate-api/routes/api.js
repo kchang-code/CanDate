@@ -35,6 +35,14 @@ router.get("/user_tag", (req, res) => {
     });
 });
 
+router.put("/user_tag/new", (req, res) => {
+  apiQueries
+    .newUserTag(req.body.newTagUser)
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 router.get("/message", (req, res) => {
   apiQueries
     .getAllMessages()
@@ -48,7 +56,7 @@ router.get("/message", (req, res) => {
 
 router.put("/users", (req, res) => {
   res.json("success");
-  apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+  apiQueries.createNewUser(req.body.newUser).catch((err) => {
     console.log(err);
   });
 });

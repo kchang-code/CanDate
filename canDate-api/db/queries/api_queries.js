@@ -55,7 +55,7 @@ const getAllMessages = () => {
     });
 };
 
-const creatNewUser = (newUser) => {
+const createNewUser = (newUser) => {
   const value = [
     newUser["first_name"],
     newUser["last_name"],
@@ -93,6 +93,29 @@ const createNewMessage = (newMessage) => {
   );
 };
 
+
+
+const newUserTag = (newTagUser) => {
+  const value = [
+    newTagUser["user_id"],
+    newTagUser["tag_id"],
+  ];
+
+  const queryStatement = `INSERT INTO user_tag(user_id, tag_id) VALUES ($1, $2);`;
+
+  return (
+    db
+      .query(queryStatement, value)
+      // .then(() => {
+      //   console.log("successes");
+      // })
+      .catch((err) => {
+        return err;
+      })
+  );
+};
+
+
 const updateUser = (updateUser) => {
   const value = [
     updateUser.gender,
@@ -125,7 +148,8 @@ module.exports = {
   getAllUsers,
   getAllUserTags,
   getAllMessages,
-  creatNewUser,
+  createNewUser,
   createNewMessage,
   updateUser,
+  newUserTag,
 };
