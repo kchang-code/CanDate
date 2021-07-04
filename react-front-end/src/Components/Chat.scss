@@ -20,6 +20,12 @@
   justify-content: space-between;
   padding: 20px;
   border-right: 1px solid lightgray;
+  align-items: center;
+  text-align: start;
+  h2 {
+    flex: 1 ;
+    margin-left: 20px;
+  }
 }
 
 .sidebar {

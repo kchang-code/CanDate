@@ -6,6 +6,6 @@ CREATE TABLE message (
   to_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   from_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   content VARCHAR(255) NOT NULL,
-  creates_on TEXT NOT NULL DEFAULT to_char(NOW(), 'DD Mon YYYY HH24:MI:SS')
+  creates_on TEXT NOT NULL DEFAULT to_char(NOW(), 'DD/MM/YYYY HH24:MI:SS')
 
 );

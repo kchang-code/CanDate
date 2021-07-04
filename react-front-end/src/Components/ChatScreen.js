@@ -11,20 +11,22 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
 import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
+import ReactTimeAgo from 'react-time-ago';
 
 let to_user_id = null;
+let userName;
+let userPhoto;
 
 const ChatScreen = (props) => {
-  const [input, setInput] = useState('');
   let { id } = useParams();
+  const [input, setInput] = useState('');
   const [showMsg, setShowMsg] = useState([]);
-  const [showTime, setShowTime] = useState('');
+  const [userInfo, setUserInfo] = useState({});
 
   const newMessage = {
     from_user_id: Number(id),
     to_user_id: Number(to_user_id),
     content: input,
-    creates_on: showTime,
   };
 
   useEffect(() => {
@@ -34,29 +36,20 @@ const ChatScreen = (props) => {
   const sendMessage = (e) => {
     e.preventDefault();
     const timeElapsed = Date.now();
+    //sending msg state
     let today = new Date(timeElapsed);
-    let time = today.toUTCString().slice(5, today.toUTCString().length - 4);
-    console.log('object', time);
-    setShowTime(time);
-    console.log('after set time');
-    console.log('showtime', showTime);
+
+    // let time = today.toUTCString().slice(5, today.toUTCString().length - 4);
+    let time = today.toLocaleString();
 
     axios
-      .put('http://localhost:8080/api/users/:id/messages', { newMessage })
-      .then(() => {
-        console.log('Put is done');
-        props.setMessages([...props.messages, newMessage]);
+      .put('http://localhost:8080/api/users/:id/messages', {
+        newMessage: { ...newMessage, creates_on: time },
       })
-      .catch((err) => {
-        console.log('hererererere', err);
-      });
-
-    // console.log('newMessage-------------', newMessage);
-    // console.log('showTime11111', showTime);
-    // console.log(
-    //   'now',
-    //   today.toUTCString().slice(5, today.toUTCString().length - 4)
-    // );
+      .then((res) => {
+        props.setMessages([...props.messages, ...res.data]);
+      })
+      .catch((err) => {});
 
     setInput('');
   };
@@ -64,7 +57,9 @@ const ChatScreen = (props) => {
   const messageContent = showMsg.map((message) => {
     if (message['from_user_id'] !== Number(id)) {
       to_user_id = message['from_user_id'];
-
+      userName = props.users[to_user_id - 1]['first_name'];
+      userPhoto = props.users[to_user_id - 1]['profile_photo'];
+      // setUserInfo({ ...userInfo, userName, userPhoto });
       return (
         <div className="chatScreen_message">
           <Avatar
@@ -95,10 +90,12 @@ const ChatScreen = (props) => {
   return (
     <div className="chat">
       <div className="chat_header">
-        <Avatar />
+        <Avatar src={userPhoto} />
         <div className="chat_headerInfo">
-          <h3>ROOM NAME</h3>
-          <p>LAST SEEN at ...</p>
+          <h3>{userName}</h3>
+          <p>
+            Last Seen: <ReactTimeAgo date={Date.now()} locale="en-US" />
+          </p>
         </div>
         <div className="chat_headerRight">
           <IconButton>

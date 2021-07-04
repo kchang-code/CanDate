@@ -79,12 +79,13 @@ const createNewMessage = (newMessage) => {
   ];
 
   const queryStatement = `INSERT INTO message(to_user_id, from_user_id, content, creates_on)
-  VALUES ($1, $2, $3, $4)`;
+  VALUES ($1, $2, $3, $4)
+  RETURNING *`;
 
   return db
-    .query(`SET timezone='GMT+7'`)
-    .then(() => {
-      db.query(queryStatement, value);
+    .query(queryStatement, value)
+    .then((res) => {
+      return res.rows;
     })
 
     .catch((err) => {
