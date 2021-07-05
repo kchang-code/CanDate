@@ -75,22 +75,22 @@ const createNewMessage = (newMessage) => {
     newMessage["to_user_id"],
     newMessage["from_user_id"],
     newMessage["content"],
+    newMessage["creates_on"],
   ];
 
-  const queryStatement = `INSERT INTO message(to_user_id, from_user_id, content)
-  VALUES ($1, $2, $3)`;
+  const queryStatement = `INSERT INTO message(to_user_id, from_user_id, content, creates_on)
+  VALUES ($1, $2, $3, $4)
+  RETURNING *`;
 
-  console.log("---------------", value, queryStatement);
-  return (
-    db
-      .query(queryStatement, value)
-      // .then(() => {
-      //   console.log("successes");
-      // })
-      .catch((err) => {
-        return err;
-      })
-  );
+  return db
+    .query(queryStatement, value)
+    .then((res) => {
+      return res.rows;
+    })
+
+    .catch((err) => {
+      return err;
+    });
 };
 
 
