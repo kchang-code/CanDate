@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Message = (props) => {
   let { id } = useParams();
-  const { messages, users, setMessages, loading } = props;
+  const { messages, users, setMessages, loading, realTimeData } = props;
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);
@@ -52,6 +52,7 @@ const Message = (props) => {
           selectedPhoto={selectedPhoto}
           users={users}
           loading={loading}
+          realTimeData={realTimeData}
         />
       </div>
     </div>
