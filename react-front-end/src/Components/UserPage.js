@@ -8,15 +8,16 @@ import NavBar from "./NavBar";
 import { TagsContext } from "../Context/TagsContext";
 import { useRadioGroup } from "@material-ui/core";
 import {filterTags, getNameOfTag, getFilteredUsers, getFilteredUserProfile} from '../helpers/userPageHelpers';
+import Button from "@material-ui/core/Button";
 
 const UserPage = (props) => {
   const { state } = useUserPage();
   const [user_tag, setUserTag] = useState([]);
   const [tag, setTags] = useState([]);
   const [selectTag, setSelectTag] = useState({
-    tags: []
+    tags: [],
+    buttonColor: false,
   });
-  const [buttonColor, setButtonColor] = useState(false)
 
   // add selected tag id into arr
   const handleTagClick = (itemId) => {
@@ -26,6 +27,11 @@ const UserPage = (props) => {
     setSelectTag(selectArr)
 };
 
+  const handleEmptyTagsClick = (selectTag) => {
+    const selectArr = {...selectTag};
+    selectArr.tags = [];
+    setSelectTag(selectArr)
+  }
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/user_tag").then((res) => {
@@ -45,8 +51,10 @@ const UserPage = (props) => {
   return (
     <>
       <TagsContext.Provider values={tag}>
-        <NavBar handleTagClick={handleTagClick}/>
+        <NavBar handleTagClick={handleTagClick} handleEmptyTagsClick={handleEmptyTagsClick}
+        />
       </TagsContext.Provider>
+
       <div>
         {selectTag.tags.length === 0 ? state.users.slice(5).map((user) => {
           return (
@@ -82,7 +90,6 @@ const UserPage = (props) => {
       </div>
       {console.log("state.users", state.users)}
       {console.log("selectTag.tags", selectTag.tags)}
-
     </>
   );
 };

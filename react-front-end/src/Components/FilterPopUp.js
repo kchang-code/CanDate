@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./FilterPopUp.scss";
-import SelectTagsInFilter from './SelectTagsInFilter';
+import SelectTagsInFilter from "./SelectTagsInFilter";
+import Button from "@material-ui/core/Button";
 
 export default function FilterPopUp(props) {
 
-  
 
   return (
     <div className="popup-box">
@@ -14,7 +14,12 @@ export default function FilterPopUp(props) {
           x
         </span>
         <span>
-          <SelectTagsInFilter tags={props.content} handleTagClick={props.handleTagClick}/>
+        </span>
+        <span>
+          <SelectTagsInFilter
+            tags={props.content}
+            handleTagClick={props.handleTagClick}
+          />
         </span>
         <div onClick={props.save}>{props.savebtn}</div>
       </div>

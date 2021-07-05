@@ -12,10 +12,16 @@ import axios from 'axios';
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [tag, setTags] = useState([]);
+  const [selectTag, setSelectTag] = useState({
+    tags: [],
+    buttonColor: false,
+  });
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+
+
 
 
   const tagArr = (tag) =>{
@@ -41,6 +47,10 @@ export default function NavBar(props) {
           <Button onClick={togglePopup} color="inherit" class="filter-btn">
             Filter
           </Button>
+          <Button onClick={() => props.handleEmptyTagsClick(selectTag)} color="inherit" class="filter-btn">
+            Clear Filter
+          </Button>
+
           {isOpen && (
 
               <FilterPopUp
@@ -53,7 +63,6 @@ export default function NavBar(props) {
           )}
         </Toolbar>
       </AppBar>
-      {/* {console.log(tagArr(tag))} */}
     </div>
   );
 }
