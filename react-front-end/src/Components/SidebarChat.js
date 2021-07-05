@@ -19,8 +19,6 @@ const SidebarChat = (props) => {
     messageObj,
   } = props;
 
-  // console.log('messageObj', messageObj);
-
   const twoMessageArr = [
     ...messageObj[message['to_user_id']],
     ...messageObj[message['from_user_id']],
@@ -33,7 +31,6 @@ const SidebarChat = (props) => {
 
   const latestMsg = filteredMsg.sort((a, b) => b.id - a.id)[0];
 
-  console.log('latestMsg', latestMsg);
   const dateTimeAgo =
     latestMsg['creates_on'].slice(3, 5) +
     '/' +
@@ -52,7 +49,7 @@ const SidebarChat = (props) => {
         <h2>{to_name}</h2>
         <p>{latestMsg.content}</p>
       </div>
-      <div>
+      <div className="sidebarChat_time">
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />
       </div>
     </div>

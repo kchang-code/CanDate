@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './ChatScreen.scss';
 
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -21,13 +21,23 @@ const ChatScreen = (props) => {
   let { id } = useParams();
   const [input, setInput] = useState('');
   const [showMsg, setShowMsg] = useState([]);
-  const [userInfo, setUserInfo] = useState({});
 
   const newMessage = {
     from_user_id: Number(id),
     to_user_id: Number(to_user_id),
     content: input,
   };
+
+  const messageEl = useRef(null);
+
+  // useEffect(() => {
+  //   if (messageEl) {
+  //     messageEl.current.addEventListener('DOMNodeInserted', (event) => {
+  //       const { currentTarget: target } = event;
+  //       target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     setShowMsg(props.selectedMessages);
@@ -39,7 +49,6 @@ const ChatScreen = (props) => {
     //sending msg state
     let today = new Date(timeElapsed);
 
-    // let time = today.toUTCString().slice(5, today.toUTCString().length - 4);
     let time = today.toLocaleString();
 
     axios

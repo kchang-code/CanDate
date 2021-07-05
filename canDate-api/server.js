@@ -29,33 +29,4 @@ const apiRoutes = require("./routes/api")(app);
 
 app.use("/api", apiRoutes);
 
-// console.log("module.exports", app);
-
 module.exports = app;
-
-//socket io goes here
-// io.on("connection", (socket) => {
-//   console.log("new client connected");
-//   console.log(socket.id);
-// });
-
-// const socket = require("socket.io");
-
-// const io = socket(server);
-
-// io.on("connection", (socket) => {
-//   console.log("New client connected");
-
-//   // socket.on("disconnect", () => {
-//   //   console.log("Client disconnected");
-//   // });
-// });
-
-// app.ws("/message", function (ws, req) {
-//   // console.log("ws", ws.id);
-//   ws.on("message", function (msg) {
-//     console.log(msg);
-//     ws.send("hello");
-//   });
-//   console.log("socket");
-// });

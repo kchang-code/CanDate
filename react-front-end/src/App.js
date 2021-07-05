@@ -23,7 +23,9 @@ function App() {
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
     socket.onmessage = function (event) {
-      console.log('event', event, event.data);
+      console.log('event', event.data);
+      // setMessages([...messages, event.data]);
+      console.log([...messages, event.data]);
     };
     socket.onopen = function () {
       socket.send('ping');

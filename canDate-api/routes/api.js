@@ -99,9 +99,9 @@ module.exports = function (app) {
   let msgWS = [];
   app.ws("/message", function (ws, req) {
     msgWS.push(ws);
-    ws.on("message", function (msg) {
-      msgWS.forEach((eachWS) => eachWS.send("hello!"));
-    });
+    // ws.on("message", function (msg) {
+    //   msgWS.forEach((eachWS) => eachWS.send("hello!"));
+    // });
   });
 
   router.put("/signup/:id", (req, res) => {
