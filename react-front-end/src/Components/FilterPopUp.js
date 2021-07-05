@@ -1,9 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import "./FilterPopUp.scss";
 import Button from "@material-ui/core/Button";
-import { TagsContext } from "../Context/TagsContext";
 
 export default function FilterPopUp(props) {
+
+  const [select, setSelect] = useState({
+    bgColor: ""
+  });
+
+  const tagClick = () => {
+    setSelect({
+      bgColor: "blue"
+    })
+  };
+
   return (
     <div className="popup-box">
       <div className="box">
@@ -14,7 +24,8 @@ export default function FilterPopUp(props) {
         <span>
           {props.content.map((item) => {
             return (
-              <Button size="small" variant="outlined" color="primary">
+              <Button class="tags" style={{backgroundColor: select.bgColor}}
+              onClick={tagClick} size="small" variant="outlined" color="primary">
                 {item}
               </Button>
             );
