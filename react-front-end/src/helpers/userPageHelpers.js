@@ -47,3 +47,17 @@ export function  getFilteredUsers (interests, user_tagArr)  {
   })
   return removeRepeatedUsers; 
 }
+
+
+  // return array of objects for filtered users
+  export function getFilteredUserProfile  (filteredUserId, users)  {
+    const userProfiles = [];
+    for (const user of users) {
+      for (const userId of filteredUserId) {
+        if (user.id === userId) {
+          userProfiles.push(user)
+        }
+      }
+    }
+    return userProfiles
+  }

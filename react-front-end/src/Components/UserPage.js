@@ -7,20 +7,25 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import { TagsContext } from "../Context/TagsContext";
 import { useRadioGroup } from "@material-ui/core";
-import {filterTags, getNameOfTag, getFilteredUsers,} from '../helpers/userPageHelpers';
+import {filterTags, getNameOfTag, getFilteredUsers, getFilteredUserProfile} from '../helpers/userPageHelpers';
 
 const UserPage = (props) => {
   const { state } = useUserPage();
   const [user_tag, setUserTag] = useState([]);
   const [tag, setTags] = useState([]);
-  const [selectTag, setSelectTag] = useState([]);
+  const [selectTag, setSelectTag] = useState({
+    tags: []
+  });
+  const [buttonColor, setButtonColor] = useState(false)
 
   // add selected tag id into arr
   const handleTagClick = (itemId) => {
-    const selectArr = [...selectTag];
-    selectArr.push(itemId)
+    const selectArr = {...selectTag};
+    // [{tags:[]}]
+    selectArr.tags.push(itemId)
     setSelectTag(selectArr)
 };
+
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/user_tag").then((res) => {
@@ -36,18 +41,6 @@ const UserPage = (props) => {
 
   
   
-  // return array of objects for filtered users
-  const getFilteredUserProfile = (filteredUserId, users) => {
-    const userProfiles = [];
-    for (const user of users) {
-      for (const userId of filteredUserId) {
-        if (user.id === userId) {
-          userProfiles.push(user)
-        }
-      }
-    }
-    return userProfiles
-  }
   
   return (
     <>
@@ -55,7 +48,7 @@ const UserPage = (props) => {
         <NavBar handleTagClick={handleTagClick}/>
       </TagsContext.Provider>
       <div>
-        {selectTag.length === 0 ? state.users.map((user) => {
+        {selectTag.tags.length === 0 ? state.users.slice(5).map((user) => {
           return (
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6} md={3}>
@@ -70,7 +63,7 @@ const UserPage = (props) => {
             </Grid>
           );
         }) 
-        : getFilteredUserProfile(getFilteredUsers(selectTag, user_tag), state.users).map((filteredUser) => {
+        : getFilteredUserProfile(getFilteredUsers(selectTag.tags, user_tag), state.users).map((filteredUser) => {
           return (
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6} md={3}>
@@ -88,7 +81,7 @@ const UserPage = (props) => {
       }
       </div>
       {console.log("state.users", state.users)}
-      {console.log("selectTag", selectTag)}
+      {console.log("selectTag.tags", selectTag.tags)}
 
     </>
   );
