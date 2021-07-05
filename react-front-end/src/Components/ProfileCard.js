@@ -12,24 +12,18 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
+
 export default function ProfileCard(props) {
 
   const {users} = useUserPage();
   const [tag, setTag] = useState([]);
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/interests")
-    .then(res => {
-      console.log("tag", res.data.interests)
-      setTag(res.data.interests)
-    })
-  }, []);
   
 
   return (
     <>
-      <div>
-        <Card elevation={3} onClick={() => { console.log('flip') }}>
+      <div >
+        <Card class="card" elevation={3} onClick={() => { console.log('flip') }}>
           <CardHeader class="name" title={props.name}
             action={
               <>
@@ -51,7 +45,13 @@ export default function ProfileCard(props) {
             <Typography variant="body2" color="textSecondary">
               Mutual interests:
             </Typography>
-            <Tags />
+            {props.tag.map(item => { 
+              return (
+              <Button size="small" variant="outlined" color="primary" >
+              {item}
+            </Button>
+              )
+            })}
         
           </CardContent>
         </Card>

@@ -11,17 +11,20 @@ function App() {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [tags, setTags] = useState([]);
+  const [user_tag, setUserTags] = useState([]);
 
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/message'),
       axios.get('http://localhost:8080/api/tags'),
+      axios.get('http://localhost:8080/api/user_tag')
     ]).then((all) => {
-      const [user, message, tag] = all;
+      const [user, message, tag, user_tag] = all;
       setUsers(user.data.users);
       setMessages(message.data.message);
       setMessages(tag.data.tags);
+      setUserTags(user_tag.data.user_tag)
     });
 
     // axios.get('http://localhost:8080/api/users').then((data) => {
@@ -41,7 +44,7 @@ function App() {
           </Route>
 
           <Route path="/user">
-            <UserPage />
+            <UserPage tags={tags} user_tag={user_tag}/>
           </Route>
 
           <Route path="/">
