@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import "./FilterPopUp.scss";
-import Button from "@material-ui/core/Button";
+import SelectTagsInFilter from './SelectTagsInFilter';
 
 export default function FilterPopUp(props) {
 
-  const [select, setSelect] = useState({
-    bgColor: ""
-  });
-
-  const tagClick = () => {
-    setSelect({
-      bgColor: "blue"
-    })
-  };
+  
 
   return (
     <div className="popup-box">
@@ -22,14 +14,7 @@ export default function FilterPopUp(props) {
           x
         </span>
         <span>
-          {props.content.map((item) => {
-            return (
-              <Button class="tags" style={{backgroundColor: select.bgColor}}
-              onClick={tagClick} size="small" variant="outlined" color="primary">
-                {item}
-              </Button>
-            );
-          })}
+          <SelectTagsInFilter tags={props.content}/>
         </span>
         <div onClick={props.save}>{props.savebtn}</div>
       </div>

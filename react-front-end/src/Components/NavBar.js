@@ -20,6 +20,7 @@ export default function NavBar() {
   const save = () => {
     console.log("save");
   };
+
   const tagArr = (tag) =>{
     let tagArr = [];
     for (const item of tag) {
@@ -27,6 +28,7 @@ export default function NavBar() {
     }
     return tagArr;
   }
+
   
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function NavBar() {
           {isOpen && (
 
               <FilterPopUp
-                content={tagArr(tag)}
+                content={tag}
                 savebtn={<button>Save</button>}
                 save={save}
                 handleClose={togglePopup}
@@ -53,6 +55,7 @@ export default function NavBar() {
           )}
         </Toolbar>
       </AppBar>
+      {/* {console.log(tagArr(tag))} */}
     </div>
   );
 }

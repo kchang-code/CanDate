@@ -6,6 +6,7 @@ import "./UserPage.scss";
 import axios from "axios";
 import NavBar from "./NavBar";
 import { TagsContext } from "../Context/TagsContext";
+import { useRadioGroup } from "@material-ui/core";
 
 const UserPage = (props) => {
   const { state } = useUserPage();
@@ -59,23 +60,23 @@ const UserPage = (props) => {
         <NavBar />
       </TagsContext.Provider>
       <div>
-        {state.users.map((user) => {
+        {state.users.map((filteredUser) => {
           return (
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6} md={3}>
                 <ProfileCard
-                  key={user.id}
-                  name={user.first_name}
-                  age={user.age}
-                  profile_photo={user.profile_photo}
-                  tag={getNameOfTag(filterTags(user.id, user_tag), tag)}
+                  key={filteredUser.id}
+                  name={filteredUser.first_name}
+                  age={filteredUser.age}
+                  profile_photo={filteredUser.profile_photo}
+                  tag={getNameOfTag(filterTags(filteredUser.id, user_tag), tag)}
                 />
               </Grid>
             </Grid>
           );
         })}
       </div>
-      {console.log(tag)}
+      {console.log("state.users", state.users)}
     </>
   );
 };
