@@ -7,6 +7,7 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import { TagsContext } from "../Context/TagsContext";
 import { useRadioGroup } from "@material-ui/core";
+import {filterTags, getNameOfTag, getFilteredUsers,} from '../helpers/userPageHelpers';
 
 const UserPage = (props) => {
   const { state } = useUserPage();
@@ -14,6 +15,12 @@ const UserPage = (props) => {
   const [tag, setTags] = useState([]);
   const [selectTag, setSelectTag] = useState([]);
 
+  // add selected tag id into arr
+  const handleTagClick = (itemId) => {
+    const selectArr = [...selectTag];
+    selectArr.push(itemId)
+    setSelectTag(selectArr)
+};
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/user_tag").then((res) => {
@@ -27,60 +34,7 @@ const UserPage = (props) => {
     });
   }, []);
 
-  const filterTags = (id, userTag) => {
-    const tagArr = [];
-    for (const tag of userTag) {
-      if (tag.id === id) {
-        tagArr.push(tag.interest);
-      }
-    }
-    return tagArr;
-  };
-
-  const getNameOfTag = (tagArr, tags) => {
-    const tagNameArr = [];
-    for (const tag of tagArr) {
-      for (const obj of tags) {
-        if (tag === obj.id) {
-          tagNameArr.push(obj.name);
-        }
-      }
-    }
-    //[movie. sport]
-    let userTag = {
-      tags: tagNameArr,
-      //id:1
-      //tags : [sport, movie]
-    };
-    return userTag.tags;
-  };
-
-  // add selected tag id into arr
-  const handleTagClick = (itemId) => {
-    const selectArr = [...selectTag];
-    selectArr.push(itemId)
-    setSelectTag(selectArr)
-  };
-
-  // returns filtered array of unique userids 
-  const getFilteredUsers = (interests, user_tagArr) => {
-    const users = [];
-    for (const interest of interests) {
-      for (const user of user_tagArr) {
-        if (interest === user.interest) {
-          users.push(user.id)
-        }
-      }
-    }
   
-    let removeRepeatedUsers = [];
-    users.forEach(element => {
-      if (!removeRepeatedUsers.includes(element)) {
-        removeRepeatedUsers.push(element)
-      }
-    })
-    return removeRepeatedUsers; 
-  }
   
   // return array of objects for filtered users
   const getFilteredUserProfile = (filteredUserId, users) => {
