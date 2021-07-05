@@ -28,11 +28,13 @@ function App() {
       console.log(messages);
       if (messages.length !== 0 && realTimeData) {
         // console.log('realTimeData', realTimeData);
-        console.log('this is what need to be set', [
+        const neesToSet = [
           ...messages,
-          JSON.parse(realTimeData),
-        ]);
-
+          ...JSON.parse(realTimeData),
+        ]
+        // console.log('neesToSet',neesToSet)
+        setMessages(neesToSet)
+        // console.log('this is what need to be set', messages);
         // console.log('messages', messages);
       }
     };
