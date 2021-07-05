@@ -15,6 +15,7 @@ const ENDPOINT = 'ws://localhost:8080/message';
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
+let realTimeData;
 function App() {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -23,18 +24,23 @@ function App() {
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
     socket.onmessage = function (event) {
-      console.log('event', event.data);
-      // setMessages([...messages, event.data]);
-      console.log([...messages, event.data]);
-    };
-    socket.onopen = function () {
-      socket.send('ping');
+      realTimeData = event.data;
+      console.log(messages);
+      if (messages.length !== 0 && realTimeData) {
+        // console.log('realTimeData', realTimeData);
+        console.log('this is what need to be set', [
+          ...messages,
+          JSON.parse(realTimeData),
+        ]);
+
+        // console.log('messages', messages);
+      }
     };
 
     socket.onclose = function () {
       console.log('Close');
     };
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     Promise.all([
@@ -55,6 +61,14 @@ function App() {
       });
   }, []);
 
+  // useEffect(() => {
+  //   if (messages.length !== 0 && realTimeData) {
+  //     // console.log('realTimeData', realTimeData);
+  //     setMessages([...messages, realTimeData]);
+  //     console.log('messages', messages);
+  //   }
+  // }, [loading, realTimeData]);
+
   return (
     <div className="App">
       <Router>
@@ -65,6 +79,7 @@ function App() {
               users={users}
               setMessages={setMessages}
               loading={loading}
+              realTimeData={realTimeData}
             />
           </Route>
           <Route path="/profile">
