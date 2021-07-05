@@ -4,7 +4,7 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import { makeStyles } from '@material-ui/core/styles';
-import { sizing } from '@material-ui/system';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
