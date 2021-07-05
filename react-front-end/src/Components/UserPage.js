@@ -101,7 +101,7 @@ const UserPage = (props) => {
         <NavBar handleTagClick={handleTagClick}/>
       </TagsContext.Provider>
       <div>
-        {selectTag === [] ? state.users.map((user) => {
+        {selectTag.length === 0 ? state.users.map((user) => {
           return (
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6} md={3}>
@@ -116,13 +116,12 @@ const UserPage = (props) => {
             </Grid>
           );
         }) 
-        // [1, 2, 3, 4]
         : getFilteredUserProfile(getFilteredUsers(selectTag, user_tag), state.users).map((filteredUser) => {
           return (
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6} md={3}>
                 <ProfileCard
-                  key={filteredUser}
+                  key={filteredUser.id}
                   name={filteredUser.first_name}
                   age={filteredUser.age}
                   profile_photo={filteredUser.profile_photo}
@@ -135,7 +134,7 @@ const UserPage = (props) => {
       }
       </div>
       {console.log("state.users", state.users)}
-      {console.log("clicked", selectTag)}
+      {console.log("selectTag", selectTag)}
 
     </>
   );
