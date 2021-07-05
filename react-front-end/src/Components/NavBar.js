@@ -17,9 +17,6 @@ export default function NavBar(props) {
     setIsOpen(!isOpen);
   };
 
-  const save = () => {
-    console.log("save");
-  };
 
   const tagArr = (tag) =>{
     let tagArr = [];
@@ -50,7 +47,7 @@ export default function NavBar(props) {
                 handleTagClick={props.handleTagClick}
                 content={tag}
                 savebtn={<button>Save</button>}
-                save={save}
+                save={togglePopup}
                 handleClose={togglePopup}
               />
           )}
