@@ -37,6 +37,10 @@ const SidebarChat = (props) => {
     latestMsg['creates_on'].slice(0, 3) +
     latestMsg['creates_on'].slice(5);
 
+  console.log('latestMsg',latestMsg['creates_on'])
+
+  console.log('dateTimeAgo',dateTimeAgo)
+
   return (
     <div
       className="sidebarChat"
