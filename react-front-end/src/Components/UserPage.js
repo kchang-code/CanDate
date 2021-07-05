@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import useUserPage from "../hooks/useUserPage";
 import './UserPage.scss';
 import axios from 'axios'
-import Tags from './Tags'
+import NavBar from './NavBar';
 
 const UserPage = (props) => {
   const { state } = useUserPage();
@@ -33,8 +33,6 @@ const UserPage = (props) => {
       }
     }
     return tagArr
-    // [1,2,3,5]
-
     }
 
     const getNameOfTag = (tagArr, tags) => {
@@ -55,11 +53,11 @@ const UserPage = (props) => {
       return userTag.tags
     }
     
-
-
+    
 
   return (
     <>
+      <NavBar />
       <div>
         {state.users.map((user) => {
           return (
@@ -78,10 +76,6 @@ const UserPage = (props) => {
           );
         })}
       </div>
-      {console.log("user tag", user_tag)}
-      {console.log("tag",tag)}
-
-      {console.log("filtertag", filterTags(1, user_tag))}
     </>
   );
 };
