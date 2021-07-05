@@ -37,7 +37,7 @@ export default function Home(props) {
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
         {mode === TAG && <TagList tags={props.tags} id={id} />}
-        {mode === SIGN && <SignIn back={back} />}
+        {mode === SIGN && <SignIn back={back} users={props.image} />}
       </div>
     </div>
   );

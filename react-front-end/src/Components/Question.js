@@ -96,7 +96,7 @@ export default function Question(props) {
         <form
           className={classes.form}
           noValidate
-          onSubmit={(e) => e.preventDefault}
+          onSubmit={(e) => e.preventDefault()}
         >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
