@@ -4,7 +4,6 @@ import Home from './Components/Home';
 import Message from './Components/Message';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
 import UserPage from './Components/UserPage';
 
 function App() {
@@ -25,11 +24,10 @@ function App() {
       setMessages(message.data.message);
       setMessages(tag.data.tags);
       setUserTags(user_tag.data.user_tag)
+      setTags(tag.data.tags);
+      
     });
 
-    // axios.get('http://localhost:8080/api/users').then((data) => {
-    //   setUsers(data.data.users);
-    // });
   }, []);
 
   return (
