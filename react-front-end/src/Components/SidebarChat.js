@@ -4,7 +4,16 @@ import './SidebarChat.scss';
 import ReactTimeAgo from 'react-time-ago';
 
 const SidebarChat = (props) => {
-  const { to_name, message, profilePic, setSelectedUserId, to_user_id } = props;
+  const {
+    to_name,
+    message,
+    profilePic,
+    setSelectedUserId,
+    to_user_id,
+    sideBarMessage,
+  } = props;
+
+  console.log('sideBarMessage', sideBarMessage);
   const dateTimeAgo =
     message['creates_on'].slice(3, 5) +
     '/' +
@@ -21,7 +30,7 @@ const SidebarChat = (props) => {
       <Avatar alt="Zio" src={profilePic} />
       <div className="sidebarChat_info">
         <h2>{to_name}</h2>
-        <p>{message.content}</p>
+        <p>{sideBarMessage.content}</p>
       </div>
       <div>
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />

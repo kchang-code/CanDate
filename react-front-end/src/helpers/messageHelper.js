@@ -11,6 +11,21 @@ const reduceToNames = (message, userId) => {
   return result;
 };
 
+const reduceToNamesIncludingMe = (message) => {
+  let id = [];
+  let result = [];
+
+  message &&
+    message.forEach((el) => {
+      if (!id.includes(el['to_user_id'])) {
+        result.push(el);
+        id.push(el['to_user_id']);
+      }
+    });
+
+  return result;
+};
+
 const filteredMessageByLoginUser = (messages, loginUserId) => {
   return messages.filter((message) => {
     return (
@@ -47,4 +62,5 @@ module.exports = {
   filteredMessageByLoginUser,
   getRidOfUsersChatBox,
   filteredMessageBySelectedUser,
+  reduceToNamesIncludingMe,
 };

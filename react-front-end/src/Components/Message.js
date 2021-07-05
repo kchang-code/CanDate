@@ -22,7 +22,6 @@ const Message = (props) => {
   useEffect(() => {
     reducedMessage.length !== 0 &&
       setSelectedUserId(reducedMessage[0]['to_user_id']);
-    console.log('reducedMessage', reducedMessage);
   }, [loading]);
 
   const selectedUserMessages = filteredMessageBySelectedUser(
@@ -43,6 +42,7 @@ const Message = (props) => {
           setMessages={setMessages}
           setSelectedUserId={setSelectedUserId}
           loading={loading}
+          selectedUserMessages={selectedUserMessages}
         />
         <ChatScreen
           selectedMessages={selectedUserMessages}
