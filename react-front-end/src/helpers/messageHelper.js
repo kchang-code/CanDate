@@ -11,9 +11,23 @@ const reduceToNames = (message, userId) => {
   return result;
 };
 
+const reduceToNamesIncludingMe = (message) => {
+  let id = [];
+  let result = [];
+
+  message &&
+    message.forEach((el) => {
+      if (!id.includes(el['to_user_id'])) {
+        result.push(el);
+        id.push(el['to_user_id']);
+      }
+    });
+
+  return result;
+};
+
 const filteredMessageByLoginUser = (messages, loginUserId) => {
   return messages.filter((message) => {
-    console.log('TYPE OF TOUSER', typeof message['to_user_id']);
     return (
       message['to_user_id'] === Number(loginUserId) ||
       message['from_user_id'] === Number(loginUserId)
@@ -42,10 +56,42 @@ const getRidOfUsersChatBox = (messages, userId) => {
   });
 };
 
+const getAllID = (messages) => {
+  const allID = [];
+  messages.forEach((message) => {
+    if (!allID.includes(message['to_user_id'])) {
+      allID.push(message['to_user_id']);
+    }
+
+    if (!allID.includes(message['from_user_id'])) {
+      allID.push(message['from_user_id']);
+    }
+  });
+  return allID;
+};
+
+const justYouAndMe = (twoMessageArr, meId, youId) => {
+  let result = [];
+  twoMessageArr.forEach((message) => {
+    if (
+      (Number(message['from_user_id']) === Number(meId) &&
+        Number(message['to_user_id']) === Number(youId)) ||
+      (Number(message['from_user_id']) === Number(youId) &&
+        Number(message['to_user_id']) === Number(meId))
+    ) {
+      result.push(message);
+    }
+  });
+  return result;
+};
+
 module.exports = {
   reduceToNames,
   filterMessageByToUserId,
   filteredMessageByLoginUser,
   getRidOfUsersChatBox,
   filteredMessageBySelectedUser,
+  reduceToNamesIncludingMe,
+  getAllID,
+  justYouAndMe,
 };

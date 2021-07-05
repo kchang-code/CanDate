@@ -1,92 +1,144 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './ChatScreen.scss';
-import { Avatar } from '@material-ui/core';
+
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
-let from_user_id = null;
+
+import { Avatar, IconButton } from '@material-ui/core';
+import './Chat.scss';
+import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
+import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
+import ReactTimeAgo from 'react-time-ago';
+
+let to_user_id = null;
+let userName;
+let userPhoto;
 
 const ChatScreen = (props) => {
-  const [input, setInput] = useState('');
   let { id } = useParams();
+  const [input, setInput] = useState('');
+  const [showMsg, setShowMsg] = useState([]);
 
   const newMessage = {
-    to_user_id: Number(id),
-    from_user_id: Number(from_user_id),
+    from_user_id: Number(id),
+    to_user_id: Number(to_user_id),
     content: input,
   };
 
-  const [showMsg, setShowMsg] = useState([]);
-  console.log('selectedMessages in chat', props.selectedMessages);
-  console.log('showmsg in chat', showMsg);
+  const messageEl = useRef(null);
 
-  // // const [selectedMessages, setSelectedMessages] = useState(
-  // //   props.selectedMessages
-  // // );
+  // useEffect(() => {
+  //   if (messageEl) {
+  //     messageEl.current.addEventListener('DOMNodeInserted', (event) => {
+  //       const { currentTarget: target } = event;
+  //       target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+  //     });
+  //   }
+  // }, []);
+
   useEffect(() => {
     setShowMsg(props.selectedMessages);
   }, [props.selectedMessages]);
 
-  const handleSend = () => {
-    axios.put('http://localhost:8080/api/users/:id/messages', { newMessage });
+  const sendMessage = (e) => {
+    e.preventDefault();
+    const timeElapsed = Date.now();
+    //sending msg state
+    let today = new Date(timeElapsed);
 
-    props.setMessages([...props.messages, newMessage]);
-    console.log('NEW MSG', newMessage);
+    let time = today.toLocaleString();
+
+    axios
+      .put('http://localhost:8080/api/users/:id/messages', {
+        newMessage: { ...newMessage, creates_on: time },
+      })
+      .then((res) => {
+        props.setMessages([...props.messages, ...res.data]);
+      })
+      .catch((err) => {});
 
     setInput('');
   };
 
   const messageContent = showMsg.map((message) => {
-    if (message['from_user_id'] === Number(id)) {
-      from_user_id = message['to_user_id'];
-
+    if (message['from_user_id'] !== Number(id)) {
+      to_user_id = message['from_user_id'];
+      userName = props.users[to_user_id - 1]['first_name'];
+      userPhoto = props.users[to_user_id - 1]['profile_photo'];
+      // setUserInfo({ ...userInfo, userName, userPhoto });
       return (
         <div className="chatScreen_message">
           <Avatar
             key={message.id}
             className="chatScreen_image"
             alt={message.name}
-            src={message.profilePic}
+            src={props.selectedPhoto}
           />
-          <p className="chatScreen_text">{message.content}</p>
+          <p className="chatScreen_text">
+            {message.content}
+
+            <span className="chat_time">{message['creates_on']}</span>
+          </p>
         </div>
       );
     } else {
       return (
         <div className="chatScreen_message">
-          <p className="chatScreen_textUser">{message.content}</p>
+          <p className="chatScreen_textUser">
+            {message.content}
+            <span className="chat_time">{message['creates_on']}</span>
+          </p>
         </div>
       );
     }
   });
 
   return (
-    <div className="box">
-      <h2>Chat screen</h2>
+    <div className="chat">
+      <div className="chat_header">
+        <Avatar src={userPhoto} />
+        <div className="chat_headerInfo">
+          <h3>{userName}</h3>
+          <p>
+            Last Seen: <ReactTimeAgo date={Date.now()} locale="en-US" />
+          </p>
+        </div>
+        <div className="chat_headerRight">
+          <IconButton>
+            <SearchOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <AttachFileOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
+      </div>
 
-      {messageContent}
+      <div className="chat_body">{messageContent}</div>
 
-      <form
-        className="chatScreen_input"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <input
-          value={input}
-          onChange={(data) => setInput(data.target.value)}
-          className="chatScreen_inputField"
-          placeholder="Type a message..."
-        />
-        <button
-          onClick={() => {
-            handleSend();
+      <div className="chat_footer">
+        <InsertEmoticonOutlinedIcon />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
           }}
-          className="chatScreen_inputButton"
-          type="submit"
         >
-          SEND
-        </button>
-      </form>
+          <input
+            type="text"
+            value={input}
+            onChange={(data) => setInput(data.target.value)}
+          />
+          <button onClick={(e) => sendMessage(e)} type="submit">
+            Send a message
+          </button>
+        </form>
+        <MicNoneOutlinedIcon />
+      </div>
     </div>
   );
 };

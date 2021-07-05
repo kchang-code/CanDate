@@ -6,58 +6,54 @@ import {
   filteredMessageByLoginUser,
   filteredMessageBySelectedUser,
   reduceToNames,
+  // reduceToNames,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Message = (props) => {
   let { id } = useParams();
-  const { messages, users, setMessages } = props;
+  const { messages, users, setMessages, loading } = props;
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  // const [selectedUserMessages, setSelectedUserMessages] = useState([]);
 
-  // useEffect(() => {
-  //   setSelectedUserMessages(
-  //     filteredMessageBySelectedUser(userAllMessages, selectedUserId)
-  //   );
-  // }, [messages]);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+  useEffect(() => {
+    reducedMessage.length !== 0 &&
+      setSelectedUserId(reducedMessage[0]['to_user_id']);
+  }, [loading]);
+
   const selectedUserMessages = filteredMessageBySelectedUser(
     userAllMessages,
     selectedUserId
   );
 
-  // console.log('selectedUserMessages', selectedUserMessages);
-  console.log('MSGGGGGGGGGG', messages);
-  console.log('USERMSG', userAllMessages);
-
-  const reducedMessagesComp = reducedMessage.map((message) => {
-    return (
-      <Chat
-        key={message.id}
-        to_user_id={message['to_user_id']}
-        from_name={users[message['from_user_id'] - 1]['first_name']}
-        to_name={users[message['to_user_id'] - 1]['first_name']}
-        timestamp="just now"
-        message={message.content}
-        profilePic={users[message['to_user_id'] - 1]['profile_photo']}
-        setSelectedUserId={setSelectedUserId}
-      />
-    );
-  });
+  const selectedPhoto = selectedUserId
+    ? users[selectedUserId - 1]['profile_photo']
+    : null;
 
   return (
-    <div className="container">
-      <section className="message">{reducedMessagesComp}</section>
-
-      <section className="chat_screen">
+    <div className="app">
+      <div className="app_body">
+        <Chat
+          messages={messages}
+          users={users}
+          setMessages={setMessages}
+          setSelectedUserId={setSelectedUserId}
+          loading={loading}
+          selectedUserMessages={selectedUserMessages}
+          selectedUserId={selectedUserId}
+        />
         <ChatScreen
           selectedMessages={selectedUserMessages}
           messages={messages}
           setMessages={setMessages}
+          selectedPhoto={selectedPhoto}
+          users={users}
+          loading={loading}
         />
-      </section>
+      </div>
     </div>
   );
 };
