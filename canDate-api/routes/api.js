@@ -129,6 +129,17 @@ module.exports = function (app) {
       });
   });
 
+  router.get("/favorite", (req, res) => {
+    apiQueries
+      .getAllFavoriteList()
+      .then((favorites) => {
+        res.json({ favorites });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  })
+
   return router;
 };
 

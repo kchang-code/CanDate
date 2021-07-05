@@ -143,6 +143,18 @@ const updateUser = (updateUser) => {
   );
 };
 
+const getAllFavoriteList = () => {
+  const queryStatement = `SELECT * FROM favorite`;
+  return db
+    .query(queryStatement)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -152,4 +164,5 @@ module.exports = {
   createNewMessage,
   updateUser,
   newUserTag,
+  getAllFavoriteList
 };
