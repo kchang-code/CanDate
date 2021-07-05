@@ -43,6 +43,7 @@ const Message = (props) => {
           setSelectedUserId={setSelectedUserId}
           loading={loading}
           selectedUserMessages={selectedUserMessages}
+          selectedUserId={selectedUserId}
         />
         <ChatScreen
           selectedMessages={selectedUserMessages}

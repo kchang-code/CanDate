@@ -8,6 +8,8 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import SidebarChat from './SidebarChat';
 import {
   filteredMessageByLoginUser,
+  filteredMessageBySelectedUser,
+  getAllID,
   reduceToNames,
   reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
@@ -23,14 +25,11 @@ const Chat = (props) => {
     setSelectedUserId,
     loading,
     selectedUserMessages,
+    selectedUserId,
   } = props;
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);
-  const reducedMessageIncludingMe =
-    reduceToNamesIncludingMe(selectedUserMessages);
-
-  console.log('reducedMessageIncludingMe', selectedUserMessages);
 
   const [userPhoto, setUserPhoto] = useState('');
   const [userFirstName, setUserFirstName] = useState('');
@@ -42,9 +41,18 @@ const Chat = (props) => {
     }
   }, [loading]);
 
+  const allId = getAllID(userAllMessages);
+
+  let messageObj = {};
+
+  allId.forEach((id) => {
+    messageObj[id.toString()] = filteredMessageBySelectedUser(
+      userAllMessages,
+      id
+    );
+  });
+
   const reducedMessagesComp = reducedMessage.map((message) => {
-    const sideBarMessage =
-      reducedMessageIncludingMe[reducedMessageIncludingMe.length - 1];
     return (
       <SidebarChat
         key={message.id}
@@ -54,7 +62,10 @@ const Chat = (props) => {
         message={message}
         profilePic={users[message['to_user_id'] - 1]['profile_photo']}
         setSelectedUserId={setSelectedUserId}
-        sideBarMessage={sideBarMessage}
+        selectedUserId={selectedUserId}
+        selectedUserMessages={selectedUserMessages}
+        userAllMessages={userAllMessages}
+        messageObj={messageObj}
       />
     );
   });

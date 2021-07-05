@@ -2,6 +2,11 @@ import React from 'react';
 import { Avatar } from '@material-ui/core';
 import './SidebarChat.scss';
 import ReactTimeAgo from 'react-time-ago';
+import {
+  filteredMessageBySelectedUser,
+  justYouAndMe,
+  reduceToNamesIncludingMe,
+} from '../helpers/messageHelper';
 
 const SidebarChat = (props) => {
   const {
@@ -11,14 +16,29 @@ const SidebarChat = (props) => {
     setSelectedUserId,
     to_user_id,
     sideBarMessage,
+    messageObj,
   } = props;
 
-  console.log('sideBarMessage', sideBarMessage);
+  // console.log('messageObj', messageObj);
+
+  const twoMessageArr = [
+    ...messageObj[message['to_user_id']],
+    ...messageObj[message['from_user_id']],
+  ];
+  const filteredMsg = justYouAndMe(
+    twoMessageArr,
+    message['to_user_id'],
+    message['from_user_id']
+  );
+
+  const latestMsg = filteredMsg.sort((a, b) => b.id - a.id)[0];
+
+  console.log('latestMsg', latestMsg);
   const dateTimeAgo =
-    message['creates_on'].slice(3, 5) +
+    latestMsg['creates_on'].slice(3, 5) +
     '/' +
-    message['creates_on'].slice(0, 3) +
-    message['creates_on'].slice(5);
+    latestMsg['creates_on'].slice(0, 3) +
+    latestMsg['creates_on'].slice(5);
 
   return (
     <div
@@ -30,7 +50,7 @@ const SidebarChat = (props) => {
       <Avatar alt="Zio" src={profilePic} />
       <div className="sidebarChat_info">
         <h2>{to_name}</h2>
-        <p>{sideBarMessage.content}</p>
+        <p>{latestMsg.content}</p>
       </div>
       <div>
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />
