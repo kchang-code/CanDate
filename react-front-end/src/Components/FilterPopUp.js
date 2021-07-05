@@ -14,7 +14,7 @@ export default function FilterPopUp(props) {
           x
         </span>
         <span>
-          <SelectTagsInFilter tags={props.content}/>
+          <SelectTagsInFilter tags={props.content} handleTagClick={props.handleTagClick}/>
         </span>
         <div onClick={props.save}>{props.savebtn}</div>
       </div>

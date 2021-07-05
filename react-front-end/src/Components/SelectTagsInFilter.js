@@ -3,13 +3,13 @@ import Button from "@material-ui/core/Button";
 
 
 export default function SelectTagsInFilter (props) {
-  const [select, setSelect] = useState([]);
+  // const [selectTag, setSelectTag] = useState([]);
 
-  const handleTagClick = (itemId) => {
-    const selectArr = [...select];
-    selectArr.push(itemId)
-    setSelect(selectArr)
-  };
+  // const handleTagClick = (itemId) => {
+  //   const selectArr = [...selectTag];
+  //   selectArr.push(itemId)
+  //   setSelectTag(selectArr)
+  // };
 
   return (
     <div>
@@ -18,14 +18,14 @@ export default function SelectTagsInFilter (props) {
         <Button 
         class="tags" 
         // item.index is the id 
-        onClick={() => handleTagClick(item.id)} 
-        style={{backgroundColor: select.bgColor}}
+        onClick={() => props.handleTagClick(item.id)} 
+        // style={{backgroundColor: select.bgColor}}
         size="small" variant="outlined" color="primary">
           {item.name}
         </Button>
       );
     })}
-    {console.log("clicked", select)}
+    {/* {console.log("clicked", selectTag)} */}
     </div>
   )
 }

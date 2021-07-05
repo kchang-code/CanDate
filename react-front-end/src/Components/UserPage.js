@@ -12,6 +12,7 @@ const UserPage = (props) => {
   const { state } = useUserPage();
   const [user_tag, setUserTag] = useState([]);
   const [tag, setTags] = useState([]);
+  const [selectTag, setSelectTag] = useState([]);
 
 
   useEffect(() => {
@@ -54,10 +55,17 @@ const UserPage = (props) => {
     return userTag.tags;
   };
 
+  // add selected tag id into arr
+  const handleTagClick = (itemId) => {
+    const selectArr = [...selectTag];
+    selectArr.push(itemId)
+    setSelectTag(selectArr)
+  };
+
   return (
     <>
       <TagsContext.Provider values={tag}>
-        <NavBar />
+        <NavBar handleTagClick={handleTagClick}/>
       </TagsContext.Provider>
       <div>
         {state.users.map((filteredUser) => {
@@ -77,6 +85,8 @@ const UserPage = (props) => {
         })}
       </div>
       {console.log("state.users", state.users)}
+      {console.log("clicked", selectTag)}
+
     </>
   );
 };

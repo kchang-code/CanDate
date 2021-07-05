@@ -9,7 +9,7 @@ import FilterPopUp from "./FilterPopUp";
 import { TagsContext } from "../Context/TagsContext";
 import axios from 'axios';
 
-export default function NavBar() {
+export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [tag, setTags] = useState([]);
 
@@ -47,6 +47,7 @@ export default function NavBar() {
           {isOpen && (
 
               <FilterPopUp
+                handleTagClick={props.handleTagClick}
                 content={tag}
                 savebtn={<button>Save</button>}
                 save={save}
