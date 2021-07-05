@@ -49,7 +49,7 @@ const SidebarChat = (props) => {
         <h2>{to_name}</h2>
         <p>{latestMsg.content}</p>
       </div>
-      <div className="sidebarChat_time">
+      <div>
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />
       </div>
     </div>

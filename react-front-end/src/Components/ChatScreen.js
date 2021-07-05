@@ -30,14 +30,14 @@ const ChatScreen = (props) => {
 
   const messageEl = useRef(null);
 
-  // useEffect(() => {
-  //   if (messageEl) {
-  //     messageEl.current.addEventListener('DOMNodeInserted', (event) => {
-  //       const { currentTarget: target } = event;
-  //       target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (messageEl) {
+      messageEl.current.addEventListener('DOMNodeInserted', (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     setShowMsg(props.selectedMessages);
@@ -119,7 +119,9 @@ const ChatScreen = (props) => {
         </div>
       </div>
 
-      <div className="chat_body">{messageContent}</div>
+      <div className="chat_body" ref={messageEl}>
+        {messageContent}
+      </div>
 
       <div className="chat_footer">
         <InsertEmoticonOutlinedIcon />
