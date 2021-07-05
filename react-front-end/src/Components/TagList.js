@@ -24,7 +24,7 @@ export default function TagList(props) {
   return (
     <div>
       <h1>choose your tag</h1>
-      <span>{lists}</span>
+      <div style={{ fontSize: "35px" }}>{lists}</div>
 
       <Button
         type="submit"
