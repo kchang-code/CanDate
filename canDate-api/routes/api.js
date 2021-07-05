@@ -56,29 +56,30 @@ module.exports = function (app) {
     res.json("success");
     apiQueries.creatNewUser(req.body.newUser).catch((err) => {
       console.log(err);
-
-router.put("/user_tag/new", (req, res) => {
-  console.log("check", req.body.newTagUser)
-  apiQueries
-    .newUserTag(req.body.newTagUser)
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
     });
-});
+  });
 
-router.get("/message", (req, res) => {
-  apiQueries
-    .getAllMessages()
-    .then((message) => {
-      res.json({ message });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
+  router.put("/user_tag/new", (req, res) => {
+    console.log("check", req.body.newTagUser);
+    apiQueries
+      .newUserTag(req.body.newTagUser)
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
-    });
+  router.get("/message", (req, res) => {
+    apiQueries
+      .getAllMessages()
+      .then((message) => {
+        res.json({ message });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   });
 
   router.put("/signup/:id", (req, res) => {
@@ -86,13 +87,14 @@ router.get("/message", (req, res) => {
     apiQueries.creatNewUser(req.body.newUser).catch((err) => {
       console.log(err);
     });
-
-router.put("/users", (req, res) => {
-  res.json("success");
-  apiQueries.createNewUser(req.body.newUser).catch((err) => {
-    console.log(err);
   });
 
+  router.put("/users", (req, res) => {
+    res.json("success");
+    apiQueries.createNewUser(req.body.newUser).catch((err) => {
+      console.log(err);
+    });
+  });
 
   let msgWS = [];
   app.ws("/message", function (ws, req) {
@@ -100,11 +102,13 @@ router.put("/users", (req, res) => {
     ws.on("message", function (msg) {
       msgWS.forEach((eachWS) => eachWS.send("hello!"));
     });
+  });
 
-router.put("/signup/:id", (req, res) => {
-  res.json("success");
-  apiQueries.updateUser(req.body.updateUser).catch((err) => {
-    console.log(err);
+  router.put("/signup/:id", (req, res) => {
+    res.json("success");
+    apiQueries.updateUser(req.body.updateUser).catch((err) => {
+      console.log(err);
+    });
   });
 
   router.put("/users/:id/messages", (req, res) => {
