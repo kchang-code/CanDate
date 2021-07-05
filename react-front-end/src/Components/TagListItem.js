@@ -1,13 +1,35 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
+import { makeStyles } from '@material-ui/core/styles';
+import { sizing } from '@material-ui/system';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+  },
+}));
 
 
 const TagListItem = props => {
+  const classes = useStyles();
+
   const [num, setNum] = useState(1)
   const [newColor, setNewColor] = useState('default')
+  const [icon, setIcon] = useState('null')
 
-  function handleCLick(num, name, id) {
+
+
+
+
+  function handleClick(num, name, id) {
     let newTagUser = {
       user_id: id,
       tag_id: name
@@ -16,24 +38,24 @@ const TagListItem = props => {
     setNum(num)
     if (num % 2 === 0) {
       setNewColor("secondary")
+      setIcon(DoneIcon)
       console.log("check1", newTagUser)
       axios.put("http://localhost:8080/api/user_tag/new", { newTagUser })
         .catch((err) => console.log('1111---v', err));
       return
     }
     setNewColor("default")
+    setIcon(FaceIcon)
     return
   }
 
   return (
 
-    <Button
-      onClick={() => { handleCLick(num, props.tag_id, props.id) }}
-      type="submit"
-      variant="contained"
+    <Chip
+      label={props.name}
+      onClick={() => { handleClick(num, props.tag_id, props.id) }}
       color={newColor}
-      name={props.name}
-    >{props.name}</Button>
+    />
 
   )
 }
