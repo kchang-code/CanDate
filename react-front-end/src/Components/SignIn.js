@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import bcrypt from 'bcryptjs';
+
 
 function Copyright() {
   return (
@@ -46,8 +48,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function SignIn(props) {
   const classes = useStyles();
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+
+  const findPasswordByEmail = (email, users) => {
+    for (const user of users) {
+      if (user.email === email) {
+        console.log('reached')
+        return user.password
+      }
+    }
+
+  }
+
+  const checkPassword = (emil, password, users) => {
+    console.log(findPasswordByEmail(email, users))
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    if (bcrypt.compareSync(findPasswordByEmail(email, users), hashedPassword)) {
+      console.log("success")
+      return
+    }
+    console.log("fail");
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,17 +84,19 @@ export default function SignIn(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={(e) => e.preventDefault()}>
           <TextField
             variant="outlined"
-            margin="normal"
             required
             fullWidth
+            type="email"
             id="email"
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             variant="outlined"
@@ -81,6 +108,7 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -92,12 +120,13 @@ export default function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => checkPassword(email, password, props.users)}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link>
                 Forgot password?
               </Link>
             </Grid>
