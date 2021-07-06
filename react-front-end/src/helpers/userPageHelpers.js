@@ -66,8 +66,10 @@ export function getFilteredUsersByAge(users, ageRange) {
   return userIds;
 }
 
+// convert array of cities into userids of users within that city 
+
 // return array of objects for filtered users
-export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, users) {
+export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, filteredCities, users) {
   const userProfiles = [];
   const filteredIds = [];
   filteredUserIds.forEach((element) => {
@@ -86,3 +88,4 @@ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, users) {
   }
   return userProfiles;
 }
+

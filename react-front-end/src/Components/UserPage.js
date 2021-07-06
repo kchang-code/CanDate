@@ -26,6 +26,9 @@ const UserPage = (props) => {
 
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
 
+  // city name
+  const LoggedInUserCity = 
+
   useEffect(() => {
     setState({
       ...state,
