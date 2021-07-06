@@ -8,8 +8,7 @@ import TimeAgo from 'javascript-time-ago';
 
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
-
-import UserPage from './Components/user-page';
+import UserPage from './Components/UserPage';
 const ENDPOINT = 'ws://localhost:8080/message';
 
 TimeAgo.addDefaultLocale(en);
@@ -22,6 +21,7 @@ function App() {
   const [tags, setTags] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user_tag, setUserTags] = useState([]);
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
     socket.onmessage = function (event) {
@@ -45,9 +45,11 @@ function App() {
       axios.get('http://localhost:8080/api/message'),
       axios.get('http://localhost:8080/api/tags'),
       axios.get('http://localhost:8080/api/favorite'),
+      axios.get('http://localhost:8080/api/user_tag'),
     ])
       .then((all) => {
         const [user, message, tag, favorite] = all;
+        setUserTags(user_tag.data.user_tag);
         setUsers(user.data.users);
         setMessages(message.data.message);
         setTags(tag.data.tags);
@@ -79,7 +81,7 @@ function App() {
           </Route>
 
           <Route path="/user">
-            <UserPage />
+            <UserPage tags={tags} user_tag={user_tag} />
           </Route>
 
           <Route path="/">

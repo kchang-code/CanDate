@@ -36,9 +36,6 @@ INSERT INTO users(first_name, last_name, email, password, gender, height, addres
 VALUES('Kaya', 'Özkök','kaya.ozkok@example.com', '123456', 'male', 178, 'Konya', 35, 'https://randomuser.me/api/portraits/men/43.jpg', 'My name is Kaya Özkök. I''m here to look for my life partner, and I like Boardgames. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
-VALUES('Kaya', 'Özkök','kaya.ozkok@example.com', '123456', 'male', 178, 'Konya', 35, 'https://randomuser.me/api/portraits/men/43.jpg', 'My name is Kaya Özkök. I''m here to look for my life partner, and I like Boardgames. If you like me, let''s chat.');
-
-INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES('Stella', 'Roux','stella.roux@example.com', '123456', 'female', 184, 'Roubaix', 41, 'https://randomuser.me/api/portraits/women/66.jpg', 'My name is Stella Roux. I''m here to look for my life partner, and I like Networking. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
