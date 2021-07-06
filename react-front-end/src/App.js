@@ -49,7 +49,7 @@ function App() {
     ])
       .then((all) => {
         const [user, message, tag, favorite, user_tag] = all;
-        console.log('---------------', all);
+
         setUsers(user.data.users);
         setMessages(message.data.message);
         setTags(tag.data.tags);
@@ -88,7 +88,9 @@ function App() {
             <ProfileDetail />
           </Route>
 
-          <Route path="/">{/* <Home image={users} tags={tags} /> */}</Route>
+          <Route path="/">
+            <Home image={users} tags={tags} />
+          </Route>
         </Switch>
       </Router>
     </div>

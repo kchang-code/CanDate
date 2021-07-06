@@ -54,7 +54,7 @@ module.exports = function (app) {
 
   router.put("/users", (req, res) => {
     res.json("success");
-    apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+    apiQueries.createNewUser(req.body.newUser).catch((err) => {
       console.log(err);
     });
   });
@@ -80,20 +80,6 @@ module.exports = function (app) {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-  });
-
-  router.put("/signup/:id", (req, res) => {
-    res.json("success");
-    apiQueries.creatNewUser(req.body.newUser).catch((err) => {
-      console.log(err);
-    });
-  });
-
-  router.put("/users", (req, res) => {
-    res.json("success");
-    apiQueries.createNewUser(req.body.newUser).catch((err) => {
-      console.log(err);
-    });
   });
 
   let msgWS = [];
