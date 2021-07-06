@@ -5,11 +5,11 @@
   border-bottom: 1px solid lightgray;
   align-items: center;
   text-align: start;
-
+  
 }
 
 .sidebarChat:hover{
- background-color: lightblue;
+  background-color: lightblue;
 }
 
 .sidebarChat_info {
@@ -21,3 +21,9 @@
   }
 }
 
+
+.sidebarChat_right {
+  display: flex;
+  flex-direction: column;
+  background-color: aquamarine;
+}
