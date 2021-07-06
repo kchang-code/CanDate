@@ -5,10 +5,32 @@ const reduceToNames = (message, userId) => {
     if (!id.includes(el['to_user_id']) && Number(userId) !== el['to_user_id']) {
       result.push(el);
       id.push(el['to_user_id']);
+    } else if (
+      !id.includes(el['from_user_id']) &&
+      Number(userId) !== el['from_user_id']
+    ) {
+      result.push(el);
+      id.push(el['from_user_id']);
     }
   });
 
   return result;
+};
+
+const reduceToNamesId = (message, userId) => {
+  let id = [];
+
+  message.forEach((el) => {
+    if (!id.includes(el['to_user_id']) && Number(userId) !== el['to_user_id']) {
+      id.push(el['to_user_id']);
+    } else if (
+      !id.includes(el['from_user_id']) &&
+      Number(userId) !== el['from_user_id']
+    ) {
+      id.push(el['from_user_id']);
+    }
+  });
+  return id;
 };
 
 const reduceToNamesIncludingMe = (message) => {
@@ -94,4 +116,5 @@ module.exports = {
   reduceToNamesIncludingMe,
   getAllID,
   justYouAndMe,
+  reduceToNamesId,
 };

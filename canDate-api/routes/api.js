@@ -126,6 +126,17 @@ module.exports = function (app) {
       });
   });
 
+  router.get("/block", (req, res) => {
+    apiQueries
+      .getAllBlockList()
+      .then((block) => {
+        res.json({ block });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };
 

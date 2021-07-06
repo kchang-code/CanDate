@@ -12,18 +12,48 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
 import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
 import ReactTimeAgo from 'react-time-ago';
+import {
+  getFavoriteByUser,
+  getUserBlockMe,
+} from '../helpers/favoriteBlockHelp';
+import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
 
 let to_user_id = null;
 let userName;
 let userPhoto;
 
+//configure alert component
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
 const ChatScreen = (props) => {
-  const { selectedMessages, messages, setMessages, selectedPhoto, users } =
-    props;
+  const classes = useStyles(); //configure block alert style
+  const {
+    selectedMessages,
+    messages,
+    setMessages,
+    selectedPhoto,
+    users,
+    block,
+    loading,
+  } = props;
 
   let { id } = useParams();
   const [input, setInput] = useState('');
   const [showMsg, setShowMsg] = useState([]);
+  const [filteredBlock, setFilteredBlock] = useState([]);
+  useEffect(() => {
+    if (block.length !== 0) {
+      setFilteredBlock(getUserBlockMe(block, id));
+    }
+  }, [loading]);
 
   const newMessage = {
     from_user_id: Number(id),
@@ -61,7 +91,9 @@ const ChatScreen = (props) => {
       .then((res) => {
         setMessages([...messages, ...res.data]);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log('Put error on new messages', err);
+      });
 
     setInput('');
   };
@@ -71,7 +103,7 @@ const ChatScreen = (props) => {
       to_user_id = message['from_user_id'];
       userName = users[to_user_id - 1]['first_name'];
       userPhoto = users[to_user_id - 1]['profile_photo'];
-      // setUserInfo({ ...userInfo, userName, userPhoto });
+
       return (
         <div className="chatScreen_message">
           <Avatar
@@ -88,6 +120,9 @@ const ChatScreen = (props) => {
         </div>
       );
     } else {
+      to_user_id = message['to_user_id'];
+      userName = users[to_user_id - 1]['first_name'];
+      userPhoto = users[to_user_id - 1]['profile_photo'];
       return (
         <div className="chatScreen_message">
           <p className="chatScreen_textUser">
@@ -124,6 +159,10 @@ const ChatScreen = (props) => {
 
       <div className="chat_body" ref={messageEl}>
         {messageContent}
+
+        {filteredBlock.includes(Number(to_user_id)) && (
+          <Alert severity="warning">Sorry, You are blocked by this user.</Alert>
+        )}
       </div>
 
       <div className="chat_footer">

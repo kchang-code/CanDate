@@ -11,6 +11,7 @@ import {
   filteredMessageBySelectedUser,
   getAllID,
   reduceToNames,
+  reduceToNamesId,
   reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -56,23 +57,45 @@ const Chat = (props) => {
     );
   });
 
+  const reducedToNamesId = reduceToNamesId(userAllMessages, id);
+
+  console.log('message in chat map', reducedMessage);
   const reducedMessagesComp = reducedMessage.map((message) => {
-    return (
-      <SidebarChat
-        key={message.id}
-        to_user_id={message['to_user_id']}
-        from_name={users[message['from_user_id'] - 1]['first_name']}
-        to_name={users[message['to_user_id'] - 1]['first_name']}
-        message={message}
-        profilePic={users[message['to_user_id'] - 1]['profile_photo']}
-        setSelectedUserId={setSelectedUserId}
-        selectedUserId={selectedUserId}
-        selectedUserMessages={selectedUserMessages}
-        userAllMessages={userAllMessages}
-        messageObj={messageObj}
-        filteredFavorite={filteredFavorite}
-      />
-    );
+    if (reducedToNamesId.includes(message['to_user_id'])) {
+      return (
+        <SidebarChat
+          key={message.id}
+          to_user_id={message['to_user_id']}
+          from_name={users[message['from_user_id'] - 1]['first_name']}
+          to_name={users[message['to_user_id'] - 1]['first_name']}
+          message={message}
+          profilePic={users[message['to_user_id'] - 1]['profile_photo']}
+          setSelectedUserId={setSelectedUserId}
+          selectedUserId={selectedUserId}
+          selectedUserMessages={selectedUserMessages}
+          userAllMessages={userAllMessages}
+          messageObj={messageObj}
+          filteredFavorite={filteredFavorite}
+        />
+      );
+    } else if (reducedToNamesId.includes(message['from_user_id'])) {
+      return (
+        <SidebarChat
+          key={message.id}
+          to_user_id={message['from_user_id']}
+          from_name={users[message['to_user_id'] - 1]['first_name']}
+          to_name={users[message['from_user_id'] - 1]['first_name']}
+          message={message}
+          profilePic={users[message['from_user_id'] - 1]['profile_photo']}
+          setSelectedUserId={setSelectedUserId}
+          selectedUserId={selectedUserId}
+          selectedUserMessages={selectedUserMessages}
+          userAllMessages={userAllMessages}
+          messageObj={messageObj}
+          filteredFavorite={filteredFavorite}
+        />
+      );
+    }
   });
 
   return (

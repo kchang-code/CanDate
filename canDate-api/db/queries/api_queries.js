@@ -148,6 +148,18 @@ const getAllFavoriteList = () => {
     });
 };
 
+const getAllBlockList = () => {
+  const queryStatement = `SELECT * FROM block`;
+  return db
+    .query(queryStatement)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -158,4 +170,5 @@ module.exports = {
   updateUser,
   newUserTag,
   getAllFavoriteList,
+  getAllBlockList,
 };

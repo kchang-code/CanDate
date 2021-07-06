@@ -21,6 +21,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [tags, setTags] = useState([]);
   const [favorite, setFavorite] = useState([]);
+  const [block, setBlock] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user_tag, setUserTags] = useState([]);
   useEffect(() => {
@@ -50,15 +51,17 @@ function App() {
       axios.get('http://localhost:8080/api/tags'),
       axios.get('http://localhost:8080/api/favorite'),
       axios.get('http://localhost:8080/api/user_tag'),
+      axios.get('http://localhost:8080/api/block'),
     ])
       .then((all) => {
-        const [user, message, tag, favorite, user_tag] = all;
+        const [user, message, tag, favorite, user_tag, block] = all;
 
         setUsers(user.data.users);
         setMessages(message.data.message);
         setTags(tag.data.tags);
         setFavorite(favorite.data.favorites);
         setUserTags(user_tag.data.user_tag);
+        setBlock(block.data.block);
         setLoading(false);
       })
       .catch((err) => {
@@ -79,6 +82,7 @@ function App() {
               loading={loading}
               realTimeData={realTimeData}
               favorite={favorite}
+              block={block}
             />
           </Route>
           <Route path="/profile">
