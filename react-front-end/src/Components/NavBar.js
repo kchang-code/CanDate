@@ -11,7 +11,8 @@ import axios from 'axios';
 
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tag, setTags] = useState([]);
+// const {tags} = props
+const [tag, setTags] = useState([])
   const [selectTag, setSelectTag] = useState({
     tags: [],
     buttonColor: false,
@@ -21,18 +22,6 @@ export default function NavBar(props) {
     setIsOpen(!isOpen);
   };
 
-
-
-
-  const tagArr = (tag) =>{
-    let tagArr = [];
-    for (const item of tag) {
-      tagArr.push(item.name)
-    }
-    return tagArr;
-  }
-
-  
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/tags").then((res) => {
