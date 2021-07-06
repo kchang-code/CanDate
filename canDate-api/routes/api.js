@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const apiQueries = require("../db/queries/api_queries");
 
+<<<<<<< HEAD
 let id = 0;
 const getId = () => {
   return id++;
@@ -56,6 +57,16 @@ module.exports = function (app) {
     res.json("success");
     apiQueries.creatNewUser(req.body.newUser).catch((err) => {
       console.log(err);
+=======
+router.get("/users", (req, res) => {
+  apiQueries
+    .getAllUsers()
+    .then((users) => {
+      res.json({users});
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+>>>>>>> feature/profile-card
     });
   });
 
@@ -129,6 +140,7 @@ module.exports = function (app) {
       });
   });
 
+<<<<<<< HEAD
   router.get("/favorite", (req, res) => {
     apiQueries
       .getAllFavoriteList()
@@ -144,3 +156,9 @@ module.exports = function (app) {
 };
 
 // module.exports = router;
+=======
+
+
+
+module.exports = router;
+>>>>>>> feature/profile-card

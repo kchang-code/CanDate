@@ -70,6 +70,7 @@ const createNewUser = (newUser) => {
   });
 };
 
+<<<<<<< HEAD
 const createNewMessage = (newMessage) => {
   const value = [
     newMessage["to_user_id"],
@@ -154,15 +155,25 @@ const getAllFavoriteList = () => {
       return err;
     });
 };
+=======
+
+
+
+>>>>>>> feature/profile-card
 
 module.exports = {
   getAllTags,
   getAllUsers,
   getAllUserTags,
   getAllMessages,
+<<<<<<< HEAD
   createNewUser,
   createNewMessage,
   updateUser,
   newUserTag,
   getAllFavoriteList
+=======
+  creatNewUser,
+
+>>>>>>> feature/profile-card
 };

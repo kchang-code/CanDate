@@ -1,4 +1,5 @@
 -- Users table seeds here (Example)
+<<<<<<< HEAD
 INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
 VALUES ('Khea','Chang', 'khea@email.com', 'khea', 'female', 'Vancouver', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuSHxD8wsSLcKp1R3IkQ-5mLCO8DKso4lYTQ&usqp=CAU', 'I like Lighthouse labs' );
 
@@ -14,6 +15,8 @@ VALUES ('Tim', 'Duncan', 'tim@email.com', 'tim', 'male', 180, 'Calgary', 25, 'ht
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES ('Chris', 'Paul', 'chris@email.com', 'chris', 'male', 190, 'Burnaby', 27, 'https://lh3.googleusercontent.com/proxy/WddGp5g5vkM_zvUk2KSdTJVJAZC2bWqqVaqguoZEZzZgxl7j1rB-jcL3NrP5S0guh63b_5tA9mdWOa2sJkYdlEBTGf2L9VMRXszamO6gQ6WrmVv6XrmOIirdvYZnKg', 'I like hiking');
 
+=======
+>>>>>>> feature/profile-card
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES ('Kelly', 'Tabtab', 'kelly@email.com', 'kelly',  'female', 165, 'Burnaby', 23, 'https://www.theattitudequotes.com/wp-content/uploads/2021/02/Best-DP-For-Girls-WhatsApp-Profile-Picture-2021-Girls-WhatsApp-Dp-35.jpg', 'I like dancing');
 
@@ -31,9 +34,6 @@ VALUES('Austin', 'Harrison','austin.harrison@example.com', '123456', 'male', 190
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES('Gül', 'Berberoğlu','gul.berberoglu@example.com', '123456', 'female', 184, 'Niğde', 70, 'https://randomuser.me/api/portraits/women/73.jpg', 'My name is Gül Berberoğlu. I''m here to look for my life partner, and I like Sleeping. If you like me, let''s chat.');
-
-INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
-VALUES('Kaya', 'Özkök','kaya.ozkok@example.com', '123456', 'male', 178, 'Konya', 35, 'https://randomuser.me/api/portraits/men/43.jpg', 'My name is Kaya Özkök. I''m here to look for my life partner, and I like Boardgames. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES('Kaya', 'Özkök','kaya.ozkok@example.com', '123456', 'male', 178, 'Konya', 35, 'https://randomuser.me/api/portraits/men/43.jpg', 'My name is Kaya Özkök. I''m here to look for my life partner, and I like Boardgames. If you like me, let''s chat.');

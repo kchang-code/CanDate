@@ -4,60 +4,31 @@ import Home from './Components/Home';
 import Message from './Components/Message';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import TimeAgo from 'javascript-time-ago';
-
-import en from 'javascript-time-ago/locale/en';
-import ru from 'javascript-time-ago/locale/ru';
-
-import UserPage from './Components/user-page';
-const ENDPOINT = 'ws://localhost:8080/message';
-
-TimeAgo.addDefaultLocale(en);
-TimeAgo.addLocale(ru);
+import UserPage from './Components/UserPage';
 
 let realTimeData;
 function App() {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [tags, setTags] = useState([]);
-  const [favorite, setFavorite] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const socket = new WebSocket(ENDPOINT);
-    socket.onmessage = function (event) {
-      realTimeData = event.data;
-
-      if (messages.length !== 0 && realTimeData) {
-        // console.log('realTimeData', realTimeData);
-        const needToSet = [...messages, ...JSON.parse(realTimeData)];
-        setMessages(needToSet);
-      }
-    };
-
-    socket.onclose = function () {
-      console.log('Close');
-    };
-  }, [loading]);
+  const [user_tag, setUserTags] = useState([]);
 
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/message'),
       axios.get('http://localhost:8080/api/tags'),
-      axios.get('http://localhost:8080/api/favorite'),
-    ])
-      .then((all) => {
-        const [user, message, tag, favorite] = all;
-        setUsers(user.data.users);
-        setMessages(message.data.message);
-        setTags(tag.data.tags);
-        setFavorite(favorite.data.favorites);
-        setLoading(false); //please pur this line at the end of this setState block
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+      axios.get('http://localhost:8080/api/user_tag')
+    ]).then((all) => {
+      const [user, message, tag, user_tag] = all;
+      setUsers(user.data.users);
+      setMessages(message.data.message);
+      setMessages(tag.data.tags);
+      setUserTags(user_tag.data.user_tag)
+      setTags(tag.data.tags);
+      
+    });
+
   }, []);
 
   return (
@@ -79,11 +50,11 @@ function App() {
           </Route>
 
           <Route path="/user">
-            <UserPage />
+            <UserPage tags={tags} user_tag={user_tag}/>
           </Route>
 
           <Route path="/">
-            <Home image={users} tags={tags} />
+          <Home image={users} tags={tags} />
           </Route>
         </Switch>
       </Router>
