@@ -65,9 +65,6 @@ export default function ProfileCard(props) {
                 </Button>
               );
             })}
-            <Typography variant="body2" color="textSecondary">
-              See more: (card will flip)
-            </Typography>
           </CardContent>
         </Card>
       </div>
