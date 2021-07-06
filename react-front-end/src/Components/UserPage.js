@@ -16,11 +16,8 @@ import {
 import Button from '@material-ui/core/Button';
 
 const UserPage = (props) => {
-  const {users} = props
+  const {users, user_tag, tag} = props
 
-  const { state } = useUserPage();
-  const [user_tag, setUserTag] = useState([]);
-  const [tag, setTags] = useState([]);
   const [selectTag, setSelectTag] = useState({
     tags: [],
     buttonColor: false,
@@ -71,7 +68,7 @@ const UserPage = (props) => {
             })
           : getFilteredUserProfile(
               getFilteredUsers(selectTag.tags, user_tag),
-              state.users
+              users
             ).map((filteredUser) => {
               return (
                 <Grid container spacing={4}>
@@ -91,9 +88,9 @@ const UserPage = (props) => {
               );
             })}
       </div>
-      {console.log('state.users', state.users)}
+      {/* {console.log('state.users', state.users)}
       {console.log('selectTag.tags', selectTag.tags)}
-      {console.log('tags', tag)}
+      {console.log('tags', tag)} */}
     </>
   );
 };
