@@ -4,7 +4,14 @@ import SelectTagsInFilter from "./SelectTagsInFilter";
 import Button from "@material-ui/core/Button";
 import Slider from "@material-ui/core/Slider";
 
+let cities = [];
 export default function FilterPopUp(props) {
+  props.users.map((user) => {      
+    if (!cities.includes(user.address)) {
+      cities.push(user.address)
+
+    }})
+
   return (
     <div className="popup-box">
       <div className="box">
@@ -14,12 +21,27 @@ export default function FilterPopUp(props) {
         </span>
         <span>
           <h3>Age:</h3>
-          {/* <p>{props.ageRange}</p> */}
           <Slider
             style={{ width: 300, margin: 30 }}
             value={props.ageRange}
             onChange={props.updateAgeRange}
           />
+        </span>
+        <span>
+          <h3>City:</h3>
+          {cities.map((city) => {      
+            if (!cities.includes(city)) {
+              cities.push(city)
+
+            }              
+            return (
+              <Button size="small" variant="outlined" color="primary" 
+              onClick={() => props.handleAddressClick(city)}
+              >
+              {city}
+              </Button>
+            );
+          })}
         </span>
         <span>
           <SelectTagsInFilter

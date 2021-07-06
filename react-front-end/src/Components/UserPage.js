@@ -19,28 +19,43 @@ import Button from "@material-ui/core/Button";
 const UserPage = (props) => {
   const { users, user_tag, tags } = props;
 
+  
   const [state, setState] = useState({
     tags: [],
     ageRange: [18, 40],
-    buttonColor: false,
+    city: [],
   });
+
+  // const [tagButtonColor, setTagButtonColor] = useState(true)
+
+  // const toggleButtonColor = () => {
+  //   const currentStatus = tagButtonColor
+  //   setTagButtonColor(!currentStatus)
+  //   console.log("success")
+  // }
 
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
     selectArr.ageRange = data;
     setState(selectArr);
-    console.log("state.ageRange", state.ageRange);
   };
 
-  // add selected tag id into arr
-  const handleTagClick = (itemId, colorFunc) => {
+  // add selected tag id into state
+  const handleTagClick = (itemId) => {
     const selectArr = { ...state };
-    // [{tags:[]}]
+    // [{tags:[], ageRange:[], city:[]}]
     selectArr.tags.push(itemId);
     setState(selectArr);
 
-    colorFunc();
   };
+  
+  // add selected address into state
+  const handleAddressClick = (city) => {
+    const selectArr = { ...state };
+    selectArr.city.push(city);
+    setState(selectArr);
+
+  }
 
   const handleEmptyTagsClick = (state) => {
     const selectArr = { ...state };
@@ -53,14 +68,16 @@ const UserPage = (props) => {
       <TagsContext.Provider values={tags}>
         <NavBar
           handleTagClick={handleTagClick}
+          handleAddressClick={handleAddressClick}
           handleEmptyTagsClick={handleEmptyTagsClick}
           updateAgeRange={updateAgeRange}
           ageRange={state.ageRange}
+          users={users}
         />
       </TagsContext.Provider>
 
       <div>
-        {state.tags.length === 0
+        {state
           ? users.slice(5).map((user) => {
               return (
                 <Grid container spacing={4}>
@@ -100,9 +117,10 @@ const UserPage = (props) => {
               );
             })}
       </div>
-      {console.log("users", users)}
       {console.log("state.tags", state.tags)}
-      {console.log("tags", tags)}
+      {console.log("state.city", state.city)}
+{      console.log("state", state)
+}
     </>
   );
 };
