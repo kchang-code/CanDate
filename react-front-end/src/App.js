@@ -20,6 +20,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [tags, setTags] = useState([]);
+  const [favorite, setFavorite] = useState([])
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
@@ -28,14 +29,11 @@ function App() {
       console.log(messages);
       if (messages.length !== 0 && realTimeData) {
         // console.log('realTimeData', realTimeData);
-        const neesToSet = [
+        const needToSet = [
           ...messages,
           ...JSON.parse(realTimeData),
         ]
-        // console.log('neesToSet',neesToSet)
-        setMessages(neesToSet)
-        // console.log('this is what need to be set', messages);
-        // console.log('messages', messages);
+        setMessages(needToSet)
       }
     };
 
@@ -49,13 +47,16 @@ function App() {
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/message'),
       axios.get('http://localhost:8080/api/tags'),
+      axios.get('http://localhost:8080/api/favorite')
     ])
       .then((all) => {
-        const [user, message, tag] = all;
+        const [user, message, tag, favorite] = all;
         setUsers(user.data.users);
         setMessages(message.data.message);
         setTags(tag.data.tags);
-        setLoading(false);
+        setFavorite(favorite.data.favorite)
+        setLoading(false);//please pur this line at the end of this setState block
+
       })
       .catch((err) => {
         console.log(err);
@@ -82,6 +83,7 @@ function App() {
               setMessages={setMessages}
               loading={loading}
               realTimeData={realTimeData}
+              favorite={favorite}
             />
           </Route>
           <Route path="/profile">
