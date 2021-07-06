@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import FilterPopUp from "./FilterPopUp";
 import { TagsContext } from "../Context/TagsContext";
 import axios from 'axios';
+import EmailIcon from '@material-ui/icons/Email';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +26,7 @@ export default function NavBar(props) {
 
 
 
-  const tagArr = (tag) =>{
+  const tagArr = (tag) => {
     let tagArr = [];
     for (const item of tag) {
       tagArr.push(item.name)
@@ -32,7 +34,7 @@ export default function NavBar(props) {
     return tagArr;
   }
 
-  
+
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/tags").then((res) => {
@@ -41,8 +43,8 @@ export default function NavBar(props) {
   }, []);
 
   return (
-    <div>
-      <AppBar position="static">
+    <AppBar position="static" className="nav" >
+      <div>
         <Toolbar>
           <Button onClick={togglePopup} color="inherit" class="filter-btn">
             Filter
@@ -53,16 +55,22 @@ export default function NavBar(props) {
 
           {isOpen && (
 
-              <FilterPopUp
-                handleTagClick={props.handleTagClick}
-                content={tag}
-                savebtn={<button>Save</button>}
-                save={togglePopup}
-                handleClose={togglePopup}
-              />
+            <FilterPopUp
+              handleTagClick={props.handleTagClick}
+              content={tag}
+              savebtn={<button>Save</button>}
+              save={togglePopup}
+              handleClose={togglePopup}
+            />
           )}
         </Toolbar>
-      </AppBar>
-    </div>
+      </div>
+      <div className="nav-info">
+        <div><a href="/users/1/message"><EmailIcon /></a></div>
+        <div><AccountCircleIcon /></div>
+        <div><p>Welcome {"Zio"}</p></div>
+        <div><Button color="secondary">Logout</Button></div>
+      </div>
+    </AppBar>
   );
 }

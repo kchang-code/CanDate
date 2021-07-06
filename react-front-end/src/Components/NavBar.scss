@@ -1,3 +1,14 @@
-.filter-btn {
-  align-content: center;
+.nav {
+  display: flex;
+  flex-direction: column;
+
+  .filter-btn {
+    align-content: center;
+  }
+  .nav-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
