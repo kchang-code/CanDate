@@ -16,6 +16,8 @@ import {
 import Button from '@material-ui/core/Button';
 
 const UserPage = (props) => {
+  const {users} = props
+
   const { state } = useUserPage();
   const [user_tag, setUserTag] = useState([]);
   const [tag, setTags] = useState([]);
@@ -40,18 +42,7 @@ const UserPage = (props) => {
     setSelectTag(selectArr);
   };
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/api/user_tag').then((res) => {
-      setUserTag(res.data.user_tag);
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get('http://localhost:8080/api/tags').then((res) => {
-      setTags(res.data.tags);
-    });
-  }, []);
-
+ 
   return (
     <>
       <TagsContext.Provider values={tag}>
@@ -63,7 +54,7 @@ const UserPage = (props) => {
 
       <div>
         {selectTag.tags.length === 0
-          ? state.users.slice(5).map((user) => {
+          ? users.slice(5).map((user) => {
               return (
                 <Grid container spacing={4}>
                   <Grid item xs={12} sm={6} md={3}>
@@ -102,6 +93,7 @@ const UserPage = (props) => {
       </div>
       {console.log('state.users', state.users)}
       {console.log('selectTag.tags', selectTag.tags)}
+      {console.log('tags', tag)}
     </>
   );
 };

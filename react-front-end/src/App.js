@@ -81,7 +81,7 @@ function App() {
           </Route>
 
           <Route path="/user">
-            <UserPage tags={tags} user_tag={user_tag} />
+            <UserPage users={users} tags={tags} user_tag={user_tag} />
           </Route>
           <Route path="/detail">
             <ProfileDetail />
