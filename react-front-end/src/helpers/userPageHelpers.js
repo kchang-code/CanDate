@@ -1,3 +1,4 @@
+// returns array of interest ids 
 export function filterTags (id, userTag)  {
   const tagArr = [];
   for (const tag of userTag) {
@@ -8,6 +9,7 @@ export function filterTags (id, userTag)  {
   return tagArr;
 };
 
+// returns array of interest names
 export function  getNameOfTag (tagArr, tags)  {
   const tagNameArr = [];
   for (const tag of tagArr) {

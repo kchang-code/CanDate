@@ -12,7 +12,10 @@ export default function SelectTagsInFilter (props) {
   }
 
   return (
+    
     <div>
+      
+      <h3>Interests:</h3>
     {props.tags.map((item) => {
       return (
         <Button 

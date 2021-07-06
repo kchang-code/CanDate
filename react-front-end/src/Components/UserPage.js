@@ -20,6 +20,7 @@ const UserPage = (props) => {
 
   const [selectTag, setSelectTag] = useState({
     tags: [],
+    ages:[],
     buttonColor: false,
   });
 
@@ -33,6 +34,7 @@ const UserPage = (props) => {
     colorFunc();
   };
 
+  
   const handleEmptyTagsClick = (selectTag) => {
     const selectArr = { ...selectTag };
     selectArr.tags = [];
@@ -89,9 +91,9 @@ const UserPage = (props) => {
               );
             })}
       </div>
-      {/* {console.log('state.users', state.users)}
+      {console.log('users',users)}
       {console.log('selectTag.tags', selectTag.tags)}
-      {console.log('tags', tag)} */}
+      {console.log('tags', tags)}
     </>
   );
 };
