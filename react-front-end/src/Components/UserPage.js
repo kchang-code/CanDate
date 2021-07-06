@@ -81,7 +81,7 @@ const UserPage = (props) => {
                       tag={getNameOfTag(
                         filterTags(filteredUser.id, user_tag),
                         tag
-                      )}
+                        )}
                     />
                   </Grid>
                 </Grid>
