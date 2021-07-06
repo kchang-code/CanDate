@@ -20,11 +20,13 @@ const UserPage = (props) => {
   });
 
   // add selected tag id into arr
-  const handleTagClick = (itemId) => {
+  const handleTagClick = (itemId, colorFunc) => {
     const selectArr = {...selectTag};
     // [{tags:[]}]
     selectArr.tags.push(itemId)
     setSelectTag(selectArr)
+
+    colorFunc();
 };
 
   const handleEmptyTagsClick = (selectTag) => {
