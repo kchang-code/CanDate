@@ -31,7 +31,6 @@ const Chat = (props) => {
   } = props;
 
   const filteredFavorite = getFavoriteByUser(favorite, id);
-  console.log('filteredFavorite', filteredFavorite);
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);

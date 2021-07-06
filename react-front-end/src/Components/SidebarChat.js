@@ -39,8 +39,6 @@ const SidebarChat = (props) => {
     latestMsg['creates_on'].slice(0, 3) +
     latestMsg['creates_on'].slice(5);
 
-  console.log('to_user_id', to_user_id);
-
   return (
     <div
       className="sidebarChat"
