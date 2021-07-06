@@ -2,19 +2,6 @@ const express = require("express");
 const router = express.Router();
 const apiQueries = require("../db/queries/api_queries");
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-router.get("/users", (req, res) => {
-  apiQueries
-    .getAllUsers()
-    .then((users) => {
-      res.json({users});
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-=======
->>>>>>> 4b6abb42f7cc99df0994461dc8be763138589e72
 let id = 0;
 const getId = () => {
   return id++;
@@ -69,10 +56,6 @@ module.exports = function (app) {
     res.json("success");
     apiQueries.creatNewUser(req.body.newUser).catch((err) => {
       console.log(err);
-<<<<<<< HEAD
-=======
->>>>>>> feature/favorite
->>>>>>> 4b6abb42f7cc99df0994461dc8be763138589e72
     });
   });
 
@@ -99,12 +82,12 @@ module.exports = function (app) {
       });
   });
 
-  // router.put("/signup/:id", (req, res) => {
-  //   res.json("success");
-  //   apiQueries.creatNewUser(req.body.newUser).catch((err) => {
-  //     console.log(err);
-  //   });
-  // });
+  router.put("/signup/:id", (req, res) => {
+    res.json("success");
+    apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+      console.log(err);
+    });
+  });
 
   router.put("/users", (req, res) => {
     res.json("success");
@@ -146,15 +129,6 @@ module.exports = function (app) {
       });
   });
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-
-
-module.exports = router;
-=======
->>>>>>> 4b6abb42f7cc99df0994461dc8be763138589e72
   router.get("/favorite", (req, res) => {
     apiQueries
       .getAllFavoriteList()
@@ -170,7 +144,3 @@ module.exports = router;
 };
 
 // module.exports = router;
-<<<<<<< HEAD
-=======
->>>>>>> feature/favorite
->>>>>>> 4b6abb42f7cc99df0994461dc8be763138589e72
