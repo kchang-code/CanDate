@@ -78,7 +78,8 @@ const UserPage = (props) => {
               );
             })
           : getFilteredUserProfile(
-              getFilteredUsersByInterest(state.tags, user_tag),getFilteredUsersByAge()
+              getFilteredUsersByInterest(state.tags, user_tag),
+              getFilteredUsersByAge(users, state.ageRange),
               users
             ).map((filteredUser) => {
               return (
