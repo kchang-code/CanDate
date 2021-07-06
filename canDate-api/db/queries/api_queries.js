@@ -70,22 +70,6 @@ const creatNewUser = (newUser) => {
   });
 };
 
-const getTagNames = () => {
-  const queryStatement = `
-  SELECT *
-  FROM user_tag
-  JOIN users ON user_tag.user_id = users.id
-  JOIN tags ON tags.id = user_tag.tag_id
-  `;
-  return db
-    .query(queryStatement)
-    .then((response) => {
-      return response.rows;
-    })
-    .catch((err) => {
-      return err;
-    });
-}
 
 
 
@@ -96,6 +80,5 @@ module.exports = {
   getAllUserTags,
   getAllMessages,
   creatNewUser,
-  getTagNames,
 
 };

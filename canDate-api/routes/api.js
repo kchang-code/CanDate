@@ -55,15 +55,6 @@ router.put("/users", (req, res) => {
   });
 });
 
-router.get("/interests", (req, res) => {
-  apiQueries.getTagNames()
-  .then((interests) => {
-    res.json({interests})
-  })
-  .catch((err) => {
-    res.status(500).json({ error: err.message });
-  });
-})
 
 
 
