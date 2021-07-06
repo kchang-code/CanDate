@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import bcrypt from 'bcryptjs';
+import NavBar from './NavBar';
 
 
 function Copyright() {
@@ -57,21 +58,18 @@ export default function SignIn(props) {
   const findPasswordByEmail = (email, users) => {
     for (const user of users) {
       if (user.email === email) {
-        console.log('reached')
         return user.password
       }
     }
-
   }
 
-  const checkPassword = (emil, password, users) => {
-    console.log(findPasswordByEmail(email, users))
+  const checkPassword = (email, password, users) => {
     const hashedPassword = bcrypt.hashSync(password, 10);
     if (bcrypt.compareSync(findPasswordByEmail(email, users), hashedPassword)) {
-      console.log("success")
+      window.location.replace("http://localhost:3002/user")
       return
     }
-    console.log("fail");
+    return false
   }
 
   return (
