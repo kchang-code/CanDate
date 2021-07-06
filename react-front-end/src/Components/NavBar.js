@@ -11,7 +11,8 @@ import axios from 'axios';
 
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
-// const {tags} = props
+  const {ageRange, updateAgeRange} = props
+
 const [tag, setTags] = useState([])
   const [selectTag, setSelectTag] = useState({
     tags: [],
@@ -48,6 +49,8 @@ const [tag, setTags] = useState([])
                 savebtn={<button>Save</button>}
                 save={togglePopup}
                 handleClose={togglePopup}
+                ageRange={ageRange}
+                updateAgeRange={updateAgeRange}
               />
           )}
         </Toolbar>

@@ -2,17 +2,9 @@ import React, { useState } from "react";
 import "./FilterPopUp.scss";
 import SelectTagsInFilter from "./SelectTagsInFilter";
 import Button from "@material-ui/core/Button";
-import Slider from '@material-ui/core/Slider';
+import Slider from "@material-ui/core/Slider";
 
 export default function FilterPopUp(props) {
-
-  const [ageRange, setAgeRange] = useState([18, 50])
-
-  const updateRange = (event, data) => {
-    setAgeRange(data)
-    console.log("ageRange", ageRange)
-  }
-
   return (
     <div className="popup-box">
       <div className="box">
@@ -22,10 +14,11 @@ export default function FilterPopUp(props) {
         </span>
         <span>
           <h3>Age:</h3>
-          <Slider 
-          style={{width: 300, margin: 30}}
-          value={ageRange}
-          onChange={updateRange}
+          {/* <p>{props.ageRange}</p> */}
+          <Slider
+            style={{ width: 300, margin: 30 }}
+            value={props.ageRange}
+            onChange={props.updateAgeRange}
           />
         </span>
         <span>

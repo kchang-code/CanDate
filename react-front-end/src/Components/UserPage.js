@@ -1,58 +1,66 @@
-import React, { useEffect, useState, useContext } from 'react';
-import ProfileCard from './ProfileCard';
-import Grid from '@material-ui/core/Grid';
-import useUserPage from '../hooks/useUserPage';
-import './UserPage.scss';
-import axios from 'axios';
-import NavBar from './NavBar';
-import { TagsContext } from '../Context/TagsContext';
-import { useRadioGroup } from '@material-ui/core';
+import React, { useEffect, useState, useContext } from "react";
+import ProfileCard from "./ProfileCard";
+import Grid from "@material-ui/core/Grid";
+import useUserPage from "../hooks/useUserPage";
+import "./UserPage.scss";
+import axios from "axios";
+import NavBar from "./NavBar";
+import { TagsContext } from "../Context/TagsContext";
+import { useRadioGroup } from "@material-ui/core";
 import {
   filterTags,
   getNameOfTag,
-  getFilteredUsers,
+  getFilteredUsersByInterest,
   getFilteredUserProfile,
-} from '../helpers/userPageHelpers';
-import Button from '@material-ui/core/Button';
+  getFilteredUsersByAge,
+} from "../helpers/userPageHelpers";
+import Button from "@material-ui/core/Button";
 
 const UserPage = (props) => {
-  const {users, user_tag, tags} = props
+  const { users, user_tag, tags } = props;
 
-  const [selectTag, setSelectTag] = useState({
+  const [state, setState] = useState({
     tags: [],
-    ages:[],
+    ageRange: [18, 40],
     buttonColor: false,
   });
 
+  const updateAgeRange = (event, data) => {
+    const selectArr = { ...state };
+    selectArr.ageRange = data;
+    setState(selectArr);
+    console.log("state.ageRange", state.ageRange);
+  };
+
   // add selected tag id into arr
   const handleTagClick = (itemId, colorFunc) => {
-    const selectArr = { ...selectTag };
+    const selectArr = { ...state };
     // [{tags:[]}]
     selectArr.tags.push(itemId);
-    setSelectTag(selectArr);
+    setState(selectArr);
 
     colorFunc();
   };
 
-  
-  const handleEmptyTagsClick = (selectTag) => {
-    const selectArr = { ...selectTag };
+  const handleEmptyTagsClick = (state) => {
+    const selectArr = { ...state };
     selectArr.tags = [];
-    setSelectTag(selectArr);
+    setState(selectArr);
   };
 
- 
   return (
     <>
       <TagsContext.Provider values={tags}>
         <NavBar
           handleTagClick={handleTagClick}
           handleEmptyTagsClick={handleEmptyTagsClick}
+          updateAgeRange={updateAgeRange}
+          ageRange={state.ageRange}
         />
       </TagsContext.Provider>
 
       <div>
-        {selectTag.tags.length === 0
+        {state.tags.length === 0
           ? users.slice(5).map((user) => {
               return (
                 <Grid container spacing={4}>
@@ -70,7 +78,7 @@ const UserPage = (props) => {
               );
             })
           : getFilteredUserProfile(
-              getFilteredUsers(selectTag.tags, user_tag),
+              getFilteredUsersByInterest(state.tags, user_tag),
               users
             ).map((filteredUser) => {
               return (
@@ -84,16 +92,16 @@ const UserPage = (props) => {
                       tag={getNameOfTag(
                         filterTags(filteredUser.id, user_tag),
                         tags
-                        )}
+                      )}
                     />
                   </Grid>
                 </Grid>
               );
             })}
       </div>
-      {console.log('users',users)}
-      {console.log('selectTag.tags', selectTag.tags)}
-      {console.log('tags', tags)}
+      {console.log("users", users)}
+      {console.log("state.tags", state.tags)}
+      {console.log("tags", tags)}
     </>
   );
 };
