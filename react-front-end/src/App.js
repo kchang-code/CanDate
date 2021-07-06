@@ -10,6 +10,7 @@ import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
 
 import UserPage from './Components/user-page';
+import ProfileDetail from './Components/ProfileDetail';
 const ENDPOINT = 'ws://localhost:8080/message';
 
 TimeAgo.addDefaultLocale(en);
@@ -91,10 +92,14 @@ function App() {
           <Route path="/user">
             <UserPage />
           </Route>
+          <Route path="/detail">
+            <ProfileDetail />
+          </Route>
 
           <Route path="/">
             <Home image={users} tags={tags} />
           </Route>
+
         </Switch>
       </Router>
     </div>
