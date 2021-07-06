@@ -48,22 +48,19 @@ export function getFilteredUsersByInterest(interests, user_tagArr) {
   return removeRepeatedUsers;
 }
 
-// age filter: returns array of user ids for filtered users 
-export function getFilteredUsersByAge(users, ageRange) {
-  const userIds = [];
-  for (const user of users) {
-    if (user.age >= ageRange[0] && user.age <= ageRange[1]){
-      userIds.push(user.id)
-    }
-  }
-  return userIds
- }
-
 // return array of objects for filtered users
-export function getFilteredUserProfile(filteredUserId, users) {
+ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, users) {
   const userProfiles = [];
+  const filteredIds = [];
+  filteredUserIds.forEach(element => {
+    if (filteredAgeIds.includes(element)) {
+      filteredIds.push(element)
+    }
+  })
+
+  // loop through users to find the user profiles
   for (const user of users) {
-    for (const userId of filteredUserId) {
+    for (const userId of filteredIds) {
       if (user.id === userId) {
         userProfiles.push(user);
       }
