@@ -8,6 +8,7 @@ import TimeAgo from 'javascript-time-ago';
 
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
+import ProfileDetail from './Components/ProfileDetail';
 import UserPage from './Components/UserPage';
 const ENDPOINT = 'ws://localhost:8080/message';
 
@@ -83,10 +84,14 @@ function App() {
           <Route path="/user">
             <UserPage tags={tags} user_tag={user_tag} />
           </Route>
+          <Route path="/detail">
+            <ProfileDetail />
+          </Route>
 
           <Route path="/">
             <Home image={users} tags={tags} />
           </Route>
+
         </Switch>
       </Router>
     </div>

@@ -1,0 +1,19 @@
+.detail {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #dadbd3;
+
+  .detail-body {
+    display: flex;
+    flex-direction: row;
+    background-color: #ededed;
+    margin-top: -50px;
+    height:80vh;
+    width:50vh;
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
+  }
+  .detail-info {
+    text-align: start;
+  }
+}
