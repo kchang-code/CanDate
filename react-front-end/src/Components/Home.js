@@ -22,7 +22,6 @@ import TagList from './TagList';
 import useVisualMode from '../hooks/useVisualMode';
 import Question from './Question';
 import SignIn from './SignIn';
-
 import Form from './Form';
 import './Home.scss';
 
@@ -35,6 +34,7 @@ export default function Home(props) {
   const id = props.image.length + 1;
 
   const { mode, transition, back } = useVisualMode(FORM);
+
 
   function change() {
     transition(QUESTION);
@@ -55,7 +55,12 @@ export default function Home(props) {
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
         {mode === TAG && <TagList tags={props.tags} id={id} />}
-        {mode === SIGN && <SignIn back={back} users={props.image} />}
+        {mode === SIGN &&
+          <SignIn
+            back={back}
+            users={props.image}
+            findPasswordByEmail={props.findPasswordByEmail}
+          />}
       </div>
     </div>
   );

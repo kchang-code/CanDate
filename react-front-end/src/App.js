@@ -5,7 +5,7 @@ import Message from './Components/Message';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import TimeAgo from 'javascript-time-ago';
-
+import bcrypt from 'bcryptjs';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
 import ProfileDetail from './Components/ProfileDetail';
@@ -24,6 +24,7 @@ function App() {
   const [block, setBlock] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user_tag, setUserTags] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
     socket.onmessage = function (event) {
@@ -70,6 +71,28 @@ function App() {
       });
   }, []);
 
+  const findPasswordByEmail = (email, users) => {
+    const arr = [];
+    for (const user of users) {
+      if (user.email === email) {
+        arr.push(user.password)
+        arr.push(user.id)
+      }
+    }
+
+    checkPassword(arr[0], arr[1])
+  }
+
+  const checkPassword = (password, id) => {
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    if (bcrypt.compareSync(password, hashedPassword)) {
+      window.location.replace(`http://localhost:3002/user/${id}`)
+      return
+    }
+    return false
+  }
+
   return (
     <div className="App">
       <Router>
@@ -102,7 +125,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={users} tags={tags} />
+            <Home image={users} tags={tags} checkPassword={checkPassword} findPasswordByEmail={findPasswordByEmail} />
           </Route>
         </Switch>
       </Router>
