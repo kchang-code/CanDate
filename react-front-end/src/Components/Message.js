@@ -9,17 +9,21 @@ import {
   // reduceToNames,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { getUserIBlock } from '../helpers/favoriteBlockHelp';
 
 const Message = (props) => {
   let { id } = useParams();
   const { messages, users, setMessages, loading, favorite, block } = props;
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
-  const reducedMessage = reduceToNames(userAllMessages, id);
+  const userIBlock = getUserIBlock(block, id);
+  const reducedMessage = reduceToNames(userAllMessages, id, userIBlock);
 
   const [selectedUserId, setSelectedUserId] = useState(null);
+  console.log('selectedUserId', selectedUserId);
 
   useEffect(() => {
+    console.log(reducedMessage);
     reducedMessage.length !== 0 &&
       setSelectedUserId(reducedMessage[0]['to_user_id']);
   }, [loading]);
@@ -45,6 +49,7 @@ const Message = (props) => {
           selectedUserMessages={selectedUserMessages}
           selectedUserId={selectedUserId}
           favorite={favorite}
+          block={block}
         />
         <ChatScreen
           selectedMessages={selectedUserMessages}

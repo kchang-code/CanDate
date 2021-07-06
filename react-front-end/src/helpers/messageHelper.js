@@ -1,18 +1,24 @@
-const reduceToNames = (message, userId) => {
+const reduceToNames = (message, userId, userIBlock) => {
   let id = [];
   let result = [];
-  message.forEach((el) => {
-    if (!id.includes(el['to_user_id']) && Number(userId) !== el['to_user_id']) {
-      result.push(el);
-      id.push(el['to_user_id']);
-    } else if (
-      !id.includes(el['from_user_id']) &&
-      Number(userId) !== el['from_user_id']
-    ) {
-      result.push(el);
-      id.push(el['from_user_id']);
-    }
-  });
+  if (userIBlock) {
+    message.forEach((el) => {
+      if (
+        !id.includes(el['to_user_id']) &&
+        Number(userId) !== el['to_user_id']
+      ) {
+        result.push(el);
+        id.push(el['to_user_id']);
+      } else if (
+        !id.includes(el['from_user_id']) &&
+        Number(userId) !== el['from_user_id'] &&
+        !userIBlock.includes(el['from_user_id'])
+      ) {
+        result.push(el);
+        id.push(el['from_user_id']);
+      }
+    });
+  }
 
   return result;
 };

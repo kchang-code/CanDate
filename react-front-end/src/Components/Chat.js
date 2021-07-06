@@ -15,7 +15,7 @@ import {
   reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
+import { getFavoriteByUser, getUserIBlock } from '../helpers/favoriteBlockHelp';
 
 const Chat = (props) => {
   let { id } = useParams();
@@ -29,12 +29,16 @@ const Chat = (props) => {
     selectedUserMessages,
     selectedUserId,
     favorite,
+    block,
   } = props;
 
   const filteredFavorite = getFavoriteByUser(favorite, id);
+  const userIBlock = getUserIBlock(block, id);
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
-  const reducedMessage = reduceToNames(userAllMessages, id);
+  const reducedMessage = reduceToNames(userAllMessages, id, userIBlock);
+
+  console.log('userIBlock', userIBlock);
 
   const [userPhoto, setUserPhoto] = useState('');
   const [userFirstName, setUserFirstName] = useState('');
@@ -59,7 +63,6 @@ const Chat = (props) => {
 
   const reducedToNamesId = reduceToNamesId(userAllMessages, id);
 
-  console.log('message in chat map', reducedMessage);
   const reducedMessagesComp = reducedMessage.map((message) => {
     if (reducedToNamesId.includes(message['to_user_id'])) {
       return (

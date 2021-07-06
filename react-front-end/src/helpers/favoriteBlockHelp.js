@@ -20,7 +20,19 @@ const getUserBlockMe = (block, id) => {
   return result;
 };
 
+const getUserIBlock = (block, id) => {
+  let result = [];
+  let filteredBlock = block.filter((user) => {
+    return Number(user.user_id) === Number(id);
+  });
+  filteredBlock.forEach((element) => {
+    result.push(element.block_user_id);
+  });
+  return result;
+};
+
 module.exports = {
   getFavoriteByUser,
   getUserBlockMe,
+  getUserIBlock,
 };
