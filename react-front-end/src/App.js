@@ -30,7 +30,11 @@ function App() {
 
       if (messages.length !== 0 && realTimeData) {
         const needToSet = [...messages, ...JSON.parse(realTimeData)];
-        setMessages(needToSet);
+        console.log('before set state', messages);
+        console.log('needToSet', needToSet);
+        // setMessages(needToSet);
+        setMessages((prev) => [...prev, ...JSON.parse(realTimeData)]);
+        console.log('after set state', messages);
       }
     };
 
