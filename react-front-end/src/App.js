@@ -89,14 +89,21 @@ function App() {
             <p>PROFILE PAGE</p>
           </Route>
 
-          <Route path="/user">
-            <UserPage users={users} tags={tags} user_tag={user_tag} />
+          <Route path="/user/:id">
+            <UserPage
+              users={users}
+              tags={tags}
+              user_tag={user_tag}
+              loading={loading}
+            />
           </Route>
           <Route path="/detail">
             <ProfileDetail />
           </Route>
 
-          <Route path="/"><Home image={users} tags={tags} /></Route>
+          <Route path="/">
+            <Home image={users} tags={tags} />
+          </Route>
         </Switch>
       </Router>
     </div>
