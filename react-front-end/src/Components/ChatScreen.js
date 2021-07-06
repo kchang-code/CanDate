@@ -1,96 +1,149 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './ChatScreen.scss';
-import { Avatar } from '@material-ui/core';
+
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
+
+import { Avatar, IconButton } from '@material-ui/core';
+import './Chat.scss';
+import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
+import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
+import ReactTimeAgo from 'react-time-ago';
+
+let to_user_id = null;
+let userName;
+let userPhoto;
 
 const ChatScreen = (props) => {
-  const [input, setInput] = useState();
-  const message = props.messages;
-  // const [message, setMessage] = useState([
-  //   {
-  //     id: '1',
-  //     name: 'Lana',
-  //     message: 'Hello! I like you!',
-  //     profilePic:
-  //       'https://i1.sndcdn.com/avatars-000323919926-l9fdlc-t500x500.jpg',
-  //   },
+  const { selectedMessages, messages, setMessages, selectedPhoto, users } =
+    props;
 
-  //   {
-  //     id: '2',
-  //     name: 'Lana',
-  //     message: 'Your coding skill is amazing!',
-  //     profilePic:
-  //       'https://i1.sndcdn.com/avatars-000323919926-l9fdlc-t500x500.jpg',
-  //   },
+  let { id } = useParams();
+  const [input, setInput] = useState('');
+  const [showMsg, setShowMsg] = useState([]);
 
-  //   {
-  //     id: '3',
-  //     message: "Let's hangout tonight",
-  //     profilePic:
-  //       'https://img.cinemablend.com/filter:scale/quill/2/5/7/3/b/2/2573b2c3b5ebe45b398fcb9c10538e6c10a5c60b.jpg?mw=600',
-  //   },
-  // ]);
+  const newMessage = {
+    from_user_id: Number(id),
+    to_user_id: Number(to_user_id),
+    content: input,
+  };
 
-  // const handleSend = (event) => {
-  //   event.preventDefault();
-  //   setMessage([...message, { message: input }]);
-  //   setInput('');
-  // };
+  const messageEl = useRef(null);
 
-  const cookie = 'matt';
+  useEffect(() => {
+    if (messageEl) {
+      messageEl.current.addEventListener('DOMNodeInserted', (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    setShowMsg(selectedMessages);
+  }, [selectedMessages]);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    const timeElapsed = Date.now();
+    //sending msg state
+    let today = new Date(timeElapsed);
+
+    let time = today.toLocaleString();
+
+    axios
+      .put('http://localhost:8080/api/users/:id/messages', {
+        newMessage: { ...newMessage, creates_on: time },
+      })
+      .then((res) => {
+        setMessages([...messages, ...res.data]);
+      })
+      .catch((err) => {});
+
+    setInput('');
+  };
+
+  const messageContent = showMsg.map((message) => {
+    if (message['from_user_id'] !== Number(id)) {
+      to_user_id = message['from_user_id'];
+      userName = users[to_user_id - 1]['first_name'];
+      userPhoto = users[to_user_id - 1]['profile_photo'];
+      // setUserInfo({ ...userInfo, userName, userPhoto });
+      return (
+        <div className="chatScreen_message">
+          <Avatar
+            key={message.id}
+            className="chatScreen_image"
+            alt={message.name}
+            src={selectedPhoto}
+          />
+          <p className="chatScreen_text">
+            {message.content}
+
+            <span className="chat_time">{message['creates_on']}</span>
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="chatScreen_message">
+          <p className="chatScreen_textUser">
+            {message.content}
+            <span className="chat_time">{message['creates_on']}</span>
+          </p>
+        </div>
+      );
+    }
+  });
+
   return (
-    <div>
-      <h2>Chat screen</h2>
-      {/* {message.map((message) =>
-        message.name ? (
-          <div className="chatScreen_message">
-            <Avatar
-              key={message.id}
-              className="chatScreen_image"
-              alt={message.name}
-              src={message.profilePic}
-            />
-            <p className="chatScreen_text">{message.message}</p>
-          </div>
-        ) : (
-          <div className="chatScreen_message">
-            <p className="chatScreen_textUser">{message.message}</p>
-          </div>
-        )
-      )} */}
+    <div className="chat">
+      <div className="chat_header">
+        <Avatar src={userPhoto} />
+        <div className="chat_headerInfo">
+          <h3>{userName}</h3>
+          <p>
+            Last Seen: <ReactTimeAgo date={Date.now()} locale="en-US" />
+          </p>
+        </div>
+        <div className="chat_headerRight">
+          <IconButton>
+            <SearchOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <AttachFileOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
+      </div>
 
-      {message.map((message) =>
-        cookie === 'matt' ? (
-          <div className="chatScreen_message">
-            <Avatar
-              key={message.id}
-              className="chatScreen_image"
-              alt={message.name}
-              src={message.profilePic}
-            />
-            <p className="chatScreen_text">{message.content}</p>
-          </div>
-        ) : (
-          <div className="chatScreen_message">
-            <p className="chatScreen_textUser">{message.message}</p>
-          </div>
-        )
-      )}
+      <div className="chat_body" ref={messageEl}>
+        {messageContent}
+      </div>
 
-      <form className="chatScreen_input">
-        <input
-          value={input}
-          onChange={(data) => setInput(data.target.value)}
-          className="chatScreen_inputField"
-          placeholder="Type a message..."
-        />
-        <button
-          // onClick={handleSend}
-          className="chatScreen_inputButton"
-          type="submit"
+      <div className="chat_footer">
+        <InsertEmoticonOutlinedIcon />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
         >
-          SEND
-        </button>
-      </form>
+          <input
+            type="text"
+            value={input}
+            onChange={(data) => setInput(data.target.value)}
+          />
+          <button onClick={(e) => sendMessage(e)} type="submit">
+            Send a message
+          </button>
+        </form>
+        <MicNoneOutlinedIcon />
+      </div>
     </div>
   );
 };

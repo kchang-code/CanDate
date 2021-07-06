@@ -1,25 +1,318 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-export default function Question(props) {
-  const [first_name, setFirst_name] = useState('');
-  const [last_name, setLast_name] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
-  const save = (first_name, last_name, email, password) => {
-    let newUser = {
-      first_name,
-      last_name,
-      email,
-      password,
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 165,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+export default function Question(props) {
+  const classes = useStyles();
+  const [gender, setGender] = useState('');
+  const [height, setHeight] = useState('');
+  const [address, setAddress] = useState('');
+  const [age, setAge] = useState('');
+  const [description, setDescription] = useState('');
+  const [url, setUrl] = useState('');
+
+  const update = (gender, height, address, age, description, url, id) => {
+    let updateUser = {
+      id,
+      gender,
+      height,
+      address,
+      age,
+      description,
+      url,
     };
 
     axios
-      .put('http://localhost:8080/api/users', { newUser })
+      .put(`http://localhost:8080/api/signup/${props.id}`, { updateUser })
       .then(() => console.log('done'))
       .catch((err) => console.log('1111---v', err));
   };
+
   return (
-    <div></div>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Tell us about yourself
+        </Typography>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel id="demo-simple-select-outlined-label">Gender</InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={gender}
+                  label="Gender"
+                  onChange={(e) => {
+                    setGender(e.target.value)
+                  }}
+                >
+                  <MenuItem value={'Male'}>Male</MenuItem>
+                  <MenuItem value={'Female'}>Female</MenuItem>
+                  <MenuItem value={'Others'}>Others</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel id="demo-simple-select-outlined-label">Height(cm)</InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={height}
+                  label="Height(cm)"
+                  onChange={(e) => {
+                    setHeight(e.target.value)
+                  }}
+                >
+                  <MenuItem value={150}>150</MenuItem>
+                  <MenuItem value={151}>151</MenuItem>
+                  <MenuItem value={152}>152</MenuItem>
+                  <MenuItem value={153}>153</MenuItem>
+                  <MenuItem value={154}>154</MenuItem>
+                  <MenuItem value={155}>155</MenuItem>
+                  <MenuItem value={156}>156</MenuItem>
+                  <MenuItem value={157}>157</MenuItem>
+                  <MenuItem value={158}>158</MenuItem>
+                  <MenuItem value={159}>159</MenuItem>
+                  <MenuItem value={160}>160</MenuItem>
+                  <MenuItem value={161}>161</MenuItem>
+                  <MenuItem value={162}>162</MenuItem>
+                  <MenuItem value={163}>163</MenuItem>
+                  <MenuItem value={164}>164</MenuItem>
+                  <MenuItem value={165}>165</MenuItem>
+                  <MenuItem value={166}>166</MenuItem>
+                  <MenuItem value={167}>167</MenuItem>
+                  <MenuItem value={168}>168</MenuItem>
+                  <MenuItem value={169}>169</MenuItem>
+                  <MenuItem value={170}>170</MenuItem>
+                  <MenuItem value={171}>171</MenuItem>
+                  <MenuItem value={172}>172</MenuItem>
+                  <MenuItem value={173}>173</MenuItem>
+                  <MenuItem value={174}>174</MenuItem>
+                  <MenuItem value={175}>175</MenuItem>
+                  <MenuItem value={176}>176</MenuItem>
+                  <MenuItem value={177}>177</MenuItem>
+                  <MenuItem value={178}>178</MenuItem>
+                  <MenuItem value={179}>179</MenuItem>
+                  <MenuItem value={180}>180</MenuItem>
+                  <MenuItem value={181}>181</MenuItem>
+                  <MenuItem value={182}>182</MenuItem>
+                  <MenuItem value={183}>183</MenuItem>
+                  <MenuItem value={184}>184</MenuItem>
+                  <MenuItem value={185}>185</MenuItem>
+                  <MenuItem value={186}>186</MenuItem>
+                  <MenuItem value={187}>187</MenuItem>
+                  <MenuItem value={188}>188</MenuItem>
+                  <MenuItem value={189}>189</MenuItem>
+                  <MenuItem value={190}>190</MenuItem>
+                  <MenuItem value={191}>191</MenuItem>
+                  <MenuItem value={192}>192</MenuItem>
+                  <MenuItem value={193}>193</MenuItem>
+                  <MenuItem value={194}>194</MenuItem>
+                  <MenuItem value={195}>195</MenuItem>
+                  <MenuItem value={196}>196</MenuItem>
+                  <MenuItem value={197}>197</MenuItem>
+                  <MenuItem value={198}>198</MenuItem>
+                  <MenuItem value={199}>199</MenuItem>
+                  <MenuItem value={200}>200</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="age"
+                label="Age"
+                name="age"
+                onChange={(e) => setAge(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="address"
+                label="Address(City)"
+                name="address"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="profile-photo"
+                label="Profile Photo Url"
+                type="text"
+                id="profile-photo"
+                onChange={(e) => setUrl(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="about-you"
+                label="About you"
+                type="text"
+                id="about-you"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => {
+              props.tagPage();
+              update(gender, height, address, age, description, url, props.id);
+            }}
+          >
+            Submit
+          </Button>
+        </form>
+      </div>
+      <Box mt={5}>
+        <Copyright />
+      </Box>
+    </Container>
+    // <form onSubmit={(e) => e.preventDefault()}>
+    //   <div className="forms">
+    //     <label for="gender"> Select you gender</label>
+    //     <select name="gender" onSelect={(e) => setGender(e.target.value)}>
+    //       <option value="none" selected>Gender</option>
+    //       <option value="male">Male</option>
+    //       <option value="female">Female</option>
+    //       <option value="other">other</option>
+    //     </select >
+    //     <div>
+    //       <label for="height" className="label">
+    //         Height(in meters):
+    //       </label>
+    //       <input
+    //         className="input"
+    //         type="text"
+    //         name="Height"
+    //         onChange={(e) => setHeight(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label for="city" className="label">
+    //         Address(City):
+    //       </label>
+    //       <input
+    //         className="input"
+    //         type="email"
+    //         name="city"
+    //         onChange={(e) => setAddress(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label for="age" className="label">
+    //         Age:
+    //       </label>
+    //       <input
+    //         className="input"
+    //         type="text"
+    //         name="age"
+    //         onChange={(e) => setAge(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label for="age" className="label">
+    //         Age:
+    //       </label>
+    //       <input
+    //         className="input"
+    //         type="text"
+    //         name="age"
+    //         onChange={(e) => setAge(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <button
+    //         type="submit"
+    //         className="btn btn-primary"
+    //       // onClick={() => { save(first_name, last_name, email, password) }}
+    //       >
+    //         sign up
+    //       </button>
+    //     </div>
+    //   </div>
+    // </form >
   );
 }

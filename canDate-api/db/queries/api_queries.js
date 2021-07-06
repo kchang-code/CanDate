@@ -55,14 +55,14 @@ const getAllMessages = () => {
     });
 };
 
-const creatNewUser = (newUser) => {
+const createNewUser = (newUser) => {
   const value = [
     newUser["first_name"],
     newUser["last_name"],
     newUser["email"],
     newUser["password"],
   ];
-  console.log(value);
+
   const queryStatement = `INSERT INTO users(first_name, last_name, email, password)
   VALUES ($1, $2, $3, $4)`;
   return db.query(queryStatement, value).catch((err) => {
@@ -70,15 +70,92 @@ const creatNewUser = (newUser) => {
   });
 };
 
+const createNewMessage = (newMessage) => {
+  const value = [
+    newMessage["to_user_id"],
+    newMessage["from_user_id"],
+    newMessage["content"],
+    newMessage["creates_on"],
+  ];
 
+  const queryStatement = `INSERT INTO message(to_user_id, from_user_id, content, creates_on)
+  VALUES ($1, $2, $3, $4)
+  RETURNING *`;
 
+  return db
+    .query(queryStatement, value)
+    .then((res) => {
+      return res.rows;
+    })
 
+    .catch((err) => {
+      return err;
+    });
+};
+
+const newUserTag = (newTagUser) => {
+  const value = [newTagUser["user_id"], newTagUser["tag_id"]];
+
+  const queryStatement = `INSERT INTO user_tag(user_id, tag_id) VALUES ($1, $2);`;
+
+  return (
+    db
+      .query(queryStatement, value)
+      // .then(() => {
+      //   console.log("successes");
+      // })
+      .catch((err) => {
+        return err;
+      })
+  );
+};
+
+const updateUser = (updateUser) => {
+  const value = [
+    updateUser.gender,
+    updateUser.height,
+    updateUser.address,
+    updateUser.age,
+    updateUser.url,
+    updateUser.description,
+    updateUser.id,
+  ];
+
+  const queryStatement = `UPDATE users
+     SET gender = $1, height = $2, address = $3, age = $4, profile_photo = $5, about_me = $6
+     WHERE id = $7`;
+  return (
+    db
+      .query(queryStatement, value)
+      // .then(() => {
+      //   console.log("successes");
+      // })
+      .catch((err) => {
+        return err;
+      })
+  );
+};
+
+const getAllFavoriteList = () => {
+  const queryStatement = `SELECT * FROM favorite`;
+  return db
+    .query(queryStatement)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 
 module.exports = {
   getAllTags,
   getAllUsers,
   getAllUserTags,
   getAllMessages,
-  creatNewUser,
-
+  createNewUser,
+  createNewMessage,
+  updateUser,
+  newUserTag,
+  getAllFavoriteList,
 };

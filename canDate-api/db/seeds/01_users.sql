@@ -1,4 +1,19 @@
 -- Users table seeds here (Example)
+INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
+VALUES ('Khea','Chang', 'khea@email.com', 'khea', 'female', 'Vancouver', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuSHxD8wsSLcKp1R3IkQ-5mLCO8DKso4lYTQ&usqp=CAU', 'I like Lighthouse labs' );
+
+INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
+VALUES ('Zio', 'Tan', 'zio@email.com', 'zio', 'male', 'Surrey', 'https://atom-wordpress-assets.s3.amazonaws.com/movie-news/wp-content/uploads/2020/08/nic-cage.jpg', 'I like DC comics' );
+
+INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
+VALUES ('Matt', 'Luo', 'matt@email.com', 'matt', 'male', 'Richmond', 'https://cdn.vox-cdn.com/thumbor/dskn4MIs8EYKrRFWZo_ngOceXrc=/0x0:2475x3712/1200x800/filters:focal(1086x887:1482x1283)/cdn.vox-cdn.com/uploads/chorus_image/image/69285941/1184051188.0.jpg', 'I like Lego');
+
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+VALUES ('Tim', 'Duncan', 'tim@email.com', 'tim', 'male', 180, 'Calgary', 25, 'https://www.jeancoutu.com/globalassets/revamp/photo/conseils-photo/20160302-01-reseaux-sociaux-profil/photo-profil_301783868.jpg', 'I like cooking');
+
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+VALUES ('Chris', 'Paul', 'chris@email.com', 'chris', 'male', 190, 'Burnaby', 27, 'https://lh3.googleusercontent.com/proxy/WddGp5g5vkM_zvUk2KSdTJVJAZC2bWqqVaqguoZEZzZgxl7j1rB-jcL3NrP5S0guh63b_5tA9mdWOa2sJkYdlEBTGf2L9VMRXszamO6gQ6WrmVv6XrmOIirdvYZnKg', 'I like hiking');
+
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES ('Kelly', 'Tabtab', 'kelly@email.com', 'kelly',  'female', 165, 'Burnaby', 23, 'https://www.theattitudequotes.com/wp-content/uploads/2021/02/Best-DP-For-Girls-WhatsApp-Profile-Picture-2021-Girls-WhatsApp-Dp-35.jpg', 'I like dancing');
 

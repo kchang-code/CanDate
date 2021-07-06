@@ -1,24 +1,107 @@
-import React from 'react';
-import { Avatar } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Avatar, IconButton } from '@material-ui/core';
 import './Chat.scss';
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
+import ChatIcon from '@material-ui/icons/Chat';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import SidebarChat from './SidebarChat';
+import {
+  filteredMessageByLoginUser,
+  filteredMessageBySelectedUser,
+  getAllID,
+  reduceToNames,
+  reduceToNamesIncludingMe,
+} from '../helpers/messageHelper';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
 
 const Chat = (props) => {
-  const { to_name, message, profilePic, timestamp } = props;
-  console.log(to_name);
-  return (
-    <div
-      className="chat"
-      onClick={() => {
-        console.log('clicked');
-      }}
-    >
-      <Avatar className="chat__image" alt="Zio" src={profilePic} />
+  let { id } = useParams();
 
-      <div className="chat_details">
-        <h2>{to_name}</h2>
-        <p>{message}</p>
+  const {
+    messages,
+    users,
+    setMessages,
+    setSelectedUserId,
+    loading,
+    selectedUserMessages,
+    selectedUserId,
+    favorite,
+  } = props;
+
+  const filteredFavorite = getFavoriteByUser(favorite, id);
+  console.log('filteredFavorite', filteredFavorite);
+
+  const userAllMessages = filteredMessageByLoginUser(messages, id);
+  const reducedMessage = reduceToNames(userAllMessages, id);
+
+  const [userPhoto, setUserPhoto] = useState('');
+  const [userFirstName, setUserFirstName] = useState('');
+
+  useEffect(() => {
+    if (users.length !== 0) {
+      setUserPhoto(users[Number(id) - 1]['profile_photo']);
+      setUserFirstName(users[Number(id) - 1]['first_name']);
+    }
+  }, [loading]);
+
+  const allId = getAllID(userAllMessages);
+
+  let messageObj = {};
+
+  allId.forEach((id) => {
+    messageObj[id.toString()] = filteredMessageBySelectedUser(
+      userAllMessages,
+      id
+    );
+  });
+
+  const reducedMessagesComp = reducedMessage.map((message) => {
+    return (
+      <SidebarChat
+        key={message.id}
+        to_user_id={message['to_user_id']}
+        from_name={users[message['from_user_id'] - 1]['first_name']}
+        to_name={users[message['to_user_id'] - 1]['first_name']}
+        message={message}
+        profilePic={users[message['to_user_id'] - 1]['profile_photo']}
+        setSelectedUserId={setSelectedUserId}
+        selectedUserId={selectedUserId}
+        selectedUserMessages={selectedUserMessages}
+        userAllMessages={userAllMessages}
+        messageObj={messageObj}
+        filteredFavorite={filteredFavorite}
+      />
+    );
+  });
+
+  return (
+    <div className="sidebar">
+      <div className="sidebar_header">
+        <Avatar className="chat__image" alt="Zio" src={userPhoto} />
+        <h2> {userFirstName}</h2>
+        <div className="sidebar_headerRight">
+          <IconButton>
+            <DonutLargeIcon />
+          </IconButton>
+          <IconButton>
+            <ChatIcon />
+          </IconButton>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
+        </div>
       </div>
-      <p>{timestamp}</p>
+
+      <div className="sidebar_search">
+        <div className="sidebar_searchContainer">
+          <SearchOutlinedIcon />
+          <input placeholder="Search or start new chat" type="text" />
+        </div>
+      </div>
+
+      <div className="sidebar_chats">{reducedMessagesComp}</div>
     </div>
   );
 };

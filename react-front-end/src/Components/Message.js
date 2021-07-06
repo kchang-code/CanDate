@@ -1,46 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Chat from './Chat';
 import './Message.scss';
 import ChatScreen from './ChatScreen';
-import { reduceToNames } from '../helpers/messageHelper';
+import {
+  filteredMessageByLoginUser,
+  filteredMessageBySelectedUser,
+  reduceToNames,
+  // reduceToNames,
+} from '../helpers/messageHelper';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Message = (props) => {
-  const { messages, users } = props;
-  const reducedMessage = reduceToNames(messages);
+  let { id } = useParams();
+  const { messages, users, setMessages, loading, favorite } = props;
 
-  console.log('message', messages);
-  console.log('users', users);
-  const reducedMessages = reducedMessage.map((message) => {
-    return (
-      <Chat
-        key={message.id}
-        from_name={users[message['from_user_id'] - 1]['first_name']}
-        to_name={users[message['to_user_id'] - 1]['first_name']}
-        timestamp="just now"
-        message={message.content}
-        profilePic={users[message['to_user_id'] - 1]['profile_photo']}
-      />
-    );
-  });
+  const userAllMessages = filteredMessageByLoginUser(messages, id);
+  const reducedMessage = reduceToNames(userAllMessages, id);
 
-  // const Messages = messages.map((message) => {
-  //   return (
-  //     <ChatScreen
-  //       key={message.id}
-  //       from_name={users[message['from_user_id'] - 1]['first_name']}
-  //       to_name={users[message['to_user_id'] - 1]['first_name']}
-  //       message={message.content}
-  //       profilePic={users[message['to_user_id'] - 1]['profile_photo']}
-  //     />
-  //   );
-  // });
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+  useEffect(() => {
+    reducedMessage.length !== 0 &&
+      setSelectedUserId(reducedMessage[0]['to_user_id']);
+  }, [loading]);
+
+  const selectedUserMessages = filteredMessageBySelectedUser(
+    userAllMessages,
+    selectedUserId
+  );
+
+  const selectedPhoto = selectedUserId
+    ? users[selectedUserId - 1]['profile_photo']
+    : null;
+
   return (
-    <div className="container">
-      <section className="message">{reducedMessages}</section>
-
-      <section className="chat_screen">
-        <ChatScreen messages={messages} />
-      </section>
+    <div className="app">
+      <div className="app_body">
+        <Chat
+          messages={messages}
+          users={users}
+          setMessages={setMessages}
+          setSelectedUserId={setSelectedUserId}
+          loading={loading}
+          selectedUserMessages={selectedUserMessages}
+          selectedUserId={selectedUserId}
+          favorite={favorite}
+        />
+        <ChatScreen
+          selectedMessages={selectedUserMessages}
+          messages={messages}
+          setMessages={setMessages}
+          selectedPhoto={selectedPhoto}
+          users={users}
+        />
+      </div>
     </div>
   );
 };
