@@ -8,9 +8,8 @@ import TimeAgo from 'javascript-time-ago';
 
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
-
-import UserPage from './Components/user-page';
 import ProfileDetail from './Components/ProfileDetail';
+import UserPage from './Components/UserPage';
 const ENDPOINT = 'ws://localhost:8080/message';
 
 TimeAgo.addDefaultLocale(en);
@@ -21,22 +20,18 @@ function App() {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [tags, setTags] = useState([]);
+  const [favorite, setFavorite] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user_tag, setUserTags] = useState([]);
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
     socket.onmessage = function (event) {
       realTimeData = event.data;
-      console.log(messages);
+
       if (messages.length !== 0 && realTimeData) {
         // console.log('realTimeData', realTimeData);
-        const neesToSet = [
-          ...messages,
-          ...JSON.parse(realTimeData),
-        ]
-        // console.log('neesToSet',neesToSet)
-        setMessages(neesToSet)
-        // console.log('this is what need to be set', messages);
-        // console.log('messages', messages);
+        const needToSet = [...messages, ...JSON.parse(realTimeData)];
+        setMessages(needToSet);
       }
     };
 
@@ -50,27 +45,23 @@ function App() {
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/message'),
       axios.get('http://localhost:8080/api/tags'),
+      axios.get('http://localhost:8080/api/favorite'),
+      axios.get('http://localhost:8080/api/user_tag'),
     ])
       .then((all) => {
-        const [user, message, tag] = all;
+        const [user, message, tag, favorite] = all;
+        setUserTags(user_tag.data.user_tag);
         setUsers(user.data.users);
         setMessages(message.data.message);
         setTags(tag.data.tags);
-        setLoading(false);
+        setFavorite(favorite.data.favorites);
+        setLoading(false); //please pur this line at the end of this setState block
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
   }, []);
-
-  // useEffect(() => {
-  //   if (messages.length !== 0 && realTimeData) {
-  //     // console.log('realTimeData', realTimeData);
-  //     setMessages([...messages, realTimeData]);
-  //     console.log('messages', messages);
-  //   }
-  // }, [loading, realTimeData]);
 
   return (
     <div className="App">
@@ -83,6 +74,7 @@ function App() {
               setMessages={setMessages}
               loading={loading}
               realTimeData={realTimeData}
+              favorite={favorite}
             />
           </Route>
           <Route path="/profile">
@@ -90,7 +82,7 @@ function App() {
           </Route>
 
           <Route path="/user">
-            <UserPage />
+            <UserPage tags={tags} user_tag={user_tag} />
           </Route>
           <Route path="/detail">
             <ProfileDetail />

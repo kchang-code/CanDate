@@ -93,13 +93,8 @@ const createNewMessage = (newMessage) => {
     });
 };
 
-
-
 const newUserTag = (newTagUser) => {
-  const value = [
-    newTagUser["user_id"],
-    newTagUser["tag_id"],
-  ];
+  const value = [newTagUser["user_id"], newTagUser["tag_id"]];
 
   const queryStatement = `INSERT INTO user_tag(user_id, tag_id) VALUES ($1, $2);`;
 
@@ -115,7 +110,6 @@ const newUserTag = (newTagUser) => {
   );
 };
 
-
 const updateUser = (updateUser) => {
   const value = [
     updateUser.gender,
@@ -127,8 +121,7 @@ const updateUser = (updateUser) => {
     updateUser.id,
   ];
 
-  const queryStatement =
-    `UPDATE users
+  const queryStatement = `UPDATE users
      SET gender = $1, height = $2, address = $3, age = $4, profile_photo = $5, about_me = $6
      WHERE id = $7`;
   return (
@@ -143,6 +136,18 @@ const updateUser = (updateUser) => {
   );
 };
 
+const getAllFavoriteList = () => {
+  const queryStatement = `SELECT * FROM favorite`;
+  return db
+    .query(queryStatement)
+    .then((response) => {
+      return response.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -152,4 +157,5 @@ module.exports = {
   createNewMessage,
   updateUser,
   newUserTag,
+  getAllFavoriteList,
 };
