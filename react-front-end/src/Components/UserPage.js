@@ -16,7 +16,7 @@ import {
 import Button from '@material-ui/core/Button';
 
 const UserPage = (props) => {
-  const {users, user_tag, tags} = props
+  const { users, user_tag, tags } = props
 
   const [selectTag, setSelectTag] = useState({
     tags: [],
@@ -39,7 +39,7 @@ const UserPage = (props) => {
     setSelectTag(selectArr);
   };
 
- 
+
   return (
     <>
       <TagsContext.Provider values={tags}>
@@ -49,44 +49,46 @@ const UserPage = (props) => {
         />
       </TagsContext.Provider>
 
-      <div>
+      <div className="user-page">
         {selectTag.tags.length === 0
           ? users.slice(5).map((user) => {
-              return (
-                <Grid container spacing={4}>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <ProfileCard
-                      key={user.id}
-                      name={user.first_name}
-                      age={user.age}
-                      profile_photo={user.profile_photo}
-                      tag={getNameOfTag(filterTags(user.id, user_tag), tags)}
-                    />
-                  </Grid>
+            return (
+              <Grid container spacing={4} className="user-page-ind">
+                <Grid item xs={12} >
+                  <ProfileCard
+                    key={user.id}
+                    name={user.first_name}
+                    age={user.age}
+                    address={user.address}
+                    profile_photo={user.profile_photo}
+                    tag={getNameOfTag(filterTags(user.id, user_tag), tags)}
+                  />
                 </Grid>
-              );
-            })
+              </Grid>
+            );
+          })
           : getFilteredUserProfile(
-              getFilteredUsers(selectTag.tags, user_tag),
-              users
-            ).map((filteredUser) => {
-              return (
-                <Grid container spacing={4}>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <ProfileCard
-                      key={filteredUser.id}
-                      name={filteredUser.first_name}
-                      age={filteredUser.age}
-                      profile_photo={filteredUser.profile_photo}
-                      tag={getNameOfTag(
-                        filterTags(filteredUser.id, user_tag),
-                        tags
-                      )}
-                    />
-                  </Grid>
+            getFilteredUsers(selectTag.tags, user_tag),
+            users
+          ).map((filteredUser) => {
+            return (
+              <Grid container spacing={4} className="user-page-ind">
+                <Grid item xs={12} >
+                  <ProfileCard
+                    key={filteredUser.id}
+                    name={filteredUser.first_name}
+                    age={filteredUser.age}
+                    address={filteredUser.address}
+                    profile_photo={filteredUser.profile_photo}
+                    tag={getNameOfTag(
+                      filterTags(filteredUser.id, user_tag),
+                      tags
+                    )}
+                  />
                 </Grid>
-              );
-            })}
+              </Grid>
+            );
+          })}
       </div>
       {/* {console.log('state.users', state.users)}
       {console.log('selectTag.tags', selectTag.tags)}

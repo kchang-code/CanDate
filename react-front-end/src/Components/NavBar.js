@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar(props) {
   const classes = useStyles();
-  console.log('what is this', props.info)
+
 
   const [isOpen, setIsOpen] = useState(false);
   const [tag, setTags] = useState([]);
