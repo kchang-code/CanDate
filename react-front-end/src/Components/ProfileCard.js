@@ -13,7 +13,8 @@ import ReactCardFlip from "react-card-flip";
 
 export default function ProfileCard(props) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const {users} = props
+  const {tags, users} = props
+  
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };

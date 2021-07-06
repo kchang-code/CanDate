@@ -96,9 +96,7 @@ function App() {
             <ProfileDetail />
           </Route>
 
-          <Route path="/">
-            <Home image={users} tags={tags} />
-          </Route>
+          <Route path="/"><Home image={users} tags={tags} /></Route>
         </Switch>
       </Router>
     </div>

@@ -1,4 +1,5 @@
-export function filterTags (id, userTag)  {
+// returns array of interest ids
+export function filterTags(id, userTag) {
   const tagArr = [];
   for (const tag of userTag) {
     if (tag.id === id) {
@@ -6,9 +7,10 @@ export function filterTags (id, userTag)  {
     }
   }
   return tagArr;
-};
+}
 
-export function  getNameOfTag (tagArr, tags)  {
+// returns array of interest names
+export function getNameOfTag(tagArr, tags) {
   const tagNameArr = [];
   for (const tag of tagArr) {
     for (const obj of tags) {
@@ -24,40 +26,58 @@ export function  getNameOfTag (tagArr, tags)  {
     //tags : [sport, movie]
   };
   return userTag.tags;
-};
+}
 
-
-
-// returns filtered array of unique userids 
-export function  getFilteredUsers (interests, user_tagArr)  {
+// interest filter: returns filtered array of unique userids
+export function getFilteredUsersByInterest(interests, user_tagArr) {
   const users = [];
   for (const interest of interests) {
     for (const user of user_tagArr) {
       if (interest === user.interest) {
-        users.push(user.id)
+        users.push(user.id);
       }
     }
   }
 
   let removeRepeatedUsers = [];
-  users.forEach(element => {
+  users.forEach((element) => {
     if (!removeRepeatedUsers.includes(element)) {
-      removeRepeatedUsers.push(element)
+      removeRepeatedUsers.push(element);
     }
-  })
-  return removeRepeatedUsers; 
+  });
+  return removeRepeatedUsers;
 }
 
 
-  // return array of objects for filtered users
-  export function getFilteredUserProfile  (filteredUserId, users)  {
-    const userProfiles = [];
-    for (const user of users) {
-      for (const userId of filteredUserId) {
-        if (user.id === userId) {
-          userProfiles.push(user)
-        }
+// age filter: returns array of user ids for filtered users 
+export function getFilteredUsersByAge(users, ageRange) {
+  const userIds = [];
+  for (const user of users) {
+    if (user.age >= ageRange[0] && user.age <= ageRange[1]){
+      userIds.push(user.id)
+    }
+  }
+  return userIds
+ }
+
+
+// return array of objects for filtered users
+ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, users) {
+  const userProfiles = [];
+  const filteredIds = [];
+  filteredUserIds.forEach(element => {
+    if (filteredAgeIds.includes(element)) {
+      filteredIds.push(element)
+    }
+  })
+
+  // loop through users to find the user profiles
+  for (const user of users) {
+    for (const userId of filteredIds) {
+      if (user.id === userId) {
+        userProfiles.push(user);
       }
     }
-    return userProfiles
   }
+  return userProfiles;
+}

@@ -13,7 +13,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tag, setTags] = useState([]);
+  const {ageRange, updateAgeRange, users, handleAddressClick} = props
+
+const [tag, setTags] = useState([])
   const [selectTag, setSelectTag] = useState({
     tags: [],
     buttonColor: false,
@@ -22,18 +24,6 @@ export default function NavBar(props) {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
-
-
-
-
-  const tagArr = (tag) => {
-    let tagArr = [];
-    for (const item of tag) {
-      tagArr.push(item.name)
-    }
-    return tagArr;
-  }
-
 
 
   useEffect(() => {
@@ -55,13 +45,17 @@ export default function NavBar(props) {
 
           {isOpen && (
 
-            <FilterPopUp
-              handleTagClick={props.handleTagClick}
-              content={tag}
-              savebtn={<button>Save</button>}
-              save={togglePopup}
-              handleClose={togglePopup}
-            />
+              <FilterPopUp
+                handleTagClick={props.handleTagClick}
+                handleAddressClick={handleAddressClick}
+                content={tag}
+                savebtn={<button>Save</button>}
+                save={togglePopup}
+                handleClose={togglePopup}
+                ageRange={ageRange}
+                updateAgeRange={updateAgeRange}
+                users={users}
+              />
           )}
         </Toolbar>
       </div>

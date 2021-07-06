@@ -1,56 +1,83 @@
-import React, { useEffect, useState, useContext } from 'react';
-import ProfileCard from './ProfileCard';
-import Grid from '@material-ui/core/Grid';
-import useUserPage from '../hooks/useUserPage';
-import './UserPage.scss';
-import axios from 'axios';
-import NavBar from './NavBar';
-import { TagsContext } from '../Context/TagsContext';
-import { useRadioGroup } from '@material-ui/core';
+import React, { useEffect, useState, useContext } from "react";
+import ProfileCard from "./ProfileCard";
+import Grid from "@material-ui/core/Grid";
+import useUserPage from "../hooks/useUserPage";
+import "./UserPage.scss";
+import axios from "axios";
+import NavBar from "./NavBar";
+import { TagsContext } from "../Context/TagsContext";
+import { useRadioGroup } from "@material-ui/core";
 import {
   filterTags,
   getNameOfTag,
-  getFilteredUsers,
+  getFilteredUsersByInterest,
   getFilteredUserProfile,
-} from '../helpers/userPageHelpers';
-import Button from '@material-ui/core/Button';
+  getFilteredUsersByAge,
+} from "../helpers/userPageHelpers";
+import Button from "@material-ui/core/Button";
 
 const UserPage = (props) => {
-  const {users, user_tag, tags} = props
+  const { users, user_tag, tags } = props;
 
-  const [selectTag, setSelectTag] = useState({
+  
+  const [state, setState] = useState({
     tags: [],
-    buttonColor: false,
+    ageRange: [18, 40],
+    city: [],
   });
 
-  // add selected tag id into arr
-  const handleTagClick = (itemId, colorFunc) => {
-    const selectArr = { ...selectTag };
-    // [{tags:[]}]
+  // const [tagButtonColor, setTagButtonColor] = useState(true)
+
+  // const toggleButtonColor = () => {
+  //   const currentStatus = tagButtonColor
+  //   setTagButtonColor(!currentStatus)
+  //   console.log("success")
+  // }
+
+  const updateAgeRange = (event, data) => {
+    const selectArr = { ...state };
+    selectArr.ageRange = data;
+    setState(selectArr);
+  };
+
+  // add selected tag id into state
+  const handleTagClick = (itemId) => {
+    const selectArr = { ...state };
+    // [{tags:[], ageRange:[], city:[]}]
     selectArr.tags.push(itemId);
-    setSelectTag(selectArr);
+    setState(selectArr);
 
-    colorFunc();
   };
+  
+  // add selected address into state
+  const handleAddressClick = (city) => {
+    const selectArr = { ...state };
+    selectArr.city.push(city);
+    setState(selectArr);
 
-  const handleEmptyTagsClick = (selectTag) => {
-    const selectArr = { ...selectTag };
+  }
+
+  const handleEmptyTagsClick = (state) => {
+    const selectArr = { ...state };
     selectArr.tags = [];
-    setSelectTag(selectArr);
+    setState(selectArr);
   };
 
- 
   return (
     <>
       <TagsContext.Provider values={tags}>
         <NavBar
           handleTagClick={handleTagClick}
+          handleAddressClick={handleAddressClick}
           handleEmptyTagsClick={handleEmptyTagsClick}
+          updateAgeRange={updateAgeRange}
+          ageRange={state.ageRange}
+          users={users}
         />
       </TagsContext.Provider>
 
       <div>
-        {selectTag.tags.length === 0
+        {state
           ? users.slice(5).map((user) => {
               return (
                 <Grid container spacing={4}>
@@ -61,13 +88,15 @@ const UserPage = (props) => {
                       age={user.age}
                       profile_photo={user.profile_photo}
                       tag={getNameOfTag(filterTags(user.id, user_tag), tags)}
+                      tags={tags}
                     />
                   </Grid>
                 </Grid>
               );
             })
           : getFilteredUserProfile(
-              getFilteredUsers(selectTag.tags, user_tag),
+              getFilteredUsersByInterest(state.tags, user_tag),
+              getFilteredUsersByAge(users, state.ageRange),
               users
             ).map((filteredUser) => {
               return (
@@ -88,9 +117,10 @@ const UserPage = (props) => {
               );
             })}
       </div>
-      {/* {console.log('state.users', state.users)}
-      {console.log('selectTag.tags', selectTag.tags)}
-      {console.log('tags', tag)} */}
+      {console.log("state.tags", state.tags)}
+      {console.log("state.city", state.city)}
+{      console.log("state", state)
+}
     </>
   );
 };
