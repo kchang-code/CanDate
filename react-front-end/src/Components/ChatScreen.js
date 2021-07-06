@@ -18,6 +18,9 @@ let userName;
 let userPhoto;
 
 const ChatScreen = (props) => {
+  const { selectedMessages, messages, setMessages, selectedPhoto, users } =
+    props;
+
   let { id } = useParams();
   const [input, setInput] = useState('');
   const [showMsg, setShowMsg] = useState([]);
@@ -40,8 +43,8 @@ const ChatScreen = (props) => {
   }, []);
 
   useEffect(() => {
-    setShowMsg(props.selectedMessages);
-  }, [props.selectedMessages]);
+    setShowMsg(selectedMessages);
+  }, [selectedMessages]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -56,7 +59,7 @@ const ChatScreen = (props) => {
         newMessage: { ...newMessage, creates_on: time },
       })
       .then((res) => {
-        props.setMessages([...props.messages, ...res.data]);
+        setMessages([...messages, ...res.data]);
       })
       .catch((err) => {});
 
@@ -66,8 +69,8 @@ const ChatScreen = (props) => {
   const messageContent = showMsg.map((message) => {
     if (message['from_user_id'] !== Number(id)) {
       to_user_id = message['from_user_id'];
-      userName = props.users[to_user_id - 1]['first_name'];
-      userPhoto = props.users[to_user_id - 1]['profile_photo'];
+      userName = users[to_user_id - 1]['first_name'];
+      userPhoto = users[to_user_id - 1]['profile_photo'];
       // setUserInfo({ ...userInfo, userName, userPhoto });
       return (
         <div className="chatScreen_message">
@@ -75,7 +78,7 @@ const ChatScreen = (props) => {
             key={message.id}
             className="chatScreen_image"
             alt={message.name}
-            src={props.selectedPhoto}
+            src={selectedPhoto}
           />
           <p className="chatScreen_text">
             {message.content}

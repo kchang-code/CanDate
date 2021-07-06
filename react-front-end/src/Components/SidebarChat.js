@@ -7,6 +7,7 @@ import {
   justYouAndMe,
   reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const SidebarChat = (props) => {
   const {
@@ -17,6 +18,7 @@ const SidebarChat = (props) => {
     to_user_id,
     sideBarMessage,
     messageObj,
+    filteredFavorite,
   } = props;
 
   const twoMessageArr = [
@@ -47,9 +49,19 @@ const SidebarChat = (props) => {
       <Avatar alt="Zio" src={profilePic} />
       <div className="sidebarChat_info">
         <h2>{to_name}</h2>
+
         <p>{latestMsg.content}</p>
       </div>
-      <div>
+      <div
+        className="SidebarChat_right"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          textAlign: 'end',
+          justifyContent: 'flex-end',
+        }}
+      >
+        {filteredFavorite.includes(to_user_id) && <FavoriteIcon />}
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />
       </div>
     </div>

@@ -14,6 +14,7 @@ import {
   reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
 
 const Chat = (props) => {
   let { id } = useParams();
@@ -26,7 +27,10 @@ const Chat = (props) => {
     loading,
     selectedUserMessages,
     selectedUserId,
+    favorite,
   } = props;
+
+  const filteredFavorite = getFavoriteByUser(favorite, id);
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);
@@ -66,6 +70,7 @@ const Chat = (props) => {
         selectedUserMessages={selectedUserMessages}
         userAllMessages={userAllMessages}
         messageObj={messageObj}
+        filteredFavorite={filteredFavorite}
       />
     );
   });

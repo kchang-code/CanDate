@@ -1,3 +1,21 @@
+// import React, { useState } from 'react';
+// import PhotoList from './PhotoList';
+// import './Home.scss';
+
+// export default function Home(props) {
+
+//   return (
+//     <div className="home-container">
+//       <div className="image-wall">
+//         <PhotoList image={props.image} />
+//       </div>
+//       <div className="register">
+//         <Form />
+//       </div>
+//     </div>
+//   );
+// }
+
 import React, { useState } from 'react';
 import PhotoList from './PhotoList';
 import TagList from './TagList';
@@ -9,23 +27,23 @@ import Form from './Form';
 import './Home.scss';
 
 export default function Home(props) {
-  const FORM = "FORM"
-  const QUESTION = "QUESTION"
-  const TAG = "TAG"
-  const SIGN = "SIGN"
+  const FORM = 'FORM';
+  const QUESTION = 'QUESTION';
+  const TAG = 'TAG';
+  const SIGN = 'SIGN';
 
-  const id = props.image.length + 1
+  const id = props.image.length + 1;
 
-  const { mode, transition, back } = useVisualMode(FORM)
+  const { mode, transition, back } = useVisualMode(FORM);
 
   function change() {
-    transition(QUESTION)
+    transition(QUESTION);
   }
   function tagPage() {
-    transition(TAG)
+    transition(TAG);
   }
   function Sign() {
-    transition(SIGN)
+    transition(SIGN);
   }
 
   return (
@@ -42,5 +60,3 @@ export default function Home(props) {
     </div>
   );
 }
-
-

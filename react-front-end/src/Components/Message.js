@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Message = (props) => {
   let { id } = useParams();
-  const { messages, users, setMessages, loading } = props;
+  const { messages, users, setMessages, loading, favorite } = props;
 
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id);
@@ -44,6 +44,7 @@ const Message = (props) => {
           loading={loading}
           selectedUserMessages={selectedUserMessages}
           selectedUserId={selectedUserId}
+          favorite={favorite}
         />
         <ChatScreen
           selectedMessages={selectedUserMessages}
@@ -51,7 +52,6 @@ const Message = (props) => {
           setMessages={setMessages}
           selectedPhoto={selectedPhoto}
           users={users}
-          loading={loading}
         />
       </div>
     </div>
