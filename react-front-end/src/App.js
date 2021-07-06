@@ -29,7 +29,6 @@ function App() {
       realTimeData = event.data;
 
       if (messages.length !== 0 && realTimeData) {
-        // console.log('realTimeData', realTimeData);
         const needToSet = [...messages, ...JSON.parse(realTimeData)];
         setMessages(needToSet);
       }
@@ -50,11 +49,13 @@ function App() {
     ])
       .then((all) => {
         const [user, message, tag, favorite, user_tag] = all;
+        console.log('---------------', all);
         setUsers(user.data.users);
         setMessages(message.data.message);
-        setMessages(tag.data.tags);
-        setUserTags(user_tag.data.user_tag);
         setTags(tag.data.tags);
+        setFavorite(favorite.data.favorites);
+        setUserTags(user_tag.data.user_tag);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -87,9 +88,7 @@ function App() {
             <ProfileDetail />
           </Route>
 
-          <Route path="/">
-            <Home image={users} tags={tags} />
-          </Route>
+          <Route path="/">{/* <Home image={users} tags={tags} /> */}</Route>
         </Switch>
       </Router>
     </div>

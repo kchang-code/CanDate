@@ -100,8 +100,8 @@ const UserPage = (props) => {
               );
             })}
       </div>
-      {console.log('state.users', state.users)}
-      {console.log('selectTag.tags', selectTag.tags)}
+      {/* {console.log('state.users', state.users)}
+      {console.log('selectTag.tags', selectTag.tags)} */}
     </>
   );
 };
