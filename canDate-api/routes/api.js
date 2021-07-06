@@ -82,12 +82,12 @@ module.exports = function (app) {
       });
   });
 
-  router.put("/signup/:id", (req, res) => {
-    res.json("success");
-    apiQueries.creatNewUser(req.body.newUser).catch((err) => {
-      console.log(err);
-    });
-  });
+  // router.put("/signup/:id", (req, res) => {
+  //   res.json("success");
+  //   apiQueries.creatNewUser(req.body.newUser).catch((err) => {
+  //     console.log(err);
+  //   });
+  // });
 
   router.put("/users", (req, res) => {
     res.json("success");
