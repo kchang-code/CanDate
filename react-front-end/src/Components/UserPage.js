@@ -16,7 +16,7 @@ import {
 import Button from '@material-ui/core/Button';
 
 const UserPage = (props) => {
-  const {users, user_tag, tag} = props
+  const {users, user_tag, tags} = props
 
   const [selectTag, setSelectTag] = useState({
     tags: [],
@@ -42,7 +42,7 @@ const UserPage = (props) => {
  
   return (
     <>
-      <TagsContext.Provider values={tag}>
+      <TagsContext.Provider values={tags}>
         <NavBar
           handleTagClick={handleTagClick}
           handleEmptyTagsClick={handleEmptyTagsClick}
@@ -60,7 +60,7 @@ const UserPage = (props) => {
                       name={user.first_name}
                       age={user.age}
                       profile_photo={user.profile_photo}
-                      tag={getNameOfTag(filterTags(user.id, user_tag), tag)}
+                      tag={getNameOfTag(filterTags(user.id, user_tag), tags)}
                     />
                   </Grid>
                 </Grid>
@@ -80,7 +80,7 @@ const UserPage = (props) => {
                       profile_photo={filteredUser.profile_photo}
                       tag={getNameOfTag(
                         filterTags(filteredUser.id, user_tag),
-                        tag
+                        tags
                       )}
                     />
                   </Grid>
