@@ -98,7 +98,7 @@ const UserPage = (props) => {
     userTagObj,
     users
   );
-  console.log('filteredByTags', filteredByTags);
+  // console.log('filteredByTags', filteredByTags);
 
   const filteredByAge = getFilteredUsersByAge(filteredByTags, state.ageRange);
 

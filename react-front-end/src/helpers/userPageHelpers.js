@@ -59,26 +59,37 @@ export function getFilteredUsersByInterest(interests, userTagObj, users) {
   const filteredUsersId = [];
   const checkIfContainsAllInterest = (userInterests, requiredInterests) => {
     let result = true;
+    let matchPoint = 0;
 
     requiredInterests.forEach((requiredInterest) => {
       if (!userInterests.includes(requiredInterest)) {
         result = false;
+      } else {
+        matchPoint++;
       }
     });
 
-    return result;
+    return { result, matchPoint };
   };
 
   for (const userId in userTagObj) {
-    if (checkIfContainsAllInterest(userTagObj[userId], interests)) {
-      filteredUsersId.push(userId);
+    const { result, matchPoint } = checkIfContainsAllInterest(
+      userTagObj[userId],
+      interests
+    );
+    if (result) {
+      filteredUsersId.push({ userId, matchPoint });
     }
   }
 
   let filteredUsers = [];
 
   filteredUsersId.forEach((userId) => {
-    filteredUsers.push(users[userId - 1]);
+    filteredUsers.push({
+      users: users[userId.userId - 1],
+      matchPoint: userId.matchPoint,
+    });
+    console.log('----------------', filteredUsers);
   });
 
   return filteredUsers;
