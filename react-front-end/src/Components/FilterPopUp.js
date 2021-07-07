@@ -3,7 +3,6 @@ import "./FilterPopUp.scss";
 import SelectTagsInFilter from "./SelectTagsInFilter";
 import Chip from "@material-ui/core/Chip";
 import Slider from "@material-ui/core/Slider";
-import DoneIcon from '@material-ui/icons/Done';
 
 let cities = [];
 export default function FilterPopUp(props) {
@@ -37,10 +36,9 @@ export default function FilterPopUp(props) {
             }              
             return (
               <Chip 
-              color={props.buttonColor} 
+              color="primary" 
               label={city}
               onClick={() => props.handleAddressClick(city)}
-              deleteIcon={<DoneIcon/>}
             
               />
               
