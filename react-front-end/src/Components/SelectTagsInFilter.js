@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 import className from 'classnames';
 
 export default function SelectTagsInFilter (props) {
@@ -11,12 +11,14 @@ export default function SelectTagsInFilter (props) {
       <h3>Interests:</h3>
     {props.tags.map((item) => {
       return (
-        <Button 
+        <Chip 
         // className={tagButtonColor === true  ? "tags" : "tags-selected" }
         onClick={() => props.handleTagClick(item.id)} 
-        size="small" variant="outlined" color="primary">
-          {item.name}
-        </Button>
+        color="primary"
+        label={item.name}
+        >
+          
+        </Chip>
       );
     })}
     {/* {console.log("clicked", selectTag)} */}

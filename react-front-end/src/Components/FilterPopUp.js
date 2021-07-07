@@ -35,10 +35,10 @@ export default function FilterPopUp(props) {
 
             }              
             return (
-              <Chip color="primary"
+              <Chip color="primary" label={city}
               onClick={() => props.handleAddressClick(city)}
               >
-              {city}
+              
               </Chip>
             );
           })}
