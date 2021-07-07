@@ -74,6 +74,13 @@ const UserPage = (props) => {
     setState(selectArr);
   };
 
+  const filteredByInterest = getFilteredUsersByInterest(state.tags, user_tag);
+  const filteredByAge = getFilteredUsersByAge(
+    users,
+    state.ageRange,
+    state.tags,
+    filteredByInterest
+  );
 
   return (
     <>
@@ -89,14 +96,11 @@ const UserPage = (props) => {
       </TagsContext.Provider>
 
       <div className="user-page">
-        {getFilteredUserProfile(
-          getFilteredUsersByInterest(state.tags, user_tag),
-          getFilteredUsersByAge(users, state.ageRange),
-          users
-        ).map((filteredUser) => {
+        {filteredByAge.map((filteredUserId) => {
+          const filteredUser = users[filteredUserId - 1];
           return (
             <Grid container spacing={4} className="user-page-ind">
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <ProfileCard
                   key={filteredUser.id}
                   name={filteredUser.first_name}
@@ -111,7 +115,6 @@ const UserPage = (props) => {
             </Grid>
           );
         })}
-
       </div>
       {console.log('state.tags', state.tags)}
       {console.log('state.city', state.city)}

@@ -71,6 +71,7 @@ const SidebarChat = (props) => {
           <FavoriteIcon
             style={{
               marginBottom: '10px',
+              color: 'red',
             }}
           />
         )}

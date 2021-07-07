@@ -19,12 +19,13 @@ export function filterTags(id, userTag) {
 // returns array of interest names
 export function getNameOfTag(tagArr, tags) {
   const tagNameArr = [];
-  for (const tag of tagArr) {
-    for (const obj of tags) {
-      if (tag === obj.id) {
-        tagNameArr.push(obj.name);
-      }
-    }
+  for (const tagId of tagArr) {
+    // for (const obj of tags) {
+    //   if (tag === obj.id) {
+    //     tagNameArr.push(obj.name);
+    //   }
+    // }
+    tagNameArr.push(tags[tagId - 1].name);
   }
   //[movie. sport]
   let userTag = {
@@ -36,33 +37,43 @@ export function getNameOfTag(tagArr, tags) {
 }
 
 // interest filter: returns filtered array of unique userids
-export function getFilteredUsersByInterest(interests, user_tagArr) {
+export function getFilteredUsersByInterest(interests, user_tag) {
   const users = [];
   for (const interest of interests) {
-    for (const user of user_tagArr) {
-      if (interest === user.interest) {
+    for (const user of user_tag) {
+      if (interest === user['interest'] && !users.includes(user.id)) {
         users.push(user.id);
       }
     }
+    users.push();
   }
 
-  let removeRepeatedUsers = [];
-  users.forEach((element) => {
-    if (!removeRepeatedUsers.includes(element)) {
-      removeRepeatedUsers.push(element);
-    }
-  });
-  return removeRepeatedUsers;
+  // let removeRepeatedUsers = [];
+  // users.forEach((element) => {
+  //   if (!removeRepeatedUsers.includes(element)) {
+  //     removeRepeatedUsers.push(element);
+  //   }
+  // });
+  return users;
 }
 
 // age filter: returns array of user ids for filtered users
-export function getFilteredUsersByAge(users, ageRange) {
+export function getFilteredUsersByAge(users, ageRange, filteredUserIdArr) {
   const userIds = [];
-  for (const user of users) {
-    if (user.age >= ageRange[0] && user.age <= ageRange[1]) {
-      userIds.push(user.id);
+  filteredUserIdArr.forEach((userId) => {
+    if (
+      users[userId - 1].age >= ageRange[0] &&
+      users[userId - 1].age <= ageRange[1]
+    ) {
+      userIds.push(users[userId - 1].id);
     }
-  }
+  });
+
+  // for (const user of users) {
+  //   if (user.age >= ageRange[0] && user.age <= ageRange[1]) {
+  //     userIds.push(user.id);
+  //   }
+  // }
   return userIds;
 }
 
