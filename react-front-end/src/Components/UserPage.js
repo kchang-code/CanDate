@@ -78,11 +78,20 @@ const UserPage = (props) => {
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
-    const selectArr = { ...state, buttonColor:'primary' };
-    selectArr.tags.push(itemId);
+    const selectArr = { ...state};
+    if (selectArr.tags.includes(itemId)) {
+      // remove it from array
+      const index = selectArr.tags.indexOf(itemId)
+      selectArr.tags.splice(index, 1)
+    } else {
+      // add to array
+      selectArr.tags.push(itemId);
+    }
+    
     setState(selectArr);
 
-    // change button state of those in the tags array 
+
+    // setState.buttonColor('primary')
     
   };
 

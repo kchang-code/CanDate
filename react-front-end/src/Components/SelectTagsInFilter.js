@@ -4,7 +4,7 @@ import className from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 
 export default function SelectTagsInFilter (props) {
-
+  const [button, setButton] = useState('default')
 
   return (
     
