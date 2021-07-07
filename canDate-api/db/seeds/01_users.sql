@@ -1,12 +1,12 @@
 -- Users table seeds here (Example)
-INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
-VALUES ('Khea','Chang', 'khea@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 'Vancouver', 'https://randomuser.me/api/portraits/women/59.jpg', 'I like Lighthouse labs' );
+INSERT INTO users(first_name, last_name, email, password, gender, address, age, profile_photo, about_me)
+VALUES ('Khea','Chang', 'khea@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 'Vancouver',20, 'https://randomuser.me/api/portraits/women/59.jpg', 'I like Lighthouse labs' );
 
-INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
-VALUES ('Zio', 'Tan', 'zio@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Surrey', 'https://randomuser.me/api/portraits/men/23.jpg', 'I like DC comics' );
+INSERT INTO users(first_name, last_name, email, password, gender, address, age, profile_photo, about_me)
+VALUES ('Zio', 'Tan', 'zio@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Surrey',20,  'https://randomuser.me/api/portraits/men/23.jpg', 'I like DC comics' );
 
-INSERT INTO users(first_name, last_name, email, password, gender, address, profile_photo, about_me)
-VALUES ('Matt', 'Luo', 'matt@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Richmond', 'https://randomuser.me/api/portraits/men/88.jpg', 'I like Lego');
+INSERT INTO users(first_name, last_name, email, password, gender, address, age, profile_photo, about_me)
+VALUES ('Matt', 'Luo', 'matt@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Richmond', 20, 'https://randomuser.me/api/portraits/men/88.jpg', 'I like Lego');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
     VALUES('Alexander', 'Pena','alexander.pena@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 185, 'Richmond', 21, 'https://randomuser.me/api/portraits/men/79.jpg', 'My name is Alexander Peña. I''m here to look for my life partner, and I like Baking. If you like me, let''s chat.');
