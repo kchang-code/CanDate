@@ -74,23 +74,22 @@ function App() {
     const arr = [];
     for (const user of users) {
       if (user.email === email) {
-        arr.push(user.password)
-        arr.push(user.id)
+        arr.push(user.password);
+        arr.push(user.id);
       }
     }
 
-    checkPassword(arr[0], arr[1])
-  }
+    checkPassword(arr[0], arr[1]);
+  };
 
   const checkPassword = (password, id) => {
-
     const hashedPassword = bcrypt.hashSync(password, 10);
     if (bcrypt.compareSync(password, hashedPassword)) {
-      window.location.replace(`http://localhost:3002/user/${id}`)
-      return
+      window.location.replace(`http://localhost:3002/user/${id}`);
+      return;
     }
-    return false
-  }
+    return false;
+  };
 
   return (
     <div className="App">
@@ -117,6 +116,8 @@ function App() {
               tags={tags}
               user_tag={user_tag}
               loading={loading}
+              messages={messages}
+              setMessages={setMessages}
             />
           </Route>
           <Route path="/detail">
@@ -124,7 +125,12 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home image={users} tags={tags} checkPassword={checkPassword} findPasswordByEmail={findPasswordByEmail} />
+            <Home
+              image={users}
+              tags={tags}
+              checkPassword={checkPassword}
+              findPasswordByEmail={findPasswordByEmail}
+            />
           </Route>
         </Switch>
       </Router>

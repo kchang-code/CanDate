@@ -64,6 +64,9 @@ const Chat = (props) => {
   });
 
   const reducedToNamesId = reduceToNamesId(userAllMessages, id);
+  const sortedMessages = reducedMessage.sort(
+    (a, b) => a.creates_on - b.creates_on
+  );
 
   const reducedMessagesComp = reducedMessage.map((message) => {
     const idAndUnread = { [message.id]: unread };

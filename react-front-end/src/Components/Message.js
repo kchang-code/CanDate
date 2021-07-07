@@ -22,12 +22,11 @@ const Message = (props) => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [unread, setUnread] = useState(true);
 
-  console.log('selectedUserId', selectedUserId);
-
   useEffect(() => {
+    // console.log('selectedUserId', selectedUserId);
     console.log(reducedMessage);
     reducedMessage.length !== 0 &&
-      setSelectedUserId(reducedMessage[0]['to_user_id']);
+      setSelectedUserId(reducedMessage[0]['from_user_id']);
   }, [loading]);
 
   const selectedUserMessages = filteredMessageBySelectedUser(
