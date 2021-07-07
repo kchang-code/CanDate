@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
-import ProfileCard from './ProfileCard';
-import Grid from '@material-ui/core/Grid';
-import useUserPage from '../hooks/useUserPage';
-import './UserPage.scss';
-import axios from 'axios';
-import NavBar from './NavBar';
-import { TagsContext } from '../Context/TagsContext';
-import { useRadioGroup } from '@material-ui/core';
+import React, { useEffect, useState, useContext } from "react";
+import ProfileCard from "./ProfileCard";
+import Grid from "@material-ui/core/Grid";
+import useUserPage from "../hooks/useUserPage";
+import "./UserPage.scss";
+import axios from "axios";
+import NavBar from "./NavBar";
+import { TagsContext } from "../Context/TagsContext";
+import { useRadioGroup } from "@material-ui/core";
 import {
   filterTags,
   getNameOfTag,
@@ -18,13 +18,13 @@ import {
   getFilteredUsersByCity,
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
-} from '../helpers/userPageHelpers';
-import Button from '@material-ui/core/Button';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import Fab from '@material-ui/core/Fab';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { makeStyles } from '@material-ui/core/styles';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+} from "../helpers/userPageHelpers";
+import Button from "@material-ui/core/Button";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import Fab from "@material-ui/core/Fab";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { makeStyles } from "@material-ui/core/styles";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -53,8 +53,10 @@ const UserPage = (props) => {
     // change age range to logged in user's age, 50
     ageRange: [0, 80],
     city: [],
-    gender: '',
+    gender: "",
+    buttonColor: "default",
   });
+
   useEffect(() => {
     if (users.length !== 0) {
       setLoggedInUserInfo((prev) => [...prev, ...neededInfo]);
@@ -76,14 +78,29 @@ const UserPage = (props) => {
   // add selected tag id into state
   const handleTagClick = (itemId) => {
     const selectArr = { ...state };
-    selectArr.tags.push(itemId);
+    if (selectArr.tags.includes(itemId)) {
+      // remove it from array
+      const index = selectArr.tags.indexOf(itemId);
+      selectArr.tags.splice(index, 1);
+    } else {
+      // add to array
+      selectArr.tags.push(itemId);
+    }
+
     setState(selectArr);
+
+    // setState.buttonColor('primary')
   };
 
   // add selected address into state
   const handleAddressClick = (city) => {
     const selectArr = { ...state };
-    selectArr.city.push(city);
+    if (selectArr.city.includes(city)) {
+      const index = selectArr.city.indexOf(city);
+      selectArr.city.splice(index, 1);
+    } else {
+      selectArr.city.push(city);
+    }
     setState(selectArr);
   };
 
@@ -136,6 +153,7 @@ const UserPage = (props) => {
         ageRange={state.ageRange}
         users={users}
         name={loggedInUserInfo}
+        buttonColor={state.buttonColor}
       />
 
       <div className="user-page">
@@ -170,7 +188,7 @@ const UserPage = (props) => {
             );
           })
         )}
-        {console.log('state', state)}
+        {console.log("state", state)}
       </div>
       <div id="user-page-button">
         {startNum > 2 && endNum <= (filteredByCity.length) &&

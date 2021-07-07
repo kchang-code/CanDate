@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./FilterPopUp.scss";
 import SelectTagsInFilter from "./SelectTagsInFilter";
-import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 import Slider from "@material-ui/core/Slider";
 
 let cities = [];
@@ -35,11 +35,13 @@ export default function FilterPopUp(props) {
 
             }              
             return (
-              <Button size="small" variant="outlined" color="primary" 
+              <Chip 
+              color="primary" 
+              label={city}
               onClick={() => props.handleAddressClick(city)}
-              >
-              {city}
-              </Button>
+            
+              />
+              
             );
           })}
         </span>
