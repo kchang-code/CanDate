@@ -107,6 +107,6 @@ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, filtered
   }
  
   const concatArr = userProfiles.concat(filteredCityIds)
-  console.log(concatArr)
+  // console.log(concatArr)
   return concatArr;
 }
