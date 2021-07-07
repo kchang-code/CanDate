@@ -38,7 +38,7 @@ export default function NavBar(props) {
   const classes = useStyles();
 
   const [isOpen, setIsOpen] = useState(false);
-  const { ageRange, updateAgeRange, users, handleAddressClick } = props;
+  const { ageRange, updateAgeRange, users, handleAddressClick, buttonColor } = props;
 
   const [tag, setTags] = useState([]);
   const [selectTag, setSelectTag] = useState({
@@ -87,6 +87,7 @@ export default function NavBar(props) {
                 ageRange={ageRange}
                 updateAgeRange={updateAgeRange}
                 users={users}
+                buttonColor={buttonColor}
               />
             )}
           </Toolbar>

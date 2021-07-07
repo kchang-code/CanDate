@@ -37,7 +37,7 @@ export default function FilterPopUp(props) {
             }              
             return (
               <Chip 
-              color="primary" 
+              color={props.buttonColor} 
               label={city}
               onClick={() => props.handleAddressClick(city)}
               deleteIcon={<DoneIcon/>}

@@ -6,16 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export default function SelectTagsInFilter (props) {
 
  
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
-    },
-  }));
 
   return (
     
@@ -25,8 +15,6 @@ export default function SelectTagsInFilter (props) {
     {props.tags.map((item) => {
       return (
         <Chip 
-        // if clicked, set classname to 
-        // className={ }
         onClick={() => props.handleTagClick(item.id)} 
         label={item.name}
         />

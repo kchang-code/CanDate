@@ -42,7 +42,6 @@ const UserPage = (props) => {
   const [loggedInUserInfo, setLoggedInUserInfo] = useState([]);
   const [startNum, setStartNum] = useState(0);
   const [endNum, setEndNum] = useState(3);
-  const [buttonColor, setButtonColor] = useState('')
   
 
   const neededInfo = getLoggedInUserInfo(id, users);
@@ -56,6 +55,7 @@ const UserPage = (props) => {
     ageRange: [0, 80],
     city: [],
     gender: '',
+    buttonColor: 'default',
   });
 
   useEffect(() => {
@@ -82,8 +82,7 @@ const UserPage = (props) => {
     selectArr.tags.push(itemId);
     setState(selectArr);
 
-    setButtonColor("default")
-  
+    
       
   };
 
@@ -144,6 +143,7 @@ const UserPage = (props) => {
         ageRange={state.ageRange}
         users={users}
         name={loggedInUserInfo}
+        buttonColor={state.buttonColor}
       />
 
       <div className="user-page">
