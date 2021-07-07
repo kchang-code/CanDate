@@ -17,6 +17,7 @@ import {
   getLoggedInUserCity,
   getFilteredUsersByCity,
   userIdWithTagsArrObj,
+  getFilteredUsersByGender,
 } from '../helpers/userPageHelpers';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -45,24 +46,26 @@ const UserPage = (props) => {
   const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
 
-  const LoggedInUserCity = getLoggedInUserCity(id, users);
+  const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
   useEffect(() => {
     if (users.length !== 0) {
       setLoggedInUserInfo((prev) => [...prev, ...neededInfo]);
+      setState({
+        ...state,
+        tags: [],
+        city: [LoggedInUserCity],
+        gender: neededInfo[0].gender,
+      });
     }
-    setState({
-      ...state,
-      tags: LoggedInUserTagIDs,
-      city: [LoggedInUserCity],
-    });
   }, [loading]);
 
   const [state, setState] = useState({
     tags: [],
     // change age range to logged in user's age, 50
-    ageRange: [24, 26],
+    ageRange: [0, 80],
     city: [],
+    gender: '',
   });
 
   const updateAgeRange = (event, data) => {
@@ -93,14 +96,21 @@ const UserPage = (props) => {
   const userTagObj = userIdWithTagsArrObj(users, user_tag);
   // console.log('userTagObj', userTagObj);
 
+  // console.log('filteredByGender', filteredByGender);
+  // console.log('users', users);
+
   const filteredByTags = getFilteredUsersByInterest(
     state.tags,
     userTagObj,
     users
   );
-  console.log('filteredByTags', filteredByTags);
+  // console.log('filteredByTags', filteredByTags);
+  const filteredByGender = getFilteredUsersByGender(
+    state.gender,
+    filteredByTags
+  );
 
-  const filteredByAge = getFilteredUsersByAge(filteredByTags, state.ageRange);
+  const filteredByAge = getFilteredUsersByAge(filteredByGender, state.ageRange);
 
   // console.log('filteredByAge', filteredByAge);
 

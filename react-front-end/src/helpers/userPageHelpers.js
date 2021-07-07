@@ -1,15 +1,24 @@
 export function getLoggedInUserInfo(id, users) {
-  return users.filter((user) => {
-    return user.id === Number(id);
-  });
+  if (users.length !== 0) {
+    return [users[Number(id) - 1]];
+  }
+}
+
+//filter male or female (get users with different gender)
+export function getFilteredUsersByGender(gender, users) {
+  const filteredUsers = [];
+  for (const user of users) {
+    if (user.gender !== gender) {
+      filteredUsers.push(user);
+    }
+  }
+  return filteredUsers;
 }
 
 // get city for logged in user
 export function getLoggedInUserCity(id, users) {
-  for (const user of users) {
-    if (user.id === Number(id)) {
-      return user.address;
-    }
+  if (users.length !== 0) {
+    return users[id - 1].address;
   }
 }
 
@@ -25,6 +34,7 @@ export function filterTags(id, userTag) {
   return tagArr;
 }
 
+//returns an object of user id and its associated tags array
 export function userIdWithTagsArrObj(users, userTag) {
   const Obj = {};
   users.forEach((user) => {
@@ -97,22 +107,18 @@ export function getFilteredUsersByAge(users, ageRange) {
       filteredUsers.push(user);
     }
   }
+
   return filteredUsers;
 }
 
 // city filter: returns array of user ids who live in those cities
 export function getFilteredUsersByCity(cities, users) {
   const filteredUsers = [];
-  // for (const user of users) {
-  //   for (const city of cities) {
-  //     if (city === user.address) {
-  //       filteredUsers.push(user.id);
-  //     }
-  //   }
-  // }
+
   if (cities.length === 0) {
     return users;
   }
+
   users.forEach((eachUser) => {
     if (cities.includes(eachUser.address)) {
       filteredUsers.push(eachUser);
@@ -120,31 +126,3 @@ export function getFilteredUsersByCity(cities, users) {
   });
   return filteredUsers;
 }
-// return array of objects for filtered users
-// export function getFilteredUserProfile(
-//   filteredUserIds,
-//   filteredAgeIds,
-//   filteredCityIds,
-//   users
-// ) {
-//   const userProfiles = [];
-//   const filteredIds = [];
-//   filteredUserIds.forEach((element) => {
-//     if (filteredAgeIds.includes(element)) {
-//       filteredIds.push(element);
-//     }
-//   });
-
-//   const allFilteredIds = filteredIds.concat(filteredCityIds);
-
-//   // loop through users to find the user profiles
-//   for (const user of users) {
-//     for (const userId of allFilteredIds) {
-//       if (user.id === userId) {
-//         userProfiles.push(user);
-//       }
-//     }
-//   }
-
-//   return userProfiles;
-// }
