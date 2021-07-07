@@ -20,6 +20,8 @@ const Message = (props) => {
   const reducedMessage = reduceToNames(userAllMessages, id, userIBlock);
 
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [unread, setUnread] = useState(true);
+
   console.log('selectedUserId', selectedUserId);
 
   useEffect(() => {
@@ -50,6 +52,8 @@ const Message = (props) => {
           selectedUserId={selectedUserId}
           favorite={favorite}
           block={block}
+          unread={unread}
+          setUnread={setUnread}
         />
         <ChatScreen
           selectedMessages={selectedUserMessages}

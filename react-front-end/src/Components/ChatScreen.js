@@ -22,6 +22,7 @@ import Alert from '@material-ui/lab/Alert';
 let to_user_id = null;
 let userName;
 let userPhoto;
+let userAboutMe;
 
 //configure alert component
 const useStyles = makeStyles((theme) => ({
@@ -103,6 +104,7 @@ const ChatScreen = (props) => {
       to_user_id = message['from_user_id'];
       userName = users[to_user_id - 1]['first_name'];
       userPhoto = users[to_user_id - 1]['profile_photo'];
+      userAboutMe = users[to_user_id - 1]['address'];
 
       return (
         <div className="chatScreen_message">
@@ -140,9 +142,7 @@ const ChatScreen = (props) => {
         <Avatar src={userPhoto} />
         <div className="chat_headerInfo">
           <h3>{userName}</h3>
-          <p>
-            Last Seen: <ReactTimeAgo date={Date.now()} locale="en-US" />
-          </p>
+          <p>{userAboutMe}</p>
         </div>
         <div className="chat_headerRight">
           <IconButton>

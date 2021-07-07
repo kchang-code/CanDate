@@ -1,4 +1,3 @@
-// returns array of interest ids
 
 export function getLoggedInUserInfo(id, users) {
   return users.filter((user) => {
@@ -6,6 +5,16 @@ export function getLoggedInUserInfo(id, users) {
   });
 }
 
+// get city for logged in user
+export function getLoggedInUserCity(id, users) {
+  for (const user of users) {
+    if (user.id === Number(id)) {
+      return user.address
+    }
+  }
+}
+
+// returns array of interest ids 
 export function filterTags(id, userTag) {
   const tagArr = [];
   for (const tag of userTag) {
@@ -36,10 +45,10 @@ export function getNameOfTag(tagArr, tags) {
 }
 
 // interest filter: returns filtered array of unique userids
-export function getFilteredUsersByInterest(interests, user_tagArr) {
+export function getFilteredUsersByInterest(interests, user_tag) {
   const users = [];
   for (const interest of interests) {
-    for (const user of user_tagArr) {
+    for (const user of user_tag) {
       if (interest === user.interest) {
         users.push(user.id);
       }
@@ -66,8 +75,20 @@ export function getFilteredUsersByAge(users, ageRange) {
   return userIds;
 }
 
+// city filter: returns array of user ids who live in those cities 
+export function getFilteredUsersByCity(cities, users) {
+  const userId = [];
+  for (const user of users) {
+    for (const city of cities) {
+      if (city === user.address){
+        userId.push(user.id)
+      }
+    }
+  }
+  return userId;
+}
 // return array of objects for filtered users
-export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, users) {
+export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, filteredCityIds, users) {
   const userProfiles = [];
   const filteredIds = [];
   filteredUserIds.forEach((element) => {
@@ -84,5 +105,8 @@ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, users) {
       }
     }
   }
-  return userProfiles;
+ 
+  const concatArr = userProfiles.concat(filteredCityIds)
+  // console.log(concatArr)
+  return concatArr;
 }
