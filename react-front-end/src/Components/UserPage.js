@@ -14,6 +14,8 @@ import {
   getFilteredUserProfile,
   getFilteredUsersByAge,
   getLoggedInUserInfo,
+  getLoggedInUserCity,
+  getFilteredUsersByCity,
 } from '../helpers/userPageHelpers';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -26,15 +28,19 @@ const UserPage = (props) => {
 
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
 
+  const LoggedInUserCity = getLoggedInUserCity(id, users);
+
   useEffect(() => {
     setState({
       ...state,
       tags: LoggedInUserTagIDs,
+      city: [LoggedInUserCity],
     });
   }, [loading]);
 
   const [state, setState] = useState({
     tags: [],
+    // change age range to logged in user's age, 50 
     ageRange: [18, 40],
     city: [],
   });
@@ -55,8 +61,7 @@ const UserPage = (props) => {
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
-    const selectArr = { ...state };
-    // [{tags:[], ageRange:[], city:[]}]
+    const selectArr = { ...state};
     selectArr.tags.push(itemId);
     setState(selectArr);
   };
@@ -69,8 +74,7 @@ const UserPage = (props) => {
   };
 
   const handleEmptyTagsClick = (state) => {
-    const selectArr = { ...state };
-    selectArr.tags = [];
+    const selectArr = { ...state, tags:[], city:[], ageRange:[18,40]};
     setState(selectArr);
   };
 
@@ -92,6 +96,7 @@ const UserPage = (props) => {
         {getFilteredUserProfile(
           getFilteredUsersByInterest(state.tags, user_tag),
           getFilteredUsersByAge(users, state.ageRange),
+          getFilteredUsersByCity(state.city, users),
           users
         ).map((filteredUser) => {
           return (
