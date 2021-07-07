@@ -160,6 +160,22 @@ const getAllBlockList = () => {
     });
 };
 
+const insertNewFavorite = (newFavorite) => {
+  const value = [newFavorite["user_id"], newFavorite["favorite_user_id"]];
+
+  const queryStatement = `INSERT INTO favorite(user_id, favorite_user_id)
+  VALUES ($1, $2)
+  RETURNING *`;
+
+  return db
+    .query(queryStatement, value)
+    .then((res) => {
+      return res.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -171,4 +187,5 @@ module.exports = {
   newUserTag,
   getAllFavoriteList,
   getAllBlockList,
+  insertNewFavorite,
 };

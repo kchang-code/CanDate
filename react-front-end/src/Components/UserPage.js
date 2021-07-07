@@ -159,6 +159,13 @@ const UserPage = (props) => {
                     )}
                     messages={props.messages}
                     setMessages={props.setMessages}
+                    //zio testing
+
+                    users={props.users}
+                    loading={props.loading}
+                    realTimeData={props.realTimeData}
+                    favorite={props.favorite}
+                    block={props.block}
                   />
                 </Grid>
               </Grid>

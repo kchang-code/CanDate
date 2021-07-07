@@ -14,9 +14,84 @@ import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
+//new dialog import for message component
+import { withStyles } from '@material-ui/core/styles';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import CloseIcon from '@material-ui/icons/Close';
+import Message from './Message';
+//configure dialog component
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+//configure dialog component
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+//configure dialog component
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+    flex: 1,
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
 export default function ProfileCard(props) {
   const [isFlipped, setIsFlipped] = useState(false);
   const { tags, users } = props;
+  //zio added open state
+  const [open, setOpen] = React.useState(false);
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setOpen(false);
+  };
+
+  const handleLike = () => {
+    const newFavorite = {
+      user_id: Number(id),
+      favorite_user_id: Number(props.id),
+    };
+
+    axios
+      .put('http://localhost:8080/api/favorites', {
+        newFavorite: { ...newFavorite },
+      })
+      .then(() => {
+        console.log('newFavorite', newFavorite);
+      });
+  };
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -26,6 +101,7 @@ export default function ProfileCard(props) {
   let { id } = useParams();
 
   const handleClickMessage = () => {
+    setOpen(true);
     const newMessage = {
       from_user_id: Number(id),
       to_user_id: Number(props.id),
@@ -68,7 +144,7 @@ export default function ProfileCard(props) {
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log('favorite');
+                    handleLike();
                   }}
                 >
                   <FavoriteIcon />
@@ -79,6 +155,34 @@ export default function ProfileCard(props) {
                     handleClickMessage();
                   }}
                 >
+                  <Dialog
+                    onClose={handleClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={open}
+                  >
+                    <DialogTitle
+                      id="customized-dialog-title"
+                      onClose={handleClose}
+                    >
+                      Modal title
+                    </DialogTitle>
+                    <DialogContent dividers style={{ maxWidth: '100000px' }}>
+                      <Message
+                        messages={props.messages}
+                        users={props.users}
+                        setMessages={props.setMessages}
+                        loading={props.loading}
+                        realTimeData={props.realTimeData}
+                        favorite={props.favorite}
+                        block={props.block}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button autoFocus onClick={handleClose} color="primary">
+                        Save changes
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                   <ChatBubbleIcon />
                 </IconButton>
               </>
