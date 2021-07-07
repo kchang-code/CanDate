@@ -48,6 +48,13 @@ const UserPage = (props) => {
 
   const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
+  const [state, setState] = useState({
+    tags: [],
+    // change age range to logged in user's age, 50
+    ageRange: [0, 80],
+    city: [],
+    gender: '',
+  });
   useEffect(() => {
     if (users.length !== 0) {
       setLoggedInUserInfo((prev) => [...prev, ...neededInfo]);
@@ -59,14 +66,6 @@ const UserPage = (props) => {
       });
     }
   }, [loading]);
-
-  const [state, setState] = useState({
-    tags: [],
-    // change age range to logged in user's age, 50
-    ageRange: [0, 80],
-    city: [],
-    gender: '',
-  });
 
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
