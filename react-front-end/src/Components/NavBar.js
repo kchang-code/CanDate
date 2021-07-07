@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import "./NavBar.scss";
-import AppBar from "@material-ui/core/AppBar";
+import React, { useState, useContext, useEffect } from 'react';
+import './NavBar.scss';
+import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Toolbar from "@material-ui/core/Toolbar";
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from "@material-ui/core/Button";
-import FilterPopUp from "./FilterPopUp";
-import { TagsContext } from "../Context/TagsContext";
+import Button from '@material-ui/core/Button';
+import FilterPopUp from './FilterPopUp';
+import { TagsContext } from '../Context/TagsContext';
 import axios from 'axios';
 import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -37,11 +37,10 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
-  console.log("in nav bar", props.name)
   const [isOpen, setIsOpen] = useState(false);
-  const { ageRange, updateAgeRange, users, handleAddressClick } = props
+  const { ageRange, updateAgeRange, users, handleAddressClick } = props;
 
-  const [tag, setTags] = useState([])
+  const [tag, setTags] = useState([]);
   const [selectTag, setSelectTag] = useState({
     tags: [],
     buttonColor: false,
@@ -51,9 +50,8 @@ export default function NavBar(props) {
     setIsOpen(!isOpen);
   };
 
-
   useEffect(() => {
-    axios.get("http://localhost:8080/api/tags").then((res) => {
+    axios.get('http://localhost:8080/api/tags').then((res) => {
       setTags(res.data.tags);
     });
   }, []);
@@ -65,7 +63,11 @@ export default function NavBar(props) {
           <Button onClick={togglePopup} color="inherit" class="filter-btn">
             Filter
           </Button>
-          <Button onClick={() => props.handleEmptyTagsClick(selectTag)} color="inherit" class="filter-btn">
+          <Button
+            onClick={() => props.handleEmptyTagsClick(selectTag)}
+            color="inherit"
+            class="filter-btn"
+          >
             Clear Filter
           </Button>
           <Typography className={classes.title} variant="h6" noWrap>
@@ -91,7 +93,13 @@ export default function NavBar(props) {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon onClick={() => window.location.replace(`http://localhost:3002/users/${props.name[0].id}/message`)} />
+                <MailIcon
+                  onClick={() =>
+                    window.location.replace(
+                      `http://localhost:3002/users/${props.name[0].id}/message`
+                    )
+                  }
+                />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
@@ -107,11 +115,13 @@ export default function NavBar(props) {
             >
               <AccountCircle />
             </IconButton>
-            <p>Welcome <strong>{props.name[0] && props.name[0]["first_name"]}</strong></p>
+            <p>
+              Welcome{' '}
+              <strong>{props.name[0] && props.name[0]['first_name']}</strong>
+            </p>
           </div>
         </Toolbar>
       </AppBar>
     </div>
   );
-
 }
