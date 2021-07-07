@@ -57,11 +57,6 @@ export function getNameOfTag(tagArr, tags) {
 // interest filter: returns filtered array of unique users
 export function getFilteredUsersByInterest(interests, userTagObj, users) {
   const filteredUsersId = [];
-
-  // if (interests.length === 0) {
-  //   return users;
-  // }
-
   const checkIfContainsAllInterest = (userInterests, requiredInterests) => {
     let result = true;
 
@@ -75,17 +70,10 @@ export function getFilteredUsersByInterest(interests, userTagObj, users) {
   };
 
   for (const userId in userTagObj) {
-    // console.log(
-    //   'check',
-    //   checkIfContainsAllInterest(userTagObj[userId], interests)
-    // );
-
     if (checkIfContainsAllInterest(userTagObj[userId], interests)) {
       filteredUsersId.push(userId);
     }
   }
-
-  // console.log('filteredUsersId', filteredUsersId);
 
   let filteredUsers = [];
 
