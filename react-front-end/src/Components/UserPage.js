@@ -135,7 +135,7 @@ const UserPage = (props) => {
         {state.tags.length === 0 && state.city.length === 0 ? (
           <h1>No results</h1>
         ) : (
-          filteredUsers.map((filteredUser) => {
+          filteredUsers.slice(startNum, endNum).map((filteredUser) => {
             return (
               <Grid container spacing={4} className="user-page-ind">
                 <Grid item xs={12}>
