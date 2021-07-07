@@ -12,8 +12,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import bcrypt from 'bcryptjs';
-
 
 function Copyright() {
   return (
@@ -54,25 +52,7 @@ export default function SignIn(props) {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
 
-  const findPasswordByEmail = (email, users) => {
-    for (const user of users) {
-      if (user.email === email) {
-        console.log('reached')
-        return user.password
-      }
-    }
 
-  }
-
-  const checkPassword = (emil, password, users) => {
-    console.log(findPasswordByEmail(email, users))
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    if (bcrypt.compareSync(findPasswordByEmail(email, users), hashedPassword)) {
-      console.log("success")
-      return
-    }
-    console.log("fail");
-  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -120,7 +100,8 @@ export default function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => checkPassword(email, password, props.users)}
+            onClick={() => props.findPasswordByEmail(email, props.users)}
+
           >
             Sign In
           </Button>
@@ -141,6 +122,6 @@ export default function SignIn(props) {
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container>
+    </Container >
   );
 }

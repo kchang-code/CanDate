@@ -10,18 +10,20 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import Button from "@material-ui/core/Button";
 import ReactCardFlip from "react-card-flip";
+import Chip from "@material-ui/core/Chip";
 
 export default function ProfileCard(props) {
+
   const [isFlipped, setIsFlipped] = useState(false);
-  const {tags, users} = props
-  
+  const { tags, users } = props
+
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
-
+  const title = props.name + ',' + props.age + ',' + props.address
   return (
     <>
-      <div>
+      <div className="ProfileCard">
         <Card
           // {users}
           class="card"
@@ -32,7 +34,7 @@ export default function ProfileCard(props) {
         >
           <CardHeader
             class="name"
-            title={props.name}
+            title={title}
             action={
               <>
                 <IconButton
@@ -62,9 +64,7 @@ export default function ProfileCard(props) {
             </Typography>
             {props.tag.map((item) => {
               return (
-                <Button size="small" variant="outlined" color="primary">
-                  {item}
-                </Button>
+                <Chip label={item} color="primary" />
               );
             })}
           </CardContent>

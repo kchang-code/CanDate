@@ -74,6 +74,7 @@ const UserPage = (props) => {
     setState(selectArr);
   };
 
+
   return (
     <>
       <TagsContext.Provider values={tags}>
@@ -87,15 +88,15 @@ const UserPage = (props) => {
         />
       </TagsContext.Provider>
 
-      <div>
+      <div className="user-page">
         {getFilteredUserProfile(
           getFilteredUsersByInterest(state.tags, user_tag),
           getFilteredUsersByAge(users, state.ageRange),
           users
         ).map((filteredUser) => {
           return (
-            <Grid container spacing={4}>
-              <Grid item xs={12} sm={6} md={3}>
+            <Grid container spacing={4} className="user-page-ind">
+              <Grid item xs={12} >
                 <ProfileCard
                   key={filteredUser.id}
                   name={filteredUser.first_name}
@@ -110,6 +111,7 @@ const UserPage = (props) => {
             </Grid>
           );
         })}
+
       </div>
       {console.log('state.tags', state.tags)}
       {console.log('state.city', state.city)}
