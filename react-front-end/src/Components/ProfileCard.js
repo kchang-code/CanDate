@@ -17,6 +17,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 //from line 25 - 63 are all material ui functions
@@ -73,13 +74,39 @@ export default function ProfileCard(props) {
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
-  const { tags, users } = props
+  const { tags, users } = props;
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+  const title = props.name + ',' + props.age + ',' + props.address;
 
-  const title = props.name + ',' + props.age + ',' + props.address
+  let { id } = useParams();
+
+  const handleClickMessage = () => {
+    const newMessage = {
+      from_user_id: Number(id),
+      to_user_id: Number(props.id),
+      content: `Hello! I am ${props.name}`,
+    };
+    console.log('load to message page');
+
+    const timeElapsed = Date.now();
+    //sending msg state
+    let today = new Date(timeElapsed);
+
+    let time = today.toLocaleString();
+    axios
+      .put('http://localhost:8080/api/users/:id/messages', {
+        newMessage: { ...newMessage, creates_on: time },
+      })
+      .then((res) => {
+        props.setMessages([...props.messages, ...res.data]);
+      })
+      .catch((err) => {
+        console.log('Put error on new messages', err);
+      });
+  };
   return (
     <>
       <div className="ProfileCard">
@@ -88,7 +115,7 @@ export default function ProfileCard(props) {
           class="card"
           elevation={3}
           onClick={() => {
-            console.log("flip");
+            console.log('flip');
           }}
         >
           <CardHeader
@@ -97,15 +124,17 @@ export default function ProfileCard(props) {
             action={
               <>
                 <IconButton
-                  onClick={() => {
-                    console.log("favorite");
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('favorite');
                   }}
                 >
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton
-                  onClick={() => {
-                    console.log("load to message page");
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClickMessage();
                   }}
                 >
                   <ChatBubbleIcon />
@@ -152,9 +181,7 @@ export default function ProfileCard(props) {
               Mutual interests:
             </Typography>
             {props.tag.map((item) => {
-              return (
-                <Chip label={item} color="primary" />
-              );
+              return <Chip label={item} color="primary" />;
             })}
           </CardContent>
         </Card>

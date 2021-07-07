@@ -148,6 +148,7 @@ const UserPage = (props) => {
                 <Grid item xs={12}>
                   <ProfileCard
                     key={filteredUser.id}
+                    id={filteredUser.id}
                     name={filteredUser.first_name}
                     last_name={filteredUser.last_name}
                     city={filteredUser.address}
@@ -161,6 +162,8 @@ const UserPage = (props) => {
                       filterTags(filteredUser.id, user_tag),
                       tags
                     )}
+                    messages={props.messages}
+                    setMessages={props.setMessages}
                   />
                 </Grid>
               </Grid>

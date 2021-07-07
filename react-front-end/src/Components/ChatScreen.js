@@ -99,7 +99,9 @@ const ChatScreen = (props) => {
     setInput('');
   };
 
-  const messageContent = showMsg.map((message) => {
+  const sortedShowMsg = showMsg.sort((a, b) => a.id - b.id);
+
+  const messageContent = sortedShowMsg.map((message) => {
     if (message['from_user_id'] !== Number(id)) {
       to_user_id = message['from_user_id'];
       userName = users[to_user_id - 1]['first_name'];
@@ -125,6 +127,7 @@ const ChatScreen = (props) => {
       to_user_id = message['to_user_id'];
       userName = users[to_user_id - 1]['first_name'];
       userPhoto = users[to_user_id - 1]['profile_photo'];
+      userAboutMe = users[to_user_id - 1]['address'];
       return (
         <div className="chatScreen_message">
           <p className="chatScreen_textUser">
