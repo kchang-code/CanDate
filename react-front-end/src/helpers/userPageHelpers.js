@@ -105,13 +105,8 @@ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, filtered
       }
     }
   }
-  // return userProfiles: [{}, {}]
-  // return duplicates of userProfiles and filteredCityIds
-  let result = [];
-  userProfiles.forEach((element) => {
-    if (filteredCityIds.includes(element.id)) {
-      result.push(element.id);
-    }
-  });
-  return result;
+ 
+  const concatArr = userProfiles.concat(filteredCityIds)
+  console.log(concatArr)
+  return concatArr;
 }

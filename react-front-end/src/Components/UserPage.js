@@ -93,6 +93,8 @@ const UserPage = (props) => {
       </TagsContext.Provider>
 
       <div className="user-page">
+
+
         {getFilteredUserProfile(
           getFilteredUsersByInterest(state.tags, user_tag),
           getFilteredUsersByAge(users, state.ageRange),
@@ -118,9 +120,7 @@ const UserPage = (props) => {
         })}
 
       </div>
-      {console.log('state.tags', state.tags)}
-      {console.log('state.city', state.city)}
-      {console.log('state', state)}
+    
     </>
   );
 };
