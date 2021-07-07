@@ -8,6 +8,7 @@ import {
   reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import MarkunreadIcon from '@material-ui/icons/Markunread';
 
 const SidebarChat = (props) => {
   const {
@@ -19,6 +20,8 @@ const SidebarChat = (props) => {
     sideBarMessage,
     messageObj,
     filteredFavorite,
+    unread,
+    setUnread,
   } = props;
 
   const twoMessageArr = [
@@ -44,6 +47,7 @@ const SidebarChat = (props) => {
       className="sidebarChat"
       onClick={() => {
         setSelectedUserId(to_user_id);
+        setUnread(false);
       }}
     >
       <Avatar alt="Zio" src={profilePic} />
@@ -58,10 +62,18 @@ const SidebarChat = (props) => {
           display: 'flex',
           flexDirection: 'column',
           textAlign: 'end',
-          justifyContent: 'flex-end',
+          alignItems: 'flex-end',
+          marginBottom: '10px',
         }}
       >
-        {filteredFavorite.includes(to_user_id) && <FavoriteIcon />}
+        {/* {unread && <MarkunreadIcon />} */}
+        {filteredFavorite.includes(to_user_id) && (
+          <FavoriteIcon
+            style={{
+              marginBottom: '10px',
+            }}
+          />
+        )}
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />
       </div>
     </div>

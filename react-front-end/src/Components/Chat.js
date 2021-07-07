@@ -30,6 +30,8 @@ const Chat = (props) => {
     selectedUserId,
     favorite,
     block,
+    unread,
+    setUnread,
   } = props;
 
   const filteredFavorite = getFavoriteByUser(favorite, id);
@@ -64,6 +66,7 @@ const Chat = (props) => {
   const reducedToNamesId = reduceToNamesId(userAllMessages, id);
 
   const reducedMessagesComp = reducedMessage.map((message) => {
+    const idAndUnread = { [message.id]: unread };
     if (reducedToNamesId.includes(message['to_user_id'])) {
       return (
         <SidebarChat
@@ -79,6 +82,9 @@ const Chat = (props) => {
           userAllMessages={userAllMessages}
           messageObj={messageObj}
           filteredFavorite={filteredFavorite}
+          unread={unread}
+          setUnread={setUnread}
+          idAndUnread={idAndUnread}
         />
       );
     } else if (reducedToNamesId.includes(message['from_user_id'])) {
@@ -96,6 +102,9 @@ const Chat = (props) => {
           userAllMessages={userAllMessages}
           messageObj={messageObj}
           filteredFavorite={filteredFavorite}
+          unread={unread}
+          setUnread={setUnread}
+          idAndUnread={idAndUnread}
         />
       );
     }
