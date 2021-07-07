@@ -26,9 +26,6 @@ const TagListItem = props => {
   const [icon, setIcon] = useState('null')
 
 
-
-
-
   function handleClick(num, name, id) {
     let newTagUser = {
       user_id: id,
@@ -39,7 +36,6 @@ const TagListItem = props => {
     if (num % 2 === 0) {
       setNewColor("secondary")
       setIcon(DoneIcon)
-      console.log("check1", newTagUser)
       axios.put("http://localhost:8080/api/user_tag/new", { newTagUser })
         .catch((err) => console.log('1111---v', err));
       return

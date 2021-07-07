@@ -8,7 +8,6 @@ import TimeAgo from 'javascript-time-ago';
 import bcrypt from 'bcryptjs';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
-import ProfileDetail from './Components/ProfileDetail';
 import UserPage from './Components/UserPage';
 const ENDPOINT = 'ws://localhost:8080/message';
 
@@ -118,9 +117,6 @@ function App() {
               user_tag={user_tag}
               loading={loading}
             />
-          </Route>
-          <Route path="/detail">
-            <ProfileDetail />
           </Route>
 
           <Route path="/">

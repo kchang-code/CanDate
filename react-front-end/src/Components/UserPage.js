@@ -149,7 +149,12 @@ const UserPage = (props) => {
                   <ProfileCard
                     key={filteredUser.id}
                     name={filteredUser.first_name}
+                    last_name={filteredUser.last_name}
+                    city={filteredUser.address}
                     age={filteredUser.age}
+                    gender={filteredUser.gender}
+                    about_me={filteredUser['about_me']}
+                    height={filteredUser.height}
                     address={filteredUser.address}
                     profile_photo={filteredUser.profile_photo}
                     tag={getNameOfTag(
@@ -164,8 +169,8 @@ const UserPage = (props) => {
         )}
         {console.log('state', state)}
       </div>
-      <div>
-        {startNum > 2 && (
+      <div id="user-page-button">
+        {startNum > 2 && endNum <= (filteredByCity.length) &&
           <Fab
             variant="extended"
             size="small"
@@ -177,18 +182,19 @@ const UserPage = (props) => {
             <ArrowBackIcon className={classes.extendedIcon} />
             Previous
           </Fab>
-        )}
-        <Fab
-          variant="extended"
-          size="small"
-          color="secondary"
-          aria-label="next"
-          className={classes.margin}
-          onClick={() => handleNextButton(startNum, endNum)}
-        >
-          <ArrowForwardIcon className={classes.extendedIcon} />
-          Next
-        </Fab>
+        }
+        {endNum > (filteredByCity.length - 1) || endNum < (filteredByCity.length - 1) &&
+          <Fab
+            variant="extended"
+            size="small"
+            color="secondary"
+            aria-label="next"
+            className={classes.margin}
+            onClick={() => handleNextButton(startNum, endNum)}
+          >
+            <ArrowForwardIcon className={classes.extendedIcon} />
+            Next
+          </Fab>}
       </div>
     </>
   );
