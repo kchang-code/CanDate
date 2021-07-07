@@ -97,16 +97,18 @@ export function getFilteredUserProfile(filteredUserIds, filteredAgeIds, filtered
     }
   });
 
+  const allFilteredIds = filteredIds.concat(filteredCityIds)
+
   // loop through users to find the user profiles
   for (const user of users) {
-    for (const userId of filteredIds) {
+    for (const userId of allFilteredIds) {
       if (user.id === userId) {
         userProfiles.push(user);
       }
     }
   }
- 
-  const concatArr = userProfiles.concat(filteredCityIds)
-  // console.log(concatArr)
-  return concatArr;
+
+  // console.log("userProfiles", userProfiles)
+
+  return userProfiles;
 }
