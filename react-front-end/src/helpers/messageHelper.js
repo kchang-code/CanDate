@@ -3,7 +3,7 @@ const reduceToNames = (message, userId, userIBlock) => {
   let result = [];
   if (userIBlock) {
     const sortedMsg = message.reverse();
-    sortedMsg.forEach((el) => {
+    message.forEach((el) => {
       if (
         !id.includes(el['to_user_id']) &&
         Number(userId) !== el['to_user_id']

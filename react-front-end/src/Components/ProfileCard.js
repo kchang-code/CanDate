@@ -29,7 +29,7 @@ export default function ProfileCard(props) {
     const newMessage = {
       from_user_id: Number(id),
       to_user_id: Number(props.id),
-      content: 'Hello!',
+      content: `Hello! I am ${props.name}`,
     };
     console.log('load to message page');
 
