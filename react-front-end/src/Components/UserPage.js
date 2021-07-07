@@ -53,7 +53,7 @@ const UserPage = (props) => {
       setLoggedInUserInfo((prev) => [...prev, ...neededInfo]);
       setState({
         ...state,
-        tags: [],
+        tags: LoggedInUserTagIDs,
         city: [LoggedInUserCity],
         gender: neededInfo[0].gender,
       });

@@ -66,29 +66,41 @@ export function getNameOfTag(tagArr, tags) {
 
 // interest filter: returns filtered array of unique users
 export function getFilteredUsersByInterest(interests, userTagObj, users) {
-  const filteredUsersId = [];
-  const checkIfContainsAllInterest = (userInterests, requiredInterests) => {
-    let result = true;
+  if (interests.length === 0) {
+    return users;
+  }
 
+  const checkIfContainsAllInterest = (userInterests, requiredInterests) => {
+    let result = false;
+    let matchPoint = 0;
     requiredInterests.forEach((requiredInterest) => {
-      if (!userInterests.includes(requiredInterest)) {
-        result = false;
+      if (userInterests.includes(requiredInterest)) {
+        result = true;
+        matchPoint++;
       }
     });
 
-    return result;
+    return { result, matchPoint };
   };
 
+  let filteredUserWithMatchPointObj = [];
   for (const userId in userTagObj) {
-    if (checkIfContainsAllInterest(userTagObj[userId], interests)) {
-      filteredUsersId.push(userId);
+    const { result, matchPoint } = checkIfContainsAllInterest(
+      userTagObj[userId],
+      interests
+    );
+    if (result) {
+      filteredUserWithMatchPointObj.push({ userId, matchPoint });
     }
+    filteredUserWithMatchPointObj.sort((a, b) => {
+      return b.matchPoint - a.matchPoint;
+    });
   }
 
   let filteredUsers = [];
 
-  filteredUsersId.forEach((userId) => {
-    filteredUsers.push(users[userId - 1]);
+  filteredUserWithMatchPointObj.forEach((obj) => {
+    filteredUsers.push(users[obj.userId - 1]);
   });
 
   return filteredUsers;
