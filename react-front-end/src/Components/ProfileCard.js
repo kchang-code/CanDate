@@ -18,6 +18,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from "axios";
 
 
 //from line 25 - 63 are all material ui functions
@@ -107,6 +108,7 @@ export default function ProfileCard(props) {
         console.log('Put error on new messages', err);
       });
   };
+
   return (
     <>
       <div className="ProfileCard">
