@@ -42,6 +42,8 @@ const UserPage = (props) => {
   const [loggedInUserInfo, setLoggedInUserInfo] = useState([]);
   const [startNum, setStartNum] = useState(0);
   const [endNum, setEndNum] = useState(3);
+  const [buttonColor, setButtonColor] = useState('')
+  
 
   const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
@@ -55,6 +57,7 @@ const UserPage = (props) => {
     city: [],
     gender: '',
   });
+
   useEffect(() => {
     if (users.length !== 0) {
       setLoggedInUserInfo((prev) => [...prev, ...neededInfo]);
@@ -78,7 +81,12 @@ const UserPage = (props) => {
     const selectArr = { ...state };
     selectArr.tags.push(itemId);
     setState(selectArr);
+
+    setButtonColor("default")
+  
+      
   };
+
 
   // add selected address into state
   const handleAddressClick = (city) => {
