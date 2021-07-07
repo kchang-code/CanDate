@@ -56,7 +56,6 @@ function App() {
     ])
       .then((all) => {
         const [user, message, tag, favorite, user_tag, block] = all;
-
         setUsers(user.data.users);
         setMessages(message.data.message);
         setTags(tag.data.tags);

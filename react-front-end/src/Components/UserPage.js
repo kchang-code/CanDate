@@ -17,16 +17,37 @@ import {
 } from '../helpers/userPageHelpers';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import Fab from '@material-ui/core/Fab';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { makeStyles } from '@material-ui/core/styles';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+
+const useStyles = makeStyles((theme) => ({
+
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+}));
 
 const UserPage = (props) => {
+  const classes = useStyles();
   const { users, user_tag, tags, loading } = props;
   let { id } = useParams();
+  const [loggedInUserInfo, setLoggedInUserInfo] = useState([])
+  const [startNum, setStartNum] = useState(0)
+  const [endNum, setEndNum] = useState(3)
 
-  const LoggedInUserInfo = getLoggedInUserInfo(id, users);
-
+  const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
 
   useEffect(() => {
+    if (users.length !== 0) {
+      setLoggedInUserInfo(prev => [...prev, ...neededInfo])
+      console.log("log", loggedInUserInfo)
+    }
     setState({
       ...state,
       tags: LoggedInUserTagIDs,
@@ -38,6 +59,8 @@ const UserPage = (props) => {
     ageRange: [18, 40],
     city: [],
   });
+
+
 
   // const [tagButtonColor, setTagButtonColor] = useState(true)
 
@@ -74,6 +97,26 @@ const UserPage = (props) => {
     setState(selectArr);
   };
 
+  const handleNextButton = (num1, num2) => {
+
+    setStartNum(num1 += 3)
+    setEndNum(num2 += 3)
+  }
+
+  const handlePreviousButton = (num1, num2) => {
+    setStartNum(num1 -= 3)
+    setEndNum(num2 -= 3)
+  }
+
+  // useEffect(() => {
+  //   handleNextButton()
+  // }, [handleNextButton()]);
+
+
+  // useEffect(() => {
+  //   handlePreviousButton()
+  // }, [handlePreviousButton()]);
+
 
   return (
     <>
@@ -85,6 +128,8 @@ const UserPage = (props) => {
           updateAgeRange={updateAgeRange}
           ageRange={state.ageRange}
           users={users}
+          name={loggedInUserInfo}
+
         />
       </TagsContext.Provider>
 
@@ -93,14 +138,15 @@ const UserPage = (props) => {
           getFilteredUsersByInterest(state.tags, user_tag),
           getFilteredUsersByAge(users, state.ageRange),
           users
-        ).map((filteredUser) => {
+        ).slice(startNum, endNum).map((filteredUser) => {
           return (
-            <Grid container spacing={4} className="user-page-ind">
+            <Grid container spacing={2} className="user-page-ind">
               <Grid item xs={12} >
                 <ProfileCard
                   key={filteredUser.id}
                   name={filteredUser.first_name}
                   age={filteredUser.age}
+                  address={filteredUser.address}
                   profile_photo={filteredUser.profile_photo}
                   tag={getNameOfTag(
                     filterTags(filteredUser.id, user_tag),
@@ -111,7 +157,35 @@ const UserPage = (props) => {
             </Grid>
           );
         })}
+      </div>
 
+      <div>
+        {startNum > 2 && <Fab
+          variant="extended"
+          size="small"
+          color="secondary"
+          aria-label="previous"
+          className={classes.margin}
+          onClick={() => handlePreviousButton(startNum, endNum)}
+        >
+          <ArrowBackIcon
+            className={classes.extendedIcon}
+          />
+          Previous
+        </Fab>}
+        <Fab
+          variant="extended"
+          size="small"
+          color="secondary"
+          aria-label="next"
+          className={classes.margin}
+          onClick={() => handleNextButton(startNum, endNum)}
+        >
+          <ArrowForwardIcon
+            className={classes.extendedIcon}
+          />
+          Next
+        </Fab>
       </div>
       {console.log('state.tags', state.tags)}
       {console.log('state.city', state.city)}

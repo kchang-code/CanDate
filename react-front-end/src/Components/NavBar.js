@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
-
+  console.log("in nav bar", props.name)
   const [isOpen, setIsOpen] = useState(false);
   const { ageRange, updateAgeRange, users, handleAddressClick } = props
 
@@ -91,7 +91,7 @@ export default function NavBar(props) {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+                <MailIcon onClick={() => window.location.replace(`http://localhost:3002/users/${props.name[0].id}/message`)} />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
@@ -107,7 +107,7 @@ export default function NavBar(props) {
             >
               <AccountCircle />
             </IconButton>
-            <p>Welcome Zio</p>
+            <p>Welcome <strong>{props.name[0] && props.name[0]["first_name"]}</strong></p>
           </div>
         </Toolbar>
       </AppBar>
