@@ -53,8 +53,8 @@ const UserPage = (props) => {
     }
     setState({
       ...state,
-      tags: LoggedInUserTagIDs,
-      city: [LoggedInUserCity],
+      tags: ['Movie'],
+      city: [],
     });
   }, [loading]);
 
