@@ -30,18 +30,18 @@ function App() {
       realTimeData = event.data;
 
       if (messages.length !== 0 && realTimeData) {
-        const needToSet = [...messages, ...JSON.parse(realTimeData)];
-        console.log('before set state', messages);
-        console.log('needToSet', needToSet);
+        // const needToSet = [...messages, ...JSON.parse(realTimeData)];
+
         // setMessages(needToSet);
-        setMessages((prev) => [...prev, ...JSON.parse(realTimeData)]);
-        console.log('after set state', messages);
+        const parsedData = JSON.parse(realTimeData);
+        console.log('parsedData', parsedData);
+        setMessages((prev) => [...prev, ...parsedData]);
       }
     };
 
-    socket.onclose = function () {
-      console.log('Close');
-    };
+    // socket.onclose = function () {
+    //   console.log('Close');
+    // };
   }, [loading]);
 
   useEffect(() => {

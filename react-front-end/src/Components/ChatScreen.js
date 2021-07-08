@@ -90,7 +90,16 @@ const ChatScreen = (props) => {
         newMessage: { ...newMessage, creates_on: time },
       })
       .then((res) => {
-        setMessages([...messages, ...res.data]);
+        const assignedId = messages.length + 1;
+        console.log('newMessage', {
+          ...newMessage,
+          id: assignedId,
+          creates_on: time,
+        });
+        console.log('res.data', res.data);
+        // setMessages([...messages, { ...newMessage, creates_on: time }]);
+
+        // setMessages([...messages, ...res.data]);
       })
       .catch((err) => {
         console.log('Put error on new messages', err);

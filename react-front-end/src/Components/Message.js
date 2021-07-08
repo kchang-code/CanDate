@@ -23,9 +23,6 @@ const Message = (props) => {
   const [unread, setUnread] = useState(true);
 
   useEffect(() => {
-    // console.log('selectedUserId', selectedUserId);
-    console.log(reducedMessage);
-
     if (reducedMessage.length !== 0) {
       let setDataToSelectedUserId;
 

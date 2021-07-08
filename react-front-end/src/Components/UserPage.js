@@ -72,7 +72,6 @@ const UserPage = (props) => {
 
   const filteredFavoriteId = getFavoriteByUser(props.favorite, Number(id));
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
-  console.log('filteredFavorite', filteredFavoriteUsers);
 
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
@@ -190,7 +189,9 @@ const UserPage = (props) => {
       </button>
 
       <div className="user-page">
-        {state.tags.length === 0 && state.city.length === 0 && !state.favorite ? (
+        {state.tags.length === 0 &&
+        state.city.length === 0 &&
+        !state.favorite ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
@@ -237,7 +238,7 @@ const UserPage = (props) => {
             );
           })
         )}
-        {console.log('state', state)}
+        {/* {console.log('state', state)} */}
       </div>
       <div id="user-page-button">
         {startNum > 2 && endNum <= filteredByCity.length && (

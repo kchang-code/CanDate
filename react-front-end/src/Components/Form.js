@@ -59,7 +59,7 @@ export default function Form(props) {
       email,
       password,
     };
-    console.log('new user', newUser);
+
     axios
       .put('http://localhost:8080/api/users', { newUser })
       .then(() => console.log('done'))
