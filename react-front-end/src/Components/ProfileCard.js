@@ -1,3 +1,4 @@
+import Message from './Message';
 import React, { useEffect, useState } from 'react';
 import './ProfileCard.scss';
 import useUserPage from '../hooks/useUserPage';
@@ -67,80 +68,23 @@ const DialogActions = withStyles((theme) => ({
 //from line 25 - 63 are all material ui functions
 
 //new dialog import for message component
-import { withStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import CloseIcon from '@material-ui/icons/Close';
-import Message from './Message';
-import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
-//configure dialog component
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
-//configure dialog component
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-//configure dialog component
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-    flex: 1,
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
 
 export default function ProfileCard(props) {
   let { id } = useParams();
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e) => {
+    e.stopPropagation();
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation();
     setOpen(false);
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
   const { tags, users, favorite } = props;
   //zio added open state
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = (e) => {
-    e.stopPropagation();
-    setOpen(false);
-  };
 
   const handleLike = () => {
     const newFavorite = {
@@ -153,6 +97,7 @@ export default function ProfileCard(props) {
         newFavorite: { ...newFavorite },
       })
       .then(() => {
+        props.setFavorite([...favorite, newFavorite]);
         console.log('newFavorite', newFavorite);
       });
   };
@@ -188,10 +133,14 @@ export default function ProfileCard(props) {
       });
   };
 
+  let color;
+  props.filteredFavoriteId.includes(props.id)
+    ? (color = 'red')
+    : (color = 'rgba(0, 0, 0, 0.54)');
+
   return (
     <>
       <div className="ProfileCard">
-        {props.filteredFavoriteId.includes(props.id) && <h2>Liked</h2>}
         <Card
           // {users}
           class="card"
@@ -206,6 +155,7 @@ export default function ProfileCard(props) {
             action={
               <>
                 <IconButton
+                  style={{ color: color }}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleLike();

@@ -122,6 +122,7 @@ function App() {
               realTimeData={realTimeData}
               favorite={favorite}
               block={block}
+              setFavorite={setFavorite}
             />
           </Route>
 

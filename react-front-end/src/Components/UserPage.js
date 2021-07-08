@@ -224,6 +224,7 @@ const UserPage = (props) => {
                     realTimeData={props.realTimeData}
                     favorite={props.favorite}
                     block={props.block}
+                    setFavorite={props.setFavorite}
                   />
                 </Grid>
               </Grid>
