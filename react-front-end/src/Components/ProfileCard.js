@@ -139,7 +139,7 @@ export default function ProfileCard(props) {
   const handleBlock = () => {
     const newBlock = {
       user_id: Number(id),
-      favorite_user_id: Number(props.id),
+      block_user_id: Number(props.id),
     };
 
     axios
@@ -147,7 +147,8 @@ export default function ProfileCard(props) {
         newBlock: { ...newBlock },
       })
       .then(() => {
-        props.setFavorite([...props.block, newBlock]);
+        console.log('newBlock', newBlock);
+        props.setBlock([...props.block, newBlock]);
       });
   };
 
