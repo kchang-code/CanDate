@@ -22,6 +22,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import Message from './Message';
+import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
 //configure dialog component
 const styles = (theme) => ({
   root: {
@@ -69,10 +70,12 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function ProfileCard(props) {
+  let { id } = useParams();
   const [isFlipped, setIsFlipped] = useState(false);
-  const { tags, users } = props;
+  const { tags, users, favorite } = props;
   //zio added open state
   const [open, setOpen] = React.useState(false);
+
   const handleClose = (e) => {
     e.stopPropagation();
     setOpen(false);
@@ -97,8 +100,6 @@ export default function ProfileCard(props) {
     setIsFlipped(!isFlipped);
   };
   const title = props.name + ',' + props.age + ',' + props.address;
-
-  let { id } = useParams();
 
   const handleClickMessage = () => {
     setOpen(true);
@@ -128,6 +129,7 @@ export default function ProfileCard(props) {
   return (
     <>
       <div className="ProfileCard">
+        {props.filteredFavoriteId.includes(props.id) && <h2>Liked</h2>}
         <Card
           // {users}
           class="card"
