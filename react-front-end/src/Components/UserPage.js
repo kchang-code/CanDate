@@ -167,9 +167,8 @@ const UserPage = (props) => {
   // console.log('filteredByCity', filteredByCity);
 
   const matchObj = getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags)
-  const matchPercentage = matchObj.map(item => item.percentage)
 
-  const filteredByCityWithMatchPoint = function addMatchPointPercentage(filteredByCity, matchObj ) {
+function addMatchPointPercentage(filteredByCity, matchObj ) {
    for (const obj of filteredByCity) {
      for (const match of matchObj) {
        if (obj.id === match.userId) {
@@ -178,6 +177,8 @@ const UserPage = (props) => {
      }
    }
   }
+
+  addMatchPointPercentage(filteredByCity, matchObj )
 
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
