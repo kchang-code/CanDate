@@ -1,28 +1,29 @@
-import Message from './Message';
-import React, { useEffect, useState } from 'react';
-import './ProfileCard.scss';
-import useUserPage from '../hooks/useUserPage';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import { Typography, IconButton } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import Button from '@material-ui/core/Button';
-import ReactCardFlip from 'react-card-flip';
-import Chip from '@material-ui/core/Chip';
-import { withStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import CloseIcon from '@material-ui/icons/Close';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from 'axios';
-import BlockIcon from '@material-ui/icons/Block';
+import Message from "./Message";
+import React, { useEffect, useState } from "react";
+import "./ProfileCard.scss";
+import useUserPage from "../hooks/useUserPage";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import { Typography, IconButton } from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
+import Button from "@material-ui/core/Button";
+import ReactCardFlip from "react-card-flip";
+import Chip from "@material-ui/core/Chip";
+import { withStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import CloseIcon from "@material-ui/icons/Close";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
+import BlockIcon from "@material-ui/icons/Block";
+import Badge from "react-bootstrap/Badge";
 
-import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
+import { getFavoriteByUser } from "../helpers/favoriteBlockHelp";
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -31,7 +32,7 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
@@ -99,7 +100,7 @@ export default function ProfileCard(props) {
     };
 
     axios
-      .put('http://localhost:8080/api/favorites', {
+      .put("http://localhost:8080/api/favorites", {
         newFavorite: { ...newFavorite },
       })
       .then(() => {
@@ -107,7 +108,7 @@ export default function ProfileCard(props) {
       });
   };
 
-  const title = props.name + ',' + props.age + ',' + props.address;
+  const title = props.name + "," + props.age + "," + props.address;
 
   const handleClickMessage = () => {
     const myName = props.users[Number(id) - 1].first_name;
@@ -117,7 +118,7 @@ export default function ProfileCard(props) {
       to_user_id: Number(props.id),
       content: `Hello! I am ${myName}`,
     };
-    console.log('load to message page');
+    console.log("load to message page");
 
     const timeElapsed = Date.now();
     //sending msg state
@@ -125,21 +126,23 @@ export default function ProfileCard(props) {
 
     let time = today.toLocaleString();
     axios
-      .put('http://localhost:8080/api/users/:id/messages', {
+      .put("http://localhost:8080/api/users/:id/messages", {
         newMessage: { ...newMessage, creates_on: time },
       })
       .then((res) => {
         props.setMessages([...props.messages, ...res.data]);
       })
       .catch((err) => {
-        console.log('Put error on new messages', err);
+        console.log("Put error on new messages", err);
       });
   };
 
   let color;
   props.filteredFavoriteId.includes(props.id)
-    ? (color = 'red')
-    : (color = 'rgba(0, 0, 0, 0.54)');
+    ? (color = "red")
+    : (color = "rgba(0, 0, 0, 0.54)");
+
+    const matchPercentage = 10
 
   return (
     <>
@@ -148,7 +151,7 @@ export default function ProfileCard(props) {
           // {users}
           class="card"
           elevation={3}
-          onClick={() => { }}
+          onClick={() => {}}
         >
           <CardHeader
             class="name"
@@ -165,7 +168,6 @@ export default function ProfileCard(props) {
                 >
                   <FavoriteIcon />
                 </IconButton>
-
                 {/* open message dialogue */}
                 <IconButton onClick={handleClickMessage}>
                   <ChatBubbleIcon />
@@ -197,11 +199,14 @@ export default function ProfileCard(props) {
                 <IconButton>
                   <BlockIcon />
                 </IconButton>
+                <Button variant="primary">
+                   <Badge variant="light">{matchPercentage}</Badge>% Match
+                </Button>
               </>
             }
           />
           <CardMedia
-            style={{ height: '200px', paddingTop: '2%' }}
+            style={{ height: "200px", paddingTop: "2%" }}
             image={props.profile_photo}
           />
           <CardContent>
@@ -224,14 +229,14 @@ export default function ProfileCard(props) {
                 </DialogTitle>
                 <DialogContent dividers>
                   <Typography gutterBottom>
-                    Name: {props.name} {props['last_name']}
+                    Name: {props.name} {props["last_name"]}
                   </Typography>
                   <Typography gutterBottom>City: {props.city}</Typography>
                   <Typography gutterBottom>Gender: {props.gender}</Typography>
                   <Typography gutterBottom>Age: {props.age}</Typography>
                   <Typography gutterBottom>Height: {props.height}</Typography>
                   <Typography gutterBottom>
-                    About Me: {props['about_me']}
+                    About Me: {props["about_me"]}
                   </Typography>
                 </DialogContent>
               </Dialog>
