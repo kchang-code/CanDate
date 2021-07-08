@@ -115,8 +115,7 @@ const UserPage = (props) => {
 
   const handleFavorite = () => {
     if (state.favorite) {
-
-      console.log("endNum", endNum)
+      console.log('endNum', endNum);
       setState({
         ...state,
         tags: LoggedInUserTagIDs,
@@ -125,8 +124,8 @@ const UserPage = (props) => {
         favorite: false,
       });
     } else {
-      setEndNum(3)
-      setStartNum(0)
+      setEndNum(3);
+      setStartNum(0);
       setState({
         ...state,
         tags: [],
