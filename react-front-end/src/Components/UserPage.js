@@ -50,6 +50,7 @@ const UserPage = (props) => {
 
   const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
+  
   const [state, setState] = useState({
     tags: [],
     // change age range to logged in user's age, 50
@@ -73,12 +74,13 @@ const UserPage = (props) => {
 
   const filteredFavoriteId = getFavoriteByUser(props.favorite, Number(id));
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
-
+  
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
     selectArr.ageRange = data;
     setState(selectArr);
   };
+
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
@@ -143,6 +145,7 @@ const UserPage = (props) => {
   // console.log('filteredByGender', filteredByGender);
   // console.log('users', users);
 
+
   let filteredByTags;
   if (state.favorite) {
     filteredByTags = filteredFavoriteUsers;
@@ -163,6 +166,19 @@ const UserPage = (props) => {
   const filteredByCity = getFilteredUsersByCity(state.city, filteredByAge);
   // console.log('filteredByCity', filteredByCity);
 
+  const matchObj = getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags)
+  const matchPercentage = matchObj.map(item => item.percentage)
+
+  const filteredByCityWithMatchPoint = function addMatchPointPercentage(filteredByCity, matchObj ) {
+   for (const obj of filteredByCity) {
+     for (const match of matchObj) {
+       if (obj.id === match.userId) {
+         obj.percent = match.percentage
+       }
+     }
+   }
+  }
+
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
     setEndNum((num2 += 3));
@@ -172,6 +188,7 @@ const UserPage = (props) => {
     setStartNum((num1 -= 3));
     setEndNum((num2 -= 3));
   };
+
 
   return (
     <>
@@ -230,6 +247,7 @@ const UserPage = (props) => {
                     favorite={props.favorite}
                     block={props.block}
                     setFavorite={props.setFavorite}
+                    matchPercentage={filteredUser.percent}
                   />
                 </Grid>
               </Grid>
@@ -265,7 +283,6 @@ const UserPage = (props) => {
             Next
           </Fab>
         )}
-        {console.log("matchpoint", getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags))}
       </div>
     </>
   );

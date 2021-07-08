@@ -1,7 +1,6 @@
 import Message from "./Message";
 import React, { useEffect, useState } from "react";
 import "./ProfileCard.scss";
-import useUserPage from "../hooks/useUserPage";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -21,9 +20,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import BlockIcon from "@material-ui/icons/Block";
-import Badge from "react-bootstrap/Badge";
-
+import {PercentageBadge} from './PercentageBadge';
 import { getFavoriteByUser } from "../helpers/favoriteBlockHelp";
+import Badge from "react-bootstrap/Badge";
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -142,8 +141,8 @@ export default function ProfileCard(props) {
     ? (color = "red")
     : (color = "rgba(0, 0, 0, 0.54)");
 
-    const matchPercentage = 10
 
+    
   return (
     <>
       <div className="ProfileCard">
@@ -199,7 +198,7 @@ export default function ProfileCard(props) {
                 <IconButton>
                   <BlockIcon />
                 </IconButton>
-                <Badge variant="light">{matchPercentage}</Badge>% Match
+                <Badge variant="light">{props.matchPercentage}</Badge>% Match 
               </>
             }
           />
@@ -248,6 +247,7 @@ export default function ProfileCard(props) {
           </CardContent>
         </Card>
       </div>
+      {/* {console.log("props.matchpercentage", props.matchPercentage)} */}
     </>
   );
 }

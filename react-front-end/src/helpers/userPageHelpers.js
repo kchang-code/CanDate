@@ -137,7 +137,7 @@ export function getUserIdWithMatchPointObj(interests, userTagObj, users, require
   let filteredUsers = [];
 
   filteredUserWithMatchPointObj.forEach((obj) => {
-    filteredUsers.push({userId: users[obj.userId - 1], matchPoint: obj.matchPoint, percentage: Math.round((obj.matchPoint / requiredInterests.length) * 100)});
+    filteredUsers.push({userId: users[obj.userId - 1].id, matchPoint: obj.matchPoint, percentage: Math.round((obj.matchPoint / requiredInterests.length) * 100)});
   });
 
   
@@ -173,7 +173,11 @@ export function getFilteredUsersByCity(cities, users) {
   users.forEach((eachUser) => {
     if (cities.includes(eachUser.address)) {
       filteredUsers.push(eachUser);
+
     }
   });
+
+  
   return filteredUsers;
 }
+
