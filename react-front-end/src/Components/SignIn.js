@@ -12,6 +12,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Copyright() {
   return (
@@ -27,6 +33,12 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -51,7 +63,18 @@ export default function SignIn(props) {
   const classes = useStyles();
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
+  const [open, setOpen] = useState(false);
 
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
 
   return (
@@ -94,17 +117,27 @@ export default function SignIn(props) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={() => props.findPasswordByEmail(email, props.users)}
-
-          >
-            Sign In
-          </Button>
+          <div>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => {
+                setTimeout(function () { props.findPasswordByEmail(email, props.users) }, 1000);
+                handleClick()
+              }
+              }
+            >
+              Sign In
+            </Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                success!
+              </Alert>
+            </Snackbar>
+          </div>
           <Grid container>
             <Grid item xs>
               <Link>
@@ -123,5 +156,6 @@ export default function SignIn(props) {
         <Copyright />
       </Box>
     </Container >
+
   );
 }
