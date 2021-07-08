@@ -123,6 +123,7 @@ function App() {
               favorite={favorite}
               block={block}
               setFavorite={setFavorite}
+              setBlock={setBlock}
             />
           </Route>
 

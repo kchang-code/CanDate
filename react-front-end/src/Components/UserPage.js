@@ -25,7 +25,11 @@ import Fab from '@material-ui/core/Fab';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
+import {
+  getFavoriteByUser,
+  getUserIBlock,
+  getUsersByBlocked,
+} from '../helpers/favoriteBlockHelp';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -71,6 +75,12 @@ const UserPage = (props) => {
   }, [loading]);
 
   const filteredFavoriteId = getFavoriteByUser(props.favorite, Number(id));
+
+  const filteredUserIBlockId = getUserIBlock(props.block, Number(id));
+  // console.log('blocked ', filteredUserIBlockId);
+
+  // const filteredBlockUsers = filteredUserIBlockId.map((id) => users[id - 1]);
+
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
 
   const updateAgeRange = (event, data) => {
@@ -113,8 +123,7 @@ const UserPage = (props) => {
 
   const handleFavorite = () => {
     if (state.favorite) {
-
-      console.log("endNum", endNum)
+      console.log('endNum', endNum);
       setState({
         ...state,
         tags: LoggedInUserTagIDs,
@@ -123,8 +132,8 @@ const UserPage = (props) => {
         favorite: false,
       });
     } else {
-      setEndNum(3)
-      setStartNum(0)
+      setEndNum(3);
+      setStartNum(0);
       setState({
         ...state,
         tags: [],
@@ -157,7 +166,17 @@ const UserPage = (props) => {
 
   // console.log('filteredByAge', filteredByAge);
 
-  const filteredByCity = getFilteredUsersByCity(state.city, filteredByAge);
+  const filteredUsersByBlocked = getUsersByBlocked(
+    filteredByAge,
+    filteredUserIBlockId
+  );
+
+  console.log(filteredUsersByBlocked);
+
+  const filteredByCity = getFilteredUsersByCity(
+    state.city,
+    filteredUsersByBlocked
+  );
   // console.log('filteredByCity', filteredByCity);
 
   const handleNextButton = (num1, num2) => {
@@ -228,6 +247,7 @@ const UserPage = (props) => {
                     favorite={props.favorite}
                     block={props.block}
                     setFavorite={props.setFavorite}
+                    setBlock={props.setBlock}
                   />
                 </Grid>
               </Grid>

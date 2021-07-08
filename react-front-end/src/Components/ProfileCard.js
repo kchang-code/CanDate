@@ -136,6 +136,22 @@ export default function ProfileCard(props) {
       });
   };
 
+  const handleBlock = () => {
+    const newBlock = {
+      user_id: Number(id),
+      block_user_id: Number(props.id),
+    };
+
+    axios
+      .put('http://localhost:8080/api/blocks', {
+        newBlock: { ...newBlock },
+      })
+      .then(() => {
+        console.log('newBlock', newBlock);
+        props.setBlock([...props.block, newBlock]);
+      });
+  };
+
   let color;
   props.filteredFavoriteId.includes(props.id)
     ? (color = 'red')
@@ -148,7 +164,7 @@ export default function ProfileCard(props) {
           // {users}
           class="card"
           elevation={3}
-          onClick={() => { }}
+          onClick={() => {}}
         >
           <CardHeader
             class="name"
@@ -194,7 +210,12 @@ export default function ProfileCard(props) {
                     />
                   </DialogContent>
                 </Dialog>
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    handleBlock();
+                    console.log('block');
+                  }}
+                >
                   <BlockIcon />
                 </IconButton>
               </>

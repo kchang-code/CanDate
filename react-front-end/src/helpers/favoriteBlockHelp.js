@@ -29,13 +29,20 @@ const getUserIBlock = (block, id) => {
     return Number(user.user_id) === Number(id);
   });
   filteredBlock.forEach((element) => {
-    result.push(element.block_user_id);
+    if (!result.includes(element.block_user_id) && element.block_user_id) {
+      result.push(element.block_user_id);
+    }
   });
   return result;
+};
+
+const getUsersByBlocked = (users, blockIdList) => {
+  return users.filter((user) => !blockIdList.includes(user.id));
 };
 
 module.exports = {
   getFavoriteByUser,
   getUserBlockMe,
   getUserIBlock,
+  getUsersByBlocked,
 };

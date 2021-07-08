@@ -176,6 +176,23 @@ const insertNewFavorite = (newFavorite) => {
       return err;
     });
 };
+
+const insertNewBlock = (newBlock) => {
+  const value = [newBlock["user_id"], newBlock["block_user_id"]];
+  const queryStatement = `INSERT INTO block(user_id, block_user_id)
+  VALUES ($1, $2)
+  RETURNING *`;
+
+  return db
+    .query(queryStatement, value)
+    .then((res) => {
+      return res.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -188,4 +205,5 @@ module.exports = {
   getAllFavoriteList,
   getAllBlockList,
   insertNewFavorite,
+  insertNewBlock,
 };
