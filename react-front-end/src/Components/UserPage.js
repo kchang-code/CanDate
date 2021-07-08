@@ -1,8 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
-import ProfileCard from "./ProfileCard";
-import Grid from "@material-ui/core/Grid";
-import "./UserPage.scss";
-import NavBar from "./NavBar";
+import React, { useEffect, useState, useContext } from 'react';
+import ProfileCard from './ProfileCard';
+import Grid from '@material-ui/core/Grid';
+import useUserPage from '../hooks/useUserPage';
+import './UserPage.scss';
+import axios from 'axios';
+import NavBar from './NavBar';
+import { TagsContext } from '../Context/TagsContext';
+import { useRadioGroup } from '@material-ui/core';
 import {
   filterTags,
   getNameOfTag,
@@ -14,12 +18,14 @@ import {
   getFilteredUsersByCity,
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
-} from "../helpers/userPageHelpers";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import Fab from "@material-ui/core/Fab";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { makeStyles } from "@material-ui/core/styles";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+} from '../helpers/userPageHelpers';
+import Button from '@material-ui/core/Button';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import Fab from '@material-ui/core/Fab';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { makeStyles } from '@material-ui/core/styles';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -48,7 +54,8 @@ const UserPage = (props) => {
     // change age range to logged in user's age, 50
     ageRange: [0, 80],
     city: [],
-    gender: "",
+    gender: '',
+    favorite: false,
   });
 
   useEffect(() => {
@@ -62,6 +69,10 @@ const UserPage = (props) => {
       });
     }
   }, [loading]);
+
+  const filteredFavoriteId = getFavoriteByUser(props.favorite, Number(id));
+  const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
+  console.log('filteredFavorite', filteredFavoriteUsers);
 
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
@@ -103,17 +114,37 @@ const UserPage = (props) => {
     setState(selectArr);
   };
 
+  const handleFavorite = () => {
+    if (state.favorite) {
+      setState({
+        ...state,
+        tags: LoggedInUserTagIDs,
+        city: [],
+        ageRange: [],
+        favorite: false,
+      });
+    } else
+      setState({
+        ...state,
+        tags: [],
+        city: [],
+        favorite: true,
+      });
+  };
+
   const userTagObj = userIdWithTagsArrObj(users, user_tag);
   // console.log('userTagObj', userTagObj);
 
   // console.log('filteredByGender', filteredByGender);
   // console.log('users', users);
 
-  const filteredByTags = getFilteredUsersByInterest(
-    state.tags,
-    userTagObj,
-    users
-  );
+  let filteredByTags;
+  if (state.favorite) {
+    filteredByTags = filteredFavoriteUsers;
+  } else {
+    filteredByTags = getFilteredUsersByInterest(state.tags, userTagObj, users);
+  }
+
   // console.log('filteredByTags', filteredByTags);
   const filteredByGender = getFilteredUsersByGender(
     state.gender,
@@ -149,9 +180,19 @@ const UserPage = (props) => {
         name={loggedInUserInfo}
         buttonColor={state.buttonColor}
       />
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFavorite();
+        }}
+      >
+        Favorite
+      </button>
 
       <div className="user-page">
-        {state.tags.length === 0 && state.city.length === 0 ? (
+        {state.tags.length === 0 &&
+          state.city.length === 0 &&
+          !state.favorite ? (
           <h1>No results</h1>
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
@@ -176,16 +217,23 @@ const UserPage = (props) => {
                     )}
                     messages={props.messages}
                     setMessages={props.setMessages}
+                    //zio testing
+                    filteredFavoriteId={filteredFavoriteId}
+                    users={props.users}
+                    loading={props.loading}
+                    realTimeData={props.realTimeData}
+                    favorite={props.favorite}
+                    block={props.block}
                   />
                 </Grid>
               </Grid>
             );
           })
         )}
-        {console.log("state", state)}
+        {console.log('state', state)}
       </div>
       <div id="user-page-button">
-        {startNum > 2 && endNum <= (filteredByCity.length) &&
+        {startNum > 2 && endNum <= filteredByCity.length && (
           <Fab
             variant="extended"
             size="small"
@@ -197,19 +245,21 @@ const UserPage = (props) => {
             <ArrowBackIcon className={classes.extendedIcon} />
             Previous
           </Fab>
-        }
-        {endNum > (filteredByCity.length - 1) || endNum < (filteredByCity.length - 1) &&
-          <Fab
-            variant="extended"
-            size="small"
-            color="secondary"
-            aria-label="next"
-            className={classes.margin}
-            onClick={() => handleNextButton(startNum, endNum)}
-          >
-            <ArrowForwardIcon className={classes.extendedIcon} />
-            Next
-          </Fab>}
+        )}
+        {endNum > filteredByCity.length - 1 ||
+          (endNum < filteredByCity.length - 1 && (
+            <Fab
+              variant="extended"
+              size="small"
+              color="secondary"
+              aria-label="next"
+              className={classes.margin}
+              onClick={() => handleNextButton(startNum, endNum)}
+            >
+              <ArrowForwardIcon className={classes.extendedIcon} />
+              Next
+            </Fab>
+          ))}
       </div>
     </>
   );

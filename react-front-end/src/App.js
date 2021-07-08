@@ -117,6 +117,11 @@ function App() {
               loading={loading}
               messages={messages}
               setMessages={setMessages}
+              // zio add for testing
+              setMessages={setMessages}
+              realTimeData={realTimeData}
+              favorite={favorite}
+              block={block}
             />
           </Route>
 
