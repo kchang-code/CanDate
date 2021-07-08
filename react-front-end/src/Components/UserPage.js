@@ -31,6 +31,8 @@ import {
   getUserIBlock,
   getUsersByBlocked,
 } from '../helpers/favoriteBlockHelp';
+import Status from "./Status"
+
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -54,7 +56,7 @@ const UserPage = (props) => {
 
   const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
-  
+
   const [state, setState] = useState({
     tags: [],
     // change age range to logged in user's age, 50
@@ -84,7 +86,7 @@ const UserPage = (props) => {
   // const filteredBlockUsers = filteredUserIBlockId.map((id) => users[id - 1]);
 
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
-  
+
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
     selectArr.ageRange = data;
@@ -187,17 +189,17 @@ const UserPage = (props) => {
 
   const matchObj = getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags)
 
-function addMatchPointPercentage(filteredByCity, matchObj ) {
-   for (const obj of filteredByCity) {
-     for (const match of matchObj) {
-       if (obj.id === match.userId) {
-         obj.percent = match.percentage
-       }
-     }
-   }
+  function addMatchPointPercentage(filteredByCity, matchObj) {
+    for (const obj of filteredByCity) {
+      for (const match of matchObj) {
+        if (obj.id === match.userId) {
+          obj.percent = match.percentage
+        }
+      }
+    }
   }
 
-  addMatchPointPercentage(filteredByCity, matchObj )
+  addMatchPointPercentage(filteredByCity, matchObj)
 
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
@@ -211,103 +213,105 @@ function addMatchPointPercentage(filteredByCity, matchObj ) {
 
 
   return (
-    <>
-      <NavBar
-        handleTagClick={handleTagClick}
-        handleAddressClick={handleAddressClick}
-        handleEmptyTagsClick={handleEmptyTagsClick}
-        updateAgeRange={updateAgeRange}
-        ageRange={state.ageRange}
-        users={users}
-        name={loggedInUserInfo}
-        handleFavorite={handleFavorite}
-        setGender={setState}
-        state={state}
-      />
-      <div className="user-page">
-        {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite ? (
-          <div class="no-results">
-            <h1>No results</h1>
-            <p>Please filter again!</p>
-          </div>
-        ) : filteredByCity.length === 0 ? (
-          <div class="no-results">
-            <h1>No results</h1>
-            <p>Please filter again!</p>
-          </div>
-        ) : (
-          filteredByCity.slice(startNum, endNum).map((filteredUser) => {
-            return (
-              <Grid container spacing={4} className="user-page-ind">
-                <Grid item xs={12}>
-                  <ProfileCard
-                    key={filteredUser.id}
-                    id={filteredUser.id}
-                    name={filteredUser.first_name}
-                    last_name={filteredUser.last_name}
-                    city={filteredUser.address}
-                    age={filteredUser.age}
-                    gender={filteredUser.gender}
-                    about_me={filteredUser['about_me']}
-                    height={filteredUser.height}
-                    address={filteredUser.address}
-                    profile_photo={filteredUser.profile_photo}
-                    tag={getNameOfTag(
-                      filterTags(filteredUser.id, user_tag),
-                      tags
-                    )}
-                    messages={props.messages}
-                    setMessages={props.setMessages}
-                    //zio testing
-                    filteredFavoriteId={filteredFavoriteId}
-                    users={props.users}
-                    loading={props.loading}
-                    realTimeData={props.realTimeData}
-                    favorite={props.favorite}
-                    block={props.block}
-                    setFavorite={props.setFavorite}
-                    setBlock={props.setBlock}
-                    matchPercentage={filteredUser.percent}
-                  />
+    loading ? <Status /> :
+      <>
+        <NavBar
+          handleTagClick={handleTagClick}
+          handleAddressClick={handleAddressClick}
+          handleEmptyTagsClick={handleEmptyTagsClick}
+          updateAgeRange={updateAgeRange}
+          ageRange={state.ageRange}
+          users={users}
+          name={loggedInUserInfo}
+          handleFavorite={handleFavorite}
+          setGender={setState}
+          state={state}
+        />
+        <div className="user-page">
+          {state.tags.length === 0 &&
+            state.city.length === 0 &&
+            !state.favorite ? (
+            <div class="no-results">
+              <h1>No results</h1>
+              <p>Please filter again!</p>
+            </div>
+          ) : filteredByCity.length === 0 ? (
+            <div class="no-results">
+              <h1>No results</h1>
+              <p>Please filter again!</p>
+            </div>
+          ) : (
+            filteredByCity.slice(startNum, endNum).map((filteredUser) => {
+              return (
+                <Grid container spacing={4} className="user-page-ind">
+                  <Grid item xs={12}>
+                    <ProfileCard
+                      key={filteredUser.id}
+                      id={filteredUser.id}
+                      name={filteredUser.first_name}
+                      last_name={filteredUser.last_name}
+                      city={filteredUser.address}
+                      age={filteredUser.age}
+                      gender={filteredUser.gender}
+                      about_me={filteredUser['about_me']}
+                      height={filteredUser.height}
+                      address={filteredUser.address}
+                      profile_photo={filteredUser.profile_photo}
+                      tag={getNameOfTag(
+                        filterTags(filteredUser.id, user_tag),
+                        tags
+                      )}
+                      messages={props.messages}
+                      setMessages={props.setMessages}
+                      //zio testing
+                      filteredFavoriteId={filteredFavoriteId}
+                      users={props.users}
+                      loading={props.loading}
+                      realTimeData={props.realTimeData}
+                      favorite={props.favorite}
+                      block={props.block}
+                      setFavorite={props.setFavorite}
+                      setBlock={props.setBlock}
+                      matchPercentage={filteredUser.percent}
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-            );
-          })
-        )}
-        {/* {console.log('state', state)} */}
-      </div>
-      <div id="user-page-button">
-        {startNum > 2 && (
-          <Fab
-            variant="extended"
-            size="small"
-            color="secondary"
-            aria-label="previous"
-            className={classes.margin}
-            onClick={() => handlePreviousButton(startNum, endNum)}
-          >
-            <ArrowBackIcon className={classes.extendedIcon} />
-            Previous
-          </Fab>
-        )}
-        {endNum < filteredByCity.length && (
-          <Fab
-            variant="extended"
-            size="small"
-            color="secondary"
-            aria-label="next"
-            className={classes.margin}
-            onClick={() => handleNextButton(startNum, endNum)}
-          >
-            <ArrowForwardIcon className={classes.extendedIcon} />
-            Next
-          </Fab>
-        )}
-      </div>
-    </>
+              );
+            })
+          )}
+          {/* {console.log('state', state)} */}
+        </div>
+        <div id="user-page-button">
+          {startNum > 2 && (
+            <Fab
+              variant="extended"
+              size="small"
+              color="secondary"
+              aria-label="previous"
+              className={classes.margin}
+              onClick={() => handlePreviousButton(startNum, endNum)}
+            >
+              <ArrowBackIcon className={classes.extendedIcon} />
+              Previous
+            </Fab>
+          )}
+          {endNum < filteredByCity.length && (
+            <Fab
+              variant="extended"
+              size="small"
+              color="secondary"
+              aria-label="next"
+              className={classes.margin}
+              onClick={() => handleNextButton(startNum, endNum)}
+            >
+              <ArrowForwardIcon className={classes.extendedIcon} />
+              Next
+            </Fab>
+          )}
+        </div>
+      </>
   );
 };
+
 
 export default UserPage;

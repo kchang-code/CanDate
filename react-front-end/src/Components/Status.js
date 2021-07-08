@@ -1,14 +1,24 @@
-import React from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '300px',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
 
 export default function Status(props) {
+  const classes = useStyles();
+
   return (
-    <main className="appointment__card appointment__card--status">
-      <img
-        className="appointment__status-image"
-        src="images/status.png"
-        alt="Loading"
-      />
-      <h1 className="text--semi-bold">{props.message}</h1>
-    </main>
-  )
+    <div className={classes.root}>
+      <CircularProgress color="secondary" />
+    </div>
+  );
 }

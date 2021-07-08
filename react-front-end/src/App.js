@@ -61,7 +61,7 @@ function App() {
         setFavorite(favorite.data.favorites);
         setUserTags(user_tag.data.user_tag);
         setBlock(block.data.block);
-        setLoading(false);
+        setTimeout(function () { setLoading(false); }, 1000);
       })
       .catch((err) => {
         console.log(err);
