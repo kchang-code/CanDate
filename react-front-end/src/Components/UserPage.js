@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import ProfileCard from "./ProfileCard";
 import Grid from "@material-ui/core/Grid";
-import useUserPage from "../hooks/useUserPage";
 import "./UserPage.scss";
-import axios from "axios";
 import NavBar from "./NavBar";
-import { TagsContext } from "../Context/TagsContext";
-import { useRadioGroup } from "@material-ui/core";
 import {
   filterTags,
   getNameOfTag,
@@ -19,7 +15,6 @@ import {
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
 } from "../helpers/userPageHelpers";
-import Button from "@material-ui/core/Button";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Fab from "@material-ui/core/Fab";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -54,7 +49,6 @@ const UserPage = (props) => {
     ageRange: [0, 80],
     city: [],
     gender: "",
-    buttonColor: "default",
   });
 
   useEffect(() => {
