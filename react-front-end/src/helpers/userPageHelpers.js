@@ -106,6 +106,45 @@ export function getFilteredUsersByInterest(interests, userTagObj, users) {
   return filteredUsers;
 }
 
+export function getUserIdWithMatchPointObj(interests, userTagObj, users, requiredInterests) {
+  const checkIfContainsAllInterest = (userInterests, requiredInterests) => {
+    let result = false;
+    let matchPoint = 0;
+    requiredInterests.forEach((requiredInterest) => {
+      if (userInterests.includes(requiredInterest)) {
+        result = true;
+        matchPoint++;
+      }
+    });
+
+    return { result, matchPoint };
+  };
+
+  let filteredUserWithMatchPointObj = [];
+  for (const userId in userTagObj) {
+    const { result, matchPoint } = checkIfContainsAllInterest(
+      userTagObj[userId],
+      interests
+    );
+    if (result) {
+      filteredUserWithMatchPointObj.push({ userId, matchPoint });
+    }
+    filteredUserWithMatchPointObj.sort((a, b) => {
+      return b.matchPoint - a.matchPoint;
+    });
+  }
+
+  let filteredUsers = [];
+
+  filteredUserWithMatchPointObj.forEach((obj) => {
+    filteredUsers.push({userId: users[obj.userId - 1].id, matchPoint: obj.matchPoint, percentage: Math.round((obj.matchPoint / requiredInterests.length) * 100)});
+  });
+
+  
+
+  return filteredUsers;
+}
+
 // age filter: returns array of user ids for filtered users
 export function getFilteredUsersByAge(users, ageRange) {
   const filteredUsers = [];
@@ -134,7 +173,11 @@ export function getFilteredUsersByCity(cities, users) {
   users.forEach((eachUser) => {
     if (cities.includes(eachUser.address)) {
       filteredUsers.push(eachUser);
+
     }
   });
+
+  
   return filteredUsers;
 }
+

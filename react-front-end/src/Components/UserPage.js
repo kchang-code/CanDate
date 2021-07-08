@@ -18,6 +18,7 @@ import {
   getFilteredUsersByCity,
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
+  getUserIdWithMatchPointObj,
 } from '../helpers/userPageHelpers';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -53,6 +54,7 @@ const UserPage = (props) => {
 
   const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
+  
   const [state, setState] = useState({
     tags: [],
     // change age range to logged in user's age, 50
@@ -82,12 +84,13 @@ const UserPage = (props) => {
   // const filteredBlockUsers = filteredUserIBlockId.map((id) => users[id - 1]);
 
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
-
+  
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
     selectArr.ageRange = data;
     setState(selectArr);
   };
+
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
@@ -151,6 +154,7 @@ const UserPage = (props) => {
   // console.log('filteredByGender', filteredByGender);
   // console.log('users', users);
 
+
   let filteredByTags;
   if (state.favorite) {
     filteredByTags = filteredFavoriteUsers;
@@ -181,6 +185,20 @@ const UserPage = (props) => {
   );
   // console.log('filteredByCity', filteredByCity);
 
+  const matchObj = getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags)
+
+function addMatchPointPercentage(filteredByCity, matchObj ) {
+   for (const obj of filteredByCity) {
+     for (const match of matchObj) {
+       if (obj.id === match.userId) {
+         obj.percent = match.percentage
+       }
+     }
+   }
+  }
+
+  addMatchPointPercentage(filteredByCity, matchObj )
+
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
     setEndNum((num2 += 3));
@@ -190,6 +208,7 @@ const UserPage = (props) => {
     setStartNum((num1 -= 3));
     setEndNum((num2 -= 3));
   };
+
 
   return (
     <>
@@ -250,6 +269,7 @@ const UserPage = (props) => {
                     block={props.block}
                     setFavorite={props.setFavorite}
                     setBlock={props.setBlock}
+                    matchPercentage={filteredUser.percent}
                   />
                 </Grid>
               </Grid>

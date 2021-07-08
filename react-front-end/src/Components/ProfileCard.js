@@ -22,7 +22,9 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
-
+import {PercentageBadge} from './PercentageBadge';
+import { getFavoriteByUser } from "../helpers/favoriteBlockHelp";
+import Badge from "react-bootstrap/Badge";
 import {
   checkIfLiked,
   findIndexOfFavorite,
@@ -36,7 +38,7 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
@@ -143,7 +145,7 @@ export default function ProfileCard(props) {
     }
   };
 
-  const title = props.name + ',' + props.age + ',' + props.address;
+  const title = props.name + "," + props.age + "," + props.address;
 
   const handleClickMessage = () => {
     const myName = props.users[Number(id) - 1].first_name;
@@ -153,7 +155,7 @@ export default function ProfileCard(props) {
       to_user_id: Number(props.id),
       content: `Hello! I am ${myName}`,
     };
-    console.log('load to message page');
+    console.log("load to message page");
 
     const timeElapsed = Date.now();
     //sending msg state
@@ -161,14 +163,14 @@ export default function ProfileCard(props) {
 
     let time = today.toLocaleString();
     axios
-      .put('http://localhost:8080/api/users/:id/messages', {
+      .put("http://localhost:8080/api/users/:id/messages", {
         newMessage: { ...newMessage, creates_on: time },
       })
       .then((res) => {
         props.setMessages([...props.messages, ...res.data]);
       })
       .catch((err) => {
-        console.log('Put error on new messages', err);
+        console.log("Put error on new messages", err);
       });
   };
 
@@ -190,9 +192,11 @@ export default function ProfileCard(props) {
 
   let color;
   props.filteredFavoriteId.includes(props.id)
-    ? (color = 'red')
-    : (color = 'rgba(0, 0, 0, 0.54)');
+    ? (color = "red")
+    : (color = "rgba(0, 0, 0, 0.54)");
 
+
+    
   return (
     <>
       <div className="ProfileCard">
@@ -217,7 +221,6 @@ export default function ProfileCard(props) {
                 >
                   <FavoriteIcon />
                 </IconButton>
-
                 {/* open message dialogue */}
                 <IconButton onClick={handleClickMessage}>
                   <ChatBubbleIcon />
@@ -254,6 +257,7 @@ export default function ProfileCard(props) {
                 >
                   <BlockIcon />
                 </IconButton>
+                <Badge variant="light">{props.matchPercentage}</Badge>% Match 
                 {/* from here is the block confirmation */}
 
                 <Dialog
@@ -293,7 +297,7 @@ export default function ProfileCard(props) {
             }
           />
           <CardMedia
-            style={{ height: '200px', paddingTop: '2%' }}
+            style={{ height: "200px", paddingTop: "2%" }}
             image={props.profile_photo}
           />
           <CardContent>
@@ -316,14 +320,14 @@ export default function ProfileCard(props) {
                 </DialogTitle>
                 <DialogContent dividers>
                   <Typography gutterBottom>
-                    Name: {props.name} {props['last_name']}
+                    Name: {props.name} {props["last_name"]}
                   </Typography>
                   <Typography gutterBottom>City: {props.city}</Typography>
                   <Typography gutterBottom>Gender: {props.gender}</Typography>
                   <Typography gutterBottom>Age: {props.age}</Typography>
                   <Typography gutterBottom>Height: {props.height}</Typography>
                   <Typography gutterBottom>
-                    About Me: {props['about_me']}
+                    About Me: {props["about_me"]}
                   </Typography>
                 </DialogContent>
               </Dialog>
@@ -337,6 +341,7 @@ export default function ProfileCard(props) {
           </CardContent>
         </Card>
       </div>
+      {/* {console.log("props.matchpercentage", props.matchPercentage)} */}
     </>
   );
 }
