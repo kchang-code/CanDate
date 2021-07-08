@@ -22,7 +22,11 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 
-import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
+import {
+  checkIfLiked,
+  findIndexOfFavorite,
+  getFavoriteByUser,
+} from '../helpers/favoriteBlockHelp';
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -92,19 +96,41 @@ export default function ProfileCard(props) {
     setOpen(false);
   };
 
+  const filteredFavoriteId = getFavoriteByUser(favorite, id);
+  // console.log('filteredFavoriteId', filteredFavoriteId);
   const handleLike = () => {
     const newFavorite = {
       user_id: Number(id),
       favorite_user_id: Number(props.id),
+      id: favorite.length + 1,
     };
+    const unlikeIndex = findIndexOfFavorite(
+      favorite,
+      Number(id),
+      Number(props.id)
+    );
 
-    axios
-      .put('http://localhost:8080/api/favorites', {
-        newFavorite: { ...newFavorite },
-      })
-      .then(() => {
-        props.setFavorite([...favorite, newFavorite]);
-      });
+    let newFavoriteAfterDelete = [...favorite];
+    newFavoriteAfterDelete.splice(unlikeIndex, 1);
+
+    if (checkIfLiked(favorite, Number(id), Number(props.id))) {
+      axios
+        .put('http://localhost:8080/api/deleteFavorite', {
+          newFavorite: { ...newFavorite },
+        })
+        .then(() => {
+          props.setFavorite([...newFavoriteAfterDelete]);
+        });
+    } else {
+      axios
+        .put('http://localhost:8080/api/favorites', {
+          newFavorite: { ...newFavorite },
+        })
+        .then(() => {
+          props.setFavorite([...favorite, newFavorite]);
+          console.log('favorite', favorite);
+        });
+    }
   };
 
   const title = props.name + ',' + props.age + ',' + props.address;

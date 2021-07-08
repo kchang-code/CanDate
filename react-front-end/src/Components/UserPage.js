@@ -173,7 +173,7 @@ const UserPage = (props) => {
     filteredUserIBlockId
   );
 
-  console.log(filteredUsersByBlocked);
+  // console.log(filteredUsersByBlocked);
 
   const filteredByCity = getFilteredUsersByCity(
     state.city,
