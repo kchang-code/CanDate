@@ -23,7 +23,6 @@ import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import {PercentageBadge} from './PercentageBadge';
-import { getFavoriteByUser } from "../helpers/favoriteBlockHelp";
 import Badge from "react-bootstrap/Badge";
 import {
   checkIfLiked,
