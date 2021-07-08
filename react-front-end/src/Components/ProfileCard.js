@@ -15,6 +15,7 @@ import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+s;
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
@@ -23,7 +24,7 @@ import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { PercentageBadge } from './PercentageBadge';
-import Badge from "react-bootstrap/Badge";
+import Badge from 'react-bootstrap/Badge';
 import {
   checkIfLiked,
   findIndexOfFavorite,
@@ -37,7 +38,7 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   closeButton: {
-    position: "absolute",
+    position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
@@ -77,17 +78,24 @@ const DialogActions = withStyles((theme) => ({
 //from line 25 - 68 are all material ui functions
 
 export default function ProfileCard(props) {
+  const { openMsg, setOpenMsg, handleMessageClose } = props;
+
   let { id } = useParams();
   const [open, setOpen] = useState(false);
-  const [openMsg, setOpenMsg] = useState(false);
+  // const [openMsg, setOpenMsg] = useState(false);
   const [openConfirm, setOpenConfirm] = React.useState(false);
 
   const { favorite } = props;
 
-  const handleMessageClose = (e) => {
-    e.stopPropagation();
-    setOpenMsg(false);
-  };
+  // const handleMessageClose = (e) => {
+  //   e.stopPropagation();
+  //   setOpenMsg(false);
+  // };
+
+  // const handleMessageOpen = (e) => {
+  //   e.stopPropagation();
+  //   setOpenMsg(true);
+  // };
 
   const handleClickOpen = (e) => {
     e.stopPropagation();
@@ -144,7 +152,7 @@ export default function ProfileCard(props) {
     }
   };
 
-  const title = props.name + "," + props.age + "," + props.address;
+  const title = props.name + ',' + props.age + ',' + props.address;
 
   const handleClickMessage = () => {
     const myName = props.users[Number(id) - 1].first_name;
@@ -154,7 +162,7 @@ export default function ProfileCard(props) {
       to_user_id: Number(props.id),
       content: `Hello! I am ${myName}`,
     };
-    console.log("load to message page");
+    console.log('load to message page');
 
     const timeElapsed = Date.now();
     //sending msg state
@@ -162,14 +170,14 @@ export default function ProfileCard(props) {
 
     let time = today.toLocaleString();
     axios
-      .put("http://localhost:8080/api/users/:id/messages", {
+      .put('http://localhost:8080/api/users/:id/messages', {
         newMessage: { ...newMessage, creates_on: time },
       })
       .then((res) => {
         props.setMessages([...props.messages, ...res.data]);
       })
       .catch((err) => {
-        console.log("Put error on new messages", err);
+        console.log('Put error on new messages', err);
       });
   };
 
@@ -191,10 +199,8 @@ export default function ProfileCard(props) {
 
   let color;
   props.filteredFavoriteId.includes(props.id)
-    ? (color = "red")
-    : (color = "rgba(0, 0, 0, 0.54)");
-
-
+    ? (color = 'red')
+    : (color = 'rgba(0, 0, 0, 0.54)');
 
   return (
     <>
@@ -203,7 +209,7 @@ export default function ProfileCard(props) {
           // {users}
           class="card"
           elevation={3}
-          onClick={() => { }}
+          onClick={() => {}}
         >
           <CardHeader
             class="name"
@@ -230,23 +236,15 @@ export default function ProfileCard(props) {
                   open={openMsg}
                   maxWidth="xl"
                 >
-                  <DialogTitle
-                    id="customized-dialog-title"
-                    onClose={handleMessageClose}
-                  >
-                    Modal title
-                  </DialogTitle>
-                  <DialogContent dividers>
-                    <Message
-                      messages={props.messages}
-                      users={props.users}
-                      setMessages={props.setMessages}
-                      loading={props.loading}
-                      realTimeData={props.realTimeData}
-                      favorite={props.favorite}
-                      block={props.block}
-                    />
-                  </DialogContent>
+                  <Message
+                    messages={props.messages}
+                    users={props.users}
+                    setMessages={props.setMessages}
+                    loading={props.loading}
+                    realTimeData={props.realTimeData}
+                    favorite={props.favorite}
+                    block={props.block}
+                  />
                 </Dialog>
                 <IconButton
                   onClick={() => {
@@ -258,7 +256,6 @@ export default function ProfileCard(props) {
                 </IconButton>
                 <Badge variant="light">{props.matchPercentage}</Badge>% Match
                 {/* from here is the block confirmation */}
-
                 <Dialog
                   open={openConfirm}
                   onClose={handleCloseConfirm}
@@ -290,13 +287,12 @@ export default function ProfileCard(props) {
                     </Button>
                   </DialogActions>
                 </Dialog>
-
                 {/* end of confirm dialogue */}
               </>
             }
           />
           <CardMedia
-            style={{ height: "200px", paddingTop: "2%" }}
+            style={{ height: '200px', paddingTop: '2%' }}
             image={props.profile_photo}
           />
           <CardContent>
@@ -319,14 +315,14 @@ export default function ProfileCard(props) {
                 </DialogTitle>
                 <DialogContent dividers>
                   <Typography gutterBottom>
-                    Name: {props.name} {props["last_name"]}
+                    Name: {props.name} {props['last_name']}
                   </Typography>
                   <Typography gutterBottom>City: {props.city}</Typography>
                   <Typography gutterBottom>Gender: {props.gender}</Typography>
                   <Typography gutterBottom>Age: {props.age}</Typography>
                   <Typography gutterBottom>Height: {props.height}</Typography>
                   <Typography gutterBottom>
-                    About Me: {props["about_me"]}
+                    About Me: {props['about_me']}
                   </Typography>
                 </DialogContent>
               </Dialog>

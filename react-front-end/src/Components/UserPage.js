@@ -31,8 +31,7 @@ import {
   getUserIBlock,
   getUsersByBlocked,
 } from '../helpers/favoriteBlockHelp';
-import Status from "./Status"
-
+import Status from './Status';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -56,6 +55,15 @@ const UserPage = (props) => {
 
   const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
+  const [openMsg, setOpenMsg] = useState(false);
+  const handleMessageClose = (e) => {
+    e.stopPropagation();
+    setOpenMsg(false);
+  };
+  const handleMessageOpen = (e) => {
+    e.stopPropagation();
+    setOpenMsg(true);
+  };
 
   const [state, setState] = useState({
     tags: [],
@@ -92,7 +100,6 @@ const UserPage = (props) => {
     selectArr.ageRange = data;
     setState(selectArr);
   };
-
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
@@ -144,6 +151,7 @@ const UserPage = (props) => {
         ...state,
         tags: [],
         city: [],
+        ageRange: [],
         gender: '',
         favorite: true,
       });
@@ -155,7 +163,6 @@ const UserPage = (props) => {
 
   // console.log('filteredByGender', filteredByGender);
   // console.log('users', users);
-
 
   let filteredByTags;
   if (state.favorite) {
@@ -181,25 +188,31 @@ const UserPage = (props) => {
 
   // console.log(filteredUsersByBlocked);
 
-  const filteredByCity = getFilteredUsersByCity(
-    state.city,
-    filteredUsersByBlocked
+  const filteredHimself = filteredUsersByBlocked.filter(
+    (user) => user.id !== Number(id)
   );
+
+  const filteredByCity = getFilteredUsersByCity(state.city, filteredHimself);
   // console.log('filteredByCity', filteredByCity);
 
-  const matchObj = getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags)
+  const matchObj = getUserIdWithMatchPointObj(
+    state.tags,
+    userTagObj,
+    users,
+    state.tags
+  );
 
   function addMatchPointPercentage(filteredByCity, matchObj) {
     for (const obj of filteredByCity) {
       for (const match of matchObj) {
         if (obj.id === match.userId) {
-          obj.percent = match.percentage
+          obj.percent = match.percentage;
         }
       }
     }
   }
 
-  addMatchPointPercentage(filteredByCity, matchObj)
+  addMatchPointPercentage(filteredByCity, matchObj);
 
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
@@ -211,107 +224,114 @@ const UserPage = (props) => {
     setEndNum((num2 -= 3));
   };
 
-
-  return (
-    loading ? <Status /> :
-      <>
-        <NavBar
-          handleTagClick={handleTagClick}
-          handleAddressClick={handleAddressClick}
-          handleEmptyTagsClick={handleEmptyTagsClick}
-          updateAgeRange={updateAgeRange}
-          ageRange={state.ageRange}
-          users={users}
-          name={loggedInUserInfo}
-          handleFavorite={handleFavorite}
-          setGender={setState}
-          state={state}
-        />
-        <div className="user-page">
-          {state.tags.length === 0 &&
-            state.city.length === 0 &&
-            !state.favorite ? (
-            <div class="no-results">
-              <h1>No results</h1>
-              <p>Please filter again!</p>
-            </div>
-          ) : filteredByCity.length === 0 ? (
-            <div class="no-results">
-              <h1>No results</h1>
-              <p>Please filter again!</p>
-            </div>
-          ) : (
-            filteredByCity.slice(startNum, endNum).map((filteredUser) => {
-              return (
-                <Grid container spacing={4} className="user-page-ind">
-                  <Grid item xs={12}>
-                    <ProfileCard
-                      key={filteredUser.id}
-                      id={filteredUser.id}
-                      name={filteredUser.first_name}
-                      last_name={filteredUser.last_name}
-                      city={filteredUser.address}
-                      age={filteredUser.age}
-                      gender={filteredUser.gender}
-                      about_me={filteredUser['about_me']}
-                      height={filteredUser.height}
-                      address={filteredUser.address}
-                      profile_photo={filteredUser.profile_photo}
-                      tag={getNameOfTag(
-                        filterTags(filteredUser.id, user_tag),
-                        tags
-                      )}
-                      messages={props.messages}
-                      setMessages={props.setMessages}
-                      //zio testing
-                      filteredFavoriteId={filteredFavoriteId}
-                      users={props.users}
-                      loading={props.loading}
-                      realTimeData={props.realTimeData}
-                      favorite={props.favorite}
-                      block={props.block}
-                      setFavorite={props.setFavorite}
-                      setBlock={props.setBlock}
-                      matchPercentage={filteredUser.percent}
-                    />
-                  </Grid>
+  return loading ? (
+    <Status />
+  ) : (
+    <>
+      <NavBar
+        handleTagClick={handleTagClick}
+        handleAddressClick={handleAddressClick}
+        handleEmptyTagsClick={handleEmptyTagsClick}
+        updateAgeRange={updateAgeRange}
+        ageRange={state.ageRange}
+        users={users}
+        name={loggedInUserInfo}
+        handleFavorite={handleFavorite}
+        setGender={setState}
+        state={state}
+        openMsg={openMsg}
+        setOpenMsg={setOpenMsg}
+        handleMessageClose={handleMessageClose}
+        handleMessageOpen={handleMessageOpen}
+      />
+      <div className="user-page">
+        {state.tags.length === 0 &&
+        state.city.length === 0 &&
+        !state.favorite ? (
+          <div class="no-results">
+            <h1>No results</h1>
+            <p>Please filter again!</p>
+          </div>
+        ) : filteredByCity.length === 0 ? (
+          <div class="no-results">
+            <h1>No results</h1>
+            <p>Please filter again!</p>
+          </div>
+        ) : (
+          filteredByCity.slice(startNum, endNum).map((filteredUser) => {
+            return (
+              <Grid container spacing={4} className="user-page-ind">
+                <Grid item xs={12}>
+                  <ProfileCard
+                    key={filteredUser.id}
+                    id={filteredUser.id}
+                    name={filteredUser.first_name}
+                    last_name={filteredUser.last_name}
+                    city={filteredUser.address}
+                    age={filteredUser.age}
+                    gender={filteredUser.gender}
+                    about_me={filteredUser['about_me']}
+                    height={filteredUser.height}
+                    address={filteredUser.address}
+                    profile_photo={filteredUser.profile_photo}
+                    tag={getNameOfTag(
+                      filterTags(filteredUser.id, user_tag),
+                      tags
+                    )}
+                    messages={props.messages}
+                    setMessages={props.setMessages}
+                    //zio testing
+                    filteredFavoriteId={filteredFavoriteId}
+                    users={props.users}
+                    loading={props.loading}
+                    realTimeData={props.realTimeData}
+                    favorite={props.favorite}
+                    block={props.block}
+                    setFavorite={props.setFavorite}
+                    setBlock={props.setBlock}
+                    matchPercentage={filteredUser.percent}
+                    openMsg={openMsg}
+                    setOpenMsg={setOpenMsg}
+                    handleMessageClose={handleMessageClose}
+                    handleMessageOpen={handleMessageOpen}
+                  />
                 </Grid>
-              );
-            })
-          )}
-          {/* {console.log('state', state)} */}
-        </div>
-        <div id="user-page-button">
-          {startNum > 2 && (
-            <Fab
-              variant="extended"
-              size="small"
-              color="secondary"
-              aria-label="previous"
-              className={classes.margin}
-              onClick={() => handlePreviousButton(startNum, endNum)}
-            >
-              <ArrowBackIcon className={classes.extendedIcon} />
-              Previous
-            </Fab>
-          )}
-          {endNum < filteredByCity.length && (
-            <Fab
-              variant="extended"
-              size="small"
-              color="secondary"
-              aria-label="next"
-              className={classes.margin}
-              onClick={() => handleNextButton(startNum, endNum)}
-            >
-              <ArrowForwardIcon className={classes.extendedIcon} />
-              Next
-            </Fab>
-          )}
-        </div>
-      </>
+              </Grid>
+            );
+          })
+        )}
+        {/* {console.log('state', state)} */}
+      </div>
+      <div id="user-page-button">
+        {startNum > 2 && (
+          <Fab
+            variant="extended"
+            size="small"
+            color="secondary"
+            aria-label="previous"
+            className={classes.margin}
+            onClick={() => handlePreviousButton(startNum, endNum)}
+          >
+            <ArrowBackIcon className={classes.extendedIcon} />
+            Previous
+          </Fab>
+        )}
+        {endNum < filteredByCity.length && (
+          <Fab
+            variant="extended"
+            size="small"
+            color="secondary"
+            aria-label="next"
+            className={classes.margin}
+            onClick={() => handleNextButton(startNum, endNum)}
+          >
+            <ArrowForwardIcon className={classes.extendedIcon} />
+            Next
+          </Fab>
+        )}
+      </div>
+    </>
   );
 };
-
 
 export default UserPage;
