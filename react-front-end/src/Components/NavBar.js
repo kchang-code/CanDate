@@ -132,6 +132,13 @@ export default function NavBar(props) {
             CanDate
           </Typography>
           <div className={classes.grow} />
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={props.handleFavorite}
+          >
+            Favorite
+          </Button>
           <div>
             <Button
               variant="outlined"

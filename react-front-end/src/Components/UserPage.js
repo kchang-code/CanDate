@@ -52,7 +52,7 @@ const UserPage = (props) => {
   const [state, setState] = useState({
     tags: [],
     // change age range to logged in user's age, 50
-    ageRange: [0, 80],
+    ageRange: [20, 80],
     city: [],
     gender: '',
     favorite: false,
@@ -116,6 +116,8 @@ const UserPage = (props) => {
 
   const handleFavorite = () => {
     if (state.favorite) {
+
+      console.log("endNum", endNum)
       setState({
         ...state,
         tags: LoggedInUserTagIDs,
@@ -123,13 +125,16 @@ const UserPage = (props) => {
         ageRange: [],
         favorite: false,
       });
-    } else
+    } else {
+      setEndNum(3)
+      setStartNum(0)
       setState({
         ...state,
         tags: [],
         city: [],
         favorite: true,
       });
+    }
   };
 
   const userTagObj = userIdWithTagsArrObj(users, user_tag);
@@ -179,16 +184,8 @@ const UserPage = (props) => {
         users={users}
         name={loggedInUserInfo}
         buttonColor={state.buttonColor}
+        handleFavorite={handleFavorite}
       />
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleFavorite();
-        }}
-      >
-        Favorite
-      </button>
-
       <div className="user-page">
         {state.tags.length === 0 && state.city.length === 0 && !state.favorite ? (
           <div class="no-results">
@@ -240,7 +237,7 @@ const UserPage = (props) => {
         {console.log('state', state)}
       </div>
       <div id="user-page-button">
-        {startNum > 2 && endNum <= filteredByCity.length && (
+        {startNum > 2 && (
           <Fab
             variant="extended"
             size="small"
@@ -253,20 +250,19 @@ const UserPage = (props) => {
             Previous
           </Fab>
         )}
-        {endNum > filteredByCity.length - 1 ||
-          (endNum < filteredByCity.length - 1 && (
-            <Fab
-              variant="extended"
-              size="small"
-              color="secondary"
-              aria-label="next"
-              className={classes.margin}
-              onClick={() => handleNextButton(startNum, endNum)}
-            >
-              <ArrowForwardIcon className={classes.extendedIcon} />
-              Next
-            </Fab>
-          ))}
+        {endNum < filteredByCity.length && (
+          <Fab
+            variant="extended"
+            size="small"
+            color="secondary"
+            aria-label="next"
+            className={classes.margin}
+            onClick={() => handleNextButton(startNum, endNum)}
+          >
+            <ArrowForwardIcon className={classes.extendedIcon} />
+            Next
+          </Fab>
+        )}
       </div>
     </>
   );

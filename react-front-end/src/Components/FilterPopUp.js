@@ -7,6 +7,25 @@ import Slider from "@material-ui/core/Slider";
 let cities = [];
 export default function FilterPopUp(props) {
 
+  const marks = [
+    {
+      value: 20,
+      label: '20',
+    },
+    {
+      value: 40,
+      label: '40',
+    },
+    {
+      value: 60,
+      label: '60',
+    },
+    {
+      value: 80,
+      label: '80',
+    },
+  ]
+
 
   props.users.map((user) => {
     if (!cities.includes(user.address)) {
@@ -29,8 +48,12 @@ export default function FilterPopUp(props) {
           <h3>Age:</h3>
           <Slider
             style={{ width: 300, margin: 30 }}
+            defaultValue={20}
+            step={5}
             value={props.ageRange}
+            valueLabelDisplay="auto"
             onChange={props.updateAgeRange}
+            marks={marks}
           />
         </span>
         <span>
