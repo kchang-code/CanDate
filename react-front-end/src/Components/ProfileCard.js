@@ -21,6 +21,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 import {
   checkIfLiked,
@@ -78,6 +79,7 @@ export default function ProfileCard(props) {
   let { id } = useParams();
   const [open, setOpen] = useState(false);
   const [openMsg, setOpenMsg] = useState(false);
+  const [openConfirm, setOpenConfirm] = React.useState(false);
 
   const { favorite } = props;
 
@@ -94,6 +96,14 @@ export default function ProfileCard(props) {
   const handleClose = (e) => {
     e.stopPropagation();
     setOpen(false);
+  };
+
+  const handleClickOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
   };
 
   const filteredFavoriteId = getFavoriteByUser(favorite, id);
@@ -238,12 +248,47 @@ export default function ProfileCard(props) {
                 </Dialog>
                 <IconButton
                   onClick={() => {
-                    handleBlock();
                     console.log('block');
+                    handleClickOpenConfirm();
                   }}
                 >
                   <BlockIcon />
                 </IconButton>
+                {/* from here is the block confirmation */}
+
+                <Dialog
+                  open={openConfirm}
+                  onClose={handleCloseConfirm}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {'Are you sure you want to block this person?'}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      You will not get any information or message from this
+                      person.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCloseConfirm} color="primary">
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        handleCloseConfirm();
+                        handleBlock();
+                      }}
+                      color="primary"
+                      autoFocus
+                    >
+                      Confirm
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+
+                {/* end of confirm dialogue */}
               </>
             }
           />
