@@ -3,7 +3,7 @@ import Photo from './Photo';
 
 export default function PhotoList(props) {
   // const imageArr = props.image.slice(40, 75)
-  const lists = props.image.map((item) => {
+  const lists = props.image.slice(0, 28).map((item) => {
     return (
       <Photo image={item.profile_photo} />
     );

@@ -22,8 +22,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import {PercentageBadge} from './PercentageBadge';
-import { getFavoriteByUser } from "../helpers/favoriteBlockHelp";
+import { PercentageBadge } from './PercentageBadge';
 import Badge from "react-bootstrap/Badge";
 import {
   checkIfLiked,
@@ -196,7 +195,7 @@ export default function ProfileCard(props) {
     : (color = "rgba(0, 0, 0, 0.54)");
 
 
-    
+
   return (
     <>
       <div className="ProfileCard">
@@ -204,7 +203,7 @@ export default function ProfileCard(props) {
           // {users}
           class="card"
           elevation={3}
-          onClick={() => {}}
+          onClick={() => { }}
         >
           <CardHeader
             class="name"
@@ -257,7 +256,7 @@ export default function ProfileCard(props) {
                 >
                   <BlockIcon />
                 </IconButton>
-                <Badge variant="light">{props.matchPercentage}</Badge>% Match 
+                <Badge variant="light">{props.matchPercentage}</Badge>% Match
                 {/* from here is the block confirmation */}
 
                 <Dialog
