@@ -40,9 +40,38 @@ const getUsersByBlocked = (users, blockIdList) => {
   return users.filter((user) => !blockIdList.includes(user.id));
 };
 
+const findIndexOfFavorite = (favorite, id, favorite_user_id) => {
+  let result;
+  favorite.forEach((item, index) => {
+    if (
+      item.favorite_user_id === Number(favorite_user_id) &&
+      item.user_id === Number(id)
+    ) {
+      result = index;
+    }
+  });
+
+  return result;
+};
+
+const checkIfLiked = (favorite, id, favorite_user_id) => {
+  let result = false;
+  favorite.forEach((item, index) => {
+    if (
+      item.favorite_user_id === Number(favorite_user_id) &&
+      item.user_id === Number(id)
+    ) {
+      result = true;
+    }
+  });
+  return result;
+};
+
 module.exports = {
   getFavoriteByUser,
   getUserBlockMe,
   getUserIBlock,
   getUsersByBlocked,
+  findIndexOfFavorite,
+  checkIfLiked,
 };

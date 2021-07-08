@@ -159,5 +159,17 @@ module.exports = function (app) {
       });
   });
 
+  router.put("/deleteFavorite", (req, res) => {
+    console.log("here");
+    apiQueries
+      .deleteFavorite(req.body.newFavorite)
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   return router;
 };

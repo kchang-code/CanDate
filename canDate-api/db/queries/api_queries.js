@@ -193,6 +193,22 @@ const insertNewBlock = (newBlock) => {
     });
 };
 
+const deleteFavorite = (newFavorite) => {
+  const value = [newFavorite["user_id"], newFavorite["block_user_id"]];
+  const queryStatement = `DELETE FROM
+  WHERE user_id = $1 AND block_user_id = $2
+  RETURNING *`;
+
+  return db
+    .query(queryStatement, value)
+    .then((res) => {
+      return res.rows;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
 module.exports = {
   getAllTags,
   getAllUsers,
@@ -206,4 +222,5 @@ module.exports = {
   getAllBlockList,
   insertNewFavorite,
   insertNewBlock,
+  deleteFavorite,
 };
