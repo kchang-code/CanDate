@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "./ProfileCard.scss";
-import useUserPage from "../hooks/useUserPage";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import { Typography, IconButton } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-import Button from "@material-ui/core/Button";
-import ReactCardFlip from "react-card-flip";
-import Chip from "@material-ui/core/Chip";
+import React, { useEffect, useState } from 'react';
+import './ProfileCard.scss';
+import useUserPage from '../hooks/useUserPage';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import { Typography, IconButton } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import Button from '@material-ui/core/Button';
+import ReactCardFlip from 'react-card-flip';
+import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -18,8 +18,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from "axios";
-
+import axios from 'axios';
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -41,7 +40,11 @@ const DialogTitle = withStyles(styles)((props) => {
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
           <CloseIcon />
         </IconButton>
       ) : null}
@@ -63,8 +66,63 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 //from line 25 - 63 are all material ui functions
 
+//new dialog import for message component
+import { withStyles } from '@material-ui/core/styles';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import CloseIcon from '@material-ui/icons/Close';
+import Message from './Message';
+import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
+//configure dialog component
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+//configure dialog component
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+//configure dialog component
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+    flex: 1,
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
 
 export default function ProfileCard(props) {
+  let { id } = useParams();
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -75,16 +133,37 @@ export default function ProfileCard(props) {
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
-  const { tags, users } = props;
+  const { tags, users, favorite } = props;
+  //zio added open state
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setOpen(false);
+  };
+
+  const handleLike = () => {
+    const newFavorite = {
+      user_id: Number(id),
+      favorite_user_id: Number(props.id),
+    };
+
+    axios
+      .put('http://localhost:8080/api/favorites', {
+        newFavorite: { ...newFavorite },
+      })
+      .then(() => {
+        console.log('newFavorite', newFavorite);
+      });
+  };
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
   const title = props.name + ',' + props.age + ',' + props.address;
 
-  let { id } = useParams();
-
   const handleClickMessage = () => {
+    setOpen(true);
     const newMessage = {
       from_user_id: Number(id),
       to_user_id: Number(props.id),
@@ -112,6 +191,7 @@ export default function ProfileCard(props) {
   return (
     <>
       <div className="ProfileCard">
+        {props.filteredFavoriteId.includes(props.id) && <h2>Liked</h2>}
         <Card
           // {users}
           class="card"
@@ -128,7 +208,7 @@ export default function ProfileCard(props) {
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log('favorite');
+                    handleLike();
                   }}
                 >
                   <FavoriteIcon />
@@ -139,40 +219,68 @@ export default function ProfileCard(props) {
                     handleClickMessage();
                   }}
                 >
+                  <Dialog
+                    onClose={handleClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={open}
+                  >
+                    <DialogTitle
+                      id="customized-dialog-title"
+                      onClose={handleClose}
+                    >
+                      Modal title
+                    </DialogTitle>
+                    <DialogContent dividers style={{ maxWidth: '100000px' }}>
+                      <Message
+                        messages={props.messages}
+                        users={props.users}
+                        setMessages={props.setMessages}
+                        loading={props.loading}
+                        realTimeData={props.realTimeData}
+                        favorite={props.favorite}
+                        block={props.block}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button autoFocus onClick={handleClose} color="primary">
+                        Save changes
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                   <ChatBubbleIcon />
                 </IconButton>
               </>
             }
           />
           <CardMedia
-            style={{ height: "200px", paddingTop: "2%" }}
+            style={{ height: '200px', paddingTop: '2%' }}
             image={props.profile_photo}
           />
           <CardContent>
             <div>
-              <Button variant="outlined" color="primary" onClick={handleClickOpen} >
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}
+              >
                 getting know me better
               </Button>
-              <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+              <Dialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}
+              >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                   About Me
                 </DialogTitle>
                 <DialogContent dividers>
                   <Typography gutterBottom>
-                    Name: {props.name}  {props['last_name']}
+                    Name: {props.name} {props['last_name']}
                   </Typography>
-                  <Typography gutterBottom>
-                    City: {props.city}
-                  </Typography>
-                  <Typography gutterBottom>
-                    Gender: {props.gender}
-                  </Typography>
-                  <Typography gutterBottom>
-                    Age: {props.age}
-                  </Typography>
-                  <Typography gutterBottom>
-                    Height: {props.height}
-                  </Typography>
+                  <Typography gutterBottom>City: {props.city}</Typography>
+                  <Typography gutterBottom>Gender: {props.gender}</Typography>
+                  <Typography gutterBottom>Age: {props.age}</Typography>
+                  <Typography gutterBottom>Height: {props.height}</Typography>
                   <Typography gutterBottom>
                     About Me: {props['about_me']}
                   </Typography>

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import { makeStyles } from '@material-ui/core/styles';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,44 +16,56 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const TagListItem = props => {
+const TagListItem = (props) => {
   const classes = useStyles();
 
+<<<<<<< HEAD
   const [num, setNum] = useState(1)
   const [newColor, setNewColor] = useState('default')
   const [icon, setIcon] = useState('null')
 
+=======
+  const [num, setNum] = useState(1);
+  const [newColor, setNewColor] = useState('default');
+  const [icon, setIcon] = useState('null');
+>>>>>>> debug/buttonColor
 
   function handleClick(num, name, id) {
     let newTagUser = {
       user_id: id,
-      tag_id: name
-    }
-    num++
-    setNum(num)
+      tag_id: name,
+    };
+    num++;
+    setNum(num);
     if (num % 2 === 0) {
+<<<<<<< HEAD
       setNewColor("secondary")
       setIcon(DoneIcon)
       axios.put("http://localhost:8080/api/user_tag/new", { newTagUser })
+=======
+      setNewColor('secondary');
+      setIcon(DoneIcon);
+      console.log('check1', newTagUser);
+      axios
+        .put('http://localhost:8080/api/user_tag/new', { newTagUser })
+>>>>>>> debug/buttonColor
         .catch((err) => console.log('1111---v', err));
-      return
+      return;
     }
-    setNewColor("default")
-    setIcon(FaceIcon)
-    return
+    setNewColor('default');
+    setIcon(FaceIcon);
+    return;
   }
 
   return (
-
     <Chip
       label={props.name}
-      onClick={() => { handleClick(num, props.tag_id, props.id) }}
+      onClick={() => {
+        handleClick(num, props.tag_id, props.id);
+      }}
       color={newColor}
     />
-
-  )
-}
-
+  );
+};
 
 export default TagListItem;
