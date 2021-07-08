@@ -19,63 +19,10 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
-
-//from line 25 - 63 are all material ui functions
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-//from line 25 - 63 are all material ui functions
-
-//new dialog import for message component
-import { withStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import CloseIcon from '@material-ui/icons/Close';
 import Message from './Message';
 import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
-//configure dialog component
+
+//from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -88,7 +35,7 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 });
-//configure dialog component
+
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -106,11 +53,10 @@ const DialogTitle = withStyles(styles)((props) => {
     </MuiDialogTitle>
   );
 });
-//configure dialog component
+
 const DialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
-    flex: 1,
   },
 }))(MuiDialogContent);
 
@@ -120,6 +66,8 @@ const DialogActions = withStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }))(MuiDialogActions);
+//from line 25 - 68 are all material ui functions
+
 
 export default function ProfileCard(props) {
   let { id } = useParams();
@@ -128,14 +76,7 @@ export default function ProfileCard(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [isFlipped, setIsFlipped] = useState(false);
   const { tags, users, favorite } = props;
-  //zio added open state
-  const [open, setOpen] = React.useState(false);
 
   const handleClose = (e) => {
     e.stopPropagation();
@@ -157,9 +98,6 @@ export default function ProfileCard(props) {
       });
   };
 
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
-  };
   const title = props.name + ',' + props.age + ',' + props.address;
 
   const handleClickMessage = () => {
