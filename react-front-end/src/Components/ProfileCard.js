@@ -103,11 +103,12 @@ export default function ProfileCard(props) {
   const title = props.name + ',' + props.age + ',' + props.address;
 
   const handleClickMessage = () => {
+    const myName = props.users[Number(id) - 1];
     setOpen(true);
     const newMessage = {
       from_user_id: Number(id),
       to_user_id: Number(props.id),
-      content: `Hello! I am ${props.name}`,
+      content: `Hello! I am ${myName}`, //---------------------------need to be fixed
     };
     console.log('load to message page');
 
