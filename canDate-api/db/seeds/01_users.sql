@@ -160,3 +160,18 @@ INSERT INTO users(first_name, last_name, email, password, gender, height, addres
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
     VALUES('Kayla', 'Sullivan','kayla.sullivan@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 185, 'Vancouver', 20, 'https://randomuser.me/api/portraits/women/60.jpg', 'My name is Kayla Sullivan. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
 
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+    VALUES('David', 'Claveau','david.claveau@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 180, 'Vancouver', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U01E22TAXSQ-bbf688783334-192', 'My name is David Claveau. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
+
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+    VALUES('Astrid', 'Cyrinne Aguilar','astrid.cyrinneaguilar@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 170, 'Vancouver', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U016J28VC02-726d61d7499d-512', 'My name is David Claveau. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
+
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+    VALUES('Brandon', 'Copeland','brand.copeland@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 180, 'Calgray', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U01UC282SKU-3a2b85b9908f-512', 'My name is David Claveau. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
+
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+    VALUES('Brandon', 'Shemilt','brandon.shemilt@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 180, 'Vacouver', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U01UC282SKU-3a2b85b9908f-512', 'My name is David Claveau. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
+
+
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+    VALUES('Matthew', 'Thompson','matthew.thompson@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 180, 'Calgray', 21, 'https://ca.slack-edge.com/T2G8TE2E5-U01UH5DCNR2-a2fb7e763438-512', 'My name is David Claveau. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
