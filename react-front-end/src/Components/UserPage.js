@@ -92,8 +92,6 @@ const UserPage = (props) => {
     }
 
     setState(selectArr);
-
-    // setState.buttonColor('primary')
   };
 
   // add selected address into state
@@ -182,13 +180,14 @@ const UserPage = (props) => {
         ageRange={state.ageRange}
         users={users}
         name={loggedInUserInfo}
-        buttonColor={state.buttonColor}
         handleFavorite={handleFavorite}
+        setGender={setState}
+        state={state}
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite ? (
+          state.city.length === 0 &&
+          !state.favorite ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>

@@ -162,6 +162,8 @@ export default function NavBar(props) {
                     updateAgeRange={updateAgeRange}
                     users={users}
                     buttonColor={buttonColor}
+                    setGender={props.setGender}
+                    state={props.state}
                   />
                 </Typography>
               </DialogContent>
@@ -172,7 +174,7 @@ export default function NavBar(props) {
           </div>
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge color="secondary" variant="dot">
                 <MailIcon
                   onClick={() =>
                     window.location.replace(
@@ -183,7 +185,7 @@ export default function NavBar(props) {
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge color="secondary" variant="dot">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

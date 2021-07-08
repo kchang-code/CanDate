@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import "./FilterPopUp.scss";
 import SelectTagsInFilter from "./SelectTagsInFilter";
-import Chip from "@material-ui/core/Chip";
+import SelectCityInFilter from "./SelectCityInFilter";
 import Slider from "@material-ui/core/Slider";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 let cities = [];
 export default function FilterPopUp(props) {
@@ -26,9 +32,8 @@ export default function FilterPopUp(props) {
     },
   ]
 
-
   props.users.map((user) => {
-    if (!cities.includes(user.address)) {
+    if (!cities.includes(user.address) && user.address) {
       cities.push(user.address)
     }
   })
@@ -41,13 +46,56 @@ export default function FilterPopUp(props) {
     />)
   })
 
+
+  const cityList = cities.map((city) => {
+    if (!cities.includes(city)) {
+      cities.push(city)
+    }
+    return (
+      <SelectCityInFilter
+        city={city}
+        handleAddressClick={props.handleAddressClick}
+      />)
+  })
+
+
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    props.setGender({ ...props.state, gender: event.target.value });
+  };
+
   return (
     <div className="popup-box">
       <div className="box">
+        <div>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={
+              handleChange} row>
+              <FormControlLabel
+                value="male"
+                control={<Radio />}
+                label="Female"
+              />
+              <FormControlLabel
+                value="female"
+                control={<Radio />}
+                label="Male"
+              />
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Other"
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
         <span>
           <h3>Age:</h3>
           <Slider
-            style={{ width: 300, margin: 30 }}
+            style={{ width: 300 }}
             defaultValue={20}
             step={5}
             value={props.ageRange}
@@ -58,18 +106,7 @@ export default function FilterPopUp(props) {
         </span>
         <span>
           <h3>City:</h3>
-          {cities.map((city) => {
-            if (!cities.includes(city)) {
-              cities.push(city)
-            }
-            return (
-              <Chip
-                color="primary"
-                label={city}
-                onClick={() => props.handleAddressClick(city)}
-              />
-            );
-          })}
+          <div>{cityList}</div>
         </span>
         <h3>Interests:</h3>
         <div>{lists}</div>
