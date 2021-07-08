@@ -54,7 +54,16 @@ const UserPage = (props) => {
 
   const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
-  
+  const [openMsg, setOpenMsg] = useState(false);
+  const handleMessageClose = (e) => {
+    e.stopPropagation();
+    setOpenMsg(false);
+  };
+  const handleMessageOpen = (e) => {
+    e.stopPropagation();
+    setOpenMsg(true);
+  };
+
   const [state, setState] = useState({
     tags: [],
     // change age range to logged in user's age, 50
@@ -84,13 +93,12 @@ const UserPage = (props) => {
   // const filteredBlockUsers = filteredUserIBlockId.map((id) => users[id - 1]);
 
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
-  
+
   const updateAgeRange = (event, data) => {
     const selectArr = { ...state };
     selectArr.ageRange = data;
     setState(selectArr);
   };
-
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
@@ -142,6 +150,7 @@ const UserPage = (props) => {
         ...state,
         tags: [],
         city: [],
+        ageRange: [],
         gender: '',
         favorite: true,
       });
@@ -153,7 +162,6 @@ const UserPage = (props) => {
 
   // console.log('filteredByGender', filteredByGender);
   // console.log('users', users);
-
 
   let filteredByTags;
   if (state.favorite) {
@@ -179,25 +187,31 @@ const UserPage = (props) => {
 
   // console.log(filteredUsersByBlocked);
 
-  const filteredByCity = getFilteredUsersByCity(
-    state.city,
-    filteredUsersByBlocked
+  const filteredHimself = filteredUsersByBlocked.filter(
+    (user) => user.id !== Number(id)
   );
+
+  const filteredByCity = getFilteredUsersByCity(state.city, filteredHimself);
   // console.log('filteredByCity', filteredByCity);
 
-  const matchObj = getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags)
+  const matchObj = getUserIdWithMatchPointObj(
+    state.tags,
+    userTagObj,
+    users,
+    state.tags
+  );
 
-function addMatchPointPercentage(filteredByCity, matchObj ) {
-   for (const obj of filteredByCity) {
-     for (const match of matchObj) {
-       if (obj.id === match.userId) {
-         obj.percent = match.percentage
-       }
-     }
-   }
+  function addMatchPointPercentage(filteredByCity, matchObj) {
+    for (const obj of filteredByCity) {
+      for (const match of matchObj) {
+        if (obj.id === match.userId) {
+          obj.percent = match.percentage;
+        }
+      }
+    }
   }
 
-  addMatchPointPercentage(filteredByCity, matchObj )
+  addMatchPointPercentage(filteredByCity, matchObj);
 
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
@@ -208,7 +222,6 @@ function addMatchPointPercentage(filteredByCity, matchObj ) {
     setStartNum((num1 -= 3));
     setEndNum((num2 -= 3));
   };
-
 
   return (
     <>
@@ -223,6 +236,10 @@ function addMatchPointPercentage(filteredByCity, matchObj ) {
         handleFavorite={handleFavorite}
         setGender={setState}
         state={state}
+        openMsg={openMsg}
+        setOpenMsg={setOpenMsg}
+        handleMessageClose={handleMessageClose}
+        handleMessageOpen={handleMessageOpen}
       />
       <div className="user-page">
         {state.tags.length === 0 &&
@@ -270,6 +287,10 @@ function addMatchPointPercentage(filteredByCity, matchObj ) {
                     setFavorite={props.setFavorite}
                     setBlock={props.setBlock}
                     matchPercentage={filteredUser.percent}
+                    openMsg={openMsg}
+                    setOpenMsg={setOpenMsg}
+                    handleMessageClose={handleMessageClose}
+                    handleMessageOpen={handleMessageOpen}
                   />
                 </Grid>
               </Grid>

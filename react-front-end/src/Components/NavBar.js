@@ -68,7 +68,11 @@ const DialogTitle = withStyles(styles)((props) => {
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
           <CloseIcon />
         </IconButton>
       ) : null}
@@ -94,7 +98,6 @@ const DialogActions = withStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -104,7 +107,8 @@ export default function NavBar(props) {
 
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { ageRange, updateAgeRange, users, handleAddressClick, buttonColor } = props;
+  const { ageRange, updateAgeRange, users, handleAddressClick, buttonColor } =
+    props;
   const [tag, setTags] = useState([]);
   const [selectTag, setSelectTag] = useState({
     tags: [],
@@ -147,7 +151,11 @@ export default function NavBar(props) {
             >
               filter
             </Button>
-            <Dialog onClose={handleClosed} aria-labelledby="customized-dialog-title" open={open}>
+            <Dialog
+              onClose={handleClosed}
+              aria-labelledby="customized-dialog-title"
+              open={open}
+            >
               <DialogTitle id="customized-dialog-title" onClose={handleClosed}>
                 Filter Results:
               </DialogTitle>
@@ -175,13 +183,7 @@ export default function NavBar(props) {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary" variant="dot">
-                <MailIcon
-                  onClick={() =>
-                    window.location.replace(
-                      `http://localhost:3002/users/${props.name[0].id}/message`
-                    )
-                  }
-                />
+                <MailIcon onClick={(e) => props.handleMessageOpen(e)} />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
@@ -190,16 +192,25 @@ export default function NavBar(props) {
               </Badge>
             </IconButton>
             <IconButton color="inherit">
-              <AccountCircle aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
+              <AccountCircle
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              />
               <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                style={{ marginTop: "50px" }}
+                style={{ marginTop: '50px' }}
               >
-                <Button variant="contained" color="secondary" href="http://localhost:3002" onClick={handleClose}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  href="http://localhost:3002"
+                  onClick={handleClose}
+                >
                   logout
                 </Button>
               </Menu>
@@ -211,6 +222,6 @@ export default function NavBar(props) {
           </div>
         </Toolbar>
       </AppBar>
-    </div >
+    </div>
   );
 }
