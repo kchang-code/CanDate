@@ -199,9 +199,7 @@ export default function ProfileCard(props) {
                 <IconButton>
                   <BlockIcon />
                 </IconButton>
-                <Button variant="primary">
-                   <Badge variant="light">{matchPercentage}</Badge>% Match
-                </Button>
+                <Badge variant="light">{matchPercentage}</Badge>% Match
               </>
             }
           />

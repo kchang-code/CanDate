@@ -18,6 +18,7 @@ import {
   getFilteredUsersByCity,
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
+  getUserIdWithMatchPointObj,
 } from '../helpers/userPageHelpers';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
@@ -264,6 +265,7 @@ const UserPage = (props) => {
             Next
           </Fab>
         )}
+        {console.log("matchpoint", getUserIdWithMatchPointObj(state.tags, userTagObj, users, state.tags))}
       </div>
     </>
   );
