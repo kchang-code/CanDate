@@ -40,8 +40,6 @@ const Chat = (props) => {
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const reducedMessage = reduceToNames(userAllMessages, id, userIBlock);
 
-  console.log('userIBlock', userIBlock);
-
   const [userPhoto, setUserPhoto] = useState('');
   const [userFirstName, setUserFirstName] = useState('');
 

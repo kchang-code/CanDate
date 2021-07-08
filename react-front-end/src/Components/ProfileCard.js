@@ -72,12 +72,19 @@ const DialogActions = withStyles((theme) => ({
 export default function ProfileCard(props) {
   let { id } = useParams();
   const [open, setOpen] = useState(false);
+  const [openMsg, setOpenMsg] = useState(false);
+
+  const { favorite } = props;
+
+  const handleMessageClose = (e) => {
+    e.stopPropagation();
+    setOpenMsg(false);
+  };
 
   const handleClickOpen = (e) => {
     e.stopPropagation();
     setOpen(true);
   };
-  const { favorite } = props;
 
   const handleClose = (e) => {
     e.stopPropagation();
@@ -96,18 +103,18 @@ export default function ProfileCard(props) {
       })
       .then(() => {
         props.setFavorite([...favorite, newFavorite]);
-        console.log('newFavorite', newFavorite);
       });
   };
 
   const title = props.name + ',' + props.age + ',' + props.address;
 
   const handleClickMessage = () => {
-    setOpen(true);
+    const myName = props.users[Number(id) - 1].first_name;
+    setOpenMsg(true);
     const newMessage = {
       from_user_id: Number(id),
       to_user_id: Number(props.id),
-      content: `Hello! I am ${props.name}`,
+      content: `Hello! I am ${myName}`,
     };
     console.log('load to message page');
 
@@ -140,9 +147,7 @@ export default function ProfileCard(props) {
           // {users}
           class="card"
           elevation={3}
-          onClick={() => {
-            console.log('flip');
-          }}
+          onClick={() => {}}
         >
           <CardHeader
             class="name"
@@ -152,48 +157,42 @@ export default function ProfileCard(props) {
                 <IconButton
                   style={{ color: color }}
                   onClick={(e) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     handleLike();
                   }}
                 >
                   <FavoriteIcon />
                 </IconButton>
-                <IconButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleClickMessage();
-                  }}
-                >
-                  <Dialog
-                    onClose={handleClose}
-                    aria-labelledby="customized-dialog-title"
-                    open={open}
-                  >
-                    <DialogTitle
-                      id="customized-dialog-title"
-                      onClose={handleClose}
-                    >
-                      Modal title
-                    </DialogTitle>
-                    <DialogContent dividers style={{ maxWidth: '100000px' }}>
-                      <Message
-                        messages={props.messages}
-                        users={props.users}
-                        setMessages={props.setMessages}
-                        loading={props.loading}
-                        realTimeData={props.realTimeData}
-                        favorite={props.favorite}
-                        block={props.block}
-                      />
-                    </DialogContent>
-                    <DialogActions>
-                      <Button autoFocus onClick={handleClose} color="primary">
-                        Save changes
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
+
+                {/* open message dialogue */}
+                <IconButton onClick={handleClickMessage}>
                   <ChatBubbleIcon />
                 </IconButton>
+                <Dialog
+                  onClose={handleMessageClose}
+                  aria-labelledby="customized-dialog-title"
+                  open={openMsg}
+                  maxWidth="xl"
+                >
+                  <DialogTitle
+                    id="customized-dialog-title"
+                    onClose={handleMessageClose}
+                  >
+                    Modal title
+                  </DialogTitle>
+                  <DialogContent dividers>
+                    <Message
+                      messages={props.messages}
+                      users={props.users}
+                      setMessages={props.setMessages}
+                      loading={props.loading}
+                      realTimeData={props.realTimeData}
+                      favorite={props.favorite}
+                      block={props.block}
+                    />
+                  </DialogContent>
+                </Dialog>
               </>
             }
           />
@@ -202,6 +201,7 @@ export default function ProfileCard(props) {
             image={props.profile_photo}
           />
           <CardContent>
+            {/* getting know me better */}
             <div>
               <Button
                 variant="outlined"
