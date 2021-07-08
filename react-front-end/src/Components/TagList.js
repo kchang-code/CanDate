@@ -21,6 +21,7 @@ export default function TagList(props) {
       <TagListItem name={item.name} tag_id={item.id} id={props.id} />
     );
   });
+
   return (
     <div>
       <h1>choose your tag</h1>

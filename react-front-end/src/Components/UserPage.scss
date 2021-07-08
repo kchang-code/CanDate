@@ -2,6 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   
+  .no-results {
+    text-align: center;
+
+  }
   .user-page-ind {
     flex: 1 0 33%; 
     margin-top: 30px;
@@ -13,3 +17,4 @@
 #user-page-button {
   margin-top: 100px
 }
+

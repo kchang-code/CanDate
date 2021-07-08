@@ -190,10 +190,16 @@ const UserPage = (props) => {
       </button>
 
       <div className="user-page">
-        {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite ? (
-          <h1>No results</h1>
+        {state.tags.length === 0 && state.city.length === 0 && !state.favorite ? (
+          <div class="no-results">
+            <h1>No results</h1>
+            <p>Please filter again!</p>
+          </div>
+        ) : filteredByCity.length === 0 ? (
+          <div class="no-results">
+            <h1>No results</h1>
+            <p>Please filter again!</p>
+          </div>
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
             return (

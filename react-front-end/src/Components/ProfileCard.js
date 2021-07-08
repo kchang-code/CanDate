@@ -21,6 +21,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 
+import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
+
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
   root: {
@@ -65,9 +67,7 @@ const DialogActions = withStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }))(MuiDialogActions);
-//from line 25 - 63 are all material ui functions
-
-//new dialog import for message component
+//from line 25 - 68 are all material ui functions
 
 export default function ProfileCard(props) {
   let { id } = useParams();
@@ -77,14 +77,12 @@ export default function ProfileCard(props) {
     e.stopPropagation();
     setOpen(true);
   };
+  const { favorite } = props;
+
   const handleClose = (e) => {
     e.stopPropagation();
     setOpen(false);
   };
-
-  const [isFlipped, setIsFlipped] = useState(false);
-  const { tags, users, favorite } = props;
-  //zio added open state
 
   const handleLike = () => {
     const newFavorite = {
@@ -102,9 +100,6 @@ export default function ProfileCard(props) {
       });
   };
 
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
-  };
   const title = props.name + ',' + props.age + ',' + props.address;
 
   const handleClickMessage = () => {
