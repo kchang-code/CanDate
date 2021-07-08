@@ -31,6 +31,7 @@ import {
   getUserIBlock,
   getUsersByBlocked,
 } from '../helpers/favoriteBlockHelp';
+import Status from './Status';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -223,7 +224,9 @@ const UserPage = (props) => {
     setEndNum((num2 -= 3));
   };
 
-  return (
+  return loading ? (
+    <Status />
+  ) : (
     <>
       <NavBar
         handleTagClick={handleTagClick}

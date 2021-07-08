@@ -130,7 +130,7 @@ export default function NavBar(props) {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" fullWidth>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             CanDate
