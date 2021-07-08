@@ -20,6 +20,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
+import BlockIcon from '@material-ui/icons/Block';
 
 import { getFavoriteByUser } from '../helpers/favoriteBlockHelp';
 
@@ -147,7 +148,7 @@ export default function ProfileCard(props) {
           // {users}
           class="card"
           elevation={3}
-          onClick={() => {}}
+          onClick={() => { }}
         >
           <CardHeader
             class="name"
@@ -193,6 +194,9 @@ export default function ProfileCard(props) {
                     />
                   </DialogContent>
                 </Dialog>
+                <IconButton>
+                  <BlockIcon />
+                </IconButton>
               </>
             }
           />
