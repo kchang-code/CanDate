@@ -153,7 +153,7 @@ const UserPage = (props) => {
         ...state,
         tags: [],
         city: [],
-        ageRange: [],
+        ageRange: [20, 80],
         gender: '',
         favorite: true,
       });

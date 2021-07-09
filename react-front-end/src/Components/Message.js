@@ -71,6 +71,7 @@ const Message = (props) => {
           users={users}
           block={block}
           loading={loading}
+          handleMessageClose={props.handleMessageClose}
         />
       </div>
     </div>

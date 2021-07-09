@@ -77,7 +77,6 @@ const DialogActions = withStyles((theme) => ({
 //from line 25 - 68 are all material ui functions
 
 export default function ProfileCard(props) {
-  console.log('users', props.users);
   const { openMsg, setOpenMsg, handleMessageClose } = props;
 
   let { id } = useParams();
@@ -86,16 +85,6 @@ export default function ProfileCard(props) {
   const [openConfirm, setOpenConfirm] = React.useState(false);
 
   const { favorite } = props;
-
-  // const handleMessageClose = (e) => {
-  //   e.stopPropagation();
-  //   setOpenMsg(false);
-  // };
-
-  // const handleMessageOpen = (e) => {
-  //   e.stopPropagation();
-  //   setOpenMsg(true);
-  // };
 
   const handleClickOpen = (e) => {
     e.stopPropagation();
@@ -244,6 +233,7 @@ export default function ProfileCard(props) {
                     realTimeData={props.realTimeData}
                     favorite={props.favorite}
                     block={props.block}
+                    handleMessageClose={handleMessageClose}
                   />
                 </Dialog>
                 <IconButton

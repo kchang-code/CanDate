@@ -11,6 +11,7 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
 import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ReactTimeAgo from 'react-time-ago';
 import {
   getFavoriteByUser,
@@ -126,9 +127,8 @@ const ChatScreen = (props) => {
             src={selectedPhoto}
           />
           <p className="chatScreen_text">
-            {message.content}
-
             <span className="chat_time">{message['creates_on']}</span>
+            {message.content}
           </p>
         </div>
       );
@@ -138,10 +138,10 @@ const ChatScreen = (props) => {
       userPhoto = users[to_user_id - 1]['profile_photo'];
       userAboutMe = users[to_user_id - 1]['address'];
       return (
-        <div className="chatScreen_message">
+        <div className="chatScreen_message2">
           <p className="chatScreen_textUser">
+            <span className="chat_time2">{message['creates_on']}</span>
             {message.content}
-            <span className="chat_time">{message['creates_on']}</span>
           </p>
         </div>
       );
@@ -165,6 +165,13 @@ const ChatScreen = (props) => {
           </IconButton>
           <IconButton>
             <MoreVertIcon />
+          </IconButton>
+          <IconButton
+            onClick={(e) => {
+              props.handleMessageClose(e);
+            }}
+          >
+            <HighlightOffIcon />
           </IconButton>
         </div>
       </div>

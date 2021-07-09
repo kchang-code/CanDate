@@ -108,6 +108,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
+  position: relative;
 }
 
 .chatScreen_text {
@@ -117,6 +118,7 @@
   border-radius: 20px;
   display: flex;
   align-items: center;
+  
 }
 
 .chatScreen_textUser {
@@ -126,12 +128,38 @@
   border-radius: 20px;
   display: flex;
   align-items: center;
+ 
 }
 
 .chat_time {
   margin-left: 10px;
   font-size: xx-small;
   color: brown;
+  position: absolute;
+  top: 20px;
+  width: 87px;
+  left: 68px;
+
+ 
+}
+
+.chatScreen_message2 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  
+}
+
+.chat_time2 {
+  margin-left: 10px;
+  font-size: xx-small;
+  color: brown;
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+  width: 87px;
 }
 
 
