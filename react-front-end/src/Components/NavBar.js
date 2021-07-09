@@ -102,11 +102,6 @@ const DialogActions = withStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
 
   const handleClickOpen = () => {
@@ -121,9 +116,7 @@ export default function NavBar(props) {
   const { ageRange, updateAgeRange, users, handleAddressClick, buttonColor } =
     props;
   const [tag, setTags] = useState([]);
-  const [selectTag, setSelectTag] = useState({
-    tags: [],
-  });
+
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/tags').then((res) => {
@@ -145,15 +138,7 @@ export default function NavBar(props) {
         <Toolbar>
           <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginLeft: "50px" }} />
           <div className={classes.grow} />
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="default"
-            textColor="primary"
-            variant="fullWidth"
-            aria-label="action tabs example"
-            style={{ marginRight: "200px" }}
-          >
+          <div className="nav-bar-tab">
             <Tab label="Favorite" onClick={props.handleFavorite} />
             <div>
               <Tab label="Filter" onClick={handleClickOpen} />
@@ -183,8 +168,8 @@ export default function NavBar(props) {
                 </DialogContent>
               </Dialog>
             </div>
-            <Tab label="Clear Filter" onClick={() => props.handleEmptyTagsClick(selectTag)} />
-          </Tabs>
+            <Tab label="Clear Filter" onClick={() => props.handleEmptyTagsClick()} />
+          </div>
           <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary" variant="dot">

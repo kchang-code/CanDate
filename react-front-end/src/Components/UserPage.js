@@ -131,7 +131,7 @@ const UserPage = (props) => {
   };
 
   const handleEmptyTagsClick = (state) => {
-    const selectArr = { ...state, tags: [], city: [], ageRange: [18, 40] };
+    const selectArr = { ...state, tags: [], city: [], ageRange: [18, 40], gender: '', loginUserTags: [], };
     setState(selectArr);
   };
 
@@ -248,8 +248,8 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite ? (
+          state.city.length === 0 &&
+          !state.favorite ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
