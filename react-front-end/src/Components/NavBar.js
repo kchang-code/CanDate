@@ -19,6 +19,10 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
 
 //from line 24 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -95,8 +99,47 @@ const DialogActions = withStyles((theme) => ({
 
 //from line 24 - 90 are all material ui functions
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`action-tabpanel-${index}`}
+      aria-labelledby={`action-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `action-tab-${index}`,
+    'aria-controls': `action-tabpanel-${index}`,
+  };
+}
+
+
 export default function NavBar(props) {
   const classes = useStyles();
+
+  // const theme = useTheme();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -130,58 +173,50 @@ export default function NavBar(props) {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" color="white">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            CanDate
-          </Typography>
+          <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginLeft: "50px" }} />
           <div className={classes.grow} />
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={props.handleFavorite}
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="default"
+            textColor="primary"
+            variant="fullWidth"
+            aria-label="action tabs example"
+            style={{ marginRight: "200px" }}
           >
-            Favorite
-          </Button>
-          <div>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={handleClickOpen}
-            >
-              filter
-            </Button>
-            <Dialog
-              onClose={handleClosed}
-              aria-labelledby="customized-dialog-title"
-              open={open}
-            >
-              <DialogTitle id="customized-dialog-title" onClose={handleClosed}>
-                Filter Results:
-              </DialogTitle>
-              <DialogContent dividers>
-                <Typography gutterBottom>
-                  <FilterPopUp
-                    handleTagClick={props.handleTagClick}
-                    handleAddressClick={handleAddressClick}
-                    content={tag}
-                    savebtn={<button>Save</button>}
-                    ageRange={ageRange}
-                    updateAgeRange={updateAgeRange}
-                    users={users}
-                    buttonColor={buttonColor}
-                    setGender={props.setGender}
-                    state={props.state}
-                  />
-                </Typography>
-              </DialogContent>
-            </Dialog>
-            <Button onClick={() => props.handleEmptyTagsClick(selectTag)}>
-              {/* maybe need to be changed here, setting it back to initial state after clearing the filter?
-               */}
-              Clear Filter
-            </Button>
-          </div>
+            <Tab label="Favorite" {...a11yProps(0)} onClick={props.handleFavorite} />
+            <div>
+              <Tab label="Filter" {...a11yProps(1)} onClick={handleClickOpen} />
+              <Dialog
+                onClose={handleClosed}
+                aria-labelledby="customized-dialog-title"
+                open={open}
+              >
+                <DialogTitle id="customized-dialog-title" onClose={handleClosed}>
+                  Filter Results:
+                </DialogTitle>
+                <DialogContent dividers>
+                  <Typography gutterBottom>
+                    <FilterPopUp
+                      handleTagClick={props.handleTagClick}
+                      handleAddressClick={handleAddressClick}
+                      content={tag}
+                      savebtn={<button>Save</button>}
+                      ageRange={ageRange}
+                      updateAgeRange={updateAgeRange}
+                      users={users}
+                      buttonColor={buttonColor}
+                      setGender={props.setGender}
+                      state={props.state}
+                    />
+                  </Typography>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <Tab label="Clear Filter" {...a11yProps(2)} onClick={() => props.handleEmptyTagsClick(selectTag)} />
+          </Tabs>
           <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary" variant="dot">
