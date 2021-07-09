@@ -18,6 +18,7 @@ export default function SelectTagsInFilter(props) {
     if (select) {
       setSelect(false);
       setNewColor("transparent");
+      setfontColor('black');
     } else {
       setSelect(true);
       setNewColor("#3f51b5");

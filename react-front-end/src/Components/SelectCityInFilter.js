@@ -12,14 +12,18 @@ import { ButtonBase } from "@material-ui/core";
 export default function SelectCityInFilter(props) {
   const [newColor, setNewColor] = useState("transparent");
   const [select, setSelect] = useState(false);
+  const [fontColor, setfontColor] = useState('black');
+
   console.log("city", props.city);
   const cityColor = (select) => {
     if (select) {
       setSelect(false);
       setNewColor("transparent");
+      setfontColor('black')
     } else {
       setSelect(true);
-      setNewColor("red");
+      setNewColor("#3f51b5");
+      setfontColor('white');
     }
   };
   return (
@@ -28,7 +32,7 @@ export default function SelectCityInFilter(props) {
         props.handleAddressClick(props.city);
         cityColor(select);
       }}
-      style={{ backgroundColor: newColor }}
+      style={{ backgroundColor: newColor, color: fontColor }}
       variant="outlined-primary"
     >
       {props.city}
