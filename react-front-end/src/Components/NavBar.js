@@ -216,7 +216,7 @@ export default function NavBar(props) {
                 </Button>
               </Menu>
             </IconButton>
-            <p>
+            <p style={{ marginTop: "14px" }}>
               Welcome{' '}
               <strong>{props.name[0] && props.name[0]['first_name']}</strong>
             </p>
