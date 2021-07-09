@@ -1,21 +1,3 @@
-// import React, { useState } from 'react';
-// import PhotoList from './PhotoList';
-// import './Home.scss';
-
-// export default function Home(props) {
-
-//   return (
-//     <div className="home-container">
-//       <div className="image-wall">
-//         <PhotoList image={props.image} />
-//       </div>
-//       <div className="register">
-//         <Form />
-//       </div>
-//     </div>
-//   );
-// }
-
 import React, { useState } from 'react';
 import PhotoList from './PhotoList';
 import TagList from './TagList';
@@ -24,6 +6,7 @@ import Question from './Question';
 import SignIn from './SignIn';
 import Form from './Form';
 import './Home.scss';
+import BasicImageList from './imageList';
 
 export default function Home(props) {
   const FORM = 'FORM';
@@ -48,9 +31,9 @@ export default function Home(props) {
 
   return (
     <div className="home-container">
-      <div className="image-wall">
-        <PhotoList image={props.image} />
-      </div>
+      {/* <div className="image-wall">
+        <BasicImageList image={props.image} />
+      </div> */}
       <div className="register">
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
