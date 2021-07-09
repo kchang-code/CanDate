@@ -261,6 +261,7 @@ const UserPage = (props) => {
           </div>
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
+            console.log('filteredByCity', filteredByCity)
             return (
               <Grid container spacing={4} className="user-page-ind">
                 <Grid item xs={12}>
@@ -318,7 +319,7 @@ const UserPage = (props) => {
             Previous
           </Fab>
         )}
-        {endNum < filteredByCity.length && (
+        {endNum < filteredByCity.length && state.city.length !== 0 && (
           <Fab
             variant="extended"
             size="small"
