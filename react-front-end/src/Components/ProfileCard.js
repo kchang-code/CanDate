@@ -130,14 +130,16 @@ export default function ProfileCard(props) {
         .then(() => {
           props.setFavorite([...newFavoriteAfterDelete]);
         });
+      console.log('favorite1', favorite);
     } else {
+      console.log('here');
       axios
         .put('http://localhost:8080/api/favorites', {
           newFavorite: { ...newFavorite },
         })
         .then(() => {
           props.setFavorite([...favorite, newFavorite]);
-          console.log('favorite', favorite);
+          // console.log('favorite', favorite);
         });
     }
   };
@@ -203,7 +205,7 @@ export default function ProfileCard(props) {
         animate="visible"
         transition={{ duration: 1 }}
         className="ProfileCard"
-        whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+        // whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
       >
         <Card
           // {users}
