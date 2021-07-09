@@ -22,3 +22,22 @@
   flex-direction: row;
   margin-right: 220px;
 }
+
+.nav-bar-logo{
+  width: 7ch;
+  animation: typing 2s steps(7), blink 0.5 step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 1px solid;
+}
+  @keyframes typing {
+    from {
+      width: 0
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }
