@@ -315,7 +315,7 @@ export default function ProfileCard(props) {
             Mutual interests:
           </Typography>
           {props.tag.map((item) => {
-            return <Chip label={item} color="primary" />;
+            return <Chip label={item} color="secondary" />;
           })}
         </div>
       </div>
