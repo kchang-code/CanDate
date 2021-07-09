@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 .nav {
+
   display: flex;
   flex-direction: column;
 
@@ -24,20 +26,20 @@
 }
 
 .nav-bar-logo{
-  width: 7ch;
-  animation: typing 2s steps(7), blink 0.5 step-end infinite alternate;
+  font-family: 'Dancing Script', cursive;
+  font-size: 24px;
+  margin-top: 20px;
   white-space: nowrap;
   overflow: hidden;
-  border-right: 1px solid;
+  animation: animated-text 4s steps(7,end) 1s 1 normal both
+           
 }
-  @keyframes typing {
-    from {
-      width: 0
-    }
-  }
 
-  @keyframes blink {
-    50% {
-      border-color: transparent
-    }
-  }
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 77px;}
+}
+
+
+
+
