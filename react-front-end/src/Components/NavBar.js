@@ -99,41 +99,9 @@ const DialogActions = withStyles((theme) => ({
 
 //from line 24 - 90 are all material ui functions
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`action-tabpanel-${index}`}
-      aria-labelledby={`action-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </Typography>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `action-tab-${index}`,
-    'aria-controls': `action-tabpanel-${index}`,
-  };
-}
-
-
 export default function NavBar(props) {
   const classes = useStyles();
 
-  // const theme = useTheme();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -186,9 +154,9 @@ export default function NavBar(props) {
             aria-label="action tabs example"
             style={{ marginRight: "200px" }}
           >
-            <Tab label="Favorite" {...a11yProps(0)} onClick={props.handleFavorite} />
+            <Tab label="Favorite" onClick={props.handleFavorite} />
             <div>
-              <Tab label="Filter" {...a11yProps(1)} onClick={handleClickOpen} />
+              <Tab label="Filter" onClick={handleClickOpen} />
               <Dialog
                 onClose={handleClosed}
                 aria-labelledby="customized-dialog-title"
@@ -215,7 +183,7 @@ export default function NavBar(props) {
                 </DialogContent>
               </Dialog>
             </div>
-            <Tab label="Clear Filter" {...a11yProps(2)} onClick={() => props.handleEmptyTagsClick(selectTag)} />
+            <Tab label="Clear Filter" onClick={() => props.handleEmptyTagsClick(selectTag)} />
           </Tabs>
           <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">
