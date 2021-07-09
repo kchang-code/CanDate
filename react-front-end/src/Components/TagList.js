@@ -6,25 +6,27 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const useStyles = makeStyles((theme) => ({
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    width: '80%'
-  },
+// const useStyles = makeStyles((theme) => ({
+//   submit: {
+//     margin: theme.spacing(3, 0, 2),
 
-}));
+//   },
+
+// }));
 
 export default function TagList(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const lists = props.tags.map((item) => {
     return (
       <TagListItem name={item.name} tag_id={item.id} id={props.id} />
     );
   });
+  // console.log(props.tagPage)
 
   return (
-    <div>
-      <h1>choose your tag</h1>
+    <div className="tagList" >
+      <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginTop: "10px", marginBottom: "-20px" }} />
+      <h1>Passions</h1>
       <div style={{ fontSize: "35px" }}>{lists}</div>
 
       <Button
@@ -32,8 +34,9 @@ export default function TagList(props) {
         fullWidth
         variant="contained"
         color="primary"
-        className={classes.submit}
-        onClick={props.tagPage}
+        // className={classes.submit}
+        onClick={() => window.location.replace(`http://localhost:3002/user/${props.id}`)}
+        style={{ width: '25vw ', marginTop: '10px' }}
       >
         Submit
       </Button>
