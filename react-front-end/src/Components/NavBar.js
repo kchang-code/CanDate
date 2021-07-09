@@ -19,6 +19,10 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
 
 //from line 24 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -98,6 +102,13 @@ const DialogActions = withStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -130,58 +141,50 @@ export default function NavBar(props) {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" color="white">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            CanDate
-          </Typography>
+          <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginLeft: "50px" }} />
           <div className={classes.grow} />
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={props.handleFavorite}
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="default"
+            textColor="primary"
+            variant="fullWidth"
+            aria-label="action tabs example"
+            style={{ marginRight: "200px" }}
           >
-            Favorite
-          </Button>
-          <div>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={handleClickOpen}
-            >
-              filter
-            </Button>
-            <Dialog
-              onClose={handleClosed}
-              aria-labelledby="customized-dialog-title"
-              open={open}
-            >
-              <DialogTitle id="customized-dialog-title" onClose={handleClosed}>
-                Filter Results:
-              </DialogTitle>
-              <DialogContent dividers>
-                <Typography gutterBottom>
-                  <FilterPopUp
-                    handleTagClick={props.handleTagClick}
-                    handleAddressClick={handleAddressClick}
-                    content={tag}
-                    savebtn={<button>Save</button>}
-                    ageRange={ageRange}
-                    updateAgeRange={updateAgeRange}
-                    users={users}
-                    buttonColor={buttonColor}
-                    setGender={props.setGender}
-                    state={props.state}
-                  />
-                </Typography>
-              </DialogContent>
-            </Dialog>
-            <Button onClick={() => props.handleEmptyTagsClick(selectTag)}>
-              {/* maybe need to be changed here, setting it back to initial state after clearing the filter?
-               */}
-              Clear Filter
-            </Button>
-          </div>
+            <Tab label="Favorite" onClick={props.handleFavorite} />
+            <div>
+              <Tab label="Filter" onClick={handleClickOpen} />
+              <Dialog
+                onClose={handleClosed}
+                aria-labelledby="customized-dialog-title"
+                open={open}
+              >
+                <DialogTitle id="customized-dialog-title" onClose={handleClosed}>
+                  Filter Results:
+                </DialogTitle>
+                <DialogContent dividers>
+                  <Typography gutterBottom>
+                    <FilterPopUp
+                      handleTagClick={props.handleTagClick}
+                      handleAddressClick={handleAddressClick}
+                      content={tag}
+                      savebtn={<button>Save</button>}
+                      ageRange={ageRange}
+                      updateAgeRange={updateAgeRange}
+                      users={users}
+                      buttonColor={buttonColor}
+                      setGender={props.setGender}
+                      state={props.state}
+                    />
+                  </Typography>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <Tab label="Clear Filter" onClick={() => props.handleEmptyTagsClick(selectTag)} />
+          </Tabs>
           <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary" variant="dot">
