@@ -156,7 +156,8 @@ export default function NavBar(props) {
                       handleTagClick={props.handleTagClick}
                       handleAddressClick={handleAddressClick}
                       content={tag}
-                      savebtn={<button>Save</button>}
+                      save={handleClosed}
+                      savebtn={<Button>Save</Button>}
                       ageRange={ageRange}
                       updateAgeRange={updateAgeRange}
                       users={users}
