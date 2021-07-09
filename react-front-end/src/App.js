@@ -9,6 +9,7 @@ import bcrypt from 'bcryptjs';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
 import UserPage from './Components/UserPage';
+
 const ENDPOINT = 'ws://localhost:8080/message';
 
 TimeAgo.addDefaultLocale(en);

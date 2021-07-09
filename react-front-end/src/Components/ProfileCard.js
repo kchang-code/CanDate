@@ -25,6 +25,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import { PercentageBadge } from './PercentageBadge';
 import { motion } from 'framer-motion';
 import Badge from 'react-bootstrap/Badge';
+
 import {
   checkIfLiked,
   findIndexOfFavorite,
@@ -106,7 +107,7 @@ export default function ProfileCard(props) {
   };
 
   const filteredFavoriteId = getFavoriteByUser(favorite, id);
-  // console.log('filteredFavoriteId', filteredFavoriteId);
+
   const handleLike = () => {
     const newFavorite = {
       user_id: Number(id),
@@ -130,16 +131,13 @@ export default function ProfileCard(props) {
         .then(() => {
           props.setFavorite([...newFavoriteAfterDelete]);
         });
-      console.log('favorite1', favorite);
     } else {
-      console.log('here');
       axios
         .put('http://localhost:8080/api/favorites', {
           newFavorite: { ...newFavorite },
         })
         .then(() => {
           props.setFavorite([...favorite, newFavorite]);
-          // console.log('favorite', favorite);
         });
     }
   };
@@ -156,7 +154,7 @@ export default function ProfileCard(props) {
     };
 
     const timeElapsed = Date.now();
-    //sending msg state
+
     let today = new Date(timeElapsed);
 
     let time = today.toLocaleString();
@@ -199,149 +197,128 @@ export default function ProfileCard(props) {
 
   return (
     <>
-      <motion.div
-        variants={fadeLeft}
-        initial="hidden"
-        animate="visible"
-        transition={{ duration: 1 }}
-        className="ProfileCard"
-        // whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-      >
-        <Card
-          // {users}
-          class="card"
-          elevation={3}
-          // onClick={handleClickOpen}
-        >
-          <CardHeader
-            class="name"
-            title={title}
-            action={
-              <>
-                <IconButton
-                  style={{ color: color }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleLike();
-                  }}
-                >
-                  <FavoriteIcon />
-                </IconButton>
-                {/* open message dialogue */}
-                <IconButton onClick={handleClickMessage}>
-                  <ChatBubbleIcon />
-                </IconButton>
-                <Dialog
-                  onClose={handleMessageClose}
-                  aria-labelledby="customized-dialog-title"
-                  open={openMsg}
-                  maxWidth="xl"
-                >
-                  <Message
-                    messages={props.messages}
-                    users={props.users}
-                    setMessages={props.setMessages}
-                    loading={props.loading}
-                    realTimeData={props.realTimeData}
-                    favorite={props.favorite}
-                    block={props.block}
-                    handleMessageClose={handleMessageClose}
-                  />
-                </Dialog>
-                <IconButton
-                  onClick={() => {
-                    handleClickOpenConfirm();
-                  }}
-                >
-                  <BlockIcon />
-                </IconButton>
-                <Badge variant="light">
-                  {props.users[Number(props.id - 1)].percent}
-                </Badge>
-                % Match
-                {/* from here is the block confirmation */}
-                <Dialog
-                  open={openConfirm}
-                  onClose={handleCloseConfirm}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {'Are you sure you want to block this person?'}
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      You will not get any information or message from this
-                      person.
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseConfirm} color="primary">
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        handleCloseConfirm();
-                        handleBlock();
-                      }}
-                      color="primary"
-                      autoFocus
-                    >
-                      Confirm
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-                {/* end of confirm dialogue */}
-              </>
-            }
-          />
-          <CardMedia
-            style={{ height: '200px', paddingTop: '2%' }}
-            image={props.profile_photo}
-          />
-          <CardContent>
-            {/* getting know me better */}
-            <div>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleClickOpen}
-              >
-                getting know me better
+      <div class="card">
+        <div className="card_title">{title}</div>
+        <div className="card_match">
+          <Badge variant="light">
+            {props.users[Number(props.id - 1)].percent}
+          </Badge>
+          % Match
+        </div>
+        <div className="icon">
+          {' '}
+          <IconButton
+            style={{ color: color }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleLike();
+            }}
+          >
+            <FavoriteIcon />
+          </IconButton>
+          {/* open message dialogue */}
+          <IconButton onClick={handleClickMessage}>
+            <ChatBubbleIcon />
+          </IconButton>
+          <Dialog
+            onClose={handleMessageClose}
+            aria-labelledby="customized-dialog-title"
+            open={openMsg}
+            maxWidth="xl"
+          >
+            <Message
+              messages={props.messages}
+              users={props.users}
+              setMessages={props.setMessages}
+              loading={props.loading}
+              realTimeData={props.realTimeData}
+              favorite={props.favorite}
+              block={props.block}
+              handleMessageClose={handleMessageClose}
+            />
+          </Dialog>
+          <IconButton
+            onClick={() => {
+              handleClickOpenConfirm();
+            }}
+          >
+            <BlockIcon />
+          </IconButton>
+          {/* from here is the block confirmation */}
+          <Dialog
+            open={openConfirm}
+            onClose={handleCloseConfirm}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {'Are you sure you want to block this person?'}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                You will not get any information or message from this person.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseConfirm} color="primary">
+                Cancel
               </Button>
-              <Dialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={open}
+              <Button
+                onClick={() => {
+                  handleCloseConfirm();
+                  handleBlock();
+                }}
+                color="primary"
+                autoFocus
               >
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                  About Me
-                </DialogTitle>
-                <DialogContent dividers>
-                  <Typography gutterBottom>
-                    Name: {props.name} {props['last_name']}
-                  </Typography>
-                  <Typography gutterBottom>City: {props.city}</Typography>
-                  <Typography gutterBottom>Gender: {props.gender}</Typography>
-                  <Typography gutterBottom>Age: {props.age}</Typography>
-                  <Typography gutterBottom>Height: {props.height}</Typography>
-                  <Typography gutterBottom>
-                    About Me: {props['about_me']}
-                  </Typography>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <Typography variant="body2" color="textSecondary">
-              Mutual interests:
-            </Typography>
-            {props.tag.map((item) => {
-              return <Chip label={item} color="primary" />;
-            })}
-          </CardContent>
-        </Card>
-      </motion.div>
-      {/* {console.log("props.matchpercentage", props.matchPercentage)} */}
+                Confirm
+              </Button>
+            </DialogActions>
+          </Dialog>
+          {/* end of confirm dialogue */}
+        </div>
+        <img src={props.profile_photo} className="profile_photo" />
+        <div className="card_content">
+          {/* getting know me better */}
+          <div>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              getting know me better
+            </Button>
+            <Dialog
+              onClose={handleClose}
+              aria-labelledby="customized-dialog-title"
+              open={open}
+            >
+              <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                About Me
+              </DialogTitle>
+              <DialogContent dividers>
+                <Typography gutterBottom>
+                  Name: {props.name} {props['last_name']}
+                </Typography>
+                <Typography gutterBottom>City: {props.city}</Typography>
+                <Typography gutterBottom>Gender: {props.gender}</Typography>
+                <Typography gutterBottom>Age: {props.age}</Typography>
+                <Typography gutterBottom>Height: {props.height}</Typography>
+                <Typography gutterBottom>
+                  About Me: {props['about_me']}
+                </Typography>
+              </DialogContent>
+            </Dialog>
+          </div>
+          <Typography variant="body2" color="textSecondary">
+            Mutual interests:
+          </Typography>
+          {props.tag.map((item) => {
+            return <Chip label={item} color="primary" />;
+          })}
+        </div>
+      </div>
     </>
   );
 }
