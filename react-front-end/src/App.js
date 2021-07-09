@@ -61,14 +61,17 @@ function App() {
         setFavorite(favorite.data.favorites);
         setUserTags(user_tag.data.user_tag);
         setBlock(block.data.block);
-        setTimeout(function () { setLoading(false); }, 1000);
+        setTimeout(function () {
+          setLoading(false);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
   }, []);
-  console.log('user', users)
+
+  // console.log('favorite', favorite);
 
   const findPasswordByEmail = (email, users) => {
     const arr = [];
