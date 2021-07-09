@@ -21,7 +21,7 @@ export default function SelectTagsInFilter(props) {
       setfontColor('black');
     } else {
       setSelect(true);
-      setNewColor("#3f51b5");
+      setNewColor("#f50057");
       setfontColor('white');
     }
   };
