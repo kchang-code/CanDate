@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+  crossorigin="anonymous"
+/>
 
 export default function SelectTagsInFilter(props) {
+
+  
   const [newColor, setNewColor] = useState('transparent')
   const [select, setSelect] = useState(false)
 
@@ -16,11 +25,10 @@ export default function SelectTagsInFilter(props) {
     }
   }
   return (
-    <Button 
-      class="btn"
-      onClick={() => { props.handleTagClick(props.id); buttonColor(select) }}
-      style={{ backgroundColor: newColor }}
-      variant="outlined-primary"
-    >{props.name}</Button>
+    
+    <Button variant="outline-primary">Primary</Button>
+
   )
 }
+
+
