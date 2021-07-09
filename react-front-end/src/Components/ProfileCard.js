@@ -256,7 +256,7 @@ export default function ProfileCard(props) {
                 >
                   <BlockIcon />
                 </IconButton>
-                <Badge variant="light">
+                <Badge variant="light" class="percentage">
                   {props.users[Number(props.id - 1)].percent}
                 </Badge>
                 % Match
