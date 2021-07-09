@@ -7,6 +7,7 @@ import axios from 'axios';
 import NavBar from './NavBar';
 import { TagsContext } from '../Context/TagsContext';
 import { useRadioGroup } from '@material-ui/core';
+
 import {
   filterTags,
   getNameOfTag,

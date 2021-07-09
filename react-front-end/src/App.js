@@ -9,7 +9,7 @@ import bcrypt from 'bcryptjs';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
 import UserPage from './Components/UserPage';
-import NewCard from './Components/NewCard';
+
 const ENDPOINT = 'ws://localhost:8080/message';
 
 TimeAgo.addDefaultLocale(en);
@@ -132,16 +132,13 @@ function App() {
             />
           </Route>
 
-          <Route path="/card">
-            <NewCard />
-            <Route path="/">
-              <Home
-                image={users}
-                tags={tags}
-                checkPassword={checkPassword}
-                findPasswordByEmail={findPasswordByEmail}
-              />
-            </Route>
+          <Route path="/">
+            <Home
+              image={users}
+              tags={tags}
+              checkPassword={checkPassword}
+              findPasswordByEmail={findPasswordByEmail}
+            />
           </Route>
         </Switch>
       </Router>
