@@ -200,10 +200,10 @@ export default function ProfileCard(props) {
       <div class="card">
         <div className="card_title">{title}</div>
         <div className="card_match">
-          <Badge variant="light">
-            {props.users[Number(props.id - 1)].percent}
-          </Badge>
-          % Match
+         
+            {props.users[Number(props.id - 1)].percent} % Match
+          
+          
         </div>
         <div className="icon">
           {' '}

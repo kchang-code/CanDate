@@ -78,9 +78,13 @@
 }
 
 .card_match {
+  span {
+    color: black;
+  }
   position: absolute;
   top: 15px;
   right: 15px;
+  color: black;
 }
 
 .icon {
