@@ -72,6 +72,7 @@ const UserPage = (props) => {
     city: [],
     gender: '',
     favorite: false,
+    loginUserTags: [],
   });
 
   useEffect(() => {
@@ -82,6 +83,7 @@ const UserPage = (props) => {
         tags: LoggedInUserTagIDs,
         city: [LoggedInUserCity],
         gender: neededInfo[0].gender,
+        loginUserTags: LoggedInUserTagIDs,
       });
     }
   }, [loading]);
@@ -196,23 +198,26 @@ const UserPage = (props) => {
   // console.log('filteredByCity', filteredByCity);
 
   const matchObj = getUserIdWithMatchPointObj(
-    state.tags,
+    state.loginUserTags,
     userTagObj,
     users,
-    state.tags
+    state.loginUserTags
   );
 
-  function addMatchPointPercentage(filteredByCity, matchObj) {
-    for (const obj of filteredByCity) {
+  function addMatchPointPercentage(users, matchObj) {
+    for (const user of users) {
       for (const match of matchObj) {
-        if (obj.id === match.userId) {
-          obj.percent = match.percentage;
+        if (user.id === match.userId) {
+          user.percent = match.percentage;
+          console.log('match.percentage', match.percentage);
         }
       }
     }
   }
 
-  addMatchPointPercentage(filteredByCity, matchObj);
+  console.log('matchOBJ', matchObj);
+
+  addMatchPointPercentage(users, matchObj);
 
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));

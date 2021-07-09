@@ -130,7 +130,7 @@ export default function NavBar(props) {
 
   return (
     <div>
-      <AppBar position="static" fullWidth>
+      <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             CanDate
@@ -180,7 +180,7 @@ export default function NavBar(props) {
               Clear Filter
             </Button>
           </div>
-          <div className={classes.sectionDesktop}>
+          <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary" variant="dot">
                 <MailIcon onClick={(e) => props.handleMessageOpen(e)} />

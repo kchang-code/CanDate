@@ -106,7 +106,12 @@ export function getFilteredUsersByInterest(interests, userTagObj, users) {
   return filteredUsers;
 }
 
-export function getUserIdWithMatchPointObj(interests, userTagObj, users, requiredInterests) {
+export function getUserIdWithMatchPointObj(
+  interests,
+  userTagObj,
+  users,
+  requiredInterests
+) {
   const checkIfContainsAllInterest = (userInterests, requiredInterests) => {
     let result = false;
     let matchPoint = 0;
@@ -126,9 +131,9 @@ export function getUserIdWithMatchPointObj(interests, userTagObj, users, require
       userTagObj[userId],
       interests
     );
-    if (result) {
-      filteredUserWithMatchPointObj.push({ userId, matchPoint });
-    }
+
+    filteredUserWithMatchPointObj.push({ userId, matchPoint });
+
     filteredUserWithMatchPointObj.sort((a, b) => {
       return b.matchPoint - a.matchPoint;
     });
@@ -137,10 +142,24 @@ export function getUserIdWithMatchPointObj(interests, userTagObj, users, require
   let filteredUsers = [];
 
   filteredUserWithMatchPointObj.forEach((obj) => {
-    filteredUsers.push({userId: users[obj.userId - 1].id, matchPoint: obj.matchPoint, percentage: Math.round((obj.matchPoint / requiredInterests.length) * 100)});
+    if (obj.matchPoint === 0) {
+      filteredUsers.push({
+        userId: users[obj.userId - 1].id,
+        matchPoint: obj.matchPoint,
+        percentage: 0,
+      });
+    } else {
+      filteredUsers.push({
+        userId: users[obj.userId - 1].id,
+        matchPoint: obj.matchPoint,
+        percentage: Math.round(
+          (obj.matchPoint / requiredInterests.length) * 100
+        ),
+      });
+    }
   });
 
-  
+  // console.log('filteredUsers', filteredUsers);
 
   return filteredUsers;
 }
@@ -173,11 +192,8 @@ export function getFilteredUsersByCity(cities, users) {
   users.forEach((eachUser) => {
     if (cities.includes(eachUser.address)) {
       filteredUsers.push(eachUser);
-
     }
   });
 
-  
   return filteredUsers;
 }
-

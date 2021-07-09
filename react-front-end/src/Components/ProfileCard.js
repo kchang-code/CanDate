@@ -77,6 +77,7 @@ const DialogActions = withStyles((theme) => ({
 //from line 25 - 68 are all material ui functions
 
 export default function ProfileCard(props) {
+  console.log('users', props.users);
   const { openMsg, setOpenMsg, handleMessageClose } = props;
 
   let { id } = useParams();
@@ -253,7 +254,10 @@ export default function ProfileCard(props) {
                 >
                   <BlockIcon />
                 </IconButton>
-                <Badge variant="light">{props.matchPercentage}</Badge>% Match
+                <Badge variant="light">
+                  {props.users[Number(props.id - 1)].percent}
+                </Badge>
+                % Match
                 {/* from here is the block confirmation */}
                 <Dialog
                   open={openConfirm}
