@@ -230,7 +230,7 @@ const UserPage = (props) => {
   return loading ? (
     <Status />
   ) : (
-    <>
+    <div className="user">
       <NavBar
         handleTagClick={handleTagClick}
         handleAddressClick={handleAddressClick}
@@ -334,7 +334,7 @@ const UserPage = (props) => {
           </Fab>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
