@@ -23,6 +23,7 @@ import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { PercentageBadge } from './PercentageBadge';
+import { motion } from 'framer-motion';
 import Badge from 'react-bootstrap/Badge';
 import {
   checkIfLiked,
@@ -151,7 +152,6 @@ export default function ProfileCard(props) {
       to_user_id: Number(props.id),
       content: `Hello! I am ${myName}`,
     };
-    console.log('load to message page');
 
     const timeElapsed = Date.now();
     //sending msg state
@@ -181,7 +181,6 @@ export default function ProfileCard(props) {
         newBlock: { ...newBlock },
       })
       .then(() => {
-        console.log('newBlock', newBlock);
         props.setBlock([...props.block, newBlock]);
       });
   };
@@ -191,14 +190,26 @@ export default function ProfileCard(props) {
     ? (color = 'red')
     : (color = 'rgba(0, 0, 0, 0.54)');
 
+  const fadeLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
     <>
-      <div className="ProfileCard">
+      <motion.div
+        variants={fadeLeft}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 1 }}
+        className="ProfileCard"
+        whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+      >
         <Card
           // {users}
           class="card"
           elevation={3}
-          onClick={() => {}}
+          // onClick={handleClickOpen}
         >
           <CardHeader
             class="name"
@@ -238,7 +249,6 @@ export default function ProfileCard(props) {
                 </Dialog>
                 <IconButton
                   onClick={() => {
-                    console.log('block');
                     handleClickOpenConfirm();
                   }}
                 >
@@ -328,7 +338,7 @@ export default function ProfileCard(props) {
             })}
           </CardContent>
         </Card>
-      </div>
+      </motion.div>
       {/* {console.log("props.matchpercentage", props.matchPercentage)} */}
     </>
   );

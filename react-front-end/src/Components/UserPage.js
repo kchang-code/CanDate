@@ -209,13 +209,10 @@ const UserPage = (props) => {
       for (const match of matchObj) {
         if (user.id === match.userId) {
           user.percent = match.percentage;
-          console.log('match.percentage', match.percentage);
         }
       }
     }
   }
-
-  console.log('matchOBJ', matchObj);
 
   addMatchPointPercentage(users, matchObj);
 
