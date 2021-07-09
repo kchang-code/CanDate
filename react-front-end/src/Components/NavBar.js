@@ -102,8 +102,6 @@ const DialogActions = withStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
-
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -116,7 +114,6 @@ export default function NavBar(props) {
   const { ageRange, updateAgeRange, users, handleAddressClick, buttonColor } =
     props;
   const [tag, setTags] = useState([]);
-
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/tags').then((res) => {
@@ -136,8 +133,14 @@ export default function NavBar(props) {
     <div>
       <AppBar position="static" color="white">
         <Toolbar>
-          <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginLeft: "30px" }} />
-          <div className="nav-bar-logo"><p>CanDate</p></div>
+          <img
+            src="https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true"
+            width="80"
+            style={{ marginLeft: '30px' }}
+          />
+          <div className="nav-bar-logo">
+            <p>CanDate</p>
+          </div>
           <div className={classes.grow} />
           <div className="nav-bar-tab">
             <Tab label="Favorite" onClick={props.handleFavorite} />
@@ -148,7 +151,10 @@ export default function NavBar(props) {
                 aria-labelledby="customized-dialog-title"
                 open={open}
               >
-                <DialogTitle id="customized-dialog-title" onClose={handleClosed}>
+                <DialogTitle
+                  id="customized-dialog-title"
+                  onClose={handleClosed}
+                >
                   Filter Results:
                 </DialogTitle>
                 <DialogContent dividers>
@@ -170,7 +176,10 @@ export default function NavBar(props) {
                 </DialogContent>
               </Dialog>
             </div>
-            <Tab label="Clear Filter" onClick={() => props.handleEmptyTagsClick()} />
+            <Tab
+              label="Clear Filter"
+              onClick={() => props.handleEmptyTagsClick()}
+            />
           </div>
           <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">

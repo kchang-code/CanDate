@@ -153,6 +153,7 @@ const UserPage = (props) => {
         ageRange: [20, 80],
         gender: neededInfo[0].gender,
         favorite: false,
+
         loginUserTags: LoggedInUserTagIDs,
       });
     } else {
@@ -258,7 +259,8 @@ const UserPage = (props) => {
       <div className="user-page">
         {state.tags.length === 0 &&
         state.city.length === 0 &&
-        !state.favorite ? (
+        !state.favorite &&
+        state.gender === '' ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>

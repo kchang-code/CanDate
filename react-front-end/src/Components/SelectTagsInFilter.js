@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ButtonBase } from "@material-ui/core";
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ButtonBase } from '@material-ui/core';
 <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -10,18 +10,19 @@ import { ButtonBase } from "@material-ui/core";
 />;
 
 export default function SelectTagsInFilter(props) {
-  const [newColor, setNewColor] = useState("transparent");
+  const [newColor, setNewColor] = useState('transparent');
+
   const [select, setSelect] = useState(false);
   const [fontColor, setfontColor] = useState('black');
 
   const buttonColor = (select) => {
     if (select) {
       setSelect(false);
-      setNewColor("transparent");
+      setNewColor('transparent');
       setfontColor('black');
     } else {
       setSelect(true);
-      setNewColor("#3f51b5");
+      setNewColor('#3f51b5');
       setfontColor('white');
     }
   };

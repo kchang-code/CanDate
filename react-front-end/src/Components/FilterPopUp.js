@@ -1,18 +1,16 @@
-import React, { useState } from "react";
-import "./FilterPopUp.scss";
-import SelectTagsInFilter from "./SelectTagsInFilter";
-import SelectCityInFilter from "./SelectCityInFilter";
-import Slider from "@material-ui/core/Slider";
+import React, { useState } from 'react';
+import './FilterPopUp.scss';
+import SelectTagsInFilter from './SelectTagsInFilter';
+import SelectCityInFilter from './SelectCityInFilter';
+import Slider from '@material-ui/core/Slider';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-
 let cities = [];
 export default function FilterPopUp(props) {
-
   const marks = [
     {
       value: 20,
@@ -30,34 +28,35 @@ export default function FilterPopUp(props) {
       value: 80,
       label: '80',
     },
-  ]
+  ];
 
   props.users.map((user) => {
     if (!cities.includes(user.address) && user.address) {
-      cities.push(user.address)
+      cities.push(user.address);
     }
-  })
+  });
 
   const lists = props.content.map((item) => {
-    return (<SelectTagsInFilter
-      id={item.id}
-      name={item.name}
-      handleTagClick={props.handleTagClick}
-    />)
-  })
-
+    return (
+      <SelectTagsInFilter
+        id={item.id}
+        name={item.name}
+        handleTagClick={props.handleTagClick}
+      />
+    );
+  });
 
   const cityList = cities.map((city) => {
     if (!cities.includes(city)) {
-      cities.push(city)
+      cities.push(city);
     }
     return (
       <SelectCityInFilter
         city={city}
         handleAddressClick={props.handleAddressClick}
-      />)
-  })
-
+      />
+    );
+  });
 
   const [value, setValue] = useState('');
 
@@ -69,7 +68,6 @@ export default function FilterPopUp(props) {
   function simulateNetworkRequest() {
     return new Promise((resolve) => setTimeout(resolve, 2000));
   }
-  
 
   return (
     <div className="popup-box">
@@ -77,8 +75,13 @@ export default function FilterPopUp(props) {
         <div>
           <FormControl component="fieldset">
             <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={
-              handleChange} row>
+            <RadioGroup
+              aria-label="gender"
+              name="gender1"
+              value={value}
+              onChange={handleChange}
+              row
+            >
               <FormControlLabel
                 value="male"
                 control={<Radio />}
