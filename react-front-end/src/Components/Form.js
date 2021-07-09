@@ -71,9 +71,7 @@ export default function Form(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <ImageListItem cols={1}>
-          <img src='../doc/logo.jpg' />
-        </ImageListItem>
+        <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginTop: "-40px", marginBottom: "20px" }} />
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
