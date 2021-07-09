@@ -66,6 +66,11 @@ export default function FilterPopUp(props) {
     props.setGender({ ...props.state, gender: event.target.value });
   };
 
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+  
+
   return (
     <div className="popup-box">
       <div className="box">
@@ -93,7 +98,7 @@ export default function FilterPopUp(props) {
           </FormControl>
         </div>
         <span>
-          <h3>Age:</h3>
+          <h3 class="age-title">Age:</h3>
           <Slider
             style={{ width: 300 }}
             defaultValue={20}
@@ -105,13 +110,11 @@ export default function FilterPopUp(props) {
           />
         </span>
         <span>
-          <h3>City:</h3>
+          <h3 class="city-title">City:</h3>
           <div>{cityList}</div>
         </span>
-        <h3>Interests:</h3>
+        <h3 class="interest-title">Interests:</h3>
         <div>{lists}</div>
-
-        <div onClick={props.save}>{props.savebtn}</div>
       </div>
     </div>
   );

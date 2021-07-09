@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { ButtonBase } from "@material-ui/core";
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+  crossorigin="anonymous"
+/>;
 
 export default function SelectTagsInFilter(props) {
-  const [newColor, setNewColor] = useState('grey')
-  const [select, setSelect] = useState(false)
+  const [newColor, setNewColor] = useState("transparent");
+  const [select, setSelect] = useState(false);
+  const [fontColor, setfontColor] = useState('black');
 
   const buttonColor = (select) => {
-
     if (select) {
-      setSelect(false)
-      setNewColor('grey')
+      setSelect(false);
+      setNewColor("transparent");
+      setfontColor('black');
     } else {
-      setSelect(true)
-      setNewColor('red')
+      setSelect(true);
+      setNewColor("#3f51b5");
+      setfontColor('white');
     }
-  }
+  };
   return (
-    <button
-      onClick={() => { props.handleTagClick(props.id); buttonColor(select) }}
-      style={{ backgroundColor: newColor }}
-    >{props.name}</button>
-  )
+    <Button
+      onClick={() => {
+        props.handleTagClick(props.id);
+        buttonColor(select);
+      }}
+      style={{ backgroundColor: newColor, color: fontColor }}
+      variant="outlined-primary"
+    >
+      {props.name}
+    </Button>
+  );
 }
