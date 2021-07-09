@@ -177,6 +177,8 @@ export default function NavBar(props) {
               </DialogContent>
             </Dialog>
             <Button onClick={() => props.handleEmptyTagsClick(selectTag)}>
+              {/* maybe need to be changed here, setting it back to initial state after clearing the filter?
+               */}
               Clear Filter
             </Button>
           </div>
