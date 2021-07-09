@@ -12,6 +12,7 @@ import { ButtonBase } from "@material-ui/core";
 export default function SelectTagsInFilter(props) {
   const [newColor, setNewColor] = useState("transparent");
   const [select, setSelect] = useState(false);
+  const [fontColor, setfontColor] = useState('black');
 
   const buttonColor = (select) => {
     if (select) {
@@ -19,7 +20,8 @@ export default function SelectTagsInFilter(props) {
       setNewColor("transparent");
     } else {
       setSelect(true);
-      setNewColor("red");
+      setNewColor("#3f51b5");
+      setfontColor('white');
     }
   };
   return (
@@ -28,7 +30,7 @@ export default function SelectTagsInFilter(props) {
         props.handleTagClick(props.id);
         buttonColor(select);
       }}
-      style={{ backgroundColor: newColor }}
+      style={{ backgroundColor: newColor, color: fontColor }}
       variant="outlined-primary"
     >
       {props.name}
