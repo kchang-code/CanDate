@@ -22,7 +22,7 @@
 .sidebar_headerRight {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   min-width: 10vw;
 
   .MuiSavIcon-root {

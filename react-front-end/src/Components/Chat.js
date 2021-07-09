@@ -118,9 +118,6 @@ const Chat = (props) => {
         <h2> {userFirstName}</h2>
         <div className="sidebar_headerRight">
           <IconButton>
-            <DonutLargeIcon />
-          </IconButton>
-          <IconButton>
             <ChatIcon />
           </IconButton>
           <IconButton>

@@ -132,7 +132,14 @@ const UserPage = (props) => {
   };
 
   const handleEmptyTagsClick = (state) => {
-    const selectArr = { ...state, tags: [], city: [], ageRange: [18, 40], gender: '', loginUserTags: [], };
+    const selectArr = {
+      ...state,
+      tags: [],
+      city: [],
+      ageRange: [18, 40],
+      gender: '',
+      loginUserTags: [],
+    };
     setState(selectArr);
   };
 
@@ -142,10 +149,11 @@ const UserPage = (props) => {
       setState({
         ...state,
         tags: LoggedInUserTagIDs,
-        city: [],
-        ageRange: [],
-        gender: '',
+        city: [LoggedInUserCity],
+        ageRange: [20, 80],
+        gender: neededInfo[0].gender,
         favorite: false,
+        loginUserTags: LoggedInUserTagIDs,
       });
     } else {
       setEndNum(3);
@@ -249,8 +257,8 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-          state.city.length === 0 &&
-          !state.favorite ? (
+        state.city.length === 0 &&
+        !state.favorite ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
@@ -262,7 +270,7 @@ const UserPage = (props) => {
           </div>
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
-            console.log('filteredByCity', filteredByCity)
+            console.log('filteredByCity', filteredByCity);
             return (
               <Grid container spacing={4} className="user-page-ind">
                 <Grid item xs={12}>
