@@ -270,6 +270,12 @@ export default function ProfileCard(props) {
           className="profile_photo"
         />
 
+        <img
+          className="crown"
+          alt="crown"
+          src="https://github.com/MattLuo90/CanDate/blob/cdd/crown/react-front-end/public/images/royal-crown.png?raw=true"
+        />
+
         <div className="card_content">
           {/* getting know me better */}
           <div>
