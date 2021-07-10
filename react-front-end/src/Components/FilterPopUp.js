@@ -103,13 +103,14 @@ export default function FilterPopUp(props) {
         <span>
           <h3 class="age-title">Age:</h3>
           <Slider
-            style={{ width: 300 }}
+            style={{ width: 300, color: "#f2a1a3" }}
             defaultValue={20}
             step={5}
             value={props.ageRange}
             valueLabelDisplay="auto"
             onChange={props.updateAgeRange}
             marks={marks}
+
           />
         </span>
         <span>
