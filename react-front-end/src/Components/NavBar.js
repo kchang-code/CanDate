@@ -120,18 +120,20 @@ export default function NavBar(props) {
 
   return (
     <div>
-      <AppBar position="static" color="white">
+      <AppBar position="static" color="white" className="nav-bar">
         <Toolbar>
-          <img
-            alt="logo"
-            src="https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true"
-            width="80"
-            style={{ marginLeft: '30px' }}
-          />
-          <div className="nav-bar-logo">
-            <p>CanDate</p>
+          <div className="nav-bar-title">
+            <img
+              alt="logo"
+              src="https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true"
+              width="80"
+              style={{ marginLeft: '30px' }}
+            />
+            <div className="nav-bar-logo">
+              <p>CanDate</p>
+            </div>
           </div>
-          <div className={classes.grow} />
+
           <div className="nav-bar-tab">
             <Tab label="Favorite" onClick={props.handleFavorite} />
             <div>
