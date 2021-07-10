@@ -1,16 +1,11 @@
 import Message from './Message';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './ProfileCard.scss';
-import useUserPage from '../hooks/useUserPage';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
+
 import { Typography, IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Button from '@material-ui/core/Button';
-import ReactCardFlip from 'react-card-flip';
 import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,14 +17,10 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { PercentageBadge } from './PercentageBadge';
-import { motion } from 'framer-motion';
-import Badge from 'react-bootstrap/Badge';
 
 import {
   checkIfLiked,
   findIndexOfFavorite,
-  getFavoriteByUser,
 } from '../helpers/favoriteBlockHelp';
 
 //from line 25 - 63 are all material ui functions
@@ -105,8 +96,6 @@ export default function ProfileCard(props) {
   const handleCloseConfirm = () => {
     setOpenConfirm(false);
   };
-
-  const filteredFavoriteId = getFavoriteByUser(favorite, id);
 
   const handleLike = () => {
     const newFavorite = {
@@ -190,11 +179,6 @@ export default function ProfileCard(props) {
     ? (color = 'red')
     : (color = 'rgba(0, 0, 0, 0.54)');
 
-  const fadeLeft = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0 },
-  };
-
   return (
     <>
       <div class="card">
@@ -275,7 +259,11 @@ export default function ProfileCard(props) {
           </Dialog>
           {/* end of confirm dialogue */}
         </div>
-        <img src={props.profile_photo} className="profile_photo" />
+        <img
+          alt={props.name}
+          src={props.profile_photo}
+          className="profile_photo"
+        />
         <div className="card_content">
           {/* getting know me better */}
           <div>

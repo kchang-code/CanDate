@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -75,7 +69,12 @@ export default function Question(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginTop: "-40px", marginBottom: "10px" }} />
+        <img
+          alt="logo"
+          src="https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true"
+          width="80"
+          style={{ marginTop: '-40px', marginBottom: '10px' }}
+        />
         <Typography component="h1" variant="h5">
           Tell us about yourself
         </Typography>
@@ -87,14 +86,16 @@ export default function Question(props) {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="demo-simple-select-outlined-label">Gender</InputLabel>
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Gender
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
                   value={gender}
                   label="Gender"
                   onChange={(e) => {
-                    setGender(e.target.value)
+                    setGender(e.target.value);
                   }}
                 >
                   <MenuItem value={'Male'}>Male</MenuItem>
@@ -105,14 +106,16 @@ export default function Question(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="demo-simple-select-outlined-label">Height(cm)</InputLabel>
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Height(cm)
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
                   value={height}
                   label="Height(cm)"
                   onChange={(e) => {
-                    setHeight(e.target.value)
+                    setHeight(e.target.value);
                   }}
                 >
                   <MenuItem value={150}>150</MenuItem>

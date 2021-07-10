@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NavBar.scss';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,12 +17,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
 
 //from line 24 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -90,13 +86,6 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
 //from line 24 - 90 are all material ui functions
 
 export default function NavBar(props) {
@@ -134,6 +123,7 @@ export default function NavBar(props) {
       <AppBar position="static" color="white">
         <Toolbar>
           <img
+            alt="logo"
             src="https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true"
             width="80"
             style={{ marginLeft: '30px' }}
@@ -216,7 +206,7 @@ export default function NavBar(props) {
                 </Button>
               </Menu>
             </IconButton>
-            <p style={{ marginTop: "14px" }}>
+            <p style={{ marginTop: '14px' }}>
               Welcome{' '}
               <strong>{props.name[0] && props.name[0]['first_name']}</strong>
             </p>

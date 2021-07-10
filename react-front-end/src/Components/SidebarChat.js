@@ -2,13 +2,8 @@ import React from 'react';
 import { Avatar } from '@material-ui/core';
 import './SidebarChat.scss';
 import ReactTimeAgo from 'react-time-ago';
-import {
-  filteredMessageBySelectedUser,
-  justYouAndMe,
-  reduceToNamesIncludingMe,
-} from '../helpers/messageHelper';
+import { justYouAndMe } from '../helpers/messageHelper';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import MarkunreadIcon from '@material-ui/icons/Markunread';
 
 const SidebarChat = (props) => {
   const {
@@ -17,10 +12,8 @@ const SidebarChat = (props) => {
     profilePic,
     setSelectedUserId,
     to_user_id,
-    sideBarMessage,
     messageObj,
     filteredFavorite,
-    unread,
     setUnread,
   } = props;
 

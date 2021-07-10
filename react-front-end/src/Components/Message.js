@@ -34,6 +34,7 @@ const Message = (props) => {
 
       setSelectedUserId(setDataToSelectedUserId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const selectedUserMessages = filteredMessageBySelectedUser(
