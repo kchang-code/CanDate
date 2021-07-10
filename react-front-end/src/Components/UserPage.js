@@ -136,7 +136,7 @@ const UserPage = (props) => {
       ...state,
       tags: [],
       city: [],
-      ageRange: [18, 40],
+      ageRange: [18, 19],
       gender: '',
       loginUserTags: [],
     };
@@ -258,9 +258,9 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite &&
-        state.gender === '' ? (
+          state.city.length === 0 &&
+          !state.favorite &&
+          state.gender === '' ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
@@ -330,7 +330,7 @@ const UserPage = (props) => {
             Previous
           </Fab>
         )}
-        {endNum < filteredByCity.length && state.city.length !== 0 && (
+        {endNum < filteredByCity.length && (
           <Fab
             variant="extended"
             size="small"
