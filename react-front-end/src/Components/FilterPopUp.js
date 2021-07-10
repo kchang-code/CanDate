@@ -74,7 +74,8 @@ export default function FilterPopUp(props) {
       <div className="box">
         <div>
           <FormControl component="fieldset">
-            <FormLabel component="legend">Gender</FormLabel>
+            <p class="age-title">Gender:</p>
+
             <RadioGroup
               aria-label="gender"
               name="gender1"
@@ -101,23 +102,22 @@ export default function FilterPopUp(props) {
           </FormControl>
         </div>
         <span>
-          <h3 class="age-title">Age:</h3>
+          <p class="age-title">Age:</p>
           <Slider
-            style={{ width: 300, color: "#f2a1a3" }}
+            style={{ width: 300, color: '#f2a1a3' }}
             defaultValue={20}
             step={5}
             value={props.ageRange}
             valueLabelDisplay="auto"
             onChange={props.updateAgeRange}
             marks={marks}
-
           />
         </span>
         <span>
-          <h3 class="city-title">City:</h3>
+          <p class="city-title">City:</p>
           <div>{cityList}</div>
         </span>
-        <h3 class="interest-title">Interests:</h3>
+        <p class="interest-title">Interests:</p>
         <div>{lists}</div>
       </div>
     </div>

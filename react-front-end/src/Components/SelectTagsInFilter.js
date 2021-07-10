@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './selectTagsInFilter.scss';
 <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -9,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 />;
 
 export default function SelectTagsInFilter(props) {
-  const [newColor, setNewColor] = useState('transparent');
+  const [newColor, setNewColor] = useState('lightgrey');
 
   const [select, setSelect] = useState(false);
   const [fontColor, setfontColor] = useState('black');
@@ -17,7 +18,7 @@ export default function SelectTagsInFilter(props) {
   const buttonColor = (select) => {
     if (select) {
       setSelect(false);
-      setNewColor('transparent');
+      setNewColor('lightgrey');
       setfontColor('black');
     } else {
       setSelect(true);
