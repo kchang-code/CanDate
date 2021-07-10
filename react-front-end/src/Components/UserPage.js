@@ -272,8 +272,13 @@ const UserPage = (props) => {
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
             return (
-              <Grid container spacing={4} className="user-page-ind">
-                <Grid item xs={12}>
+              <Grid
+                key={filteredUser.id}
+                container
+                spacing={4}
+                className="user-page-ind"
+              >
+                <Grid key={filteredUser.id} item xs={12}>
                   <ProfileCard
                     key={filteredUser.id}
                     id={filteredUser.id}
