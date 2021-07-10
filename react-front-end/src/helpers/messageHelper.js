@@ -1,6 +1,7 @@
 const reduceToNames = (message, userId, userIBlock) => {
   let id = [];
   let result = [];
+  message.reverse();
   if (userIBlock) {
     message.forEach((el) => {
       if (

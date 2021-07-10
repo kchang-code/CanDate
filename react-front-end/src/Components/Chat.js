@@ -60,6 +60,7 @@ const Chat = (props) => {
   });
 
   const reducedToNamesId = reduceToNamesId(userAllMessages, id);
+  // console.log('reduced message', reducedMessage);
 
   const reducedMessagesComp = reducedMessage.map((message) => {
     const idAndUnread = { [message.id]: unread };
