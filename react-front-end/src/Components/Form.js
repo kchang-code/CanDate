@@ -153,7 +153,7 @@ export default function Form(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link onClick={props.SignIn}>
+              <Link onClick={props.SignIn} style={{ marginRight: '75px' }}>
                 Already have an account? Sign in
               </Link>
             </Grid>

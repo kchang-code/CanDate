@@ -25,7 +25,7 @@ export default function TagList(props) {
         width="80"
         style={{ marginTop: '10px', marginBottom: '-20px' }}
       />
-      <h1>Passions</h1>
+      <h3 style={{ marginTop: ' 30px' }}>Passions</h3>
       <div style={{ fontSize: '35px' }}>{lists}</div>
 
       <Button

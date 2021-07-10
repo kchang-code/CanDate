@@ -256,10 +256,10 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite &&
-        state.gender === '' &&
-        state.ageRange[0] === 0 ? (
+          state.city.length === 0 &&
+          !state.favorite &&
+          state.gender === '' &&
+          state.ageRange[0] === 0 ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
@@ -324,7 +324,7 @@ const UserPage = (props) => {
           <Fab
             variant="extended"
             size="small"
-            color="secondary"
+            style={{ backgroundColor: "#f2a1a3" }}
             aria-label="previous"
             className={classes.margin}
             onClick={() => handlePreviousButton(startNum, endNum)}
@@ -337,7 +337,7 @@ const UserPage = (props) => {
           <Fab
             variant="extended"
             size="small"
-            color="secondary"
+            style={{ backgroundColor: "#f2a1a3" }}
             aria-label="next"
             className={classes.margin}
             onClick={() => handleNextButton(startNum, endNum)}

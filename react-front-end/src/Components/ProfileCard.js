@@ -331,7 +331,7 @@ export default function ProfileCard(props) {
               <Chip
                 key={props.users.id}
                 label={item}
-                style={{ backgroundColor: '#ffb3cd' }}
+                style={{ backgroundColor: '#f2a1a3' }}
               />
             );
           })}

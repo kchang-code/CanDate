@@ -30,14 +30,14 @@ const TagListItem = (props) => {
     num++;
     setNum(num);
     if (num % 2 === 0) {
-      setNewColor('secondary');
+      setNewColor("#f2a1a3");
       // setIcon(DoneIcon);
       axios
         .put('http://localhost:8080/api/user_tag/new', { newTagUser })
         .catch((err) => console.log(err));
       return;
     }
-    setNewColor('default');
+    setNewColor('grey');
     // setIcon(FaceIcon);
   }
 
@@ -47,7 +47,8 @@ const TagListItem = (props) => {
       onClick={() => {
         handleClick(num, props.tag_id, props.id);
       }}
-      color={newColor}
+      // color={newColor}
+      style={{ backgroundColor: newColor }}
     />
   );
 };
