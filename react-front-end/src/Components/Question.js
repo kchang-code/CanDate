@@ -98,9 +98,9 @@ export default function Question(props) {
                     setGender(e.target.value);
                   }}
                 >
-                  <MenuItem value={'Male'}>Male</MenuItem>
-                  <MenuItem value={'Female'}>Female</MenuItem>
-                  <MenuItem value={'Others'}>Others</MenuItem>
+                  <MenuItem value={'male'}>Male</MenuItem>
+                  <MenuItem value={'female'}>Female</MenuItem>
+                  <MenuItem value={'other'}>Other</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
