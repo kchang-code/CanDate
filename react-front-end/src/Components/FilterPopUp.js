@@ -30,7 +30,7 @@ export default function FilterPopUp(props) {
     },
   ];
 
-  props.users.map((user) => {
+  props.users.forEach((user) => {
     if (!cities.includes(user.address) && user.address) {
       cities.push(user.address);
     }
@@ -65,9 +65,9 @@ export default function FilterPopUp(props) {
     props.setGender({ ...props.state, gender: event.target.value });
   };
 
-  function simulateNetworkRequest() {
-    return new Promise((resolve) => setTimeout(resolve, 2000));
-  }
+  // function simulateNetworkRequest() {
+  //   return new Promise((resolve) => setTimeout(resolve, 2000));
+  // }
 
   return (
     <div className="popup-box">

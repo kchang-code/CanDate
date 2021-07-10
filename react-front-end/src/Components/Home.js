@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import PhotoList from './PhotoList';
+import React from 'react';
 import TagList from './TagList';
 import useVisualMode from '../hooks/useVisualMode';
 import Question from './Question';
 import SignIn from './SignIn';
 import Form from './Form';
 import './Home.scss';
-import BasicImageList from './imageList';
 
 export default function Home(props) {
   const FORM = 'FORM';
@@ -17,7 +15,6 @@ export default function Home(props) {
   const id = props.image.length + 1;
 
   const { mode, transition, back } = useVisualMode(FORM);
-
 
   function change() {
     transition(QUESTION);
@@ -38,12 +35,13 @@ export default function Home(props) {
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
         {mode === TAG && <TagList tags={props.tags} id={id} />}
-        {mode === SIGN &&
+        {mode === SIGN && (
           <SignIn
             back={back}
             users={props.image}
             findPasswordByEmail={props.findPasswordByEmail}
-          />}
+          />
+        )}
       </div>
     </div>
   );

@@ -127,7 +127,7 @@ export function getUserIdWithMatchPointObj(
 
   let filteredUserWithMatchPointObj = [];
   for (const userId in userTagObj) {
-    const { result, matchPoint } = checkIfContainsAllInterest(
+    const { matchPoint } = checkIfContainsAllInterest(
       userTagObj[userId],
       interests
     );

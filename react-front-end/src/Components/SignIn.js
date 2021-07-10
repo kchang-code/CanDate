@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -8,7 +7,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -58,11 +56,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function SignIn(props) {
   const classes = useStyles();
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -76,12 +73,16 @@ export default function SignIn(props) {
     setOpen(false);
   };
 
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img src='https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true' width="80" style={{ marginTop: "-40px", marginBottom: "20px" }} />
+        <img
+          alt="logo"
+          src="https://github.com/MattLuo90/CanDate/blob/master/react-front-end/src/docs/logo.jpg?raw=true"
+          width="80"
+          style={{ marginTop: '-40px', marginBottom: '20px' }}
+        />
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -109,7 +110,7 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            // onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -123,10 +124,11 @@ export default function SignIn(props) {
               color="primary"
               className={classes.submit}
               onClick={() => {
-                setTimeout(function () { props.findPasswordByEmail(email, props.users) }, 1000);
-                handleClick()
-              }
-              }
+                setTimeout(function () {
+                  props.findPasswordByEmail(email, props.users);
+                }, 1000);
+                handleClick();
+              }}
             >
               Sign In
             </Button>
@@ -138,9 +140,7 @@ export default function SignIn(props) {
           </div>
           <Grid container>
             <Grid item xs>
-              <Link>
-                Forgot password?
-              </Link>
+              <Link>Forgot password?</Link>
             </Grid>
             <Grid item>
               <Link onClick={props.back}>
@@ -153,7 +153,6 @@ export default function SignIn(props) {
       <Box mt={8}>
         <Copyright />
       </Box>
-    </Container >
-
+    </Container>
   );
 }
