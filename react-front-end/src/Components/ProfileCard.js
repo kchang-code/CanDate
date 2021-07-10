@@ -269,12 +269,13 @@ export default function ProfileCard(props) {
           src={props.profile_photo}
           className="profile_photo"
         />
-
-        <img
-          className="crown"
-          alt="crown"
-          src="https://github.com/MattLuo90/CanDate/blob/cdd/crown/react-front-end/public/images/royal-crown.png?raw=true"
-        />
+        {props.filteredFavoriteId.includes(props.id) && (
+          <img
+            className="crown"
+            alt="crown"
+            src="https://github.com/MattLuo90/CanDate/blob/cdd/crown/react-front-end/public/images/output-onlinepngtools.png?raw=true"
+          />
+        )}
 
         <div className="card_content">
           {/* getting know me better */}
