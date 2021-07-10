@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ButtonBase } from "@material-ui/core";
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ButtonBase } from '@material-ui/core';
 <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -10,19 +10,18 @@ import { ButtonBase } from "@material-ui/core";
 />;
 
 export default function SelectCityInFilter(props) {
-  const [newColor, setNewColor] = useState("transparent");
+  const [newColor, setNewColor] = useState('transparent');
   const [select, setSelect] = useState(false);
   const [fontColor, setfontColor] = useState('black');
 
-  console.log("city", props.city);
   const cityColor = (select) => {
     if (select) {
       setSelect(false);
-      setNewColor("transparent");
-      setfontColor('black')
+      setNewColor('transparent');
+      setfontColor('black');
     } else {
       setSelect(true);
-      setNewColor("#ffb3cd");
+      setNewColor('#ffb3cd');
     }
   };
   return (

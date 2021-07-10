@@ -157,7 +157,7 @@ export default function ProfileCard(props) {
 
     let today = new Date(timeElapsed);
 
-    let time = today.toLocaleString();
+    let time = today.toLocaleString('en-GB');
     axios
       .put('http://localhost:8080/api/users/:id/messages', {
         newMessage: { ...newMessage, creates_on: time },
@@ -200,10 +200,7 @@ export default function ProfileCard(props) {
       <div class="card">
         <div className="card_title">{title}</div>
         <div className="card_match">
-
           {props.users[Number(props.id - 1)].percent} % Match
-
-
         </div>
         <div className="icon">
           {' '}
@@ -305,9 +302,7 @@ export default function ProfileCard(props) {
                 <Typography gutterBottom>Gender: {props.gender}</Typography>
                 <Typography gutterBottom>Age: {props.age}</Typography>
                 <Typography gutterBottom>Height: {props.height}</Typography>
-                <Typography gutterBottom>
-                  Notes: {props['about_me']}
-                </Typography>
+                <Typography gutterBottom>Notes: {props['about_me']}</Typography>
               </DialogContent>
             </Dialog>
           </div>
@@ -315,7 +310,7 @@ export default function ProfileCard(props) {
             Mutual interests:
           </Typography>
           {props.tag.map((item) => {
-            return <Chip label={item} style={{backgroundColor:'#ffb3cd'}}/>;
+            return <Chip label={item} style={{ backgroundColor: '#ffb3cd' }} />;
           })}
         </div>
       </div>

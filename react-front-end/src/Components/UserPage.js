@@ -277,7 +277,6 @@ const UserPage = (props) => {
           </div>
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
-            console.log('filteredByCity', filteredByCity);
             return (
               <Grid container spacing={4} className="user-page-ind">
                 <Grid item xs={12}>

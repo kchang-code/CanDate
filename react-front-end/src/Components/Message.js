@@ -41,8 +41,6 @@ const Message = (props) => {
     selectedUserId
   );
 
-  console.log('selectedUserId', selectedUserId);
-
   const selectedPhoto = selectedUserId
     ? users[selectedUserId - 1]['profile_photo']
     : null;

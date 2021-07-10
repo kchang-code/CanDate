@@ -84,7 +84,8 @@ const ChatScreen = (props) => {
     //sending msg state
     let today = new Date(timeElapsed);
 
-    let time = today.toLocaleString();
+    let time = today.toLocaleString('en-GB');
+    console.log('time', time);
 
     axios
       .put('http://localhost:8080/api/users/:id/messages', {

@@ -35,7 +35,6 @@ function App() {
 
         // setMessages(needToSet);
         const parsedData = JSON.parse(realTimeData);
-        console.log('parsedData', parsedData);
         setMessages((prev) => [...prev, ...parsedData]);
       }
     };
