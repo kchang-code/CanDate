@@ -26,7 +26,7 @@ export default function Status(props) {
         tag = "",
         writingTag = false,
         tagOpen = false,
-        typeSpeed = 20,
+        typeSpeed = 30,
         tempTypeSpeed = 0;
 
       var type = function () {
