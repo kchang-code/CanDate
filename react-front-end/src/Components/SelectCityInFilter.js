@@ -22,8 +22,7 @@ export default function SelectCityInFilter(props) {
       setfontColor('black')
     } else {
       setSelect(true);
-      setNewColor("#3f51b5");
-      setfontColor('white');
+      setNewColor("#ffb3cd");
     }
   };
   return (
