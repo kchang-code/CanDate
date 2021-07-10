@@ -14,6 +14,7 @@ import {
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
   getUserIdWithMatchPointObj,
+  getSortedUsers,
 } from '../helpers/userPageHelpers';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Fab from '@material-ui/core/Fab';
@@ -74,8 +75,8 @@ const UserPage = (props) => {
       setLoggedInUserInfo((prev) => [...prev, ...neededInfo]);
       setState({
         ...state,
-        tags: LoggedInUserTagIDs,
-        city: [LoggedInUserCity],
+        tags: [],
+        city: [],
         gender: neededInfo[0].gender,
         loginUserTags: LoggedInUserTagIDs,
       });
@@ -165,6 +166,14 @@ const UserPage = (props) => {
   };
 
   const userTagObj = userIdWithTagsArrObj(users, user_tag);
+  const matchObj = getUserIdWithMatchPointObj(
+    state.loginUserTags,
+    userTagObj,
+    users,
+    state.loginUserTags
+  );
+
+  const sortedUsers = getSortedUsers(matchObj, users);
   // console.log('userTagObj', userTagObj);
 
   // console.log('filteredByGender', filteredByGender);
@@ -174,7 +183,11 @@ const UserPage = (props) => {
   if (state.favorite) {
     filteredByTags = filteredFavoriteUsers;
   } else {
-    filteredByTags = getFilteredUsersByInterest(state.tags, userTagObj, users);
+    filteredByTags = getFilteredUsersByInterest(
+      state.tags,
+      userTagObj,
+      sortedUsers
+    );
   }
 
   // console.log('filteredByTags', filteredByTags);
@@ -204,13 +217,6 @@ const UserPage = (props) => {
   if (filteredByCity.length > 0 && state.ageRange[0] === 0) {
     setState({ ...state, ageRange: [1, 19] });
   }
-
-  const matchObj = getUserIdWithMatchPointObj(
-    state.loginUserTags,
-    userTagObj,
-    users,
-    state.loginUserTags
-  );
 
   function addMatchPointPercentage(users, matchObj) {
     for (const user of users) {
@@ -256,10 +262,10 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-          state.city.length === 0 &&
-          !state.favorite &&
-          state.gender === '' &&
-          state.ageRange[0] === 0 ? (
+        state.city.length === 0 &&
+        !state.favorite &&
+        state.gender === '' &&
+        state.ageRange[0] === 0 ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
@@ -324,7 +330,7 @@ const UserPage = (props) => {
           <Fab
             variant="extended"
             size="small"
-            style={{ backgroundColor: "#f2a1a3" }}
+            style={{ backgroundColor: '#f2a1a3' }}
             aria-label="previous"
             className={classes.margin}
             onClick={() => handlePreviousButton(startNum, endNum)}
@@ -337,7 +343,7 @@ const UserPage = (props) => {
           <Fab
             variant="extended"
             size="small"
-            style={{ backgroundColor: "#f2a1a3" }}
+            style={{ backgroundColor: '#f2a1a3' }}
             aria-label="next"
             className={classes.margin}
             onClick={() => handleNextButton(startNum, endNum)}

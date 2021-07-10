@@ -159,7 +159,7 @@ export function getUserIdWithMatchPointObj(
     }
   });
 
-  // console.log('filteredUsers', filteredUsers);
+  console.log('filteredUsers', filteredUsers);
 
   return filteredUsers;
 }
@@ -196,4 +196,13 @@ export function getFilteredUsersByCity(cities, users) {
   });
 
   return filteredUsers;
+}
+
+export function getSortedUsers(userMatchObj, users) {
+  let result = [];
+  userMatchObj.forEach((userObj) => {
+    result.push(users[userObj.userId - 1]);
+  });
+
+  return result;
 }
