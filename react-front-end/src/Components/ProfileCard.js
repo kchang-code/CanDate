@@ -17,7 +17,6 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
-
 import {
   checkIfLiked,
   findIndexOfFavorite,
@@ -270,6 +269,7 @@ export default function ProfileCard(props) {
           src={props.profile_photo}
           className="profile_photo"
         />
+
         <div className="card_content">
           {/* getting know me better */}
           <div>
