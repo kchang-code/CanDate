@@ -136,7 +136,7 @@ const UserPage = (props) => {
       ...state,
       tags: [],
       city: [],
-      ageRange: [18, 19],
+      ageRange: [0, 18],
       gender: '',
       loginUserTags: [],
     };
@@ -207,6 +207,10 @@ const UserPage = (props) => {
   const filteredByCity = getFilteredUsersByCity(state.city, filteredHimself);
   // console.log('filteredByCity', filteredByCity);
 
+  if (filteredByCity.length > 0 && state.ageRange[0] === 0) {
+    setState({ ...state, ageRange: [1, 19] });
+  }
+
   const matchObj = getUserIdWithMatchPointObj(
     state.loginUserTags,
     userTagObj,
@@ -258,9 +262,10 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-          state.city.length === 0 &&
-          !state.favorite &&
-          state.gender === '' ? (
+        state.city.length === 0 &&
+        !state.favorite &&
+        state.gender === '' &&
+        state.ageRange[0] === 0 ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
