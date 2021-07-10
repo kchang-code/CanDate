@@ -12,12 +12,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
 import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import ReactTimeAgo from 'react-time-ago';
-import {
-  getFavoriteByUser,
-  getUserBlockMe,
-} from '../helpers/favoriteBlockHelp';
-import { makeStyles } from '@material-ui/core/styles';
+import { getUserBlockMe } from '../helpers/favoriteBlockHelp';
 import Alert from '@material-ui/lab/Alert';
 
 let to_user_id = null;
@@ -25,27 +20,9 @@ let userName;
 let userPhoto;
 let userAboutMe;
 
-//configure alert component
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-
 const ChatScreen = (props) => {
-  const classes = useStyles(); //configure block alert style
-  const {
-    selectedMessages,
-    messages,
-    setMessages,
-    selectedPhoto,
-    users,
-    block,
-    loading,
-  } = props;
+  const { selectedMessages, messages, selectedPhoto, users, block, loading } =
+    props;
 
   let { id } = useParams();
   const [input, setInput] = useState('');
@@ -55,6 +32,7 @@ const ChatScreen = (props) => {
     if (block.length !== 0) {
       setFilteredBlock(getUserBlockMe(block, id));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const newMessage = {

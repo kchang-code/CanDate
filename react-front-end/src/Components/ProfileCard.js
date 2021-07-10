@@ -1,16 +1,11 @@
 import Message from './Message';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './ProfileCard.scss';
-import useUserPage from '../hooks/useUserPage';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
+
 import { Typography, IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Button from '@material-ui/core/Button';
-import ReactCardFlip from 'react-card-flip';
 import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,14 +17,10 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import BlockIcon from '@material-ui/icons/Block';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { PercentageBadge } from './PercentageBadge';
-import { motion } from 'framer-motion';
-import Badge from 'react-bootstrap/Badge';
 
 import {
   checkIfLiked,
   findIndexOfFavorite,
-  getFavoriteByUser,
 } from '../helpers/favoriteBlockHelp';
 
 //from line 25 - 63 are all material ui functions
@@ -105,8 +96,6 @@ export default function ProfileCard(props) {
   const handleCloseConfirm = () => {
     setOpenConfirm(false);
   };
-
-  const filteredFavoriteId = getFavoriteByUser(favorite, id);
 
   const handleLike = () => {
     const newFavorite = {
@@ -190,14 +179,9 @@ export default function ProfileCard(props) {
     ? (color = 'red')
     : (color = 'rgba(0, 0, 0, 0.54)');
 
-  const fadeLeft = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0 },
-  };
-
   return (
     <>
-      <div class="card">
+      <div className="card">
         <div className="card_title">{title}</div>
         <div className="card_match">
           {props.users[Number(props.id - 1)].percent} % Match
@@ -205,6 +189,7 @@ export default function ProfileCard(props) {
         <div className="icon">
           {' '}
           <IconButton
+            key="1"
             style={{ color: color }}
             onClick={(e) => {
               e.preventDefault();
@@ -215,16 +200,18 @@ export default function ProfileCard(props) {
             <FavoriteIcon />
           </IconButton>
           {/* open message dialogue */}
-          <IconButton onClick={handleClickMessage}>
+          <IconButton key="2" onClick={handleClickMessage}>
             <ChatBubbleIcon />
           </IconButton>
           <Dialog
+            key="3"
             onClose={handleMessageClose}
             aria-labelledby="customized-dialog-title"
             open={openMsg}
             maxWidth="xl"
           >
             <Message
+              key="14"
               messages={props.messages}
               users={props.users}
               setMessages={props.setMessages}
@@ -236,6 +223,7 @@ export default function ProfileCard(props) {
             />
           </Dialog>
           <IconButton
+            key="6"
             onClick={() => {
               handleClickOpenConfirm();
             }}
@@ -244,24 +232,26 @@ export default function ProfileCard(props) {
           </IconButton>
           {/* from here is the block confirmation */}
           <Dialog
+            key="7"
             open={openConfirm}
             onClose={handleCloseConfirm}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">
+            <DialogTitle key="15" id="alert-dialog-title">
               {'Are you sure you want to block this person?'}
             </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
+            <DialogContent key="16">
+              <DialogContentText key="17" id="alert-dialog-description">
                 You will not get any information or message from this person.
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseConfirm} color="primary">
+            <DialogActions key="19">
+              <Button key="9" onClick={handleCloseConfirm} color="primary">
                 Cancel
               </Button>
               <Button
+                key="10"
                 onClick={() => {
                   handleCloseConfirm();
                   handleBlock();
@@ -275,11 +265,16 @@ export default function ProfileCard(props) {
           </Dialog>
           {/* end of confirm dialogue */}
         </div>
-        <img src={props.profile_photo} className="profile_photo" />
+        <img
+          alt={props.name}
+          src={props.profile_photo}
+          className="profile_photo"
+        />
         <div className="card_content">
           {/* getting know me better */}
           <div>
             <Button
+              key="11"
               variant="outlined"
               color="primary"
               onClick={handleClickOpen}
@@ -287,30 +282,51 @@ export default function ProfileCard(props) {
               More about me
             </Button>
             <Dialog
+              key="12"
               onClose={handleClose}
               aria-labelledby="customized-dialog-title"
               open={open}
             >
-              <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+              <DialogTitle
+                key="20"
+                id="customized-dialog-title"
+                onClose={handleClose}
+              >
                 About Me
               </DialogTitle>
-              <DialogContent dividers>
-                <Typography gutterBottom>
+              <DialogContent key="21" dividers>
+                <Typography key="13" gutterBottom>
                   Name: {props.name} {props['last_name']}
                 </Typography>
-                <Typography gutterBottom>City: {props.city}</Typography>
-                <Typography gutterBottom>Gender: {props.gender}</Typography>
-                <Typography gutterBottom>Age: {props.age}</Typography>
-                <Typography gutterBottom>Height: {props.height}</Typography>
-                <Typography gutterBottom>Notes: {props['about_me']}</Typography>
+                <Typography key="1" gutterBottom>
+                  City: {props.city}
+                </Typography>
+                <Typography key="2" gutterBottom>
+                  Gender: {props.gender}
+                </Typography>
+                <Typography key="3" gutterBottom>
+                  Age: {props.age}
+                </Typography>
+                <Typography key="4" gutterBottom>
+                  Height: {props.height}
+                </Typography>
+                <Typography key="5" gutterBottom>
+                  Notes: {props['about_me']}
+                </Typography>
               </DialogContent>
             </Dialog>
           </div>
-          <Typography variant="body2" color="textSecondary">
+          <Typography key="6" variant="body2" color="textSecondary">
             Mutual interests:
           </Typography>
           {props.tag.map((item) => {
-            return <Chip label={item} style={{ backgroundColor: '#ffb3cd' }} />;
+            return (
+              <Chip
+                key={props.users.id}
+                label={item}
+                style={{ backgroundColor: '#ffb3cd' }}
+              />
+            );
           })}
         </div>
       </div>

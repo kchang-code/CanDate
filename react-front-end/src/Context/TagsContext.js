@@ -1,7 +1,5 @@
-import React, {createContext} from 'react';
+import { createContext } from 'react';
 
 const TagsContext = createContext({});
 
-export {
-  TagsContext,
-}
+export { TagsContext };

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, IconButton } from '@material-ui/core';
 import './Chat.scss';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
@@ -12,7 +11,6 @@ import {
   getAllID,
   reduceToNames,
   reduceToNamesId,
-  reduceToNamesIncludingMe,
 } from '../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { getFavoriteByUser, getUserIBlock } from '../helpers/favoriteBlockHelp';
@@ -23,7 +21,6 @@ const Chat = (props) => {
   const {
     messages,
     users,
-    setMessages,
     setSelectedUserId,
     loading,
     selectedUserMessages,
@@ -48,6 +45,7 @@ const Chat = (props) => {
       setUserPhoto(users[Number(id) - 1]['profile_photo']);
       setUserFirstName(users[Number(id) - 1]['first_name']);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const allId = getAllID(userAllMessages);
@@ -62,9 +60,6 @@ const Chat = (props) => {
   });
 
   const reducedToNamesId = reduceToNamesId(userAllMessages, id);
-  const sortedMessages = reducedMessage.sort(
-    (a, b) => a.creates_on - b.creates_on
-  );
 
   const reducedMessagesComp = reducedMessage.map((message) => {
     const idAndUnread = { [message.id]: unread };
@@ -109,6 +104,7 @@ const Chat = (props) => {
         />
       );
     }
+    return null;
   });
 
   return (

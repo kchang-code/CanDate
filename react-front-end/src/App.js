@@ -24,7 +24,6 @@ function App() {
   const [block, setBlock] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user_tag, setUserTags] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
   useEffect(() => {
     const socket = new WebSocket(ENDPOINT);
     socket.onmessage = function (event) {
@@ -42,6 +41,7 @@ function App() {
     // socket.onclose = function () {
     //   console.log('Close');
     // };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   useEffect(() => {
@@ -122,7 +122,6 @@ function App() {
               messages={messages}
               setMessages={setMessages}
               // zio add for testing
-              setMessages={setMessages}
               realTimeData={realTimeData}
               favorite={favorite}
               block={block}
