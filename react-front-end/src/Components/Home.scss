@@ -2,17 +2,29 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background-image: url("../docs/imageWall.png");
+  background-image: url("../docs/imageWall.jpg");
   background-size: 100rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  .gradient {
+    width: 100%;
+    height: 100%;
+    opacity: 90%;
+    background-image: radial-gradient(at 300px 300px, #f2a1a3 0, rgb(104, 69, 145) 50%);
+  }
+  
   .register {
     height: 80vh;
     width:30vw;
     background-color: white;
     border: black solid 2px;
-    margin-right:20px;
-  
+    left:500px;
+    top:80px;
+    z-index: 1;
+    position: absolute;
     border-radius: 30px 30px 30px 30px;
-    margin: auto;
+    // margin: auto;
     padding: 10px;
 
     .forms {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TagList from './TagList';
 import useVisualMode from '../hooks/useVisualMode';
 import Question from './Question';
@@ -26,11 +26,21 @@ export default function Home(props) {
     transition(SIGN);
   }
 
+  useEffect(() => {
+    const gradient = document.querySelector(".gradient");
+
+    function onMouseMove(event) {
+      gradient.style.backgroundImage = 'radial-gradient(at ' + event.clientX + 'px ' + event.clientY + 'px, #f2a1a3 0, rgb(104, 69, 145) 50%)';
+    }
+    document.addEventListener("mousemove", onMouseMove);
+  }, []);
+
   return (
     <div className="home-container">
       {/* <div className="image-wall">
         <BasicImageList image={props.image} />
       </div> */}
+      <div class="gradient"></div>
       <div className="register">
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
