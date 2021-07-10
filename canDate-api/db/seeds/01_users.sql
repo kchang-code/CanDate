@@ -177,3 +177,8 @@ INSERT INTO users(first_name, last_name, email, password, gender, height, addres
     VALUES('Kayla', 'Sullivan','kayla.sullivan@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 185, 'Vancouver', 20, 'https://randomuser.me/api/portraits/women/60.jpg', 'My name is Kayla Sullivan. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
 
 
+INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
+    VALUES('Historic', 'Beaten','Katarina_Hauck@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 165, 'Richmond', 23, 'https://github.com/Zio7711/ProfilePhotos-for-Candate/blob/master/profile_photos/aiony-haust-3TLl_97HNJo-unsplash.jpg?raw=true', 'My name is Historic Beaten. I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
+
+
+
