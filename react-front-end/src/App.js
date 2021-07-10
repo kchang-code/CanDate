@@ -63,7 +63,7 @@ function App() {
         setBlock(block.data.block);
         setTimeout(function () {
           setLoading(false);
-        }, 6000);
+        }, 3000);
       })
       .catch((err) => {
         console.log(err);

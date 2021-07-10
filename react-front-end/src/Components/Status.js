@@ -26,7 +26,7 @@ export default function Status(props) {
         tag = "",
         writingTag = false,
         tagOpen = false,
-        typeSpeed = 100,
+        typeSpeed = 20,
         tempTypeSpeed = 0;
 
       var type = function () {
@@ -55,12 +55,12 @@ export default function Status(props) {
             tempTypeSpeed = 0;
           }
           else {
-            tempTypeSpeed = (Math.random() * typeSpeed) + 1;
+            tempTypeSpeed = typeSpeed;
           }
           t.innerHTML += HTML[cursorPosition];
         }
         if (writingTag === true && HTML[cursorPosition] === ">") {
-          tempTypeSpeed = (Math.random() * typeSpeed) + 1;
+          tempTypeSpeed = typeSpeed;
           writingTag = false;
           if (tagOpen) {
             var newSpan = document.createElement("span");
@@ -92,11 +92,11 @@ export default function Status(props) {
       <div className={classes.root}>
         <CircularProgress color="secondary" />
       </div>
-      <pre id="typewriter">
-        <span class="var-highlight">Function findLover (myself) </span>
-        if (myself.passions === CanDate.users.passions)
-        <span class="string-highlight"> return MyLover;</span>
-        <span class="string-highlight"> We find your lover;</span>
+      <pre id="typewriter" style={{ fontSize: "30px" }}>
+        <p>Function findLover (myself) </p>
+        <p>if (myself.passions === CanDate.users.passions)</p>
+        <p>return MyLover;</p>
+        <p>We find your lover;</p>
       </pre>
     </div>
   );
