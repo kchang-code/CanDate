@@ -27,6 +27,7 @@ import {
   getUsersByBlocked,
 } from '../helpers/favoriteBlockHelp';
 import Status from './Status';
+import NoResult from './NoResult';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -44,6 +45,7 @@ const UserPage = (props) => {
   const [loggedInUserInfo, setLoggedInUserInfo] = useState([]);
   const [startNum, setStartNum] = useState(0);
   const [endNum, setEndNum] = useState(3);
+  const [checkedA, setCheckedA] = useState(true);
 
   const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
@@ -136,6 +138,7 @@ const UserPage = (props) => {
       loginUserTags: [],
     };
     setState(selectArr);
+    setCheckedA(false);
   };
 
   const handleFavorite = () => {
@@ -261,6 +264,8 @@ const UserPage = (props) => {
         handleMessageOpen={handleMessageOpen}
         setStartNum={setStartNum}
         setEndNum={setEndNum}
+        checkedA={checkedA}
+        setCheckedA={setCheckedA}
       />
       <div className="user-page">
         {state.tags.length === 0 &&
@@ -268,15 +273,9 @@ const UserPage = (props) => {
         !state.favorite &&
         state.gender === '' &&
         state.ageRange[0] === 0 ? (
-          <div class="no-results">
-            <h1>No results</h1>
-            <p>Please filter again!</p>
-          </div>
+          <NoResult />
         ) : filteredByCity.length === 0 ? (
-          <div class="no-results">
-            <h1>No results</h1>
-            <p>Please filter again!</p>
-          </div>
+          <NoResult />
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
             return (
