@@ -5,8 +5,8 @@ import './ProfileCard.scss';
 import { Typography, IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -328,11 +328,27 @@ export default function ProfileCard(props) {
           </Typography>
           {props.tag.map((item) => {
             return (
-              <Chip
-                key={props.users.id}
-                label={item}
-                style={{ backgroundColor: '#f2a1a3' }}
-              />
+              // <Chip
+              //   key={props.users.id}
+              //   label={item}
+              //   style={{ backgroundColor: '#f2a1a3' }}
+              // />
+              <Button
+                className="profile_card_tags"
+                style={{
+                  backgroundColor: '#f2a1a3',
+                  paddingTop: '1px',
+                  paddingBottom: '1px',
+                  paddingLeft: '8px',
+                  paddingRight: '8px',
+                  color: 'black',
+                  border: '2px solid lightblue',
+                  fontSize: 'medium',
+                }}
+                // variant="outlined-primary"
+              >
+                {item}
+              </Button>
             );
           })}
         </div>
