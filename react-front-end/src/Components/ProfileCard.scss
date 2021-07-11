@@ -1,11 +1,4 @@
 
-.ProfileCard {
-  width: 350px;
-  height: 430px;
-  border-radius: 30px 30px 30px 30px;
-  box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
-}
-
 .MuiDialog-paperWidthSm{
   max-width: fit-content;
 }
@@ -35,34 +28,54 @@
 .card {
   width: 350px;
   height: 450px;
-  border-radius: 30px 30px 30px 30px;
+  border-radius: 10px 10px 10px 10px;
   box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
   position: relative;
   animation: fadeIn 2s;
 }
 
 .profile_photo {
-  max-width: 200px;
-  min-height: 200px;
-  max-height: 200px;
-  min-width: 200px;
   position: absolute;
-  margin: auto;
-  top: 50px;
-  right: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px #151515,
-              inset 0 0 0 5px #000000,
-              inset 0 0 0 5px #000000,
-              inset 0 0 0 5px #000000,
-              inset 0 0 0 5px #000000,;
-  background: white;
-  overflow: hidden;
+  width: 180px;
+  height: 180px;
+  left: 85px;
+  top: 52px;
+  border: 6px solid ;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(#F386FD 0%, #0B86F8 100%);
+  background:linear-gradient( #F386FD 0%, #0B86F8 100%);  ;
+  border-radius: 999px;
   animation: fadeIn 1s;
 }
+
+.profile_photo:hover {
+  z-index: -999;
+}
+
+.card-dialog {
+  position: relative;
+  border : 1px solid black;
+  width: 180px;
+  height: 180px;
+  left: 85px;
+  top: 52px;
+  border-radius: 999px;
+  background-color: #999999;
+  z-index: 0;
+  .card-dialog-open {
+    margin-top: 80px;
+  .card-dialog-open-button {
+    background:transparent;
+    border:none;
+    margin:0;
+  }
+ }
+}
+
+
+
 .crown {
   transform: rotate(45deg);
   width: 50px;
@@ -70,13 +83,10 @@
   position: absolute;
   right: 90px;
   top: 30px;
-  
-  
 }
 
 .profile_card_tags {
   height: 29px;
- 
   color:black;
   margin: 2px;
   border: solid black;
@@ -84,43 +94,65 @@
 
 .card_content{
   position: absolute;
-  top:260px;
+  top:225px;
   right: 0;
   left: 0;
   animation: fadeIn 1s;
   padding-left: 8px;
   padding-right: 8px;
+  font-size: 18px;
 
 }
 
 .card_title {
   margin-top: 10px;
-  position: absolute;
-  right: 0;
-  left: -120px;
+  // position: absolute;
+  // right: 0;
+  // left: -120px;
   font-size: 22px;
   animation: fadeInMoveTitle 1s;
 }
 
-.card_match {
+.card-top {
   span {
     color: black;
   }
   position: absolute;
-  top: 15px;
-  right: 15px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 25px;
+  margin-top:12px;
   color: black;
+  font-size: 18px;
+  .card-address {
+    position: absolute;
+    right: -200px;
+    display: flex;
+    flex-direction: row;
+    .card-location-icon{
+      font-size:large;
+    }
+  }
+}
+
+.card-notes {
+  font-size:14px;
+  color: #999999;
 }
 
 .icon {
+  color:black;
   display: flex;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
   justify-content: space-between;
   position: absolute;
-  bottom: 10px; 
+  bottom: 3px; 
   right: 0;
-  left: 0;
+  left: 15px;
+  border-top: 1px solid #E5E5E5;
+  width: 90%;
+
   .MuiSvgIcon-root {
     width: 35px;
     height: fit-content;
@@ -192,7 +224,7 @@
 
 .glow-on-hover:before {
   content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background: linear-gradient(45deg, #ff0000,  #7a00ff, #f2a1a3, #ff0000);
   position: absolute;
   top: -2px;
   left:-2px;

@@ -62,7 +62,7 @@ export default function Question(props) {
     axios
       .put(`http://localhost:8080/api/signup/${props.id}`, { updateUser })
       .then(() => console.log('done'))
-      .catch((err) => console.log('1111---v', err));
+      .catch((err) => console.log(err));
   };
 
   return (

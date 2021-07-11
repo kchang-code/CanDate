@@ -20,7 +20,9 @@ import {
   checkIfLiked,
   findIndexOfFavorite,
 } from '../helpers/favoriteBlockHelp';
-import classNames from 'classnames'
+import classNames from 'classnames';
+import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -130,7 +132,7 @@ export default function ProfileCard(props) {
     }
   };
 
-  const title = props.name + ',' + props.age + ',' + props.address;
+  const title = props.name + ', ' + props.age;
 
   const handleClickMessage = () => {
     const myName = props.users[Number(id) - 1].first_name;
@@ -176,7 +178,7 @@ export default function ProfileCard(props) {
   let color;
   props.filteredFavoriteId.includes(props.id)
     ? (color = 'red')
-    : (color = 'rgba(0, 0, 0, 0.54)');
+    : (color = 'black');
 
   const VIPs = [1, 2, 3, 4, 5, 6, 13, 14, 16, 22]
 
@@ -187,9 +189,14 @@ export default function ProfileCard(props) {
   return (
     <>
       <div className={VIPsClass}>
-        <div className="card_title">{title}</div>
-        <div className="card_match">
-          {props.users[Number(props.id - 1)].percent} % Match
+        <div className="card-top">
+          <div className="card_match">
+            <strong>{props.users[Number(props.id - 1)].percent} % Match</strong>
+          </div>
+          <div className="card-address">
+            <PersonPinCircleIcon fontSize='medium' />
+            <strong>{props.address}</strong>
+          </div>
         </div>
         <div className="icon">
           {' '}
@@ -205,7 +212,7 @@ export default function ProfileCard(props) {
             <FavoriteIcon />
           </IconButton>
           {/* open message dialogue */}
-          <IconButton key="2" onClick={handleClickMessage}>
+          <IconButton key="2" onClick={handleClickMessage} style={{ color: 'black' }}>
             <ChatBubbleIcon />
           </IconButton>
           <Dialog
@@ -232,6 +239,7 @@ export default function ProfileCard(props) {
             onClick={() => {
               handleClickOpenConfirm();
             }}
+            style={{ color: 'black' }}
           >
             <BlockIcon />
           </IconButton>
@@ -282,81 +290,77 @@ export default function ProfileCard(props) {
             src="https://github.com/MattLuo90/CanDate/blob/cdd/crown/react-front-end/public/images/output-onlinepngtools.png?raw=true"
           />
         )}
-
-        <div className="card_content">
-          {/* getting know me better */}
-          <div>
-            <Button
-              key="11"
-              variant="outlined"
-              color="primary"
+        {/* getting know me better */}
+        <div className="card-dialog">
+          <div className="card-dialog-open">
+            <ArrowForwardIcon />
+            <button className="card-dialog-open-button"
               onClick={handleClickOpen}
             >
-              More about me
-            </Button>
-            <Dialog
-              key="12"
-              onClose={handleClose}
-              aria-labelledby="customized-dialog-title"
-              open={open}
-            >
-              <DialogTitle
-                key="20"
-                id="customized-dialog-title"
-                onClose={handleClose}
-              >
-                About Me
-              </DialogTitle>
-              <DialogContent key="21" dividers>
-                <Typography key="13" gutterBottom>
-                  Name: {props.name} {props['last_name']}
-                </Typography>
-                <Typography key="1" gutterBottom>
-                  City: {props.city}
-                </Typography>
-                <Typography key="2" gutterBottom>
-                  Gender: {props.gender}
-                </Typography>
-                <Typography key="3" gutterBottom>
-                  Age: {props.age}
-                </Typography>
-                <Typography key="4" gutterBottom>
-                  Height: {props.height}
-                </Typography>
-                <Typography key="5" gutterBottom>
-                  Notes: {props['about_me']}
-                </Typography>
-              </DialogContent>
-            </Dialog>
+              Learn more
+            </button>
           </div>
-          <Typography key="6" variant="body2" color="textSecondary">
-            Mutual interests:
-          </Typography>
-          {props.tag.map((item) => {
-            return (
-              // <Chip
-              //   key={props.users.id}
-              //   label={item}
-              //   style={{ backgroundColor: '#f2a1a3' }}
-              // />
-              <Button
-                className="profile_card_tags"
-                style={{
-                  backgroundColor: '#f2a1a3',
-                  paddingTop: '1px',
-                  paddingBottom: '1px',
-                  paddingLeft: '8px',
-                  paddingRight: '8px',
-                  color: 'black',
-                  border: '2px solid lightblue',
-                  fontSize: 'medium',
-                }}
-              // variant="outlined-primary"
-              >
-                {item}
-              </Button>
-            );
-          })}
+          <Dialog
+            key="12"
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={open}
+          >
+            <DialogTitle
+              key="20"
+              id="customized-dialog-title"
+              onClose={handleClose}
+            >
+              About Me
+            </DialogTitle>
+            <DialogContent key="21" dividers>
+              <Typography key="13" gutterBottom>
+                Name: {props.name} {props['last_name']}
+              </Typography>
+              <Typography key="1" gutterBottom>
+                City: {props.city}
+              </Typography>
+              <Typography key="2" gutterBottom>
+                Gender: {props.gender}
+              </Typography>
+              <Typography key="3" gutterBottom>
+                Age: {props.age}
+              </Typography>
+              <Typography key="4" gutterBottom>
+                Height: {props.height}
+              </Typography>
+              <Typography key="5" gutterBottom>
+                Notes: {props['about_me']}
+              </Typography>
+            </DialogContent>
+          </Dialog>
+        </div>
+        <div className="card_content">
+          <div className="card_title"><strong>{title}</strong></div>
+          <div className="card-notes">{props["about_me"]}</div>
+          <div>
+            {props.tag.map((item) => {
+              return (
+                <Button
+                  className="profile_card_tags"
+                  style={{
+                    backgroundColor: 'rgba(34, 34, 34, 0.05)',
+                    paddingTop: '1px',
+                    paddingBottom: '1px',
+                    paddingLeft: '8px',
+                    paddingRight: '8px',
+                    marginTop: "4px",
+                    color: '#999999',
+                    border: '2px solid lightblue',
+                    fontSize: 'medium',
+                  }}
+                // variant="outlined-primary"
+                >
+                  {item}
+                </Button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
