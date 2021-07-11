@@ -164,6 +164,8 @@ export default function NavBar(props) {
                       buttonColor={buttonColor}
                       setGender={props.setGender}
                       state={props.state}
+                      setStartNum={props.setStartNum}
+                      setEndNum={props.setEndNum}
                     />
                   </Typography>
                   <div className="filter_buttons">

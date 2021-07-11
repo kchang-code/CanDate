@@ -43,6 +43,8 @@ export default function FilterPopUp(props) {
         name={item.name}
         handleTagClick={props.handleTagClick}
         state={props.state}
+        setStartNum={props.setStartNum}
+        setEndNum={props.setEndNum}
       />
     );
   });
@@ -56,6 +58,8 @@ export default function FilterPopUp(props) {
         city={city}
         handleAddressClick={props.handleAddressClick}
         state={props.state}
+        setStartNum={props.setStartNum}
+        setEndNum={props.setEndNum}
       />
     );
   });

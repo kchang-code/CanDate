@@ -143,8 +143,8 @@ const UserPage = (props) => {
       console.log('endNum', endNum);
       setState({
         ...state,
-        tags: LoggedInUserTagIDs,
-        city: [LoggedInUserCity],
+        tags: [],
+        city: [],
         ageRange: [20, 80],
         gender: neededInfo[0].gender,
         favorite: false,
@@ -259,13 +259,15 @@ const UserPage = (props) => {
         setOpenMsg={setOpenMsg}
         handleMessageClose={handleMessageClose}
         handleMessageOpen={handleMessageOpen}
+        setStartNum={setStartNum}
+        setEndNum={setEndNum}
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-          state.city.length === 0 &&
-          !state.favorite &&
-          state.gender === '' &&
-          state.ageRange[0] === 0 ? (
+        state.city.length === 0 &&
+        !state.favorite &&
+        state.gender === '' &&
+        state.ageRange[0] === 0 ? (
           <div class="no-results">
             <h1>No results</h1>
             <p>Please filter again!</p>
@@ -429,6 +431,5 @@ const UserPage = (props) => {
     </div>
   );
 };
-
 
 export default UserPage;

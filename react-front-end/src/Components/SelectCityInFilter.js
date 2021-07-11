@@ -38,6 +38,9 @@ export default function SelectCityInFilter(props) {
     <Button
       className="filter_button"
       onClick={() => {
+        props.setStartNum(0);
+        props.setEndNum(3);
+
         props.handleAddressClick(props.city);
         cityColor(select);
       }}
