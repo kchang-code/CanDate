@@ -91,7 +91,8 @@ const DialogContent = withStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e) => {
+    e.stopPropagation();
     setOpen(true);
   };
   const handleClosed = () => {
@@ -137,9 +138,9 @@ export default function NavBar(props) {
           <div className="nav-bar-tab">
             <Tab label="Favorite" onClick={props.handleFavorite} />
             <div>
-              <Tab label="Filter" onClick={handleClickOpen} />
+              <Tab label="Filter" onClick={(e) => handleClickOpen(e)} />
               <Dialog
-                onClose={handleClosed}
+                onClose={(e) => handleClosed(e)}
                 aria-labelledby="customized-dialog-title"
                 open={open}
               >

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './selectTagsInFilter.scss';
@@ -11,20 +11,29 @@ import './selectTagsInFilter.scss';
 />;
 
 export default function SelectCityInFilter(props) {
-  const [newColor, setNewColor] = useState('lightgrey');
+  const [newColor, setNewColor] = useState('');
   const [select, setSelect] = useState(false);
   const [fontColor, setfontColor] = useState('black');
-
+  let cities = props.state.city;
   const cityColor = (select) => {
     if (select) {
       setSelect(false);
-      setNewColor('lightgrey');
+
       setfontColor('black');
     } else {
       setSelect(true);
-      setNewColor('#f2a1a3');
     }
   };
+
+  useEffect(() => {
+    if (cities.includes(props.city)) {
+      setNewColor('#f2a1a3');
+    } else {
+      setNewColor('lightgrey');
+    }
+  }, [cities.length]);
+
+  console.log('newColor', newColor);
   return (
     <Button
       className="filter_button"
