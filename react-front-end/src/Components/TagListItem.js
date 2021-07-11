@@ -57,7 +57,7 @@ const TagListItem = (props) => {
       onClick={() => {
         handleClick(num, props.tag_id, props.id);
       }}
-      style={{ backgroundColor: newColor, color: 'black' }}
+      style={{ backgroundColor: newColor, color: 'black', border: 'none' }}
     >
       {props.name}{' '}
     </Button>
