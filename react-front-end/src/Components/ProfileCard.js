@@ -189,6 +189,7 @@ export default function ProfileCard(props) {
     'glow-on-hover': VIPs.includes(props.id),
   });
 
+
   return (
     <>
       <div className={VIPsClass}>
