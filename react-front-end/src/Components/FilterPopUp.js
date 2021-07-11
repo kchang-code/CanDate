@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FilterPopUp.scss';
 import SelectTagsInFilter from './SelectTagsInFilter';
 import SelectCityInFilter from './SelectCityInFilter';
@@ -42,6 +42,7 @@ export default function FilterPopUp(props) {
         id={item.id}
         name={item.name}
         handleTagClick={props.handleTagClick}
+        state={props.state}
       />
     );
   });
@@ -54,11 +55,20 @@ export default function FilterPopUp(props) {
       <SelectCityInFilter
         city={city}
         handleAddressClick={props.handleAddressClick}
+        state={props.state}
       />
     );
   });
 
   const [value, setValue] = useState('');
+  let thisGender = props.state.gender;
+  useEffect(() => {
+    if (thisGender !== '') {
+      setValue(thisGender);
+    } else {
+      setValue('');
+    }
+  }, [thisGender]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
