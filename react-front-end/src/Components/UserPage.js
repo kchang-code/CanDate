@@ -45,6 +45,7 @@ const UserPage = (props) => {
   const [loggedInUserInfo, setLoggedInUserInfo] = useState([]);
   const [startNum, setStartNum] = useState(0);
   const [endNum, setEndNum] = useState(3);
+  const [checkedA, setCheckedA] = useState(true);
 
   const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
@@ -137,6 +138,7 @@ const UserPage = (props) => {
       loginUserTags: [],
     };
     setState(selectArr);
+    setCheckedA(false);
   };
 
   const handleFavorite = () => {
@@ -262,6 +264,8 @@ const UserPage = (props) => {
         handleMessageOpen={handleMessageOpen}
         setStartNum={setStartNum}
         setEndNum={setEndNum}
+        checkedA={checkedA}
+        setCheckedA={setCheckedA}
       />
       <div className="user-page">
         {state.tags.length === 0 &&

@@ -91,8 +91,6 @@ const DialogContent = withStyles((theme) => ({
 //from line 24 - 90 are all material ui functions
 
 export default function NavBar(props) {
-  const [checkedA, setCheckedA] = useState(true);
-  const [checkedB, setCheckedB] = useState(true);
   const handleChange = (event) => {
     setCheckedA(!checkedA);
   };
@@ -108,8 +106,15 @@ export default function NavBar(props) {
 
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { ageRange, updateAgeRange, users, handleAddressClick, buttonColor } =
-    props;
+  const {
+    ageRange,
+    updateAgeRange,
+    users,
+    handleAddressClick,
+    buttonColor,
+    checkedA,
+    setCheckedA,
+  } = props;
   const [tag, setTags] = useState([]);
 
   useEffect(() => {
