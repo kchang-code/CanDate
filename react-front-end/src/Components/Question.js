@@ -180,6 +180,7 @@ export default function Question(props) {
                 id="age"
                 label="Age"
                 name="age"
+                autoComplete="age"
                 onChange={(e) => setAge(e.target.value)}
               />
             </Grid>
@@ -190,6 +191,7 @@ export default function Question(props) {
                 required
                 fullWidth
                 id="address"
+                autoComplete="address"
                 label="Address(City)"
                 name="address"
                 onChange={(e) => setAddress(e.target.value)}
@@ -204,6 +206,7 @@ export default function Question(props) {
                 label="Profile Photo Url"
                 type="text"
                 id="profile-photo"
+                autoComplete="url"
                 onChange={(e) => setUrl(e.target.value)}
               />
             </Grid>
@@ -216,6 +219,7 @@ export default function Question(props) {
                 label="About you"
                 type="text"
                 id="about-you"
+                autoComplete="about_me"
                 onChange={(e) => setDescription(e.target.value)}
               />
             </Grid>
