@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+// import Button from 'react-bootstrap/Button';
 import FilterPopUp from './FilterPopUp';
 import axios from 'axios';
 import MailIcon from '@material-ui/icons/Mail';
@@ -19,6 +20,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import CloseIcon from '@material-ui/icons/Close';
 import Tab from '@material-ui/core/Tab';
+import Switch from '@material-ui/core/Switch';
 
 //from line 24 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -89,6 +91,11 @@ const DialogContent = withStyles((theme) => ({
 //from line 24 - 90 are all material ui functions
 
 export default function NavBar(props) {
+  const [checkedA, setCheckedA] = useState(true);
+  const [checkedB, setCheckedB] = useState(true);
+  const handleChange = (event) => {
+    setCheckedA(!checkedA);
+  };
   const classes = useStyles();
 
   const handleClickOpen = (e) => {
@@ -136,9 +143,12 @@ export default function NavBar(props) {
           </div>
 
           <div className="nav-bar-tab">
-            <Tab label="Favorite" onClick={props.handleFavorite} />
             <div>
-              <Tab label="Filter" onClick={(e) => handleClickOpen(e)} />
+              {/* <Tab label="Filter" onClick={(e) => handleClickOpen(e)} /> */}
+              <Button className="favorite" onClick={(e) => handleClickOpen(e)}>
+                {' '}
+                Filter{' '}
+              </Button>
               <Dialog
                 onClose={(e) => handleClosed(e)}
                 aria-labelledby="customized-dialog-title"
@@ -169,8 +179,11 @@ export default function NavBar(props) {
                     />
                   </Typography>
                   <div className="filter_buttons">
-                    <button onClick={handleClosed}>Save</button>
+                    <button className="save" onClick={handleClosed}>
+                      Save
+                    </button>
                     <button
+                      className="delete"
                       label="Clear Filter"
                       onClick={() => props.handleEmptyTagsClick()}
                     >
@@ -179,6 +192,28 @@ export default function NavBar(props) {
                   </div>
                 </DialogContent>
               </Dialog>
+            </div>
+            <div className="favorite_switch">
+              {/* <Tab label="Favorite" onClick={props.handleFavorite} /> */}
+              {/* <span className="favorite">Favorite</span> */}
+
+              <Button
+                className="favorite"
+                onClick={(e) => {
+                  props.handleFavorite(e);
+                  handleChange();
+                }}
+              >
+                {' '}
+                Favorite{' '}
+              </Button>
+              <Switch
+                checked={checkedA}
+                onChange={(e) => {
+                  props.handleFavorite(e);
+                  handleChange();
+                }}
+              />
             </div>
           </div>
           <div className="buttonList">

@@ -24,6 +24,14 @@
 
 .sidebarChat_right {
   display: flex;
-  flex-direction: column;
-  background-color: aquamarine;
+  flex-direction: colum;
+ 
+}
+
+.right_icon {
+  display: flex;
+  height: 25px;
+  svg {
+    margin-right: 10px;
+  }
 }

@@ -83,15 +83,17 @@ const SidebarChat = (props) => {
           marginBottom: '10px',
         }}
       >
-        {unread && <MarkunreadIcon />}
-        {filteredFavorite.includes(to_user_id) && (
-          <FavoriteIcon
-            style={{
-              marginBottom: '10px',
-              color: 'red',
-            }}
-          />
-        )}
+        <div className="right_icon">
+          {unread && <MarkunreadIcon />}
+          {filteredFavorite.includes(to_user_id) && (
+            <FavoriteIcon
+              style={{
+                marginBottom: '10px',
+                color: 'red',
+              }}
+            />
+          )}
+        </div>
         <ReactTimeAgo date={dateTimeAgo} locale="en-US" />
       </div>
     </div>

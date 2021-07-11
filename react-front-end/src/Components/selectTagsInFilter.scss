@@ -13,4 +13,9 @@
 .filter_button {
   
   margin: 2px;
+  transition: all .1s ease-in-out;
+
+  &:hover {
+    transform: scale(0.9);
+  }
 }

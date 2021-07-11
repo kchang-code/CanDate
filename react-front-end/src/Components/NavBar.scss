@@ -19,6 +19,8 @@
   display: flex;
 }
 
+
+
 .nav-bar-tab {
   display:flex;
   flex-direction: row;
@@ -41,9 +43,27 @@
 .filter_buttons {
   display: flex;
   justify-content: center;
+
+
   button {
     margin-right: 50px;
     margin-left: 50px;
+    font-family: sans-serif;
+    text-decoration: none;
+    border:none;
+    color: #fff;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    transition: all .2s ease-in-out;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+  .delete {
+    background-color: #dc3545;
+  }
+  .save {
+    background-color: #0d6efd;
   }
 }
 
@@ -58,10 +78,59 @@
            
 }
 
+.favorite {
+  width: 160px;
+  height: 48px;
+
+}
+.favorite_switch{
+  display: flex;
+  position: relative;
+  align-items: center;
+  input {
+    position: absolute;
+    left: 0px;
+  }
+
+
+
+  .MuiSwitch-root {
+    width: 68px;
+    height: 48px;
+    padding: 0;
+    position: absolute;
+    top: 2px;
+    left: 105px;
+
+    
+  }
+
+ 
+  .MuiSwitch-track {
+    position: absolute;
+    height: 14px;
+    width: 34px;
+    top: 15px;
+    left: 15px;
+  }
+  .MuiIconButton-label {
+
+    position: relative;
+
+  }
+ 
+}
+
+
 @keyframes animated-text{
   from{width: 0;}
   to{width: 90px;}
 }
+
+
+// .MuiTab-textColorInherit {
+
+// }
 
 
 
