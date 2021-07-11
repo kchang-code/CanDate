@@ -313,6 +313,7 @@ export default function ProfileCard(props) {
               key="20"
               id="customized-dialog-title"
               onClose={handleClose}
+              style={{ width: "600px" }}
             >
               About Me
             </DialogTitle>
