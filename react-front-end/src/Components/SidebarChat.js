@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar } from '@material-ui/core';
 import './SidebarChat.scss';
 import ReactTimeAgo from 'react-time-ago';
 import { justYouAndMe } from '../helpers/messageHelper';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
+import MarkunreadIcon from '@material-ui/icons/Markunread';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 const SidebarChat = (props) => {
   const {
     to_name,
@@ -14,9 +15,12 @@ const SidebarChat = (props) => {
     to_user_id,
     messageObj,
     filteredFavorite,
-    setUnread,
+    id,
+    selectedUserId,
   } = props;
 
+  const [unread, setUnread] = useState(false);
+  const [clickTime, setClickTime] = useState('09/07/2020, 21:45:49');
   const twoMessageArr = [
     ...messageObj[message['to_user_id']],
     ...messageObj[message['from_user_id']],
@@ -28,6 +32,25 @@ const SidebarChat = (props) => {
   );
 
   const latestMsg = filteredMsg.sort((a, b) => b.id - a.id)[0];
+
+  useEffect(() => {
+    let messageTime = new Date(latestMsg.creates_on);
+    let time = messageTime.toLocaleString('en-GB');
+    const rightnow = new Date(clickTime);
+    let ClickRightnow = rightnow.toLocaleString('en-GB');
+    const d1 = Date.parse(ClickRightnow);
+    const d2 = Date.parse(time);
+    // setClickTime('09/07/2022, 21:45:49');
+
+    if (
+      d1 < d2 &&
+      Number(id) === latestMsg['to_user_id'] &&
+      selectedUserId !== latestMsg['from_user_id']
+      // ||      (!clickTime && setSelectedUserId !== latestMsg['from_user_id'])
+    ) {
+      setUnread(true);
+    }
+  }, []);
 
   const dateTimeAgo =
     latestMsg['creates_on'].slice(3, 5) +
@@ -41,6 +64,7 @@ const SidebarChat = (props) => {
       onClick={() => {
         setSelectedUserId(to_user_id);
         setUnread(false);
+        setClickTime(Date.now());
       }}
     >
       <Avatar alt="Zio" src={profilePic} />
@@ -59,7 +83,7 @@ const SidebarChat = (props) => {
           marginBottom: '10px',
         }}
       >
-        {/* {unread && <MarkunreadIcon />} */}
+        {unread && <MarkunreadIcon />}
         {filteredFavorite.includes(to_user_id) && (
           <FavoriteIcon
             style={{

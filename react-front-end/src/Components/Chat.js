@@ -82,6 +82,8 @@ const Chat = (props) => {
           unread={unread}
           setUnread={setUnread}
           idAndUnread={idAndUnread}
+          id={id}
+          selectedUserId={selectedUserId}
         />
       );
     } else if (reducedToNamesId.includes(message['from_user_id'])) {
@@ -102,6 +104,8 @@ const Chat = (props) => {
           unread={unread}
           setUnread={setUnread}
           idAndUnread={idAndUnread}
+          id={id}
+          selectedUserId={selectedUserId}
         />
       );
     }
