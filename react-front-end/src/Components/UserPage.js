@@ -27,6 +27,7 @@ import {
   getUsersByBlocked,
 } from '../helpers/favoriteBlockHelp';
 import Status from './Status';
+import NoResult from './NoResult';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -268,15 +269,9 @@ const UserPage = (props) => {
         !state.favorite &&
         state.gender === '' &&
         state.ageRange[0] === 0 ? (
-          <div class="no-results">
-            <h1>No results</h1>
-            <p>Please filter again!</p>
-          </div>
+          <NoResult />
         ) : filteredByCity.length === 0 ? (
-          <div class="no-results">
-            <h1>No results</h1>
-            <p>Please filter again!</p>
-          </div>
+          <NoResult />
         ) : (
           filteredByCity.slice(startNum, endNum).map((filteredUser) => {
             return (

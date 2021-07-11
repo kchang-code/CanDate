@@ -159,8 +159,6 @@ export function getUserIdWithMatchPointObj(
     }
   });
 
-  console.log('filteredUsers', filteredUsers);
-
   return filteredUsers;
 }
 

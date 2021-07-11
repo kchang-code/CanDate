@@ -20,7 +20,7 @@ import {
   checkIfLiked,
   findIndexOfFavorite,
 } from '../helpers/favoriteBlockHelp';
-import classNames from 'classnames'
+import classNames from 'classnames';
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -134,7 +134,7 @@ export default function ProfileCard(props) {
 
   const handleClickMessage = () => {
     const myName = props.users[Number(id) - 1].first_name;
-    setOpenMsg(true);
+
     const newMessage = {
       from_user_id: Number(id),
       to_user_id: Number(props.id),
@@ -152,6 +152,9 @@ export default function ProfileCard(props) {
       })
       .then((res) => {
         props.setMessages([...props.messages, ...res.data]);
+      })
+      .then(() => {
+        setOpenMsg(true);
       })
       .catch((err) => {
         console.log('Put error on new messages', err);
@@ -178,10 +181,10 @@ export default function ProfileCard(props) {
     ? (color = 'red')
     : (color = 'rgba(0, 0, 0, 0.54)');
 
-  const VIPs = [1, 2, 3, 4, 5, 6, 13, 14, 16, 22]
+  const VIPs = [1, 2, 3, 4, 5, 6, 13, 14, 16, 22];
 
-  const VIPsClass = classNames("card", {
-    "glow-on-hover": VIPs.includes(props.id),
+  const VIPsClass = classNames('card', {
+    'glow-on-hover': VIPs.includes(props.id),
   });
 
   return (
@@ -351,7 +354,7 @@ export default function ProfileCard(props) {
                   border: '2px solid lightblue',
                   fontSize: 'medium',
                 }}
-              // variant="outlined-primary"
+                // variant="outlined-primary"
               >
                 {item}
               </Button>
