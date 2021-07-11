@@ -27,6 +27,7 @@ export default function SelectCityInFilter(props) {
   };
   return (
     <Button
+      className="filter_button"
       onClick={() => {
         props.handleAddressClick(props.city);
         cityColor(select);

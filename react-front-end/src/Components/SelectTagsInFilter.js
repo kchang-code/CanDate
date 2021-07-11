@@ -27,6 +27,7 @@ export default function SelectTagsInFilter(props) {
   };
   return (
     <Button
+      className="filter_button"
       onClick={() => {
         props.handleTagClick(props.id);
         buttonColor(select);
