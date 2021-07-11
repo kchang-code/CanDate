@@ -103,7 +103,7 @@ const UserPage = (props) => {
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
-    const selectArr = { ...state };
+    const selectArr = { ...state, ageRange: [0,] };
     if (selectArr.tags.includes(itemId)) {
       // remove it from array
       const index = selectArr.tags.indexOf(itemId);
@@ -133,7 +133,7 @@ const UserPage = (props) => {
       ...state,
       tags: [],
       city: [],
-      ageRange: [0, 18],
+      ageRange: [0, 100],
       gender: '',
       loginUserTags: [],
     };
@@ -217,9 +217,9 @@ const UserPage = (props) => {
   const filteredByCity = getFilteredUsersByCity(state.city, filteredHimself);
   // console.log('filteredByCity', filteredByCity);
 
-  if (filteredByCity.length > 0 && state.ageRange[0] === 0) {
-    setState({ ...state, ageRange: [1, 19] });
-  }
+  // if (filteredByCity.length > 0 && state.ageRange[0] === 0) {
+  //   setState({ ...state, ageRange: [1, 19] });
+  // }
 
   function addMatchPointPercentage(users, matchObj) {
     for (const user of users) {
@@ -426,6 +426,7 @@ const UserPage = (props) => {
           //   Next
           // </Fab>
         )}
+        {console.log("state", state)}
       </div>
     </div>
   );
