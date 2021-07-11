@@ -1,7 +1,6 @@
 import Message from './Message';
 import React, { useState } from 'react';
 import './ProfileCard.scss';
-
 import { Typography, IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
@@ -21,6 +20,7 @@ import {
   checkIfLiked,
   findIndexOfFavorite,
 } from '../helpers/favoriteBlockHelp';
+import classNames from 'classnames'
 
 //from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
@@ -178,9 +178,15 @@ export default function ProfileCard(props) {
     ? (color = 'red')
     : (color = 'rgba(0, 0, 0, 0.54)');
 
+  const VIPs = [1, 2, 3, 4, 5, 6, 13, 14, 16, 22]
+
+  const VIPsClass = classNames("card", {
+    "glow-on-hover": VIPs.includes(props.id),
+  });
+
   return (
     <>
-      <div className="card">
+      <div className={VIPsClass}>
         <div className="card_title">{title}</div>
         <div className="card_match">
           {props.users[Number(props.id - 1)].percent} % Match
@@ -345,7 +351,7 @@ export default function ProfileCard(props) {
                   border: '2px solid lightblue',
                   fontSize: 'medium',
                 }}
-                // variant="outlined-primary"
+              // variant="outlined-primary"
               >
                 {item}
               </Button>
