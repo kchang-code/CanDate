@@ -16,7 +16,7 @@
 }
 
 // .card {
-//   cursor: pointer;
+//  padding-left: 20px 
 // }
 
 
@@ -74,12 +74,23 @@
   
 }
 
+.profile_card_tags {
+  height: 29px;
+ 
+  color:black;
+  margin: 2px;
+  border: solid black;
+}
+
 .card_content{
   position: absolute;
   top:260px;
   right: 0;
   left: 0;
   animation: fadeIn 1s;
+  padding-left: 8px;
+  padding-right: 8px;
+
 }
 
 .card_title {

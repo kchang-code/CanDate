@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import './Form.scss';
 
 function Copyright() {
   return (
@@ -151,9 +152,9 @@ export default function Form(props) {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justify="center">
             <Grid item>
-              <Link onClick={props.SignIn} style={{ marginRight: '75px' }}>
+              <Link onClick={props.SignIn} style={{ cursor: 'pointer' }}>
                 Already have an account? Sign in
               </Link>
             </Grid>

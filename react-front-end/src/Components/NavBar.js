@@ -165,13 +165,18 @@ export default function NavBar(props) {
                       state={props.state}
                     />
                   </Typography>
+                  <div className="filter_buttons">
+                    <button onClick={handleClosed}>Save</button>
+                    <button
+                      label="Clear Filter"
+                      onClick={() => props.handleEmptyTagsClick()}
+                    >
+                      Clear Filter
+                    </button>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
-            <Tab
-              label="Clear Filter"
-              onClick={() => props.handleEmptyTagsClick()}
-            />
           </div>
           <div className="buttonList">
             <IconButton aria-label="show 4 new mails" color="inherit">
