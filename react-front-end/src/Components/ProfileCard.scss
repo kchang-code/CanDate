@@ -45,25 +45,31 @@
   z-index: 1;
   border-image-slice: 1;
   border-image-source: linear-gradient(#F386FD 0%, #0B86F8 100%);
-  background:linear-gradient( #F386FD 0%, #0B86F8 100%);  ;
+  background:linear-gradient( #F386FD 0%, #0B86F8 100%);  
   border-radius: 999px;
   animation: fadeIn 1s;
 }
 
 .profile_photo:hover {
   z-index: -999;
+ 
+}
+
+.card-dialog:hover {
+  z-index:100;
+  opacity: 80%;
 }
 
 .card-dialog {
   position: relative;
-  border : 1px solid black;
   width: 180px;
   height: 180px;
   left: 85px;
   top: 52px;
-  border-radius: 999px;
   background-color: #999999;
-  z-index: 0;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+ 
   .card-dialog-open {
     margin-top: 80px;
   .card-dialog-open-button {
