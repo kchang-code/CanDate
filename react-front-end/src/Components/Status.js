@@ -13,35 +13,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Status(props) {
-
   useEffect(() => {
     function setupTypewriter(t) {
       var HTML = t.innerHTML;
 
-      t.innerHTML = "";
+      t.innerHTML = '';
 
       var cursorPosition = 0,
-        tag = "",
+        tag = '',
         writingTag = false,
         tagOpen = false,
         typeSpeed = 30,
         tempTypeSpeed = 0;
 
       var type = function () {
-
         if (writingTag === true) {
           tag += HTML[cursorPosition];
         }
 
-        if (HTML[cursorPosition] === "<") {
+        if (HTML[cursorPosition] === '<') {
           tempTypeSpeed = 0;
           if (tagOpen) {
             tagOpen = false;
             writingTag = true;
           } else {
-            tag = "";
+            tag = '';
             tagOpen = true;
             writingTag = true;
             tag += HTML[cursorPosition];
@@ -51,19 +48,18 @@ export default function Status(props) {
           tag.innerHTML += HTML[cursorPosition];
         }
         if (!writingTag && !tagOpen) {
-          if (HTML[cursorPosition] === " ") {
+          if (HTML[cursorPosition] === ' ') {
             tempTypeSpeed = 0;
-          }
-          else {
+          } else {
             tempTypeSpeed = typeSpeed;
           }
           t.innerHTML += HTML[cursorPosition];
         }
-        if (writingTag === true && HTML[cursorPosition] === ">") {
+        if (writingTag === true && HTML[cursorPosition] === '>') {
           tempTypeSpeed = typeSpeed;
           writingTag = false;
           if (tagOpen) {
-            var newSpan = document.createElement("span");
+            var newSpan = document.createElement('span');
             t.appendChild(newSpan);
             newSpan.innerHTML = tag;
             tag = newSpan.firstChild;
@@ -75,7 +71,7 @@ export default function Status(props) {
         }
       };
       return {
-        type: type
+        type: type,
       };
     }
     var typer = document.getElementById('typewriter');
@@ -85,18 +81,17 @@ export default function Status(props) {
     typewriter.type();
   }, []);
 
-
   const classes = useStyles();
   return (
     <div>
       <div className={classes.root}>
         <CircularProgress color="secondary" />
       </div>
-      <pre id="typewriter" style={{ fontSize: "30px" }}>
+      <pre id="typewriter" style={{ fontSize: '30px' }}>
         <p>Function findLover (myself) </p>
         <p>if (myself.passions === CanDate.users.passions)</p>
-        <p>return MyLover;</p>
-        <p>We find your lover;</p>
+        <p>return MyLove;</p>
+        <p>We find your love;</p>
       </pre>
     </div>
   );
