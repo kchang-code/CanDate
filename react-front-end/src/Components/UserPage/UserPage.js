@@ -65,7 +65,6 @@ const UserPage = (props) => {
 
   const [state, setState] = useState({
     tags: [],
-    // change age range to logged in user's age, 50
     ageRange: [20, 80],
     city: [],
     gender: '',
@@ -84,15 +83,11 @@ const UserPage = (props) => {
         loginUserTags: LoggedInUserTagIDs,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const filteredFavoriteId = getFavoriteByUser(props.favorite, Number(id));
 
   const filteredUserIBlockId = getUserIBlock(props.block, Number(id));
-  // console.log('blocked ', filteredUserIBlockId);
-
-  // const filteredBlockUsers = filteredUserIBlockId.map((id) => users[id - 1]);
 
   const filteredFavoriteUsers = filteredFavoriteId.map((id) => users[id - 1]);
 
@@ -106,11 +101,9 @@ const UserPage = (props) => {
   const handleTagClick = (itemId) => {
     const selectArr = { ...state, ageRange: [0, 100] };
     if (selectArr.tags.includes(itemId)) {
-      // remove it from array
       const index = selectArr.tags.indexOf(itemId);
       selectArr.tags.splice(index, 1);
     } else {
-      // add to array
       selectArr.tags.push(itemId);
     }
 
@@ -178,10 +171,6 @@ const UserPage = (props) => {
   );
 
   const sortedUsers = getSortedUsers(matchObj, users);
-  // console.log('userTagObj', userTagObj);
-
-  // console.log('filteredByGender', filteredByGender);
-  // console.log('users', users);
 
   let filteredByTags;
   if (state.favorite) {
@@ -194,7 +183,6 @@ const UserPage = (props) => {
     );
   }
 
-  // console.log('filteredByTags', filteredByTags);
   const filteredByGender = getFilteredUsersByGender(
     state.gender,
     filteredByTags
@@ -202,25 +190,16 @@ const UserPage = (props) => {
 
   const filteredByAge = getFilteredUsersByAge(filteredByGender, state.ageRange);
 
-  // console.log('filteredByAge', filteredByAge);
-
   const filteredUsersByBlocked = getUsersByBlocked(
     filteredByAge,
     filteredUserIBlockId
   );
-
-  // console.log(filteredUsersByBlocked);
 
   const filteredHimself = filteredUsersByBlocked.filter(
     (user) => user.id !== Number(id)
   );
 
   const filteredByCity = getFilteredUsersByCity(state.city, filteredHimself);
-  // console.log('filteredByCity', filteredByCity);
-
-  // if (filteredByCity.length > 0 && state.ageRange[0] === 0) {
-  //   setState({ ...state, ageRange: [1, 19] });
-  // }
 
   function addMatchPointPercentage(users, matchObj) {
     for (const user of users) {
@@ -325,7 +304,6 @@ const UserPage = (props) => {
             );
           })
         )}
-        {/* {console.log('state', state)} */}
       </div>
       <div id="user-page-button">
         {startNum > 2 && (
@@ -416,7 +394,6 @@ const UserPage = (props) => {
             </a>
           </div>
         )}
-        {console.log('state', state)}
       </div>
 
       <Footer></Footer>

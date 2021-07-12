@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import Button from 'react-bootstrap/Button';
 import FilterPopUp from './FilterPopUp';
 import axios from 'axios';
 import MailIcon from '@material-ui/icons/Mail';
@@ -22,7 +21,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Tab from '@material-ui/core/Tab';
 import Switch from '@material-ui/core/Switch';
 
-//from line 24 - 63 are all material ui functions
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -199,9 +197,6 @@ export default function NavBar(props) {
               </Dialog>
             </div>
             <div className="favorite_switch">
-              {/* <Tab label="Favorite" onClick={props.handleFavorite} /> */}
-              {/* <span className="favorite">Favorite</span> */}
-
               <Button
                 className="favorite"
                 onClick={(e) => {
