@@ -35,5 +35,57 @@ Favorite a profile for easy access in the _Favorite toggle_ or block a profile, 
 Initiate and receive conversations from other users with our message feature. 
 
 ## Installation
+You should have two terminals open to set up local database and start the react app. 
+
+### Local database setup
+
+1. on your vagrant machine and in candate api folder run:
+   `psql -U vagrant -d template1`
+
+2. Run the following SQL commands to create the necessary objects in the DB:
+   `CREATE ROLE labber WITH LOGIN password 'labber';`
+   `CREATE DATABASE candate OWNER labber;`
+
+3. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+4. Update the .env file with your correct local information
+
+- username: `labber`
+- password: `labber`
+- database: `candate`
+
+5. Install dependencies: `npm i`
+
+6. Reset database: `npm run db:reset`
+
+- Check the db folder to see what gets created and seeded in the SDB
+
+7. Run the server: `npm run local`
+
+- Note: nodemon is used, so you should not have to restart your server
+
+### Start React App
+1. In the project directory, run `npm start` to open up the app in development mode. The command should automatically open up http://localhost:3000 to view in the browser. 
+
 
 ## Dependencies
+
+### Backend:
+- Node 10.x or above
+- Npm 5.x or above
+- PG 6.x
+- Express 4.17 or above
+- Socket.io 2.4 or above
+
+### Frontend: 
+- React 17.0 or above
+- React-dom 17.0 or above
+- React-router-dom 5.2 or above
+- React-bootstrap 1.6.1 or above
+- Socket.io-client 4.1.2 or above
+- Timeago-react 3.0.2 or above
+- Web-vitals 1.1.2 or above
+- Material-UI library 4.11 or above
+- Bcryptjs 2.4.3 or above
+- Axios 0.21.1 or above
+- Framer-motion 4.1.17 or above
+- Node-sass 4.14 or above
