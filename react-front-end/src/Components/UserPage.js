@@ -103,7 +103,7 @@ const UserPage = (props) => {
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
-    const selectArr = { ...state, ageRange: [0,] };
+    const selectArr = { ...state, ageRange: [0,100] };
     if (selectArr.tags.includes(itemId)) {
       // remove it from array
       const index = selectArr.tags.indexOf(itemId);
@@ -232,7 +232,7 @@ const UserPage = (props) => {
   }
 
   addMatchPointPercentage(users, matchObj);
-
+  
   const handleNextButton = (num1, num2) => {
     setStartNum((num1 += 3));
     setEndNum((num2 += 3));
