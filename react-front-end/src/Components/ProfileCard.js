@@ -1,4 +1,4 @@
-import Message from './Message';
+import Message from './Message/Message';
 import React, { useState } from 'react';
 import './ProfileCard.scss';
 import { Typography, IconButton } from '@material-ui/core';

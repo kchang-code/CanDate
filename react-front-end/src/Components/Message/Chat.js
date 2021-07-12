@@ -11,13 +11,15 @@ import {
   getAllID,
   reduceToNames,
   reduceToNamesId,
-} from '../helpers/messageHelper';
+} from '../../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { getFavoriteByUser, getUserIBlock } from '../helpers/favoriteBlockHelp';
+import {
+  getFavoriteByUser,
+  getUserIBlock,
+} from '../../helpers/favoriteBlockHelp';
 
 const Chat = (props) => {
   let { id } = useParams();
-
   const {
     messages,
     users,
@@ -60,7 +62,6 @@ const Chat = (props) => {
   });
 
   const reducedToNamesId = reduceToNamesId(userAllMessages, id);
-  // console.log('reduced message', reducedMessage);
 
   const reducedMessagesComp = reducedMessage.map((message) => {
     const idAndUnread = { [message.id]: unread };
@@ -83,7 +84,6 @@ const Chat = (props) => {
           setUnread={setUnread}
           idAndUnread={idAndUnread}
           id={id}
-          selectedUserId={selectedUserId}
         />
       );
     } else if (reducedToNamesId.includes(message['from_user_id'])) {
@@ -105,7 +105,6 @@ const Chat = (props) => {
           setUnread={setUnread}
           idAndUnread={idAndUnread}
           id={id}
-          selectedUserId={selectedUserId}
         />
       );
     }

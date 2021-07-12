@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Components/Home';
-import Message from './Components/Message';
+import Message from './Components/Message/Message';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import TimeAgo from 'javascript-time-ago';

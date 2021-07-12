@@ -4,8 +4,7 @@
   cursor: pointer;
   border-bottom: 1px solid lightgray;
   align-items: center;
-  text-align: start;
-  
+  text-align: start; 
 }
 
 .sidebarChat:hover{
@@ -21,11 +20,9 @@
   }
 }
 
-
 .sidebarChat_right {
   display: flex;
   flex-direction: colum;
- 
 }
 
 .right_icon {

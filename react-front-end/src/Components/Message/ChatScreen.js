@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './ChatScreen.scss';
-
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
-
 import { Avatar, IconButton } from '@material-ui/core';
 import './Chat.scss';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
@@ -12,7 +10,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonOutlinedIcon from '@material-ui/icons/InsertEmoticonOutlined';
 import MicNoneOutlinedIcon from '@material-ui/icons/MicNoneOutlined';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { getUserBlockMe } from '../helpers/favoriteBlockHelp';
+import { getUserBlockMe } from '../../helpers/favoriteBlockHelp';
 import Alert from '@material-ui/lab/Alert';
 
 let to_user_id = null;
@@ -59,11 +57,8 @@ const ChatScreen = (props) => {
   const sendMessage = (e) => {
     e.preventDefault();
     const timeElapsed = Date.now();
-    //sending msg state
     let today = new Date(timeElapsed);
-
     let time = today.toLocaleString('en-GB');
-
     axios
       .put('http://localhost:8080/api/users/:id/messages', {
         newMessage: { ...newMessage, creates_on: time },
@@ -76,9 +71,6 @@ const ChatScreen = (props) => {
           creates_on: time,
         });
         console.log('res.data', res.data);
-        // setMessages([...messages, { ...newMessage, creates_on: time }]);
-
-        // setMessages([...messages, ...res.data]);
       })
       .catch((err) => {
         console.log('Put error on new messages', err);
@@ -97,7 +89,7 @@ const ChatScreen = (props) => {
       userAboutMe = users[to_user_id - 1]['address'];
 
       return (
-        <div className="chatScreen_message">
+        <div key={message.id} className="chatScreen_message">
           <Avatar
             key={message.id}
             className="chatScreen_image"
@@ -116,7 +108,7 @@ const ChatScreen = (props) => {
       userPhoto = users[to_user_id - 1]['profile_photo'];
       userAboutMe = users[to_user_id - 1]['address'];
       return (
-        <div className="chatScreen_message2">
+        <div key={message.id} className="chatScreen_message2">
           <p className="chatScreen_textUser">
             <span className="chat_time2">{message['creates_on']}</span>
             {message.content}

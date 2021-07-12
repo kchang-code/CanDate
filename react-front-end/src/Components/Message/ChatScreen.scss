@@ -5,7 +5,6 @@
   padding: 20px;
 }
 
-
 .chatScreen_text {
   margin-left: 1em;
   background-color: burlywood;
@@ -53,7 +52,6 @@
   
 }
 
-
 .chat_header {
 
   display: flex;
@@ -91,8 +89,6 @@
   overflow: scroll;
  }
 
-
-
 .chatScreen_message {
   margin: 0;
   display: flex;
@@ -108,7 +104,6 @@
   border-radius: 20px;
   display: flex;
   align-items: center;
-  
 }
 
 .chatScreen_textUser {
@@ -118,7 +113,6 @@
   border-radius: 20px;
   display: flex;
   align-items: center;
- 
 }
 
 .chat_time {
@@ -129,8 +123,6 @@
   top: 5px;
   width: 87px;
   left: 68px;
-
- 
 }
 
 .chatScreen_message2 {
@@ -139,7 +131,6 @@
   align-items: center;
   padding: 20px;
   position: relative;
-  
 }
 
 .chat_time2 {
@@ -151,7 +142,6 @@
   right: 20px;
   width: 87px;
 }
-
 
 .chat_footer {
   display: flex;
@@ -175,9 +165,7 @@
       display: none;
     }
   }
-
   .MuiSvgIcon-root {
- 
     color: gray;
   }
 }

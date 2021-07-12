@@ -6,19 +6,16 @@ import {
   filteredMessageByLoginUser,
   filteredMessageBySelectedUser,
   reduceToNames,
-  // reduceToNames,
-} from '../helpers/messageHelper';
+} from '../../helpers/messageHelper';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { getUserIBlock } from '../helpers/favoriteBlockHelp';
+import { getUserIBlock } from '../../helpers/favoriteBlockHelp';
 
 const Message = (props) => {
   let { id } = useParams();
   const { messages, users, setMessages, loading, favorite, block } = props;
-
   const userAllMessages = filteredMessageByLoginUser(messages, id);
   const userIBlock = getUserIBlock(block, id);
   const reducedMessage = reduceToNames(userAllMessages, id, userIBlock);
-
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [unread, setUnread] = useState(true);
 
@@ -31,7 +28,6 @@ const Message = (props) => {
       } else {
         setDataToSelectedUserId = reducedMessage[0]['to_user_id'];
       }
-
       setSelectedUserId(setDataToSelectedUserId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
