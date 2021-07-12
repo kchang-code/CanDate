@@ -31,9 +31,9 @@ export default function SelectCityInFilter(props) {
     } else {
       setNewColor('lightgrey');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cities.length]);
 
-  console.log('newColor', newColor);
   return (
     <Button
       className="filter_button"

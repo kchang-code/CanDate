@@ -355,6 +355,7 @@ export default function ProfileCard(props) {
             {props.tag.map((item) => {
               return (
                 <Button
+                  key={item}
                   className="profile_card_tags"
                   style={{
                     backgroundColor: 'rgba(34, 34, 34, 0.05)',

@@ -8,34 +8,32 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 const Footer = () => {
   return (
     <div>
-      <body>
-        <div class="footer-basic">
-          <div className="social_icon">
-            <FacebookIcon />
-            <YouTubeIcon />
-            <TwitterIcon />
-            <LinkedInIcon />
-          </div>
-          <footer>
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <a>Home</a>
-              </li>
-              <li class="list-inline-item">
-                <a>Contact Us</a>
-              </li>
-              <li class="list-inline-item">
-                <a>About Us</a>
-              </li>
-              <li class="list-inline-item">
-                <a>Subscribe</a>
-              </li>
-            </ul>
-            <p class="copyright">Can Date © 2021</p>
-          </footer>
+      <div className="footer-basic">
+        <div className="social_icon">
+          <FacebookIcon />
+          <YouTubeIcon />
+          <TwitterIcon />
+          <LinkedInIcon />
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-      </body>
+        <footer>
+          <ul className="list-inline">
+            <li className="list-inline-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="list-inline-item">
+              <a href="/">Contact Us</a>
+            </li>
+            <li className="list-inline-item">
+              <a href="/">About Us</a>
+            </li>
+            <li className="list-inline-item">
+              <a href="/">Subscribe</a>
+            </li>
+          </ul>
+          <p className="copyright">Can Date © 2021</p>
+        </footer>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     </div>
   );
 };

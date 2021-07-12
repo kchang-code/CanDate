@@ -153,7 +153,7 @@ export default function Form(props) {
           >
             Sign Up
           </Button>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <Link onClick={props.SignIn} style={{ cursor: 'pointer' }}>
                 Already have an account? Sign in

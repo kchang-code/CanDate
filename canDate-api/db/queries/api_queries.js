@@ -202,7 +202,6 @@ const deleteFavorite = (newFavorite) => {
   return db
     .query(queryStatement, value)
     .then((res) => {
-      console.log("res.rows", res.rows);
       return res.rows;
     })
     .catch((err) => {
