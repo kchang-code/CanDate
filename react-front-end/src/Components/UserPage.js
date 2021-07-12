@@ -334,6 +334,7 @@ const UserPage = (props) => {
               className="cta-left"
               onClick={() => handlePreviousButton(startNum, endNum)}
             >
+              {/* next and previous button style */}
               <span>
                 <svg
                   width="66px"

@@ -51,6 +51,7 @@ export default function Form(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // register new user
   const save = (first_name, last_name, email, password) => {
     let newUser = {
       first_name,
@@ -62,7 +63,7 @@ export default function Form(props) {
     axios
       .put('http://localhost:8080/api/users', { newUser })
       .then(() => console.log('done'))
-      .catch((err) => console.log('1111---v', err));
+      .catch((err) => console.log(err));
   };
 
   return (

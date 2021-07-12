@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn(props) {
   const classes = useStyles();
-  // const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -110,7 +109,6 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
-            // onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -132,6 +130,7 @@ export default function SignIn(props) {
             >
               Sign In
             </Button>
+            {/* effect for success alert */}
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
               <Alert onClose={handleClose} severity="success">
                 success!

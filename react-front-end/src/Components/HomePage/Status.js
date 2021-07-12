@@ -13,25 +13,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Status(props) {
+
+export default function Status() {
+  // from line 19 - 80 is function to control the type effect after login in or sign up
   useEffect(() => {
     function setupTypewriter(t) {
-      var HTML = t.innerHTML;
-
+      let HTML = t.innerHTML;
       t.innerHTML = '';
-
-      var cursorPosition = 0,
+      let cursorPosition = 0,
         tag = '',
         writingTag = false,
         tagOpen = false,
         typeSpeed = 30,
         tempTypeSpeed = 0;
 
-      var type = function () {
+      let type = function () {
         if (writingTag === true) {
           tag += HTML[cursorPosition];
         }
-
         if (HTML[cursorPosition] === '<') {
           tempTypeSpeed = 0;
           if (tagOpen) {
@@ -59,7 +58,7 @@ export default function Status(props) {
           tempTypeSpeed = typeSpeed;
           writingTag = false;
           if (tagOpen) {
-            var newSpan = document.createElement('span');
+            let newSpan = document.createElement('span');
             t.appendChild(newSpan);
             newSpan.innerHTML = tag;
             tag = newSpan.firstChild;
@@ -74,14 +73,15 @@ export default function Status(props) {
         type: type,
       };
     }
-    var typer = document.getElementById('typewriter');
 
-    var typewriter = setupTypewriter(typer);
-
+    let typer = document.getElementById('typewriter');
+    let typewriter = setupTypewriter(typer);
     typewriter.type();
   }, []);
 
+
   const classes = useStyles();
+
   return (
     <div>
       <div className={classes.root}>

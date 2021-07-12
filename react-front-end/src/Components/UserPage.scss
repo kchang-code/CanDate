@@ -1,9 +1,7 @@
-
 .user-page {
   display: flex;
   flex-wrap: wrap;
 
-  
   .no-results {
     text-align: center;
 
@@ -23,8 +21,7 @@
   justify-content: center;
 }
 
-// button style
-
+// next and previous button style
 .wrapper-left {
   margin-left: 20px;
   margin-right: 20px;
@@ -71,22 +68,12 @@
 
 .button-label-left {
   margin-left:10px;
-  // margin-right:20px;
 }
 
 .button-label-right {
   margin-left:20px;
   margin-right:10px; 
 }
-
-
-
-
-// #arrow-left {
-//   transform:rotate(180deg);
-//   // padding-right:200px;
-// }
-
 
 .wrapper-right {
   margin-right: 20px;
@@ -132,9 +119,7 @@
   transition: 0.5s;
   margin-right: 45px;
 }
-
-
-  
+ 
 /**************SVG****************/
 
 path.one-left {
