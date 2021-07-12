@@ -8,7 +8,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-
 let cities = [];
 export default function FilterPopUp(props) {
   const marks = [
@@ -77,6 +76,8 @@ export default function FilterPopUp(props) {
   const handleChange = (event) => {
     setValue(event.target.value);
     props.setGender({ ...props.state, gender: event.target.value });
+    props.setStartNum(0);
+    props.setEndNum(3);
   };
 
   // function simulateNetworkRequest() {

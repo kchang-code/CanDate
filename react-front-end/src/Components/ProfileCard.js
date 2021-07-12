@@ -279,7 +279,7 @@ export default function ProfileCard(props) {
                   handleCloseConfirm();
                   handleBlock();
                 }}
-                color="primary"
+                variant="danger"
                 autoFocus
               >
                 Confirm
