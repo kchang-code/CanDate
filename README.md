@@ -4,6 +4,10 @@ Candate is a dating webapp to connect you with your most compatible singles usin
 
 CanDate is more effective at finding potential matches by personalizing the user's home page to a list of candidates based on the user's preferences and interests. At sign up, the user selects his or her interests and personal information, for CanDate to find user profiles that are most compatible with the user. Each profile is given a _match percentage_ to indicate how well their profiles match. 
 
+## Technologies:
+This project was built using the PERN stack (PostgreSQL, Express, React, NodeJS) with Material-UI library, React Bootstrap library, and Socket.io. 
+For a full list of dependencies, please view the dependencies section.  
+
 ## Table of Contents
 -   [Features with screenshots](#features-with-screenshots)
     - [Sign up](#sign-up-and-select-interest-tags)
