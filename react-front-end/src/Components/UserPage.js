@@ -270,10 +270,10 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite &&
-        state.gender === '' &&
-        state.ageRange[0] === 0 ? (
+          state.city.length === 0 &&
+          !state.favorite &&
+          state.gender === '' &&
+          state.ageRange[0] === 0 ? (
           <NoResult />
         ) : filteredByCity.length === 0 ? (
           <NoResult />
@@ -334,6 +334,7 @@ const UserPage = (props) => {
               className="cta-left"
               onClick={() => handlePreviousButton(startNum, endNum)}
             >
+              {/* next and previous button style */}
               <span>
                 <svg
                   width="66px"
