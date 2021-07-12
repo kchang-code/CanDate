@@ -80,10 +80,6 @@ export default function FilterPopUp(props) {
     props.setEndNum(3);
   };
 
-  // function simulateNetworkRequest() {
-  //   return new Promise((resolve) => setTimeout(resolve, 2000));
-  // }
-
   return (
     <div className="popup-box">
       <div className="box">

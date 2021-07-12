@@ -24,7 +24,6 @@ import classNames from 'classnames';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-//from line 25 - 63 are all material ui functions
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -68,14 +67,12 @@ const DialogActions = withStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }))(MuiDialogActions);
-//from line 25 - 68 are all material ui functions
 
 export default function ProfileCard(props) {
   const { openMsg, setOpenMsg, handleMessageClose } = props;
 
   let { id } = useParams();
   const [open, setOpen] = useState(false);
-  // const [openMsg, setOpenMsg] = useState(false);
   const [openConfirm, setOpenConfirm] = React.useState(false);
 
   const { favorite } = props;
@@ -286,7 +283,6 @@ export default function ProfileCard(props) {
               </Button>
             </DialogActions>
           </Dialog>
-          {/* end of confirm dialogue */}
         </div>
         <img
           alt={props.name}
@@ -300,7 +296,6 @@ export default function ProfileCard(props) {
             src="https://github.com/MattLuo90/CanDate/blob/cdd/crown/react-front-end/public/images/output-onlinepngtools.png?raw=true"
           />
         )}
-        {/* getting know me better */}
         <div className="card-dialog">
           <div className="card-dialog-open">
             <ArrowForwardIcon />
