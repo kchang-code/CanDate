@@ -1,8 +1,8 @@
 # Candate
 
-Candate is a dating webapp to connect you with your most compatible singles using interest, age, location, and preferred gender filters. 
+Candate is a dating webapp to connect you with the most compatible singles using interest, age, location, and preferred gender filters. 
 
-CanDate is more effective at finding potential matches by personalizing the user's home page to a list of candidates based on the user's preferences and interests. At sign up, the user selects his or her interests and personal information, for CanDate to find user profiles that are most compatible with the user. Each profile is given a _match percentage_ to indicate how well their profiles match. 
+CanDate finds potential matches by personalizing the user's home page to show profiles based on the user's unique preferences and interests. At sign up, the user selects his or her interests and personal information, for CanDate to find user profiles that are most compatible with the user. Each profile is given a _match percentage_ to indicate how well their profiles match. 
 
 ## Technologies:
 This project was built using the PERN stack (PostgreSQL, Express, React, NodeJS) with Material-UI library, React Bootstrap library, and Socket.io. 
@@ -21,7 +21,7 @@ For a full list of dependencies, please view the dependencies section.
 
 ## Features with Screenshots
 ### **Sign up and select interest tags**: 
-Users are asked to select tags associated with their interests, so CanDate can show their most compatible matches. 
+Users are asked to select tags associated with their interests, so CanDate can show their most compatible profiles. 
 
 ### **View your most relevant matches**: 
 Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
@@ -30,10 +30,10 @@ Users will see their most relevant profiles, based on their location, age, gende
 Each profile has a match percentage that indicates how well the profile's interests matches that of the user's. 
 
 ### **Further filtering**: 
-Not happy with your current results? The filter feature allows you to add, remove, or clear filters to update your matches.
+Not happy with your current results? The filter feature allows you to add, remove, or clear filters to update your profiles.
 
 ### **Favorite and Block**: 
-Favorite a profile for easy access in the _Favorite toggle_ or block a profile, so you'll never see them in your results again. 
+Favorite a profile to view in the _Favorite toggle_ or block a profile, so you'll never see them in your results again. 
 
 ### **Message other users**: 
 Initiate and receive conversations from other users with our message feature. 
