@@ -42,7 +42,16 @@ export default function SelectTagsInFilter(props) {
         props.handleTagClick(props.id);
         buttonColor(select);
       }}
-      style={{ backgroundColor: newColor, color: fontColor }}
+      style={{
+        backgroundColor: newColor,
+        color: fontColor,
+        paddingTop: '1px',
+        paddingBottom: '1px',
+        paddingLeft: '8px',
+        paddingRight: '8px',
+        border: '2px solid lightblue',
+        fontSize: 'medium',
+      }}
       variant="outlined-primary"
     >
       {props.name}
