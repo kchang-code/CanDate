@@ -15,18 +15,15 @@ import {
   getFilteredUsersByGender,
   getUserIdWithMatchPointObj,
   getSortedUsers,
-} from '../helpers/userPageHelpers';
+} from '../../helpers/userPageHelpers';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import Fab from '@material-ui/core/Fab';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {
   getFavoriteByUser,
   getUserIBlock,
   getUsersByBlocked,
-} from '../helpers/favoriteBlockHelp';
-import Status from './Status';
+} from '../../helpers/favoriteBlockHelp';
+import Status from '../HomePage/Status';
 import NoResult from './NoResult';
 import Footer from './Footer';
 
@@ -270,10 +267,10 @@ const UserPage = (props) => {
       />
       <div className="user-page">
         {state.tags.length === 0 &&
-        state.city.length === 0 &&
-        !state.favorite &&
-        state.gender === '' &&
-        state.ageRange[0] === 0 ? (
+          state.city.length === 0 &&
+          !state.favorite &&
+          state.gender === '' &&
+          state.ageRange[0] === 0 ? (
           <NoResult />
         ) : filteredByCity.length === 0 ? (
           <NoResult />

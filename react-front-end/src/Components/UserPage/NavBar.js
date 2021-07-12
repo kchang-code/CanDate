@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import Button from 'react-bootstrap/Button';
 import FilterPopUp from './FilterPopUp';
 import axios from 'axios';
 import MailIcon from '@material-ui/icons/Mail';
@@ -19,7 +18,6 @@ import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import CloseIcon from '@material-ui/icons/Close';
-import Tab from '@material-ui/core/Tab';
 import Switch from '@material-ui/core/Switch';
 
 //from line 24 - 63 are all material ui functions
