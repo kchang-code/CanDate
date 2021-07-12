@@ -1,4 +1,4 @@
-import Message from '../Message/Message';
+import Message from './Message/Message';
 import React, { useState } from 'react';
 import './ProfileCard.scss';
 import { Typography, IconButton } from '@material-ui/core';
@@ -19,7 +19,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import {
   checkIfLiked,
   findIndexOfFavorite,
-} from '../../helpers/favoriteBlockHelp';
+} from '../helpers/favoriteBlockHelp';
 import classNames from 'classnames';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -360,7 +360,6 @@ export default function ProfileCard(props) {
             {props.tag.map((item) => {
               return (
                 <Button
-                  key={item}
                   className="profile_card_tags"
                   style={{
                     backgroundColor: 'rgba(34, 34, 34, 0.05)',

@@ -130,7 +130,7 @@ export default function NavBar(props) {
 
   return (
     <div>
-      <AppBar position="static" color="white" className="nav-bar">
+      <AppBar position="static" color="inherit" className="nav-bar">
         <Toolbar>
           <div className="nav-bar-title">
             <img

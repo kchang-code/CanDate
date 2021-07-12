@@ -25,18 +25,23 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    const gradient = document.querySelector(".gradient");
+    const gradient = document.querySelector('.gradient');
 
     function onMouseMove(event) {
-      gradient.style.backgroundImage = 'radial-gradient(at ' + event.clientX + 'px ' + event.clientY + 'px, #f2a1a3 0, rgb(104, 69, 145) 50%)';
+      gradient.style.backgroundImage =
+        'radial-gradient(at ' +
+        event.clientX +
+        'px ' +
+        event.clientY +
+        'px, #f2a1a3 0, rgb(104, 69, 145) 50%)';
     }
-    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener('mousemove', onMouseMove);
   }, []);
 
   return (
     <div className="home-container">
       {/* div for the home page image wall effect */}
-      <div class="gradient"></div>
+      <div className="gradient"></div>
       <div className="register">
         {mode === FORM && <Form change={change} SignIn={Sign} />}
         {mode === QUESTION && <Question tagPage={tagPage} id={id} />}
