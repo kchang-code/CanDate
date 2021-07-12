@@ -8,7 +8,7 @@ import TimeAgo from 'javascript-time-ago';
 import bcrypt from 'bcryptjs';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
-import UserPage from './Components/UserPage';
+import UserPage from './Components/UserPage/UserPage';
 
 const ENDPOINT = 'ws://localhost:8080/message';
 
