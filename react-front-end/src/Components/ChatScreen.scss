@@ -5,7 +5,6 @@
   padding: 20px;
 }
 
-
 .chatScreen_text {
   margin-left: 1em;
   background-color: burlywood;
@@ -53,7 +52,6 @@
   
 }
 
-
 .chat_header {
 
   display: flex;
@@ -62,11 +60,11 @@
   padding: 20px;
   
 }
+
 .chat_headerInfo {
   text-align: start;
   display: flex;
   flex-direction: column;
-
   flex: 1;
   padding-left: 20px; 
   h3 {
@@ -90,8 +88,6 @@
   padding: 30px;
   overflow: scroll;
  }
-
-
 
 .chatScreen_message {
   margin: 0;
@@ -118,7 +114,6 @@
   border-radius: 20px;
   display: flex;
   align-items: center;
- 
 }
 
 .chat_time {
@@ -129,8 +124,6 @@
   top: 5px;
   width: 87px;
   left: 68px;
-
- 
 }
 
 .chatScreen_message2 {
@@ -139,7 +132,6 @@
   align-items: center;
   padding: 20px;
   position: relative;
-  
 }
 
 .chat_time2 {
@@ -151,7 +143,6 @@
   right: 20px;
   width: 87px;
 }
-
 
 .chat_footer {
   display: flex;

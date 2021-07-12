@@ -19,8 +19,6 @@
   display: flex;
 }
 
-
-
 .nav-bar-tab {
   display:flex;
   flex-direction: row;
@@ -43,7 +41,6 @@
 .filter_buttons {
   display: flex;
   justify-content: center;
-
 
   button {
     margin-right: 50px;
@@ -92,8 +89,6 @@
     left: 0px;
   }
 
-
-
   .MuiSwitch-root {
     width: 68px;
     height: 48px;
@@ -101,11 +96,8 @@
     position: absolute;
     top: 2px;
     left: 105px;
-
-    
   }
 
- 
   .MuiSwitch-track {
     position: absolute;
     height: 14px;
@@ -113,24 +105,17 @@
     top: 15px;
     left: 15px;
   }
+
   .MuiIconButton-label {
-
     position: relative;
-
   }
- 
 }
-
 
 @keyframes animated-text{
   from{width: 0;}
   to{width: 90px;}
 }
 
-
-// .MuiTab-textColorInherit {
-
-// }
 
 
 
