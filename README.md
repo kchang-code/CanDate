@@ -22,7 +22,7 @@ For a full list of dependencies, please view the dependencies section.
 ## Features with Screenshots
 ### **Sign up and select interest tags**: 
 Users are asked to select tags associated with their interests, so CanDate can show their most compatible profiles. 
-![Sign up](https://media.giphy.com/media/81i2wIYUyrlBedZAXJ/giphy.gif)
+<img src="https://media.giphy.com/media/81i2wIYUyrlBedZAXJ/giphy.gif" width="48">
 ### **View your most relevant matches**: 
 Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
 
