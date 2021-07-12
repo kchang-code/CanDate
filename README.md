@@ -1,5 +1,4 @@
-![](https://github.com/MattLuo90/CanDate/blob/master/docs/logo.png?raw=true)
-# Candate
+# Candate 
 
 Candate is a dating webapp to connect you with the most compatible singles using interest, age, location, and preferred gender filters. 
 
