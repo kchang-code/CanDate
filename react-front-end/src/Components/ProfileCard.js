@@ -189,6 +189,7 @@ export default function ProfileCard(props) {
     'glow-on-hover': VIPs.includes(props.id),
   });
 
+
   return (
     <>
       <div className={VIPsClass}>
@@ -313,27 +314,28 @@ export default function ProfileCard(props) {
               key="20"
               id="customized-dialog-title"
               onClose={handleClose}
+              style={{ width: "600px" }}
             >
-              About Me
+              <strong>About Me</strong>
             </DialogTitle>
             <DialogContent key="21" dividers>
               <Typography key="13" gutterBottom>
-                Name: {props.name} {props['last_name']}
+                <strong>Name:</strong> {props.name} {props['last_name']}
               </Typography>
               <Typography key="1" gutterBottom>
-                City: {props.city}
+                <strong> City: </strong>{props.city}
               </Typography>
               <Typography key="2" gutterBottom>
-                Gender: {props.gender}
+                <strong>Gender:</strong> {props.gender}
               </Typography>
               <Typography key="3" gutterBottom>
-                Age: {props.age}
+                <strong> Age: </strong>{props.age}
               </Typography>
               <Typography key="4" gutterBottom>
-                Height: {props.height}
+                <strong> Height: </strong>{props.height}
               </Typography>
               <Typography key="5" gutterBottom>
-                Notes: {props['about_me']}
+                <strong> Notes: </strong>{props['about_me']}
               </Typography>
             </DialogContent>
           </Dialog>
@@ -357,7 +359,6 @@ export default function ProfileCard(props) {
                     border: '2px solid lightblue',
                     fontSize: 'medium',
                   }}
-                // variant="outlined-primary"
                 >
                   {item}
                 </Button>
