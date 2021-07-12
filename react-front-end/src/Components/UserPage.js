@@ -28,6 +28,7 @@ import {
 } from '../helpers/favoriteBlockHelp';
 import Status from './Status';
 import NoResult from './NoResult';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -414,19 +415,10 @@ const UserPage = (props) => {
               </span>
             </a>
           </div>
-          // <Fab
-          //   variant="extended"
-          //   size="small"
-          //   style={{ backgroundColor: '#f2a1a3' }}
-          //   aria-label="next"
-          //   className={classes.margin}
-          //   onClick={() => handleNextButton(startNum, endNum)}
-          // >
-          //   <ArrowForwardIcon className={classes.extendedIcon} />
-          //   Next
-          // </Fab>
         )}
       </div>
+
+      <Footer></Footer>
     </div>
   );
 };

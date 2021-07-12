@@ -214,7 +214,7 @@ export default function NavBar(props) {
               </Button>
               <Switch
                 checked={checkedA}
-                onChange={(e) => {
+                onClick={(e) => {
                   props.handleFavorite(e);
                   handleChange();
                 }}
