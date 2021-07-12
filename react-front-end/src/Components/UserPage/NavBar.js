@@ -20,7 +20,6 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import CloseIcon from '@material-ui/icons/Close';
 import Switch from '@material-ui/core/Switch';
 
-//from line 24 - 63 are all material ui functions
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -196,9 +195,6 @@ export default function NavBar(props) {
               </Dialog>
             </div>
             <div className="favorite_switch">
-              {/* <Tab label="Favorite" onClick={props.handleFavorite} /> */}
-              {/* <span className="favorite">Favorite</span> */}
-
               <Button
                 className="favorite"
                 onClick={(e) => {
