@@ -16,17 +16,23 @@ CanDate is more effective at finding potential matches by personalizing the user
   - [Dependencies](#Dependencies)
 
 ## Features with Screenshots
-#### **Sign up and select interest tags**: Users are asked to select tags associated with their interests, so CanDate can show their most compatible matches. 
+### **Sign up and select interest tags**: 
+Users are asked to select tags associated with their interests, so CanDate can show their most compatible matches. 
 
-#### **View your most relevant matches**: Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
+### **View your most relevant matches**: 
+Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
 
-#### **Most compatible matches**: Each profile has a match percentage that indicates how well the profile's interests matches that of the user's. 
+### **Most compatible matches**: 
+Each profile has a match percentage that indicates how well the profile's interests matches that of the user's. 
 
-#### **Further filtering**: Not happy with your current results? The filter feature allows you to add, remove, or clear filters to update your matches.
+### **Further filtering**: 
+Not happy with your current results? The filter feature allows you to add, remove, or clear filters to update your matches.
 
-#### **Favorite and Block**: Favorite a profile for easy access in the _Favorite toggle_ or block a profile, so you'll never see them in your results again. 
+### **Favorite and Block**: 
+Favorite a profile for easy access in the _Favorite toggle_ or block a profile, so you'll never see them in your results again. 
 
-#### **Message other users**: Initiate and receive conversations from other users with our message feature. 
+### **Message other users**: 
+Initiate and receive conversations from other users with our message feature. 
 
 ## Installation
 
