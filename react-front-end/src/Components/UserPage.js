@@ -46,7 +46,7 @@ const UserPage = (props) => {
   const [loggedInUserInfo, setLoggedInUserInfo] = useState([]);
   const [startNum, setStartNum] = useState(0);
   const [endNum, setEndNum] = useState(3);
-  const [checkedA, setCheckedA] = useState(true);
+  const [checkedA, setCheckedA] = useState(false);
 
   const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);

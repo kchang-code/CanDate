@@ -88,7 +88,7 @@ export default function Status(props) {
         <CircularProgress color="secondary" />
       </div>
       <pre id="typewriter" style={{ fontSize: '30px' }}>
-        <p>Function findLover (myself) </p>
+        <p>Function findLove (myself) </p>
         <p>if (myself.passions === CanDate.users.passions)</p>
         <p>return MyLove;</p>
         <p>We find your love;</p>
