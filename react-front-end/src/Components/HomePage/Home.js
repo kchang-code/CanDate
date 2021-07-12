@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import TagList from './TagList';
-import useVisualMode from '../hooks/useVisualMode';
+import useVisualMode from '../../hooks/useVisualMode';
 import Question from './Question';
 import SignIn from './SignIn';
 import Form from './Form';
@@ -11,9 +11,7 @@ export default function Home(props) {
   const QUESTION = 'QUESTION';
   const TAG = 'TAG';
   const SIGN = 'SIGN';
-
   const id = props.image.length + 1;
-
   const { mode, transition, back } = useVisualMode(FORM);
 
   function change() {
@@ -37,9 +35,7 @@ export default function Home(props) {
 
   return (
     <div className="home-container">
-      {/* <div className="image-wall">
-        <BasicImageList image={props.image} />
-      </div> */}
+      {/* div for the home page image wall effect */}
       <div class="gradient"></div>
       <div className="register">
         {mode === FORM && <Form change={change} SignIn={Sign} />}

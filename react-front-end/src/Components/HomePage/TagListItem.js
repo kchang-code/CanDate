@@ -3,12 +3,9 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import './TagListItem.scss';
 
-
 const TagListItem = (props) => {
-
   const [num, setNum] = useState(1);
   const [newColor, setNewColor] = useState('lightgrey');
-
 
   function handleClick(num, name, id) {
     let newTagUser = {
@@ -28,7 +25,6 @@ const TagListItem = (props) => {
   }
 
   return (
-
     <Button
       className="tag_button"
       onClick={() => {

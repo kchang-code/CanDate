@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Components/Home';
+import Home from './Components/HomePage/Home';
 import Message from './Components/Message';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
