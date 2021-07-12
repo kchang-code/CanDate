@@ -92,7 +92,6 @@ export default function NavBar(props) {
   const handleChange = (event) => {
     setCheckedA(!checkedA);
   };
-  const classes = useStyles();
 
   const handleClickOpen = (e) => {
     e.stopPropagation();

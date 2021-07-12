@@ -343,9 +343,9 @@ const UserPage = (props) => {
                   <g
                     id="arrow-left"
                     stroke="none"
-                    stroke-width="1"
+                    strokeWidth="1"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   >
                     <path
                       className="one-left"
@@ -388,9 +388,9 @@ const UserPage = (props) => {
                   <g
                     id="arrow"
                     stroke="none"
-                    stroke-width="1"
+                    strokeWidth="1"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   >
                     <path
                       className="one-right"
