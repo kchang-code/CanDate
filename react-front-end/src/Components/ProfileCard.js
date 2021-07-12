@@ -189,7 +189,6 @@ export default function ProfileCard(props) {
     'glow-on-hover': VIPs.includes(props.id),
   });
 
-
   return (
     <>
       <div className={VIPsClass}>
@@ -198,13 +197,14 @@ export default function ProfileCard(props) {
             <strong>{props.users[Number(props.id - 1)].percent} % Match</strong>
           </div>
           <div className="card-address">
-            <PersonPinCircleIcon fontSize='medium' />
+            <PersonPinCircleIcon fontSize="medium" />
             <strong>{props.address}</strong>
           </div>
         </div>
         <div className="icon">
           {' '}
           <IconButton
+            className="icon_button"
             key="1"
             style={{ color: color }}
             onClick={(e) => {
@@ -216,7 +216,12 @@ export default function ProfileCard(props) {
             <FavoriteIcon />
           </IconButton>
           {/* open message dialogue */}
-          <IconButton key="2" onClick={handleClickMessage} style={{ color: 'black' }}>
+          <IconButton
+            className="icon_button"
+            key="2"
+            onClick={handleClickMessage}
+            style={{ color: 'black' }}
+          >
             <ChatBubbleIcon />
           </IconButton>
           <Dialog
@@ -239,6 +244,7 @@ export default function ProfileCard(props) {
             />
           </Dialog>
           <IconButton
+            className="icon_button"
             key="6"
             onClick={() => {
               handleClickOpenConfirm();
@@ -298,7 +304,8 @@ export default function ProfileCard(props) {
         <div className="card-dialog">
           <div className="card-dialog-open">
             <ArrowForwardIcon />
-            <button className="card-dialog-open-button"
+            <button
+              className="card-dialog-open-button"
               onClick={handleClickOpen}
             >
               Learn more
@@ -314,7 +321,7 @@ export default function ProfileCard(props) {
               key="20"
               id="customized-dialog-title"
               onClose={handleClose}
-              style={{ width: "600px" }}
+              style={{ width: '600px' }}
             >
               <strong>About Me</strong>
             </DialogTitle>
@@ -323,26 +330,32 @@ export default function ProfileCard(props) {
                 <strong>Name:</strong> {props.name} {props['last_name']}
               </Typography>
               <Typography key="1" gutterBottom>
-                <strong> City: </strong>{props.city}
+                <strong> City: </strong>
+                {props.city}
               </Typography>
               <Typography key="2" gutterBottom>
                 <strong>Gender:</strong> {props.gender}
               </Typography>
               <Typography key="3" gutterBottom>
-                <strong> Age: </strong>{props.age}
+                <strong> Age: </strong>
+                {props.age}
               </Typography>
               <Typography key="4" gutterBottom>
-                <strong> Height: </strong>{props.height}
+                <strong> Height: </strong>
+                {props.height}
               </Typography>
               <Typography key="5" gutterBottom>
-                <strong> Notes: </strong>{props['about_me']}
+                <strong> Notes: </strong>
+                {props['about_me']}
               </Typography>
             </DialogContent>
           </Dialog>
         </div>
         <div className="card_content">
-          <div className="card_title"><strong>{title}</strong></div>
-          <div className="card-notes">{props["about_me"]}</div>
+          <div className="card_title">
+            <strong>{title}</strong>
+          </div>
+          <div className="card-notes">{props['about_me']}</div>
           <div>
             {props.tag.map((item) => {
               return (
@@ -354,7 +367,7 @@ export default function ProfileCard(props) {
                     paddingBottom: '1px',
                     paddingLeft: '8px',
                     paddingRight: '8px',
-                    marginTop: "4px",
+                    marginTop: '4px',
                     color: '#999999',
                     border: '2px solid lightblue',
                     fontSize: 'medium',

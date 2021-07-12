@@ -10,10 +10,12 @@ const Footer = () => {
     <div>
       <body>
         <div class="footer-basic">
-          <FacebookIcon />
-          <YouTubeIcon />
-          <TwitterIcon />
-          <LinkedInIcon />
+          <div className="social_icon">
+            <FacebookIcon />
+            <YouTubeIcon />
+            <TwitterIcon />
+            <LinkedInIcon />
+          </div>
           <footer>
             <ul class="list-inline">
               <li class="list-inline-item">
@@ -23,7 +25,7 @@ const Footer = () => {
                 <a>Contact Us</a>
               </li>
               <li class="list-inline-item">
-                <a>Log in</a>
+                <a>About Us</a>
               </li>
               <li class="list-inline-item">
                 <a>Subscribe</a>
