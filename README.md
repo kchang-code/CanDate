@@ -1,5 +1,4 @@
-![](https://github.com/MattLuo90/CanDate/blob/master/docs/logo.png?raw=true)
-# Candate
+# Candate 
 
 Candate is a dating webapp to connect you with the most compatible singles using interest, age, location, and preferred gender filters. 
 
@@ -23,7 +22,7 @@ For a full list of dependencies, please view the dependencies section.
 ## Features with Screenshots
 ### **Sign up and select interest tags**: 
 Users are asked to select tags associated with their interests, so CanDate can show their most compatible profiles. 
-
+<img src="https://media.giphy.com/media/81i2wIYUyrlBedZAXJ/giphy.gif" width="400" height="215">
 ### **View your most relevant matches**: 
 Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
 
