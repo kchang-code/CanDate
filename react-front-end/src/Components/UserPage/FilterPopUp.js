@@ -38,6 +38,7 @@ export default function FilterPopUp(props) {
   const lists = props.content.map((item) => {
     return (
       <SelectTagsInFilter
+        key={item.id}
         id={item.id}
         name={item.name}
         handleTagClick={props.handleTagClick}
@@ -54,6 +55,7 @@ export default function FilterPopUp(props) {
     }
     return (
       <SelectCityInFilter
+        key={city}
         city={city}
         handleAddressClick={props.handleAddressClick}
         state={props.state}

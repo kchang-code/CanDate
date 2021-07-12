@@ -1,4 +1,4 @@
-import Message from './Message/Message';
+import Message from './Message';
 import React, { useState } from 'react';
 import './ProfileCard.scss';
 import { Typography, IconButton } from '@material-ui/core';
@@ -279,7 +279,7 @@ export default function ProfileCard(props) {
                   handleCloseConfirm();
                   handleBlock();
                 }}
-                variant="danger"
+                color="primary"
                 autoFocus
               >
                 Confirm

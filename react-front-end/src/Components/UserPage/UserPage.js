@@ -9,7 +9,6 @@ import {
   getFilteredUsersByInterest,
   getFilteredUsersByAge,
   getLoggedInUserInfo,
-  getLoggedInUserCity,
   getFilteredUsersByCity,
   userIdWithTagsArrObj,
   getFilteredUsersByGender,
@@ -17,7 +16,7 @@ import {
   getSortedUsers,
 } from '../../helpers/userPageHelpers';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { makeStyles } from '@material-ui/core/styles';
+
 import {
   getFavoriteByUser,
   getUserIBlock,
@@ -27,17 +26,8 @@ import Status from '../HomePage/Status';
 import NoResult from './NoResult';
 import Footer from './Footer';
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-}));
-
 const UserPage = (props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { users, user_tag, tags, loading } = props;
   let { id } = useParams();
   const [loggedInUserInfo, setLoggedInUserInfo] = useState([]);
@@ -47,8 +37,6 @@ const UserPage = (props) => {
 
   const neededInfo = getLoggedInUserInfo(id, users);
   const LoggedInUserTagIDs = filterTags(Number(id), user_tag);
-
-  const LoggedInUserCity = getLoggedInUserCity(Number(id), users);
 
   const [openMsg, setOpenMsg] = useState(false);
   const handleMessageClose = (e) => {
@@ -80,6 +68,7 @@ const UserPage = (props) => {
         loginUserTags: LoggedInUserTagIDs,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   const filteredFavoriteId = getFavoriteByUser(props.favorite, Number(id));
@@ -134,7 +123,6 @@ const UserPage = (props) => {
 
   const handleFavorite = () => {
     if (state.favorite) {
-      console.log('endNum', endNum);
       setState({
         ...state,
         tags: [],
@@ -305,7 +293,7 @@ const UserPage = (props) => {
       <div id="user-page-button">
         {startNum > 2 && (
           <div className="wrapper-left">
-            <a
+            <span
               className="cta-left"
               onClick={() => handlePreviousButton(startNum, endNum)}
             >
@@ -344,12 +332,12 @@ const UserPage = (props) => {
                 </svg>
               </span>
               <span className="button-label-left"> Prev</span>
-            </a>
+            </span>
           </div>
         )}
         {endNum < filteredByCity.length && (
           <div className="wrapper-right">
-            <a
+            <span
               className="cta-right"
               onClick={() => handleNextButton(startNum, endNum)}
             >
@@ -388,7 +376,7 @@ const UserPage = (props) => {
                   </g>
                 </svg>
               </span>
-            </a>
+            </span>
           </div>
         )}
       </div>

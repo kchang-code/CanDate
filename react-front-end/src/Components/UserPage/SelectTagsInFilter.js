@@ -31,6 +31,7 @@ export default function SelectTagsInFilter(props) {
     } else {
       setNewColor('lightgrey');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags.length]);
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.scss';
 import AppBar from '@material-ui/core/AppBar';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -33,33 +33,33 @@ const styles = (theme) => ({
   },
 });
 
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   grow: {
+//     flexGrow: 1,
+//   },
+//   title: {
+//     display: 'none',
+//     [theme.breakpoints.up('sm')]: {
+//       display: 'block',
+//     },
+//   },
+//   sectionDesktop: {
+//     display: 'none',
+//     [theme.breakpoints.up('md')]: {
+//       display: 'flex',
+//     },
+//   },
+//   root: {
+//     margin: 0,
+//     padding: theme.spacing(2),
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     right: theme.spacing(1),
+//     top: theme.spacing(1),
+//     color: theme.palette.grey[500],
+//   },
+// }));
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -215,9 +215,13 @@ export default function NavBar(props) {
             </div>
           </div>
           <div className="buttonList">
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            <IconButton
+              aria-label="show 4 new mails"
+              color="inherit"
+              onClick={(e) => props.handleMessageOpen(e)}
+            >
               <Badge color="secondary" variant="dot">
-                <MailIcon onClick={(e) => props.handleMessageOpen(e)} />
+                <MailIcon />
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
@@ -225,30 +229,27 @@ export default function NavBar(props) {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit">
-              <AccountCircle
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              />
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                style={{ marginTop: '50px' }}
-              >
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  href="http://localhost:3002"
-                  onClick={handleClose}
-                >
-                  logout
-                </Button>
-              </Menu>
+            <IconButton color="inherit" onClick={handleClick}>
+              <AccountCircle aria-controls="simple-menu" aria-haspopup="true" />
             </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              style={{ marginTop: '50px' }}
+            >
+              <Button
+                variant="contained"
+                color="secondary"
+                href="http://localhost:3002"
+                onClick={handleClose}
+              >
+                logout
+              </Button>
+            </Menu>
+
             <p style={{ marginTop: '14px' }}>
               Welcome{' '}
               <strong>{props.name[0] && props.name[0]['first_name']}</strong>

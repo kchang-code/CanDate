@@ -4,9 +4,15 @@ import Button from '@material-ui/core/Button';
 
 export default function TagList(props) {
   const lists = props.tags.map((item) => {
-    return <TagListItem name={item.name} tag_id={item.id} id={props.id} />;
+    return (
+      <TagListItem
+        key={item.id}
+        name={item.name}
+        tag_id={item.id}
+        id={props.id}
+      />
+    );
   });
-
 
   return (
     <div className="tagList">
