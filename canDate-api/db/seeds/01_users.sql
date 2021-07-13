@@ -376,7 +376,7 @@ INSERT INTO users(first_name, last_name, email, password, gender, height, addres
     VALUES('Julie', 'Beck','julie.beck@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 174, 'Surrey', 39, 'https://randomuser.me/api/portraits/women/63.jpg', 'I''m here to look for my life partner, and I like Piano. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
-    VALUES('Alfred', 'Martin','alfred.martin@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 170, 'Surrey', 40, 'https://randomuser.me/api/portraits/men/54.jpg', 'I''m here to look for my life partner, and I like Volleyball. If you like me, let''s chat.');
+    VALUES('Kanye', 'West','kanye.west@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 170, 'Surrey', 40, 'https://randomuser.me/api/portraits/men/54.jpg', 'I''m here to look for my life partner, and I like Volleyball. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
     VALUES('Javier', 'Nuñez','javier.nunez@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 184, 'Surrey', 23, 'https://randomuser.me/api/portraits/men/51.jpg', 'I''m here to look for my life partner, and I like Hunting. If you like me, let''s chat.');
