@@ -22,7 +22,8 @@ For a full list of dependencies, please view the dependencies section.
 ## Features with Screenshots
 ### **Sign up and select interest tags**: 
 Users are asked to select tags associated with their interests, so CanDate can show their most compatible profiles. 
-<img src="https://media.giphy.com/media/81i2wIYUyrlBedZAXJ/giphy.gif" width="400" height="215">
+<img src="https://media.giphy.com/media/81i2wIYUyrlBedZAXJ/giphy.gif" width="600" height="340">
+
 ### **View your most relevant matches**: 
 Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
 
@@ -34,9 +35,12 @@ Not happy with your current results? The filter feature allows you to add, remov
 
 ### **Favorite and Block**: 
 Favorite a profile to view in the _Favorite toggle_ or block a profile, so you'll never see them in your results again. 
+<img src="https://media.giphy.com/media/I9UTYh5KOEniIHdQs8/giphy.gif" width="600" height="340">
+<img src="https://media.giphy.com/media/X4idF8l9zmopL1AxzM/giphy.gif" width="600" height="340">
 
 ### **Message other users**: 
 Initiate and receive conversations from other users with our message feature. 
+<img src="https://media.giphy.com/media/annlemoZVyZCdZUnwv/giphy.gif" width="600" height="340">
 
 ## Installation
 You should have two terminals open to set up local database and start the react app. 
