@@ -5,8 +5,8 @@ VALUES ('Khea','Chang', 'khea@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.J
 INSERT INTO users(first_name, last_name, email, password, gender, address, age, profile_photo, about_me)
 VALUES ('Zio', 'Tan', 'zio@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Surrey',20,  'https://ca.slack-edge.com/T2G8TE2E5-U01UYJMPP36-b0b5ab2bbcfd-512', 'I like DC comics' );
 
-INSERT INTO users(first_name, last_name, email, password, gender, address, age, profile_photo, about_me)
-VALUES ('Matt', 'Luo', 'matt@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Richmond', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U01TNRH6LCX-ca7f8d23bf89-512', 'I like Lego');
+-- INSERT INTO users(first_name, last_name, email, password, gender, address, age, profile_photo, about_me)
+-- VALUES ('Matt', 'Luo', 'matt@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 'Richmond', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U01TNRH6LCX-ca7f8d23bf89-512', 'I like Lego');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
 VALUES('Brandon', 'Copeland','brand.copeland@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'male', 180, 'Calgary', 20, 'https://ca.slack-edge.com/T2G8TE2E5-U01UC282SKU-3a2b85b9908f-512', 'I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
