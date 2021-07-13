@@ -34,6 +34,7 @@ Each profile has a match percentage that indicates how well the profile's intere
 
 ### **Further filtering**: 
 Not happy with your current results? The filter feature allows you to add, remove, or clear filters to update your profiles.
+
 <img src="https://media.giphy.com/media/mbydEUNnvzFg90mrv8/giphy.gif" width="600" height="340">
 
 ### **Favorite and Block**: 
