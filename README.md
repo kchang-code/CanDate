@@ -26,12 +26,15 @@ Users are asked to select tags associated with their interests, so CanDate can s
 
 ### **View your most relevant matches**: 
 Users will see their most relevant profiles, based on their location, age, gender, and interest preferences, as soon as they login. 
+<img src="https://media.giphy.com/media/ICSgiRE0ZDt2OkSHni/giphy.gif" width="600" height="340">
 
 ### **Most compatible matches**: 
 Each profile has a match percentage that indicates how well the profile's interests matches that of the user's. 
+<img src="https://media.giphy.com/media/khiFo2cHswGyw58Jn7/giphy.gif" width="600" height="340">
 
 ### **Further filtering**: 
 Not happy with your current results? The filter feature allows you to add, remove, or clear filters to update your profiles.
+<img src="https://media.giphy.com/media/mbydEUNnvzFg90mrv8/giphy.gif" width="600" height="340">
 
 ### **Favorite and Block**: 
 Favorite a profile to view in the _Favorite toggle_ or block a profile, so you'll never see them in your results again. 
