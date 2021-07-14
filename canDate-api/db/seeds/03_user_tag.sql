@@ -890,9 +890,9 @@ INSERT INTO user_tag(user_id, tag_id) VALUES (191, 30);
 INSERT INTO user_tag(user_id, tag_id) VALUES (191, 23);
 INSERT INTO user_tag(user_id, tag_id) VALUES (191, 17);
 INSERT INTO user_tag(user_id, tag_id) VALUES (191, 18);
-INSERT INTO user_tag(user_id, tag_id) VALUES (192, 17);
-INSERT INTO user_tag(user_id, tag_id) VALUES (192, 30);
-INSERT INTO user_tag(user_id, tag_id) VALUES (192, 2);
-INSERT INTO user_tag(user_id, tag_id) VALUES (192, 16);
-INSERT INTO user_tag(user_id, tag_id) VALUES (192, 18);
+-- INSERT INTO user_tag(user_id, tag_id) VALUES (192, 17);
+-- INSERT INTO user_tag(user_id, tag_id) VALUES (192, 30);
+-- INSERT INTO user_tag(user_id, tag_id) VALUES (192, 2);
+-- INSERT INTO user_tag(user_id, tag_id) VALUES (192, 16);
+-- INSERT INTO user_tag(user_id, tag_id) VALUES (192, 18);
 

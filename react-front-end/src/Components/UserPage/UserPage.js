@@ -85,7 +85,9 @@ const UserPage = (props) => {
 
   // add selected tag id into state
   const handleTagClick = (itemId) => {
-    const selectArr = { ...state, ageRange: [0, 100] };
+    // const selectArr = { ...state, ageRange: [0, 100] };
+    const selectArr = { ...state };
+
     if (selectArr.tags.includes(itemId)) {
       const index = selectArr.tags.indexOf(itemId);
       selectArr.tags.splice(index, 1);

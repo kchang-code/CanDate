@@ -19,7 +19,7 @@ INSERT INTO message(to_user_id, from_user_id, content) VALUES (1, 4, 'Hey Khea, 
 INSERT INTO message(to_user_id, from_user_id, content) VALUES (4, 1, 'Thank you!');
 
 
-INSERT INTO message(to_user_id, from_user_id, content) VALUES (1, 5, 'Hi I am Brandon!');
+INSERT INTO message(to_user_id, from_user_id, content) VALUES (5, 1, 'Hi I am Khea!');
 
 INSERT INTO message(to_user_id, from_user_id, content) VALUES (1, 6, 'Wow, I love swimming too!');
 INSERT INTO message(to_user_id, from_user_id, content) VALUES (6, 1, 'Awesome!');
