@@ -184,7 +184,7 @@ INSERT INTO users(first_name, last_name, email, password, gender, height, addres
     VALUES('Marianne', 'French','marianne.french@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 184, 'Richmond', 32, 'https://randomuser.me/api/portraits/women/75.jpg', 'I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
-    VALUES('April', 'Tian','April.tian@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 173, 'Richmond', 20, 'https://slack-files.com/T2G8TE2E5-F027ZTJ0QN9-441267d21a', 'I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
+    VALUES('April', 'Tian','April.tian@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 173, 'Richmond', 20, 'https://github.com/MattLuo90/CanDate/blob/photo/new/react-front-end/public/images/10kb.jpg?raw=true', 'I''m here to look for my life partner, and I like Blogging. If you like me, let''s chat.');
 
 INSERT INTO users(first_name, last_name, email, password, gender, height, address, age, profile_photo, about_me)
     VALUES('Linda', 'Perkins','linda.perkins@example.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'female', 181, 'Richmond', 30, 'https://randomuser.me/api/portraits/women/87.jpg', 'I''m here to look for my life partner, and I like Bowling. If you like me, let''s chat.');
