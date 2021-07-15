@@ -189,7 +189,7 @@ INSERT INTO user_tag(user_id, tag_id) VALUES (48, 3);
 INSERT INTO user_tag(user_id, tag_id) VALUES (49, 36);
 INSERT INTO user_tag(user_id, tag_id) VALUES (49, 15);
 INSERT INTO user_tag(user_id, tag_id) VALUES (49, 3);
-INSERT INTO user_tag(user_id, tag_id) VALUES (50, 15);
+INSERT INTO user_tag(user_id, tag_id) VALUES (50, 4);
 INSERT INTO user_tag(user_id, tag_id) VALUES (50, 2);
 INSERT INTO user_tag(user_id, tag_id) VALUES (50, 1);
 INSERT INTO user_tag(user_id, tag_id) VALUES (50, 12);
