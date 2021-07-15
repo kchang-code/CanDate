@@ -180,7 +180,7 @@ export default function ProfileCard(props) {
     ? (color = 'red')
     : (color = 'black');
 
-  const VIPs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 50, 60, 61, 63];
+  const VIPs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 47, 50, 60, 61, 63];
 
   const VIPsClass = classNames('card', {
     'glow-on-hover': VIPs.includes(props.id),
