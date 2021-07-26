@@ -255,7 +255,7 @@ const UserPage = (props) => {
                 <Grid key={filteredUser.id} item xs={12}>
                   <ProfileCard
                     key={filteredUser.id}
-                    id={filteredUser.id}
+                    id={filteredUser.id} 
                     name={filteredUser.first_name}
                     last_name={filteredUser.last_name}
                     city={filteredUser.address}

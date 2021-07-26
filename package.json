@@ -1,0 +1,24 @@
+{
+  "name": "candate",
+  "version": "1.0.0",
+  "description": "Candate is a dating webapp to connect you with the most compatible singles using interest, age, location, and preferred gender filters.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kchang-code/CanDate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kchang-code/CanDate/issues"
+  },
+  "homepage": "https://github.com/kchang-code/CanDate#readme"
+}

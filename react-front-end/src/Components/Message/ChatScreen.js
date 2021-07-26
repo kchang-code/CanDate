@@ -54,7 +54,7 @@ const ChatScreen = (props) => {
     setShowMsg(selectedMessages);
   }, [selectedMessages]);
 
-  const sendMessage = (e) => {
+  const sendMessage = (e) => {  
     e.preventDefault();
     const timeElapsed = Date.now();
     let today = new Date(timeElapsed);
