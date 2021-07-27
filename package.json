@@ -1,24 +1,33 @@
 {
-  "name": "candate",
+  "name": "node-skeleton",
   "version": "1.0.0",
-  "description": "Candate is a dating webapp to connect you with the most compatible singles using interest, age, location, and preferred gender filters.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "react-scripts test",
-    "start": "npm start"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "db:reset": "node bin/resetdb.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kchang-code/CanDate.git"
-  },
-  "author": "",
+  "author": "Lighthouse Labs",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kchang-code/CanDate/issues"
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chalk": "^2.4.2",
+    "classnames": "^2.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-ws": "^5.0.2",
+    "morgan": "^1.9.1",
+    "node-sass-middleware": "^0.11.0",
+    "pg": "^8.5.0",
+    "pg-native": "^3.0.0",
+    "socket.io": "^2.4.1",
+    "ws": "^7.0.0"
   },
-  "homepage": "https://github.com/kchang-code/CanDate#readme"
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
