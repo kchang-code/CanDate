@@ -9,7 +9,7 @@
   
   "scripts": {
     "test": "react-scripts test",
-    "start": "react-scripts start"
+    "start": "npm run local"
   },
   "repository": {
     "type": "git",
